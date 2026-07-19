@@ -5,7 +5,6 @@ import 'package:go_router/go_router.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../presentation/voice_recording_controller.dart';
 import '../../domain/voice_recording_state.dart';
-import 'recording_review_screen.dart';
 
 class VoicePracticeScreen extends ConsumerStatefulWidget {
   const VoicePracticeScreen({super.key});
@@ -27,23 +26,6 @@ class _VoicePracticeScreenState extends ConsumerState<VoicePracticeScreen> {
     final minutes = duration.inMinutes.remainder(60).toString().padLeft(2, '0');
     final seconds = duration.inSeconds.remainder(60).toString().padLeft(2, '0');
     return '$minutes:$seconds';
-  }
-
-  void _showSnackBar(String message, {bool isError = false, VoidCallback? action}) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(message),
-        backgroundColor: isError ? AppColors.error : AppColors.primaryDark,
-        action: action != null
-            ? SnackBarAction(
-                label: 'Open Settings',
-                textColor: Colors.white,
-                onPressed: action,
-              )
-            : null,
-        duration: const Duration(seconds: 4),
-      ),
-    );
   }
 
   @override

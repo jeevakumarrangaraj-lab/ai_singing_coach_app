@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -36,7 +37,7 @@ class _RecordingReviewScreenState extends ConsumerState<RecordingReviewScreen> {
 
   void _listenToPlayer() {
     final controller = ref.read(voiceRecordingControllerProvider.notifier);
-    controller._audioPlayer.onDurationChanged.listen((duration) {
+    controller.onDurationChanged.listen((duration) {
       if (mounted) {
         setState(() {
           _duration = duration;
@@ -44,15 +45,15 @@ class _RecordingReviewScreenState extends ConsumerState<RecordingReviewScreen> {
         });
       }
     });
-    controller._audioPlayer.onPositionChanged.listen((position) {
+    controller.onPositionChanged.listen((position) {
       if (mounted) {
         setState(() {
           _position = position;
-          _isPlaying = controller._audioPlayer.state == PlayerState.playing;
+          _isPlaying = controller.playerState == PlayerState.playing;
         });
       }
     });
-    controller._audioPlayer.onPlayerStateChanged.listen((state) {
+    controller.onPlayerStateChanged.listen((state) {
       if (mounted) {
         setState(() {
           _isPlaying = state == PlayerState.playing;
