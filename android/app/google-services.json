@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1796647747",
+    "project_id": "ai-singing-coach-fdaff",
+    "storage_bucket": "ai-singing-coach-fdaff.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1796647747:android:d6f149fa783ba8bcd41df6",
+        "android_client_info": {
+          "package_name": "com.example.ai_singing_coach"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC_CnZRBf-nh2zED9NRnHoSG34cJNT5aPo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
