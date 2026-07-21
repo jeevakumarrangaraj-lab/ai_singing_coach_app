@@ -8,12 +8,23 @@ import '../../../../core/widgets/glass_card.dart';
 import '../../../../features/auth/presentation/auth_controller.dart';
 import '../../domain/onboarding_profile.dart';
 import '../onboarding_controller.dart';
+import '../onboarding_completion_provider.dart';
 
-class OnboardingReviewStep extends ConsumerWidget {
+class OnboardingReviewStep extends ConsumerStatefulWidget {
   const OnboardingReviewStep({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<OnboardingReviewStep> createState() =>
+      _OnboardingReviewStepState();
+}
+
+class _OnboardingReviewStepState extends ConsumerState<OnboardingReviewStep> {
+  /// Guards against duplicate submissions while the Firestore save is in-flight
+  /// and prevents a second navigation after a successful save.
+  bool _isSubmitting = false;
+
+  @override
+  Widget build(BuildContext context) {
     final state = ref.watch(onboardingControllerProvider);
     final controller = ref.read(onboardingControllerProvider.notifier);
     final textTheme = Theme.of(context).textTheme;
@@ -74,79 +85,10 @@ class OnboardingReviewStep extends ConsumerWidget {
           width: double.infinity,
           height: 54,
           child: FilledButton.icon(
-            onPressed: state.isLoading
+            onPressed: (state.isLoading || _isSubmitting)
                 ? null
-                : () async {
-                    if (!controller.validateCurrentStep()) return;
-
-                    // Read auth state before awaiting any async work.
-                    final authState = ref.read(authControllerProvider);
-                    final userId = authState.user?.uid;
-
-                    if (userId == null || userId.isEmpty) {
-                      if (context.mounted) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: const Text(
-                              'Please sign in again to complete your setup.',
-                            ),
-                            backgroundColor: AppColors.warning,
-                            behavior: SnackBarBehavior.floating,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            margin: const EdgeInsets.all(16),
-                          ),
-                        );
-                      }
-                      return;
-                    }
-
-                    // Capture controller before await.
-                    final onboardingController = ref.read(
-                      onboardingControllerProvider.notifier,
-                    );
-
-                    // Persist onboarding data to Firestore.
-                    final success = await onboardingController
-                        .completeOnboarding(userId: userId);
-
-                    if (!context.mounted) return;
-
-                    if (success) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: const Text('Your Tuno setup is ready.'),
-                          backgroundColor: AppColors.success,
-                          behavior: SnackBarBehavior.floating,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          margin: const EdgeInsets.all(16),
-                        ),
-                      );
-                      context.go('/home');
-                    } else {
-                      final errorMessage = ref
-                          .read(onboardingControllerProvider)
-                          .errorMessage;
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text(
-                            errorMessage ??
-                                'We couldn\'t save your setup. Please try again.',
-                          ),
-                          backgroundColor: AppColors.error,
-                          behavior: SnackBarBehavior.floating,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          margin: const EdgeInsets.all(16),
-                        ),
-                      );
-                    }
-                  },
-            icon: state.isLoading
+                : _handleCompleteSetup,
+            icon: (state.isLoading || _isSubmitting)
                 ? const SizedBox(
                     width: 22,
                     height: 22,
@@ -172,6 +114,100 @@ class OnboardingReviewStep extends ConsumerWidget {
         ),
       ],
     );
+  }
+
+  Future<void> _handleCompleteSetup() async {
+    // Guard: prevent duplicate submission and navigation.
+    if (_isSubmitting) return;
+    _isSubmitting = true;
+
+    try {
+      final onboardingController = ref.read(
+        onboardingControllerProvider.notifier,
+      );
+
+      // Validate current step (review step always passes validation, but
+      // we call it for consistency).
+      if (!onboardingController.validateCurrentStep()) {
+        _isSubmitting = false;
+        return;
+      }
+
+      // Read auth state before awaiting any async work.
+      final authState = ref.read(authControllerProvider);
+      final userId = authState.user?.uid;
+
+      if (userId == null || userId.isEmpty) {
+        _isSubmitting = false;
+        if (!mounted) return;
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: const Text('Please sign in again to complete your setup.'),
+            backgroundColor: AppColors.warning,
+            behavior: SnackBarBehavior.floating,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+            margin: const EdgeInsets.all(16),
+          ),
+        );
+        return;
+      }
+
+      // Persist onboarding data to Firestore.
+      final success = await onboardingController.completeOnboarding(
+        userId: userId,
+      );
+
+      if (!mounted) return;
+
+      if (success) {
+        // Synchronously mark onboarding as completed so GoRouter redirect
+        // sees the latest state immediately.
+        ref.read(onboardingCompletionProvider.notifier).markCompleted();
+
+        if (!mounted) return;
+
+        // Navigate to /home exactly once. GoRouter's redirect will confirm
+        // the destination, but we drive the final navigation here.
+        context.go('/home');
+        // _isSubmitting intentionally left true — component is no longer
+        // rendered after navigation.
+      } else {
+        // Save failed: re-enable the button and show the error SnackBar.
+        _isSubmitting = false;
+        if (!mounted) return;
+        final currentState = ref.read(onboardingControllerProvider);
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              currentState.errorMessage ??
+                  'We couldn\'t save your setup. Please try again.',
+            ),
+            backgroundColor: AppColors.error,
+            behavior: SnackBarBehavior.floating,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+            margin: const EdgeInsets.all(16),
+          ),
+        );
+      }
+    } catch (error) {
+      _isSubmitting = false;
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Something went wrong: $error'),
+          backgroundColor: AppColors.error,
+          behavior: SnackBarBehavior.floating,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+          margin: const EdgeInsets.all(16),
+        ),
+      );
+    }
   }
 }
 

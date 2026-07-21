@@ -10,6 +10,7 @@ import '../../../auth/presentation/widgets/auth_elevated_button.dart';
 import '../../../auth/presentation/widgets/auth_secondary_button.dart';
 import '../widgets/experience_step.dart';
 import '../widgets/goals_step.dart';
+import '../widgets/language_step.dart';
 import '../widgets/onboarding_review_step.dart';
 import '../widgets/permission_education_step.dart';
 import '../onboarding_controller.dart';
@@ -108,37 +109,51 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                               controller,
                             ),
                             const SizedBox(height: 32),
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: AuthSecondaryButton(
-                                    label: 'Back',
-                                    onPressed: state.currentStep > 0
-                                        ? controller.previousStep
-                                        : null,
-                                    icon: Icons.arrow_back_ios_new_rounded,
+                            // Step 5 (Review) has its own "Complete Setup" button
+                            // inside OnboardingReviewStep. Show only Back here.
+                            if (state.currentStep < 4)
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: AuthSecondaryButton(
+                                      label: 'Back',
+                                      onPressed: state.currentStep > 0
+                                          ? controller.previousStep
+                                          : null,
+                                      icon: Icons.arrow_back_ios_new_rounded,
+                                    ),
                                   ),
-                                ),
-                                const SizedBox(width: 16),
-                                Expanded(
-                                  child: AuthElevatedButton(
-                                    label: state.currentStep == 4
-                                        ? 'Finish'
-                                        : 'Continue',
-                                    onPressed: () {
-                                      if (controller.validateCurrentStep()) {
-                                        controller.nextStep();
-                                      }
-                                    },
-                                    icon: state.currentStep == 4
-                                        ? Icons.check_rounded
-                                        : Icons.arrow_forward_ios_rounded,
-                                    iconPosition: IconPosition.end,
-                                    isLoading: false,
+                                  const SizedBox(width: 16),
+                                  Expanded(
+                                    child: AuthElevatedButton(
+                                      label: 'Continue',
+                                      onPressed: () {
+                                        if (controller.validateCurrentStep()) {
+                                          controller.nextStep();
+                                        }
+                                      },
+                                      icon: Icons.arrow_forward_ios_rounded,
+                                      iconPosition: IconPosition.end,
+                                      isLoading: false,
+                                    ),
                                   ),
-                                ),
-                              ],
-                            ),
+                                ],
+                              )
+                            else
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: AuthSecondaryButton(
+                                      label: 'Back',
+                                      onPressed: () =>
+                                          controller.previousStep(),
+                                      icon: Icons.arrow_back_ios_new_rounded,
+                                    ),
+                                  ),
+                                  const SizedBox(width: 16),
+                                  const Expanded(child: SizedBox.shrink()),
+                                ],
+                              ),
                             const SizedBox(height: 24),
                           ],
                         ),
@@ -272,6 +287,8 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
     ];
 
     switch (state.currentStep) {
+      case 0:
+        return const LanguageStep();
       case 1:
         return const ExperienceStep();
       case 2:

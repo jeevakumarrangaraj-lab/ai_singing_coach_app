@@ -4,14 +4,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-// TODO: Spotify-style animated Splash (fade/scale entrance + reverse exit)
-// is paused for later repair. When resuming:
-//   - Restore SingleTickerProviderStateMixin with ONE AnimationController
-//   - Use forward() for entrance, reverse() for exit (reverseDuration: 250ms)
-//   - Future.wait<dynamic> was already replaced with typed independent futures
-//   - Read MediaQuery.disableAnimationsOf(context) before any await
-//   - Ensure mounted check guards all async gaps
-// See git history for previous implementation.
+/// Splash screen that restores auth state then navigates to /welcome.
+///
+/// Navigation to /welcome lets GoRouter's redirect logic choose the final
+/// destination based on the verified state and onboarding completion:
+///   - unverified         → /verify-email
+///   - verified, not done → /onboarding
+///   - verified, done     → /home
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
@@ -30,39 +29,30 @@ class _SplashScreenState extends State<SplashScreen> {
 
     // Navigate after the first frame is rendered so the router is ready.
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      _navigateToDestination();
+      _navigateToWelcome();
     });
   }
 
-  Future<void> _navigateToDestination() async {
+  Future<void> _navigateToWelcome() async {
     if (_hasNavigated) return;
 
     try {
-      final user = await FirebaseAuth.instance.authStateChanges().first.timeout(
+      await FirebaseAuth.instance.authStateChanges().first.timeout(
         _authTimeout,
       );
 
       if (!mounted || _hasNavigated) return;
 
-      final String destination;
-      if (user == null) {
-        destination = '/welcome';
-      } else if (!user.emailVerified) {
-        destination = '/verify-email';
-      } else {
-        destination = '/home';
-      }
-
       _hasNavigated = true;
-      debugPrint('TUNO SPLASH NAVIGATING TO: $destination');
-      context.go(destination);
-    } on TimeoutException catch (error) {
-      debugPrint('TUNO SPLASH auth timeout: $error');
+      // Always go to /welcome. GoRouter redirect handles the rest
+      // (verify-email, onboarding, home).
+      context.go('/welcome');
+    } on TimeoutException {
       if (!mounted || _hasNavigated) return;
       _hasNavigated = true;
       context.go('/welcome');
     } catch (error) {
-      debugPrint('TUNO SPLASH error: $error');
+      debugPrint('Splash error: $error');
       if (!mounted || _hasNavigated) return;
       _hasNavigated = true;
       context.go('/welcome');
@@ -77,8 +67,6 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // Static dark splash with centered logo – no animations, no ticker.
-    // The logo appears immediately while auth resolves.
     final screenWidth = MediaQuery.of(context).size.width;
     final bool isMobile = screenWidth < 600;
     final double logoSize = isMobile ? 130.0 : 165.0;

@@ -13,6 +13,14 @@ class OnboardingController extends StateNotifier<OnboardingState> {
 
   final OnboardingRepository _repository;
 
+  bool _disposed = false;
+
+  @override
+  void dispose() {
+    _disposed = true;
+    super.dispose();
+  }
+
   void selectLanguage(OnboardingLanguage language) {
     state = state.copyWith(selectedLanguage: language, errorMessage: null);
   }
@@ -60,6 +68,7 @@ class OnboardingController extends StateNotifier<OnboardingState> {
   }
 
   Future<bool> completeOnboarding({required String userId}) async {
+    if (_disposed) return false;
     if (state.isLoading) return false;
 
     if (userId.isEmpty) {
@@ -102,9 +111,12 @@ class OnboardingController extends StateNotifier<OnboardingState> {
 
       await _repository.saveProfile(userId, profile);
 
+      if (_disposed) return false;
+
       state = state.copyWith(isCompleted: true, isLoading: false);
       return true;
     } on OnboardingRepositoryException {
+      if (_disposed) return false;
       state = state.copyWith(
         isLoading: false,
         errorMessage: 'We couldn\'t save your setup. Please try again.',
@@ -113,6 +125,7 @@ class OnboardingController extends StateNotifier<OnboardingState> {
     } catch (error, stackTrace) {
       debugPrint('Onboarding complete failed: $error');
       debugPrintStack(stackTrace: stackTrace);
+      if (_disposed) return false;
       state = state.copyWith(
         isLoading: false,
         errorMessage: 'Unable to save your Tuno setup. Please try again.',

@@ -2,7 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 enum OnboardingLanguage {
   english('English', 'en'),
-  tamil('Tamil', 'ta');
+  tamil('Tamil', 'ta'),
+  hindi('Hindi', 'hi');
 
   const OnboardingLanguage(this.label, this.code);
   final String label;
