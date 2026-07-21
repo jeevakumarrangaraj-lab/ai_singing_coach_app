@@ -15,9 +15,24 @@ class SingingCoachApp extends ConsumerWidget {
 
     final router = ref.watch(appRouterProvider);
 
+    // Listen for auth state changes to refresh the router.
+    ref.listen<AuthState>(authControllerProvider, (previous, next) {
+      final previousAuthenticated = previous?.user != null;
+      final nextAuthenticated = next.user != null;
+
+      final previousVerified = previous?.user?.emailVerified ?? false;
+      final nextVerified = next.user?.emailVerified ?? false;
+
+      if (previousAuthenticated != nextAuthenticated ||
+          previousVerified != nextVerified) {
+        router.refresh();
+      }
+    });
+
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
-      title: 'AI Singing Coach',
+      title: 'Tuno',
+
       theme: AppTheme.darkTheme,
       routerConfig: router,
     );

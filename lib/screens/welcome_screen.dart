@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../core/theme/app_colors.dart';
+import '../core/widgets/responsive_page_background.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({super.key});
@@ -25,6 +26,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
       vsync: this,
       duration: const Duration(milliseconds: 650),
     );
+
     _fade = CurvedAnimation(parent: _controller, curve: Curves.easeOut);
     _slide = Tween<double>(
       begin: 14,
@@ -45,70 +47,63 @@ class _WelcomeScreenState extends State<WelcomeScreen>
 
     return Scaffold(
       backgroundColor: Colors.transparent,
-      body: Stack(
-        fit: StackFit.expand,
-        children: [
-          Positioned.fill(
-            child: Image.asset(
-              'assets/images/welcome_bg.png',
-              fit: BoxFit.cover,
-              alignment: Alignment.center,
-            ),
-          ),
-          Positioned.fill(
-            child: ColoredBox(color: Colors.black.withValues(alpha: 0.30)),
-          ),
-          SafeArea(
-            child: LayoutBuilder(
-              builder: (context, constraints) {
-                final isSmall = constraints.maxWidth < 420;
-                final horizontal = isSmall ? 18.0 : 28.0;
+      body: ResponsivePageBackground(
+        imagePath: 'assets/images/welcome_bg.png',
+        mobileAlignment: Alignment.center,
+        wideAlignment: Alignment.bottomCenter,
+        mobileOverlayAlpha: 0.24,
+        wideOverlayAlpha: 0.14,
+        maxContentWidth: 1200,
+        child: SafeArea(
+          child: LayoutBuilder(
+            builder: (context, constraints) {
+              final isSmall = constraints.maxWidth < 420;
+              final horizontal = isSmall ? 18.0 : 28.0;
 
-                return SingleChildScrollView(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: horizontal,
-                    vertical: 18,
-                  ),
-                  child: FadeTransition(
-                    opacity: _fade,
-                    child: Transform.translate(
-                      offset: Offset(0, _slide.value),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          const SizedBox(height: 6),
-                          Text(
-                            'AI Singing Coach',
-                            style: textTheme.titleLarge?.copyWith(
-                              fontWeight: FontWeight.w900,
-                              letterSpacing: 0.2,
-                              color: AppColors.textPrimary.withValues(
-                                alpha: 0.95,
-                              ),
+              return SingleChildScrollView(
+                padding: EdgeInsets.symmetric(
+                  horizontal: horizontal,
+                  vertical: 18,
+                ),
+                child: FadeTransition(
+                  opacity: _fade,
+                  child: Transform.translate(
+                    offset: Offset(0, _slide.value),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        const SizedBox(height: 4),
+                        Text(
+                          'Tuno',
+                          style: textTheme.titleLarge?.copyWith(
+                            fontWeight: FontWeight.w900,
+                            letterSpacing: 0.2,
+                            color: AppColors.textPrimary.withValues(
+                              alpha: 0.95,
                             ),
                           ),
-                          const SizedBox(height: 18),
-                          Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              _MicHeader(isSmall: isSmall),
-                              const SizedBox(height: 20),
-                              _FeatureGrid(isSmall: isSmall),
-                            ],
-                          ),
-                          const SizedBox(height: 16),
-                          _BottomCta(isSmall: isSmall),
-                          const SizedBox(height: 10),
-                        ],
-                      ),
+                        ),
+                        const SizedBox(height: 12),
+                        Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            _MicHeader(isSmall: isSmall),
+                            const SizedBox(height: 12),
+                            _FeatureGrid(isSmall: isSmall),
+                          ],
+                        ),
+                        const SizedBox(height: 8),
+                        _BottomCta(isSmall: isSmall),
+                        const SizedBox(height: 6),
+                      ],
                     ),
                   ),
-                );
-              },
-            ),
+                ),
+              );
+            },
           ),
-        ],
+        ),
       ),
     );
   }
@@ -125,12 +120,13 @@ class _MicHeader extends StatelessWidget {
 
     return _GlassContainer(
       child: Padding(
-        padding: const EdgeInsets.all(18),
+        padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 14),
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
             Container(
-              width: isSmall ? 118 : 132,
-              height: isSmall ? 118 : 132,
+              width: 120,
+              height: 120,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 gradient: AppColors.primaryGradient,
@@ -142,30 +138,28 @@ class _MicHeader extends StatelessWidget {
                   ),
                 ],
               ),
-              child: Icon(
-                Icons.mic_rounded,
-                size: isSmall ? 64 : 68,
-                color: Colors.white,
-              ),
+              child: Icon(Icons.mic_rounded, size: 55, color: Colors.white),
             ),
-            const SizedBox(height: 18),
+            const SizedBox(height: 10),
             Text(
-              'Master Your Voice with AI',
+              'Train Your Voice with AI',
               textAlign: TextAlign.center,
+              maxLines: 2,
               style: textTheme.headlineMedium?.copyWith(
-                fontSize: isSmall ? 30 : 38,
+                fontSize: isSmall ? 32 : 36,
                 fontWeight: FontWeight.w900,
-                height: 1.12,
+                height: 1.1,
               ),
             ),
-            const SizedBox(height: 14),
+            const SizedBox(height: 6),
             Text(
-              'Improve your pitch, melody, rhythm and breathing using Artificial Intelligence.',
+              'Improve your pitch, melody, rhythm, and breathing.',
               textAlign: TextAlign.center,
+              maxLines: 2,
               style: textTheme.bodyMedium?.copyWith(
-                fontSize: isSmall ? 15 : 17,
+                fontSize: isSmall ? 15 : 16,
                 color: AppColors.textSecondary.withValues(alpha: 0.9),
-                height: 1.55,
+                height: 1.35,
               ),
             ),
           ],
@@ -189,20 +183,37 @@ class _FeatureGrid extends StatelessWidget {
       'Track Progress',
     ];
 
+    final width = MediaQuery.of(context).size.width;
+    final isVeryNarrow = width < 340;
+
     return _GlassContainer(
       child: Padding(
-        padding: const EdgeInsets.all(14),
-        child: Wrap(
-          spacing: isSmall ? 10 : 12,
-          runSpacing: isSmall ? 10 : 12,
-          alignment: WrapAlignment.center,
-          children: cards.map((label) {
-            return SizedBox(
-              width: isSmall ? 150 : 170,
-              child: _FeatureCard(label: label),
-            );
-          }).toList(),
-        ),
+        padding: const EdgeInsets.all(10),
+        child: isVeryNarrow
+            ? Column(
+                mainAxisSize: MainAxisSize.min,
+                children: cards
+                    .map(
+                      (label) => Padding(
+                        padding: const EdgeInsets.only(bottom: 8),
+                        child: _FeatureCard(label: label),
+                      ),
+                    )
+                    .toList(),
+              )
+            : Wrap(
+                spacing: 10,
+                runSpacing: 10,
+                alignment: WrapAlignment.center,
+                children: cards
+                    .map(
+                      (label) => SizedBox(
+                        width: (width - 48) / 2,
+                        child: _FeatureCard(label: label),
+                      ),
+                    )
+                    .toList(),
+              ),
       ),
     );
   }
@@ -219,17 +230,17 @@ class _BottomCta extends StatelessWidget {
 
     return _GlassContainer(
       child: Padding(
-        padding: const EdgeInsets.all(18),
+        padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 14),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             SizedBox(
               width: double.infinity,
-              height: isSmall ? 52 : 56,
+              height: isSmall ? 50 : 54,
               child: DecoratedBox(
                 decoration: BoxDecoration(
                   gradient: AppColors.primaryGradient,
-                  borderRadius: BorderRadius.circular(18),
+                  borderRadius: BorderRadius.circular(16),
                 ),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
@@ -237,7 +248,7 @@ class _BottomCta extends StatelessWidget {
                     backgroundColor: Colors.transparent,
                     foregroundColor: Colors.white,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(18),
+                      borderRadius: BorderRadius.circular(16),
                     ),
                   ),
                   onPressed: () => context.go('/signup'),
@@ -252,16 +263,17 @@ class _BottomCta extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: 14),
+            const SizedBox(height: 10),
             Text(
               'Already have an account?',
               textAlign: TextAlign.center,
               style: textTheme.bodyMedium?.copyWith(
                 color: AppColors.textSecondary.withValues(alpha: 0.92),
                 fontWeight: FontWeight.w700,
+                fontSize: 15,
               ),
             ),
-            const SizedBox(height: 6),
+            const SizedBox(height: 4),
             Center(
               child: TextButton(
                 onPressed: () => context.go('/login'),
@@ -270,6 +282,7 @@ class _BottomCta extends StatelessWidget {
                   style: textTheme.bodyMedium?.copyWith(
                     fontWeight: FontWeight.w900,
                     color: AppColors.primaryLight,
+                    fontSize: 15,
                   ),
                 ),
               ),
@@ -323,9 +336,9 @@ class _FeatureCard extends StatelessWidget {
     final textTheme = Theme.of(context).textTheme;
 
     return ClipRRect(
-      borderRadius: BorderRadius.circular(18),
+      borderRadius: BorderRadius.circular(14),
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
         decoration: BoxDecoration(
           color: Colors.white.withValues(alpha: 0.06),
           border: Border.all(color: Colors.white.withValues(alpha: 0.12)),
@@ -333,27 +346,31 @@ class _FeatureCard extends StatelessWidget {
         child: Row(
           children: [
             Container(
-              width: 28,
-              height: 28,
+              width: 36,
+              height: 36,
               decoration: const BoxDecoration(
                 shape: BoxShape.circle,
                 gradient: AppColors.primaryGradient,
               ),
               child: const Icon(
                 Icons.check_rounded,
-                size: 18,
+                size: 20,
                 color: Colors.white,
               ),
             ),
-            const SizedBox(width: 10),
+            const SizedBox(width: 8),
             Expanded(
-              child: Text(
-                label,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: textTheme.bodyMedium?.copyWith(
-                  fontWeight: FontWeight.w900,
-                  color: AppColors.textPrimary.withValues(alpha: 0.92),
+              child: FittedBox(
+                fit: BoxFit.scaleDown,
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  label,
+                  maxLines: 1,
+                  style: textTheme.bodyMedium?.copyWith(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w900,
+                    color: AppColors.textPrimary.withValues(alpha: 0.92),
+                  ),
                 ),
               ),
             ),

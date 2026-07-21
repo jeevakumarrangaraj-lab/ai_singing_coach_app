@@ -6,46 +6,97 @@ class AppTheme {
   const AppTheme._();
 
   static ThemeData get darkTheme {
-    final base = ThemeData.dark();
+    final base = ThemeData.dark(useMaterial3: true);
+
+    const fallbackFontFamily = 'Arial';
 
     final textTheme = base.textTheme.copyWith(
+      displayLarge: base.textTheme.displayLarge?.copyWith(
+        color: AppColors.textPrimary,
+        fontWeight: FontWeight.w800,
+        fontFamily: fallbackFontFamily,
+      ),
+      displayMedium: base.textTheme.displayMedium?.copyWith(
+        color: AppColors.textPrimary,
+        fontWeight: FontWeight.w700,
+        fontFamily: fallbackFontFamily,
+      ),
+      displaySmall: base.textTheme.displaySmall?.copyWith(
+        color: AppColors.textPrimary,
+        fontWeight: FontWeight.w600,
+        fontFamily: fallbackFontFamily,
+      ),
       headlineLarge: base.textTheme.headlineLarge?.copyWith(
         color: AppColors.textPrimary,
         fontWeight: FontWeight.w800,
+        fontFamily: fallbackFontFamily,
       ),
       headlineMedium: base.textTheme.headlineMedium?.copyWith(
         color: AppColors.textPrimary,
         fontWeight: FontWeight.w700,
+        fontFamily: fallbackFontFamily,
+      ),
+      headlineSmall: base.textTheme.headlineSmall?.copyWith(
+        color: AppColors.textPrimary,
+        fontWeight: FontWeight.w600,
+        fontFamily: fallbackFontFamily,
       ),
       titleLarge: base.textTheme.titleLarge?.copyWith(
         color: AppColors.textPrimary,
         fontWeight: FontWeight.w700,
+        fontFamily: fallbackFontFamily,
       ),
       titleMedium: base.textTheme.titleMedium?.copyWith(
         color: AppColors.textPrimary,
         fontWeight: FontWeight.w600,
+        fontFamily: fallbackFontFamily,
+      ),
+      titleSmall: base.textTheme.titleSmall?.copyWith(
+        color: AppColors.textPrimary,
+        fontWeight: FontWeight.w600,
+        fontFamily: fallbackFontFamily,
       ),
       bodyLarge: base.textTheme.bodyLarge?.copyWith(
         color: AppColors.textPrimary,
         fontWeight: FontWeight.w500,
+        fontFamily: fallbackFontFamily,
       ),
       bodyMedium: base.textTheme.bodyMedium?.copyWith(
         color: AppColors.textSecondary,
+        fontFamily: fallbackFontFamily,
       ),
-      bodySmall: base.textTheme.bodySmall?.copyWith(color: AppColors.textMuted),
+      bodySmall: base.textTheme.bodySmall?.copyWith(
+        color: AppColors.textMuted,
+        fontFamily: fallbackFontFamily,
+      ),
+      labelLarge: base.textTheme.labelLarge?.copyWith(
+        color: AppColors.textPrimary,
+        fontWeight: FontWeight.w600,
+        fontFamily: fallbackFontFamily,
+      ),
+      labelMedium: base.textTheme.labelMedium?.copyWith(
+        color: AppColors.textSecondary,
+        fontFamily: fallbackFontFamily,
+      ),
+      labelSmall: base.textTheme.labelSmall?.copyWith(
+        color: AppColors.textMuted,
+        fontFamily: fallbackFontFamily,
+      ),
     );
 
     final colorScheme = ColorScheme.fromSeed(
-      seedColor: AppColors.primary,
+      seedColor: AppColors.primaryCoral,
       brightness: Brightness.dark,
       surface: AppColors.surface,
+      primary: AppColors.primaryCoral,
+      secondary: AppColors.accentGold,
+      error: AppColors.error,
     );
 
     return ThemeData.from(
       colorScheme: colorScheme,
       textTheme: textTheme,
     ).copyWith(
-      // Material 3 is enabled by default when using ThemeData.from + modern widgets.
       brightness: Brightness.dark,
       scaffoldBackgroundColor: AppColors.background,
       colorScheme: colorScheme,
@@ -55,7 +106,7 @@ class AppTheme {
         foregroundColor: AppColors.textPrimary,
         elevation: 0,
         centerTitle: false,
-        titleTextStyle: base.textTheme.titleLarge?.copyWith(
+        titleTextStyle: textTheme.titleLarge?.copyWith(
           color: AppColors.textPrimary,
           fontWeight: FontWeight.w700,
         ),
@@ -63,7 +114,7 @@ class AppTheme {
       textTheme: textTheme,
       filledButtonTheme: FilledButtonThemeData(
         style: FilledButton.styleFrom(
-          backgroundColor: AppColors.primary,
+          backgroundColor: Colors.transparent,
           foregroundColor: AppColors.textPrimary,
           padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 14),
           shape: RoundedRectangleBorder(
@@ -81,12 +132,19 @@ class AppTheme {
           ),
         ),
       ),
+      textButtonTheme: TextButtonThemeData(
+        style: TextButton.styleFrom(
+          foregroundColor: AppColors.accentGold,
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+        ),
+      ),
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
         fillColor: AppColors.surface,
-        hintStyle: base.textTheme.bodyMedium?.copyWith(
-          color: AppColors.textMuted,
-        ),
+        hintStyle: textTheme.bodyMedium?.copyWith(color: AppColors.textMuted),
         contentPadding: const EdgeInsets.symmetric(
           horizontal: 16,
           vertical: 14,
@@ -99,7 +157,10 @@ class AppTheme {
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(18),
-          borderSide: const BorderSide(color: AppColors.primary, width: 1.5),
+          borderSide: const BorderSide(
+            color: AppColors.primaryCoral,
+            width: 1.5,
+          ),
         ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(18),
@@ -123,9 +184,21 @@ class AppTheme {
         space: 0,
       ),
       progressIndicatorTheme: ProgressIndicatorThemeData(
-        color: AppColors.primary,
+        color: AppColors.primaryCoral,
         linearTrackColor: AppColors.border.withValues(alpha: 0.4),
         circularTrackColor: AppColors.border.withValues(alpha: 0.4),
+      ),
+      sliderTheme: SliderThemeData(
+        trackHeight: 4,
+        activeTrackColor: AppColors.accentGold,
+        inactiveTrackColor: Colors.white.withValues(alpha: 0.20),
+        thumbColor: AppColors.accentGold,
+        thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 10),
+        overlayColor: AppColors.accentGold.withValues(alpha: 0.2),
+        valueIndicatorColor: AppColors.accentGold,
+        valueIndicatorTextStyle: textTheme.bodySmall?.copyWith(
+          color: Colors.white,
+        ),
       ),
     );
   }

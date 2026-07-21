@@ -3,9 +3,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../core/theme/app_colors.dart';
+import '../../../core/widgets/responsive_page_background.dart';
 import '../presentation/auth_controller.dart';
 import 'widgets/auth_elevated_button.dart';
 import 'widgets/auth_text_field.dart';
+import '../../../../common/widgets/app_back_button.dart';
 
 String? _validateEmail(String? value) {
   final email = value?.trim() ?? '';
@@ -119,7 +121,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     final emailVerified = currentUser?.emailVerified ?? false;
 
     if (emailVerified) {
-      context.go('/practice');
+      context.go('/home');
     } else {
       context.go('/verify-email');
     }
@@ -147,245 +149,238 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
       },
       child: Scaffold(
         backgroundColor: Colors.transparent,
-        body: Stack(
-          fit: StackFit.expand,
-          children: [
-            Positioned.fill(
-              child: Image.asset(
-                'assets/images/signup_bg.png',
-                fit: BoxFit.cover,
-              ),
-            ),
-            Positioned.fill(
-              child: ColoredBox(color: Colors.black.withValues(alpha: 0.30)),
-            ),
-            SafeArea(
-              child: LayoutBuilder(
-                builder: (context, constraints) {
-                  final horizontalPadding = constraints.maxWidth < 420
-                      ? 18.0
-                      : 28.0;
-                  final maxFormWidth = constraints.maxWidth < 420
-                      ? double.infinity
-                      : 420.0;
+        body: ResponsivePageBackground(
+          imagePath: 'assets/images/signup_bg.png',
+          mobileAlignment: Alignment.center,
+          wideAlignment: Alignment.bottomCenter,
+          mobileOverlayAlpha: 0.28,
+          wideOverlayAlpha: 0.18,
+          maxContentWidth: 520,
+          child: SafeArea(
+            child: LayoutBuilder(
+              builder: (context, constraints) {
+                final horizontalPadding = constraints.maxWidth < 420
+                    ? 18.0
+                    : 28.0;
+                final maxFormWidth = constraints.maxWidth < 420
+                    ? double.infinity
+                    : 420.0;
 
-                  return LayoutBuilder(
-                    builder: (context, scrollConstraints) {
-                      return SingleChildScrollView(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: horizontalPadding,
-                          vertical: 22,
-                        ),
-                        child: ConstrainedBox(
-                          constraints: BoxConstraints(
-                            minHeight: scrollConstraints.maxHeight,
-                          ),
-                          child: Center(
-                            child: ConstrainedBox(
-                              constraints: BoxConstraints(maxWidth: maxFormWidth),
-                              child: Form(
-                                key: _formKey,
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  mainAxisSize: MainAxisSize.min,
-                                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                                  children: [
-                                    const SizedBox(height: 10),
+                return SingleChildScrollView(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: horizontalPadding,
+                    vertical: 22,
+                  ),
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints(
+                      minHeight: constraints.maxHeight,
+                    ),
+                    child: Center(
+                      child: ConstrainedBox(
+                        constraints: BoxConstraints(maxWidth: maxFormWidth),
+                        child: Form(
+                          key: _formKey,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              const AppBackButton(),
+                              const SizedBox(height: 10),
 
-                                    Text(
-                                      'Welcome back',
-                                      style: textTheme.headlineMedium?.copyWith(
-                                        fontSize: 34,
-                                        fontWeight: FontWeight.w800,
-                                      ),
-                                    ),
-
-                                    const SizedBox(height: 8),
-
-                                    Text(
-                                      'Log in to continue your singing practice.',
-                                      style: textTheme.bodyMedium?.copyWith(
-                                        fontSize: 16,
-                                        color: AppColors.textSecondary.withValues(
-                                          alpha: 0.85,
-                                        ),
-                                        height: 1.4,
-                                      ),
-                                    ),
-
-                                    const SizedBox(height: 26),
-
-                                    AuthTextField(
-                                      controller: _emailController,
-                                      labelText: 'Email',
-                                      hintText: 'you@example.com',
-                                      keyboardType: TextInputType.emailAddress,
-                                      validator: _validateEmail,
-                                      textInputAction: TextInputAction.next,
-                                      onChanged: (_) {
-                                        _clearLoginError();
-                                      },
-                                    ),
-
-                                    const SizedBox(height: 14),
-
-                                    AuthTextField(
-                                      controller: _passwordController,
-                                      labelText: 'Password',
-                                      hintText: 'Your password',
-                                      obscureText: _obscurePassword,
-                                      validator: _validatePassword,
-                                      textInputAction: TextInputAction.done,
-                                      onFieldSubmitted: (_) {
-                                        _handleLogin();
-                                      },
-                                      onChanged: (_) {
-                                        _clearLoginError();
-                                      },
-                                      onToggleObscure: () {
-                                        setState(() {
-                                          _obscurePassword = !_obscurePassword;
-                                        });
-                                      },
-                                      obscureIcon: _obscurePassword
-                                          ? Icons.visibility_off_rounded
-                                          : Icons.visibility_rounded,
-                                    ),
-
-                                    if (_loginError != null) ...[
-                                      const SizedBox(height: 12),
-                                      Padding(
-                                        padding: const EdgeInsets.only(left: 12),
-                                        child: Align(
-                                          alignment: Alignment.centerLeft,
-                                          child: Text(
-                                            _loginError!,
-                                            style: const TextStyle(
-                                              color: Colors.redAccent,
-                                              fontSize: 13,
-                                              fontWeight: FontWeight.w500,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-
-                                    Align(
-                                      alignment: Alignment.centerRight,
-                                      child: TextButton(
-                                        onPressed: isLoginLoading
-                                            ? null
-                                            : () {
-                                                context.push('/forgot-password');
-                                              },
-                                        child: Text(
-                                          'Forgot password?',
-                                          style: textTheme.bodyMedium?.copyWith(
-                                            color: AppColors.primaryLight,
-                                            fontWeight: FontWeight.w600,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-
-                                    const SizedBox(height: 10),
-
-                                    AuthElevatedButton(
-                                      label: 'Log In',
-                                      isLoading: isLoginLoading,
-                                      onPressed: _handleLogin,
-                                    ),
-
-                                    const SizedBox(height: 14),
-                                    const Divider(height: 1),
-                                    const SizedBox(height: 14),
-
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          "Don't have an account? ",
-                                          style: textTheme.bodyMedium?.copyWith(
-                                            color: AppColors.textSecondary,
-                                          ),
-                                        ),
-                                        TextButton(
-                                          style: ButtonStyle(
-                                            mouseCursor: WidgetStateProperty.all(
-                                              SystemMouseCursors.click,
-                                            ),
-                                            overlayColor:
-                                                WidgetStateProperty.resolveWith<
-                                                  Color?
-                                                >((states) {
-                                                  if (states.contains(
-                                                    WidgetState.hovered,
-                                                  )) {
-                                                    return Colors.white
-                                                        .withValues(alpha: 0.08);
-                                                  }
-
-                                                  if (states.contains(
-                                                    WidgetState.pressed,
-                                                  )) {
-                                                    return Colors.white
-                                                        .withValues(alpha: 0.14);
-                                                  }
-
-                                                  return null;
-                                                }),
-                                            foregroundColor:
-                                                WidgetStateProperty.resolveWith<
-                                                  Color?
-                                                >((states) {
-                                                  if (states.contains(
-                                                    WidgetState.hovered,
-                                                  )) {
-                                                    return Colors.white;
-                                                  }
-
-                                                  return null;
-                                                }),
-                                            padding: WidgetStateProperty.all(
-                                              const EdgeInsets.symmetric(
-                                                horizontal: 6,
-                                                vertical: 4,
-                                              ),
-                                            ),
-                                            minimumSize: WidgetStateProperty.all(
-                                              Size.zero,
-                                            ),
-                                            tapTargetSize:
-                                                MaterialTapTargetSize.shrinkWrap,
-                                          ),
-                                          onPressed: isLoginLoading
-                                              ? null
-                                              : () {
-                                                  context.push('/signup');
-                                                },
-                                          child: Text(
-                                            'Sign up',
-                                            style: textTheme.bodyMedium?.copyWith(
-                                              color: AppColors.primaryLight,
-                                              fontWeight: FontWeight.w700,
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
+                              Text(
+                                'Welcome back',
+                                style: textTheme.headlineMedium?.copyWith(
+                                  fontSize: 34,
+                                  fontWeight: FontWeight.w800,
                                 ),
                               ),
-                            ),
+
+                              const SizedBox(height: 8),
+
+                              Text(
+                                'Log in to continue your singing practice.',
+                                style: textTheme.bodyMedium?.copyWith(
+                                  fontSize: 16,
+                                  color: AppColors.textSecondary.withValues(
+                                    alpha: 0.85,
+                                  ),
+                                  height: 1.4,
+                                ),
+                              ),
+
+                              const SizedBox(height: 26),
+
+                              AuthTextField(
+                                controller: _emailController,
+                                labelText: 'Email',
+                                hintText: 'you@example.com',
+                                keyboardType: TextInputType.emailAddress,
+                                validator: _validateEmail,
+                                textInputAction: TextInputAction.next,
+                                onChanged: (_) {
+                                  _clearLoginError();
+                                },
+                              ),
+
+                              const SizedBox(height: 14),
+
+                              AuthTextField(
+                                controller: _passwordController,
+                                labelText: 'Password',
+                                hintText: 'Your password',
+                                obscureText: _obscurePassword,
+                                validator: _validatePassword,
+                                textInputAction: TextInputAction.done,
+                                onFieldSubmitted: (_) {
+                                  _handleLogin();
+                                },
+                                onChanged: (_) {
+                                  _clearLoginError();
+                                },
+                                onToggleObscure: () {
+                                  setState(() {
+                                    _obscurePassword = !_obscurePassword;
+                                  });
+                                },
+                                obscureIcon: _obscurePassword
+                                    ? Icons.visibility_off_rounded
+                                    : Icons.visibility_rounded,
+                              ),
+
+                              if (_loginError != null) ...[
+                                const SizedBox(height: 12),
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 12),
+                                  child: Align(
+                                    alignment: Alignment.centerLeft,
+                                    child: Text(
+                                      _loginError!,
+                                      style: const TextStyle(
+                                        color: Colors.redAccent,
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+
+                              Align(
+                                alignment: Alignment.centerRight,
+                                child: TextButton(
+                                  onPressed: isLoginLoading
+                                      ? null
+                                      : () {
+                                          context.push('/forgot-password');
+                                        },
+                                  child: Text(
+                                    'Forgot password?',
+                                    style: textTheme.bodyMedium?.copyWith(
+                                      color: AppColors.primaryLight,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                ),
+                              ),
+
+                              const SizedBox(height: 10),
+
+                              AuthElevatedButton(
+                                label: 'Log In',
+                                isLoading: isLoginLoading,
+                                onPressed: _handleLogin,
+                              ),
+
+                              const SizedBox(height: 14),
+                              const Divider(height: 1),
+                              const SizedBox(height: 14),
+
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    "Don't have an account? ",
+                                    style: textTheme.bodyMedium?.copyWith(
+                                      color: AppColors.textSecondary,
+                                    ),
+                                  ),
+                                  TextButton(
+                                    style: ButtonStyle(
+                                      mouseCursor: WidgetStateProperty.all(
+                                        SystemMouseCursors.click,
+                                      ),
+                                      overlayColor:
+                                          WidgetStateProperty.resolveWith<
+                                            Color?
+                                          >((states) {
+                                            if (states.contains(
+                                              WidgetState.hovered,
+                                            )) {
+                                              return Colors.white.withValues(
+                                                alpha: 0.08,
+                                              );
+                                            }
+
+                                            if (states.contains(
+                                              WidgetState.pressed,
+                                            )) {
+                                              return Colors.white.withValues(
+                                                alpha: 0.14,
+                                              );
+                                            }
+
+                                            return null;
+                                          }),
+                                      foregroundColor:
+                                          WidgetStateProperty.resolveWith<
+                                            Color?
+                                          >((states) {
+                                            if (states.contains(
+                                              WidgetState.hovered,
+                                            )) {
+                                              return Colors.white;
+                                            }
+
+                                            return null;
+                                          }),
+                                      padding: WidgetStateProperty.all(
+                                        const EdgeInsets.symmetric(
+                                          horizontal: 6,
+                                          vertical: 4,
+                                        ),
+                                      ),
+                                      minimumSize: WidgetStateProperty.all(
+                                        Size.zero,
+                                      ),
+                                      tapTargetSize:
+                                          MaterialTapTargetSize.shrinkWrap,
+                                    ),
+                                    onPressed: isLoginLoading
+                                        ? null
+                                        : () {
+                                            context.push('/signup');
+                                          },
+                                    child: Text(
+                                      'Sign up',
+                                      style: textTheme.bodyMedium?.copyWith(
+                                        color: AppColors.primaryLight,
+                                        fontWeight: FontWeight.w700,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
                           ),
                         ),
-                      );
-                    },
-                  );
-                },
-              ),
+                      ),
+                    ),
+                  ),
+                );
+              },
             ),
-          ],
+          ),
         ),
       ),
     );

@@ -1,9 +1,26 @@
-# TODO
+# Splash White Screen Diagnostic & Fix
 
-- [x] Apply edits for Task 1: Premium Welcome Screen (galaxy background, overlay, transparent scaffold, glassmorphism cards, fade-in animation).
-- [x] Apply edits for Task 2: Persistent Login (SplashScreen should route based on authState after Firebase restores state; removed unconditional 3s navigation).
-- [ ] Run `dart format .`.
-- [ ] Run `flutter analyze`.
-- [ ] Run tests (`flutter test` or at least widget tests).
-- [ ] Re-check routing behavior for login/signup/forgot/verify/logout.
+## Steps
+
+- [x] STEP 1 — Capture complete error
+      **ROOT CAUSE:** `_SplashScreenState` uses `SingleTickerProviderStateMixin` but creates TWO
+      `AnimationController` instances (`_entranceController`, `_exitController`).
+      Assertion error at `ticker_provider.dart:327` causes white screen.
+
+- [ ] STEP 2 — Edit `splash_screen.dart`:
+  - [x] a. Change `SingleTickerProviderStateMixin` → `TickerProviderStateMixin`
+  - [ ] b. Fix `Future.wait<dynamic>` + `results[1] as User?` → typed independent futures
+  - [ ] c. Read `disableAnimations` BEFORE any `await`, pass to methods
+  - [ ] d. Add `debugPrint('ACTIVE TUNO SPLASH BUILD');` in `build()`
+  - [ ] e. Temporarily simplify build body to text-only Scaffold for diagnosis
+
+- [ ] STEP 3 — Run `flutter run -d chrome`, confirm text-only Splash renders
+
+- [ ] STEP 4 — Restore original Splash UI (logo, animations, fade-out)
+
+- [ ] STEP 5 — Run final verification:
+  - [ ] `dart format .`
+  - [ ] `flutter analyze`
+  - [ ] `flutter build web --no-tree-shake-icons`
+  - [ ] `flutter run -d chrome` → confirm dark bg, centered logo, no white screen
 

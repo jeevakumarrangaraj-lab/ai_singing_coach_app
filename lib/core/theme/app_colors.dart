@@ -8,27 +8,42 @@ class AppColors {
   static const Color surface = Color(0xFF171923);
   static const Color surfaceLight = Color(0xFF232638);
 
-  // Brand
-  static const Color primary = Color(0xFF8B5CF6);
-  static const Color primaryDark = Color(0xFF5B21B6);
-  static const Color primaryLight = Color(0xFFC4B5FD);
+  // Brand - New Sunset/Music Palette
+  static const Color primaryCoral = Color(0xFFFF6B45);
+  static const Color primaryMagenta = Color(0xFFE83E8C);
+  static const Color accentGold = Color(0xFFFFC857);
+  static const Color deepPlum = Color(0xFF32133F);
+  static const Color lightText = Color(0xFFFFFFFF);
+  static const Color secondaryText = Color(0xFFD8CBDC);
+  static const Color disabled = Color(0xFF8B7D91);
+
+  // Legacy primary (deprecated, kept for migration)
+  static const Color primary = primaryCoral;
+  static const Color primaryDark = primaryMagenta;
+  static const Color primaryLight = accentGold;
 
   // Text
-  static const Color textPrimary = Color(0xFFF5F3FF);
-  static const Color textSecondary = Color(0xFFB8B5C7);
-  static const Color textMuted = Color(0xFF7E7A91);
+  static const Color textPrimary = lightText;
+  static const Color textSecondary = secondaryText;
+  static const Color textMuted = disabled;
 
   // Status
   static const Color success = Color(0xFF22C55E);
-  static const Color warning = Color(0xFFF59E0B);
+  static const Color warning = accentGold;
   static const Color error = Color(0xFFEF4444);
 
   // Borders
   static const Color border = Color(0xFF303344);
 
   // Gradients
+  static const LinearGradient primaryButtonGradient = LinearGradient(
+    colors: [primaryCoral, primaryMagenta],
+    begin: Alignment.centerLeft,
+    end: Alignment.centerRight,
+  );
+
   static const LinearGradient primaryGradient = LinearGradient(
-    colors: [Color(0xFFA855F7), Color(0xFF6D28D9)],
+    colors: [primaryCoral, primaryMagenta],
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
   );
@@ -38,4 +53,31 @@ class AppColors {
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
   );
+
+  // Microphone gradients
+  static const LinearGradient microphoneIdleGradient = LinearGradient(
+    colors: [primaryCoral, primaryMagenta],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+  );
+
+  static const LinearGradient microphoneRecordingGradient = LinearGradient(
+    colors: [error, Color(0xFFDC2626)],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+  );
+
+  // Secondary button surface
+  static const Color secondarySurface = deepPlum;
+  static const Color secondaryBorder = Color(
+    0x38FFFFFF,
+  ); // white with 0.22 alpha
+  static const Color secondaryHover = Color(
+    0x14FFFFFF,
+  ); // white with 0.08 alpha
+
+  // Destructive button surface
+  static const Color destructiveSurface = Color(0x1AFF0000); // transparent red
+  static const Color destructiveBorder = error;
+  static const Color destructiveHover = Color(0x1AFF4444); // slight red hover
 }

@@ -10,28 +10,33 @@ class PracticeRoutes {
   static const String analysisResult = '/practice/analysis';
 
   List<RouteBase> get routes => [
-        GoRoute(
-          path: practice,
-          name: 'practice',
-          builder: (context, state) => const VoicePracticeScreen(),
-        ),
-        GoRoute(
-          path: recordingReview,
-          name: 'recordingReview',
-          builder: (context, state) {
-            final audioPath = state.extra as String? ?? '';
-            return RecordingReviewScreen(audioPath: audioPath);
-          },
-        ),
-        GoRoute(
-          path: analysisResult,
-          name: 'analysisResult',
-          builder: (context, state) {
-            final extra = state.extra as Map<String, dynamic>? ?? {};
-            final audioPath = extra['audioPath'] as String? ?? '';
-            final duration = extra['duration'] as Duration? ?? Duration.zero;
-            return AnalysisResultScreen(audioPath: audioPath, duration: duration);
-          },
-        ),
-      ];
+    GoRoute(
+      path: practice,
+      name: 'practice',
+      builder: (context, state) => const VoicePracticeScreen(),
+    ),
+    GoRoute(
+      path: recordingReview,
+      name: 'recordingReview',
+      builder: (context, state) {
+        final audioPath = state.extra as String? ?? '';
+        return RecordingReviewScreen(audioPath: audioPath);
+      },
+    ),
+    GoRoute(
+      path: analysisResult,
+      name: 'analysisResult',
+      builder: (context, state) {
+        final extra = state.extra as Map<String, dynamic>? ?? {};
+        final audioPath = extra['audioPath'] as String? ?? '';
+        final duration = extra['duration'] as Duration? ?? Duration.zero;
+        final recordedAt = extra['recordedAt'] as DateTime? ?? DateTime.now();
+        return AnalysisResultScreen(
+          audioPath: audioPath,
+          duration: duration,
+          recordedAt: recordedAt,
+        );
+      },
+    ),
+  ];
 }

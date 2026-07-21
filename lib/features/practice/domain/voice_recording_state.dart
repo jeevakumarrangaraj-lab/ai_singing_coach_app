@@ -17,10 +17,7 @@ class RecordingState extends VoiceRecordingState {
   final Duration duration;
   final String audioPath;
 
-  const RecordingState({
-    required this.duration,
-    required this.audioPath,
-  });
+  const RecordingState({required this.duration, required this.audioPath});
 
   @override
   bool operator ==(Object other) =>
@@ -38,10 +35,7 @@ class StoppedState extends VoiceRecordingState {
   final String audioPath;
   final Duration duration;
 
-  const StoppedState({
-    required this.audioPath,
-    required this.duration,
-  });
+  const StoppedState({required this.audioPath, required this.duration});
 
   @override
   bool operator ==(Object other) =>
@@ -76,7 +70,8 @@ class PlayingState extends VoiceRecordingState {
           duration == other.duration;
 
   @override
-  int get hashCode => audioPath.hashCode ^ position.hashCode ^ duration.hashCode;
+  int get hashCode =>
+      audioPath.hashCode ^ position.hashCode ^ duration.hashCode;
 }
 
 class PausedState extends VoiceRecordingState {
@@ -100,7 +95,8 @@ class PausedState extends VoiceRecordingState {
           duration == other.duration;
 
   @override
-  int get hashCode => audioPath.hashCode ^ position.hashCode ^ duration.hashCode;
+  int get hashCode =>
+      audioPath.hashCode ^ position.hashCode ^ duration.hashCode;
 }
 
 class ErrorState extends VoiceRecordingState {
@@ -111,7 +107,9 @@ class ErrorState extends VoiceRecordingState {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is ErrorState && runtimeType == other.runtimeType && message == other.message;
+      other is ErrorState &&
+          runtimeType == other.runtimeType &&
+          message == other.message;
 
   @override
   int get hashCode => message.hashCode;
@@ -136,7 +134,8 @@ extension VoiceRecordingStateX on VoiceRecordingState {
 
   bool get isError => this is ErrorState;
 
-  bool get hasRecording => whenOrNull(
+  bool get hasRecording =>
+      whenOrNull(
         stopped: (audioPath, _) => audioPath.isNotEmpty,
         playing: (audioPath, _, _) => audioPath.isNotEmpty,
         paused: (audioPath, _, _) => audioPath.isNotEmpty,
@@ -144,23 +143,23 @@ extension VoiceRecordingStateX on VoiceRecordingState {
       false;
 
   String? get audioPath => whenOrNull(
-        stopped: (audioPath, _) => audioPath,
-        playing: (audioPath, _, _) => audioPath,
-        paused: (audioPath, _, _) => audioPath,
-      );
+    stopped: (audioPath, _) => audioPath,
+    playing: (audioPath, _, _) => audioPath,
+    paused: (audioPath, _, _) => audioPath,
+  );
 
   Duration? get duration => whenOrNull(
-        recording: (duration, _) => duration,
-        stopped: (_, duration) => duration,
-        playing: (_, __, duration) => duration,
-        paused: (_, __, duration) => duration,
-      );
+    recording: (duration, _) => duration,
+    stopped: (_, duration) => duration,
+    playing: (_, _, duration) => duration,
+    paused: (_, _, duration) => duration,
+  );
 
   Duration? get position => whenOrNull(
-        recording: (duration, _) => duration,
-        playing: (_, position, _) => position,
-        paused: (_, position, _) => position,
-      );
+    recording: (duration, _) => duration,
+    playing: (_, position, _) => position,
+    paused: (_, position, _) => position,
+  );
 
   T? whenOrNull<T>({
     T Function()? idle,
@@ -186,12 +185,21 @@ extension VoiceRecordingStateX on VoiceRecordingState {
         return recording?.call(d, p);
       case StoppedState(audioPath: final p, duration: final d):
         return stopped?.call(p, d);
-      case PlayingState(audioPath: final p, position: final pos, duration: final d):
+      case PlayingState(
+        audioPath: final p,
+        position: final pos,
+        duration: final d,
+      ):
         return playing?.call(p, pos, d);
-      case PausedState(audioPath: final p, position: final pos, duration: final d):
+      case PausedState(
+        audioPath: final p,
+        position: final pos,
+        duration: final d,
+      ):
         return paused?.call(p, pos, d);
       case ErrorState(message: final m):
         return error?.call(m);
     }
+    return null;
   }
 }

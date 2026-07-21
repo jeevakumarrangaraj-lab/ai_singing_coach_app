@@ -1,12 +1,14 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../features/auth/presentation/auth_controller.dart';
 import '../../features/auth/presentation/auth_router.dart';
+import '../../features/onboarding/presentation/screens/onboarding_screen.dart';
 import '../../features/practice/presentation/practice_router.dart';
 import '../../screens/home_screen.dart';
-import '../../screens/splash_screen.dart';
 import '../../screens/welcome_screen.dart';
+import '../../features/splash/presentation/screens/splash_screen.dart';
 
 final appRouterProvider = Provider<GoRouter>((ref) {
   final GoRouter router = GoRouter(
@@ -24,6 +26,11 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         builder: (context, state) => const WelcomeScreen(),
       ),
       GoRoute(
+        path: '/onboarding',
+        name: 'onboarding',
+        builder: (context, state) => const OnboardingScreen(),
+      ),
+      GoRoute(
         path: '/home',
         name: 'home',
         builder: (context, state) => const HomeScreen(),
@@ -32,6 +39,15 @@ final appRouterProvider = Provider<GoRouter>((ref) {
       ...const AuthRoutes().routes,
     ],
     redirect: (context, state) {
+      final location = state.matchedLocation;
+      final destination = location;
+
+      debugPrint('Splash destination: $destination');
+
+      // IMPORTANT: Allow the Splash route to always build.
+      // Splash itself will navigate after auth restoration + min duration.
+      if (location == '/') return null;
+
       final authState = ref.read(authControllerProvider);
       final user = authState.user;
 
@@ -39,7 +55,6 @@ final appRouterProvider = Provider<GoRouter>((ref) {
 
       final isAuthenticated = user != null;
       final isVerified = user?.emailVerified ?? false;
-      final location = state.matchedLocation;
 
       final bool isAuthPage =
           location == '/login' ||
@@ -61,25 +76,12 @@ final appRouterProvider = Provider<GoRouter>((ref) {
       }
 
       if (isVerified && (location == '/verify-email' || isAuthPage)) {
-        return '/practice';
+        return '/home';
       }
 
       return null;
     },
   );
-
-  ref.listen<AuthState>(authControllerProvider, (previous, next) {
-    final previousAuthenticated = previous?.user != null;
-    final nextAuthenticated = next.user != null;
-
-    final previousVerified = previous?.user?.emailVerified ?? false;
-    final nextVerified = next.user?.emailVerified ?? false;
-
-    if (previousAuthenticated != nextAuthenticated ||
-        previousVerified != nextVerified) {
-      router.refresh();
-    }
-  });
 
   ref.onDispose(router.dispose);
 
