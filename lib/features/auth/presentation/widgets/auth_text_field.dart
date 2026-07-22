@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/theme/app_colors.dart';
-
 class AuthTextField extends StatelessWidget {
   const AuthTextField({
     super.key,
@@ -32,6 +30,8 @@ class AuthTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return TextFormField(
       controller: controller,
       keyboardType: keyboardType,
@@ -48,7 +48,7 @@ class AuthTextField extends StatelessWidget {
                 onPressed: onToggleObscure,
                 icon: Icon(
                   obscureIcon ?? Icons.visibility_off_rounded,
-                  color: AppColors.textMuted,
+                  color: colorScheme.onSurfaceVariant,
                 ),
               )
             : null,

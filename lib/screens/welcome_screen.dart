@@ -1,10 +1,5 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-
-import '../core/theme/app_colors.dart';
-import '../core/widgets/responsive_page_background.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({super.key});
@@ -43,66 +38,57 @@ class _WelcomeScreenState extends State<WelcomeScreen>
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
 
     return Scaffold(
-      backgroundColor: Colors.transparent,
-      body: ResponsivePageBackground(
-        imagePath: 'assets/images/welcome_bg.png',
-        mobileAlignment: Alignment.center,
-        wideAlignment: Alignment.bottomCenter,
-        mobileOverlayAlpha: 0.24,
-        wideOverlayAlpha: 0.14,
-        maxContentWidth: 1200,
-        child: SafeArea(
-          child: LayoutBuilder(
-            builder: (context, constraints) {
-              final isSmall = constraints.maxWidth < 420;
-              final horizontal = isSmall ? 18.0 : 28.0;
+      backgroundColor: colorScheme.surface,
+      body: SafeArea(
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            final isSmall = constraints.maxWidth < 420;
+            final horizontal = isSmall ? 18.0 : 28.0;
 
-              return SingleChildScrollView(
-                padding: EdgeInsets.symmetric(
-                  horizontal: horizontal,
-                  vertical: 18,
-                ),
-                child: FadeTransition(
-                  opacity: _fade,
-                  child: Transform.translate(
-                    offset: Offset(0, _slide.value),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        const SizedBox(height: 4),
-                        Text(
-                          'Tuno',
-                          style: textTheme.titleLarge?.copyWith(
-                            fontWeight: FontWeight.w900,
-                            letterSpacing: 0.2,
-                            color: AppColors.textPrimary.withValues(
-                              alpha: 0.95,
-                            ),
-                          ),
+            return SingleChildScrollView(
+              padding: EdgeInsets.symmetric(
+                horizontal: horizontal,
+                vertical: 18,
+              ),
+              child: FadeTransition(
+                opacity: _fade,
+                child: Transform.translate(
+                  offset: Offset(0, _slide.value),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const SizedBox(height: 4),
+                      Text(
+                        'Tuno',
+                        style: textTheme.titleLarge?.copyWith(
+                          fontWeight: FontWeight.w900,
+                          letterSpacing: 0.2,
+                          color: colorScheme.onSurface,
                         ),
-                        const SizedBox(height: 12),
-                        Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            _MicHeader(isSmall: isSmall),
-                            const SizedBox(height: 12),
-                            _FeatureGrid(isSmall: isSmall),
-                          ],
-                        ),
-                        const SizedBox(height: 8),
-                        _BottomCta(isSmall: isSmall),
-                        const SizedBox(height: 6),
-                      ],
-                    ),
+                      ),
+                      const SizedBox(height: 12),
+                      Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          _MicHeader(isSmall: isSmall),
+                          const SizedBox(height: 12),
+                          _FeatureGrid(isSmall: isSmall),
+                        ],
+                      ),
+                      const SizedBox(height: 8),
+                      _BottomCta(isSmall: isSmall),
+                      const SizedBox(height: 6),
+                    ],
                   ),
                 ),
-              );
-            },
-          ),
+              ),
+            );
+          },
         ),
       ),
     );
@@ -116,9 +102,10 @@ class _MicHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
 
-    return _GlassContainer(
+    return _ThemeCard(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 14),
         child: Column(
@@ -129,16 +116,13 @@ class _MicHeader extends StatelessWidget {
               height: 120,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                gradient: AppColors.primaryGradient,
-                boxShadow: [
-                  BoxShadow(
-                    color: AppColors.primary.withValues(alpha: 0.35),
-                    blurRadius: 44,
-                    spreadRadius: 8,
-                  ),
-                ],
+                color: colorScheme.primary,
               ),
-              child: Icon(Icons.mic_rounded, size: 55, color: Colors.white),
+              child: Icon(
+                Icons.mic_rounded,
+                size: 55,
+                color: colorScheme.onPrimary,
+              ),
             ),
             const SizedBox(height: 10),
             Text(
@@ -149,6 +133,7 @@ class _MicHeader extends StatelessWidget {
                 fontSize: isSmall ? 32 : 36,
                 fontWeight: FontWeight.w900,
                 height: 1.1,
+                color: colorScheme.onSurface,
               ),
             ),
             const SizedBox(height: 6),
@@ -158,7 +143,7 @@ class _MicHeader extends StatelessWidget {
               maxLines: 2,
               style: textTheme.bodyMedium?.copyWith(
                 fontSize: isSmall ? 15 : 16,
-                color: AppColors.textSecondary.withValues(alpha: 0.9),
+                color: colorScheme.onSurfaceVariant,
                 height: 1.35,
               ),
             ),
@@ -186,7 +171,7 @@ class _FeatureGrid extends StatelessWidget {
     final width = MediaQuery.of(context).size.width;
     final isVeryNarrow = width < 340;
 
-    return _GlassContainer(
+    return _ThemeCard(
       child: Padding(
         padding: const EdgeInsets.all(10),
         child: isVeryNarrow
@@ -226,9 +211,10 @@ class _BottomCta extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
 
-    return _GlassContainer(
+    return _ThemeCard(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 14),
         child: Column(
@@ -237,29 +223,16 @@ class _BottomCta extends StatelessWidget {
             SizedBox(
               width: double.infinity,
               height: isSmall ? 50 : 54,
-              child: DecoratedBox(
-                decoration: BoxDecoration(
-                  gradient: AppColors.primaryGradient,
-                  borderRadius: BorderRadius.circular(16),
+              child: FilledButton(
+                style: FilledButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16),
+                  ),
                 ),
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    elevation: 0,
-                    backgroundColor: Colors.transparent,
-                    foregroundColor: Colors.white,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                  ),
-                  onPressed: () => context.go('/signup'),
-                  child: Text(
-                    'Get Started',
-                    style: textTheme.titleMedium?.copyWith(
-                      fontSize: 17,
-                      fontWeight: FontWeight.w900,
-                      color: Colors.white,
-                    ),
-                  ),
+                onPressed: () => context.go('/signup'),
+                child: Text(
+                  'Get Started',
+                  style: TextStyle(fontSize: 17, fontWeight: FontWeight.w900),
                 ),
               ),
             ),
@@ -268,7 +241,7 @@ class _BottomCta extends StatelessWidget {
               'Already have an account?',
               textAlign: TextAlign.center,
               style: textTheme.bodyMedium?.copyWith(
-                color: AppColors.textSecondary.withValues(alpha: 0.92),
+                color: colorScheme.onSurfaceVariant,
                 fontWeight: FontWeight.w700,
                 fontSize: 15,
               ),
@@ -281,7 +254,7 @@ class _BottomCta extends StatelessWidget {
                   'Login',
                   style: textTheme.bodyMedium?.copyWith(
                     fontWeight: FontWeight.w900,
-                    color: AppColors.primaryLight,
+                    color: colorScheme.primary,
                     fontSize: 15,
                   ),
                 ),
@@ -294,34 +267,22 @@ class _BottomCta extends StatelessWidget {
   }
 }
 
-class _GlassContainer extends StatelessWidget {
-  const _GlassContainer({required this.child});
+class _ThemeCard extends StatelessWidget {
+  const _ThemeCard({required this.child});
 
   final Widget child;
 
   @override
   Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(22),
-      child: BackdropFilter(
-        filter: ImageFilter.blur(sigmaX: 14, sigmaY: 14),
+    final colorScheme = Theme.of(context).colorScheme;
 
-        child: Container(
-          decoration: BoxDecoration(
-            color: Colors.white.withValues(alpha: 0.06),
-            borderRadius: BorderRadius.circular(22),
-            border: Border.all(color: Colors.white.withValues(alpha: 0.12)),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withValues(alpha: 0.25),
-                blurRadius: 22,
-                offset: const Offset(0, 10),
-              ),
-            ],
-          ),
-          child: child,
-        ),
+    return Container(
+      decoration: BoxDecoration(
+        color: colorScheme.surfaceContainerHighest,
+        borderRadius: BorderRadius.circular(22),
+        border: Border.all(color: colorScheme.outlineVariant, width: 1),
       ),
+      child: child,
     );
   }
 }
@@ -333,49 +294,48 @@ class _FeatureCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
 
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(14),
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-        decoration: BoxDecoration(
-          color: Colors.white.withValues(alpha: 0.06),
-          border: Border.all(color: Colors.white.withValues(alpha: 0.12)),
-        ),
-        child: Row(
-          children: [
-            Container(
-              width: 36,
-              height: 36,
-              decoration: const BoxDecoration(
-                shape: BoxShape.circle,
-                gradient: AppColors.primaryGradient,
-              ),
-              child: const Icon(
-                Icons.check_rounded,
-                size: 20,
-                color: Colors.white,
-              ),
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+      decoration: BoxDecoration(
+        color: colorScheme.surfaceContainerHighest,
+        borderRadius: BorderRadius.circular(14),
+        border: Border.all(color: colorScheme.outlineVariant, width: 1),
+      ),
+      child: Row(
+        children: [
+          Container(
+            width: 36,
+            height: 36,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: colorScheme.primary,
             ),
-            const SizedBox(width: 8),
-            Expanded(
-              child: FittedBox(
-                fit: BoxFit.scaleDown,
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  label,
-                  maxLines: 1,
-                  style: textTheme.bodyMedium?.copyWith(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w900,
-                    color: AppColors.textPrimary.withValues(alpha: 0.92),
-                  ),
+            child: Icon(
+              Icons.check_rounded,
+              size: 20,
+              color: colorScheme.onPrimary,
+            ),
+          ),
+          const SizedBox(width: 8),
+          Expanded(
+            child: FittedBox(
+              fit: BoxFit.scaleDown,
+              alignment: Alignment.centerLeft,
+              child: Text(
+                label,
+                maxLines: 1,
+                style: textTheme.bodyMedium?.copyWith(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w900,
+                  color: colorScheme.onSurface,
                 ),
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

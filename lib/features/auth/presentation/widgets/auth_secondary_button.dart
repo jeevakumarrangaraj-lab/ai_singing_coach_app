@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
-import '../../../../core/theme/app_colors.dart';
 import '../../../../core/enums/icon_position.dart';
 
 class AuthSecondaryButton extends StatelessWidget {
@@ -23,67 +22,55 @@ class AuthSecondaryButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cs = Theme.of(context).colorScheme;
+
     return SizedBox(
       width: double.infinity,
       height: 54,
-      child: DecoratedBox(
-        decoration: BoxDecoration(
-          color: isLoading
-              ? AppColors.deepPlum.withValues(alpha: 0.65)
-              : AppColors.deepPlum,
-          borderRadius: BorderRadius.circular(18),
-          border: Border.all(
+      child: OutlinedButton(
+        onPressed: isLoading ? null : onPressed,
+        style: OutlinedButton.styleFrom(
+          foregroundColor: cs.onSurface,
+          side: BorderSide(
             color: isLoading
-                ? Colors.white.withValues(alpha: 0.15)
-                : Colors.white.withValues(alpha: 0.22),
+                ? cs.outline.withValues(alpha: 0.15)
+                : cs.outline.withValues(alpha: 0.22),
             width: 1.5,
           ),
-        ),
-        child: Material(
-          color: Colors.transparent,
-          borderRadius: BorderRadius.circular(18),
-          child: InkWell(
-            onTap: isLoading ? null : onPressed,
+          backgroundColor: isLoading
+              ? cs.surfaceContainerHighest.withValues(alpha: 0.65)
+              : cs.surfaceContainerHighest,
+          shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(18),
-            splashColor: Colors.white.withValues(alpha: 0.1),
-            highlightColor: Colors.white.withValues(alpha: 0.05),
-            child: Center(
-              child: isLoading
-                  ? const SizedBox(
-                      width: 22,
-                      height: 22,
-                      child: CircularProgressIndicator(
-                        strokeWidth: 2,
-                        valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-                      ),
-                    )
-                  : Row(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        if (icon != null &&
-                            iconPosition == IconPosition.start) ...[
-                          Icon(icon, color: Colors.white, size: 22),
-                          const SizedBox(width: 8),
-                        ],
-                        Text(
-                          label,
-                          style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
-                            color: Colors.white,
-                          ),
-                        ),
-                        if (icon != null &&
-                            iconPosition == IconPosition.end) ...[
-                          const SizedBox(width: 8),
-                          Icon(icon, color: Colors.white, size: 22),
-                        ],
-                      ],
-                    ),
-            ),
           ),
         ),
+        child: isLoading
+            ? SizedBox(
+                width: 22,
+                height: 22,
+                child: CircularProgressIndicator(
+                  strokeWidth: 2,
+                  valueColor: AlwaysStoppedAnimation<Color>(cs.onSurface),
+                ),
+              )
+            : Row(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  if (icon != null && iconPosition == IconPosition.start) ...[
+                    Icon(icon, size: 22),
+                    const SizedBox(width: 8),
+                  ],
+                  Text(
+                    label,
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                  ),
+                  if (icon != null && iconPosition == IconPosition.end) ...[
+                    const SizedBox(width: 8),
+                    Icon(icon, size: 22),
+                  ],
+                ],
+              ),
       ),
     );
   }

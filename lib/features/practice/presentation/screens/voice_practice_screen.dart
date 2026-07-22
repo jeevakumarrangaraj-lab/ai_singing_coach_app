@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../../core/theme/app_colors.dart';
 import '../../../../core/enums/icon_position.dart';
-import '../../../../core/widgets/responsive_page_background.dart';
 import '../../presentation/voice_recording_controller.dart';
 import '../../domain/voice_recording_state.dart';
 import '../../../auth/presentation/widgets/auth_elevated_button.dart';
@@ -37,10 +35,11 @@ class _VoicePracticeScreenState extends ConsumerState<VoicePracticeScreen>
 
       // Recording: confirm discard.
       if (currentState.isRecording) {
+        final cs = Theme.of(context).colorScheme;
         final shouldDiscard = await showDialog<bool>(
           context: context,
           builder: (dialogContext) => AlertDialog(
-            backgroundColor: AppColors.surface,
+            backgroundColor: cs.surfaceContainerHighest,
             title: const Text('Discard recording?'),
             content: const Text('Your current recording will not be saved.'),
             actions: [
@@ -50,7 +49,7 @@ class _VoicePracticeScreenState extends ConsumerState<VoicePracticeScreen>
               ),
               TextButton(
                 onPressed: () => Navigator.of(dialogContext).pop(true),
-                style: TextButton.styleFrom(foregroundColor: AppColors.error),
+                style: TextButton.styleFrom(foregroundColor: cs.error),
                 child: const Text('Discard and Go Back'),
               ),
             ],
@@ -89,11 +88,7 @@ class _VoicePracticeScreenState extends ConsumerState<VoicePracticeScreen>
   late final AnimationController _pulseController;
 
   late final Animation<double> _pulseScale;
-  bool _isStartupInProgress = false;
-
-  bool _isMicrophoneBusy = false;
-  bool _isMicrophonePressed = false;
-  bool _lastIsRecording = false;
+  bool _isBusy = false;
 
   @override
   void initState() {
@@ -129,61 +124,42 @@ class _VoicePracticeScreenState extends ConsumerState<VoicePracticeScreen>
     super.didChangeDependencies();
 
     final state = ref.read(voiceRecordingControllerProvider);
-    final shouldBeRecordingMode = state.isRecording;
-
-    if (shouldBeRecordingMode) {
+    if (state.isRecording) {
       if (!_pulseController.isAnimating) {
         _pulseController.repeat(reverse: true);
       }
     } else {
-      if (_lastIsRecording) {
-        _pulseController.stop();
-        _pulseController.reset();
-      }
+      _pulseController.stop();
+      _pulseController.reset();
     }
-
-    _lastIsRecording = shouldBeRecordingMode;
   }
 
   @override
   Widget build(BuildContext context) {
     final state = ref.watch(voiceRecordingControllerProvider);
     final controller = ref.read(voiceRecordingControllerProvider.notifier);
+    final cs = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
 
     return Scaffold(
-      backgroundColor: Colors.transparent,
+      backgroundColor: cs.surface,
       body: Stack(
-        fit: StackFit.expand,
         children: [
-          ResponsivePageBackground(
-            imagePath: 'assets/images/practice_bg.png',
-            mobileAlignment: Alignment.center,
-            wideAlignment: Alignment.bottomCenter,
-            mobileOverlayAlpha: 0.22,
-            wideOverlayAlpha: 0.14,
-            maxContentWidth: 900,
-            child: SafeArea(
-              child: SingleChildScrollView(
-                padding: const EdgeInsets.all(24),
+          SafeArea(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.all(24),
+              child: Center(
                 child: ConstrainedBox(
-                  constraints: BoxConstraints(
-                    minHeight:
-                        MediaQuery.of(context).size.height -
-                        MediaQuery.of(context).padding.top -
-                        MediaQuery.of(context).padding.bottom -
-                        48,
-                  ),
+                  constraints: const BoxConstraints(maxWidth: 600),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const SizedBox(height: 56),
+                      const SizedBox(height: 32),
                       Text(
                         'Voice Practice',
                         style: textTheme.headlineLarge?.copyWith(
                           fontSize: 32,
                           fontWeight: FontWeight.w800,
-                          color: Colors.white,
                         ),
                       ),
                       const SizedBox(height: 16),
@@ -191,46 +167,51 @@ class _VoicePracticeScreenState extends ConsumerState<VoicePracticeScreen>
                         'Record your singing and get AI-powered feedback on pitch, rhythm, and tone.',
                         textAlign: TextAlign.center,
                         style: textTheme.bodyLarge?.copyWith(
-                          color: AppColors.textSecondary.withValues(alpha: 0.9),
+                          color: cs.onSurfaceVariant,
                           fontSize: 16,
                         ),
                       ),
                       const SizedBox(height: 48),
-                      _buildRecordingUI(state, controller, textTheme),
+                      _buildRecordingUI(state, controller, textTheme, cs),
                       const SizedBox(height: 48),
                       if (state.isError)
-                        Container(
-                          width: double.infinity,
-                          padding: const EdgeInsets.all(16),
-                          decoration: BoxDecoration(
-                            color: AppColors.error.withValues(alpha: 0.2),
+                        Card(
+                          color: cs.surfaceContainerHighest,
+                          surfaceTintColor: Colors.transparent,
+                          shadowColor: Colors.transparent,
+                          elevation: 0,
+                          shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(16),
-                            border: Border.all(
-                              color: AppColors.error.withValues(alpha: 0.5),
+                            side: BorderSide(
+                              color: cs.outlineVariant,
+                              width: 1,
                             ),
                           ),
-                          child: Row(
-                            children: [
-                              const Icon(
-                                Icons.error_outline,
-                                color: AppColors.error,
-                                size: 24,
-                              ),
-                              const SizedBox(width: 12),
-                              Expanded(
-                                child: Text(
-                                  state.whenOrNull(error: (msg) => msg) ??
-                                      'An error occurred',
-                                  style: textTheme.bodyMedium?.copyWith(
-                                    color: AppColors.error,
+                          child: Padding(
+                            padding: const EdgeInsets.all(16),
+                            child: Row(
+                              children: [
+                                Icon(
+                                  Icons.error_outline,
+                                  color: cs.error,
+                                  size: 24,
+                                ),
+                                const SizedBox(width: 12),
+                                Expanded(
+                                  child: Text(
+                                    state.whenOrNull(error: (msg) => msg) ??
+                                        'An error occurred',
+                                    style: textTheme.bodyMedium?.copyWith(
+                                      color: cs.error,
+                                    ),
                                   ),
                                 ),
-                              ),
-                              TextButton(
-                                onPressed: () => controller.reset(),
-                                child: const Text('Dismiss'),
-                              ),
-                            ],
+                                TextButton(
+                                  onPressed: () => controller.reset(),
+                                  child: Text('Dismiss'),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                     ],
@@ -239,15 +220,16 @@ class _VoicePracticeScreenState extends ConsumerState<VoicePracticeScreen>
               ),
             ),
           ),
-          // Back button on top of everything
+          // Back button as last Stack child so it is clickable
           Positioned(
             top: 8,
             left: 8,
-            child: AppBackButton(
-              onPressed: () {
-                debugPrint('VOICE PRACTICE BACK PRESSED');
-                _handleBackPressed();
-              },
+            child: Tooltip(
+              message: 'Back',
+              child: AppBackButton(
+                onPressed: _handleBackPressed,
+                showOnlyIfCanPop: false,
+              ),
             ),
           ),
         ],
@@ -259,23 +241,23 @@ class _VoicePracticeScreenState extends ConsumerState<VoicePracticeScreen>
     VoiceRecordingState state,
     VoiceRecordingController controller,
     TextTheme textTheme,
+    ColorScheme cs,
   ) {
     final isRecording = state.isRecording;
     final isRequestingPermission = state is RequestingPermissionState;
     final isPermissionDenied = state is PermissionDeniedState;
     final hasRecording = state.hasRecording;
-    final isDisabled = isRecording || _isStartupInProgress;
+    // Only _isBusy disables buttons – RecordingState must NOT disable Stop.
+    final isDisabled = _isBusy;
 
     if (isRequestingPermission) {
       return Column(
         children: [
-          const CircularProgressIndicator(color: AppColors.primaryCoral),
+          CircularProgressIndicator(color: cs.primary),
           const SizedBox(height: 24),
           Text(
             'Requesting microphone permission...',
-            style: textTheme.bodyLarge?.copyWith(
-              color: AppColors.textSecondary,
-            ),
+            style: textTheme.bodyLarge?.copyWith(color: cs.onSurfaceVariant),
           ),
         ],
       );
@@ -284,20 +266,18 @@ class _VoicePracticeScreenState extends ConsumerState<VoicePracticeScreen>
     if (isPermissionDenied) {
       return Column(
         children: [
-          const Icon(Icons.mic_off_rounded, size: 80, color: AppColors.error),
+          Icon(Icons.mic_off_rounded, size: 80, color: cs.error),
           const SizedBox(height: 24),
           Text(
             'Microphone Permission Required',
-            style: textTheme.titleLarge?.copyWith(color: Colors.white),
+            style: textTheme.titleLarge?.copyWith(color: cs.onSurface),
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 12),
           Text(
             'Please enable microphone access in settings to record your voice.',
             textAlign: TextAlign.center,
-            style: textTheme.bodyMedium?.copyWith(
-              color: AppColors.textSecondary,
-            ),
+            style: textTheme.bodyMedium?.copyWith(color: cs.onSurfaceVariant),
           ),
           const SizedBox(height: 24),
           AuthElevatedButton(
@@ -315,9 +295,9 @@ class _VoicePracticeScreenState extends ConsumerState<VoicePracticeScreen>
 
     return Column(
       children: [
-        _buildMicrophoneButton(isRecording, controller, textTheme),
+        _buildMicrophoneButton(isRecording, controller, textTheme, cs),
         const SizedBox(height: 32),
-        _buildTimerDisplay(state, textTheme),
+        _buildTimerDisplay(state, textTheme, cs),
         const SizedBox(height: 32),
         _buildActionButtons(
           state,
@@ -326,29 +306,38 @@ class _VoicePracticeScreenState extends ConsumerState<VoicePracticeScreen>
           isRecording,
           hasRecording,
           isDisabled,
+          cs,
         ),
       ],
     );
+  }
+
+  // Unified stop handler – called by both microphone tap and Stop button.
+  Future<void> _handleStopRecording(VoiceRecordingController controller) async {
+    if (!mounted || _isBusy) return;
+    _isBusy = true;
+
+    try {
+      final path = await controller.stopRecording();
+      if (!mounted) return;
+      if (path != null && path.isNotEmpty) {
+        context.go('/practice/review', extra: path);
+      }
+    } finally {
+      if (mounted) _isBusy = false;
+    }
   }
 
   Future<void> _handleMicrophoneTap(
     VoiceRecordingController controller,
     bool isRecording,
   ) async {
-    if (!mounted) return;
+    if (!mounted || _isBusy) return;
 
-    if (_isMicrophoneBusy) return;
-
-    _isMicrophoneBusy = true;
-
-    try {
-      if (isRecording) {
-        await controller.stopRecording();
-      } else {
-        await _handleStartRecording(controller);
-      }
-    } finally {
-      _isMicrophoneBusy = false;
+    if (isRecording) {
+      await _handleStopRecording(controller);
+    } else {
+      await _handleStartRecording(controller);
     }
   }
 
@@ -356,73 +345,12 @@ class _VoicePracticeScreenState extends ConsumerState<VoicePracticeScreen>
     bool isRecording,
     VoiceRecordingController controller,
     TextTheme textTheme,
+    ColorScheme cs,
   ) {
-    final isBusy = _isMicrophoneBusy || _isStartupInProgress;
-
-    final microphoneCircle = AnimatedContainer(
-      duration: const Duration(milliseconds: 300),
-      width: 160,
-      height: 160,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        gradient: isRecording
-            ? AppColors.microphoneRecordingGradient
-            : AppColors.microphoneIdleGradient,
-        boxShadow: [
-          BoxShadow(
-            color: (isRecording ? AppColors.error : AppColors.primaryCoral)
-                .withValues(alpha: 0.5),
-            blurRadius: isRecording ? 40 : 30,
-            spreadRadius: isRecording ? 10 : 5,
-            offset: const Offset(0, 8),
-          ),
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.3),
-            blurRadius: 20,
-            offset: const Offset(0, 10),
-          ),
-        ],
-      ),
-      child: Center(
-        child: AnimatedSwitcher(
-          duration: const Duration(milliseconds: 300),
-          child: isRecording
-              ? Container(
-                  key: const ValueKey('recording'),
-                  width: 70,
-                  height: 70,
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
-                    shape: BoxShape.circle,
-                  ),
-                  child: const Icon(
-                    Icons.stop_rounded,
-                    size: 40,
-                    color: Colors.white,
-                  ),
-                )
-              : Container(
-                  key: const ValueKey('idle'),
-                  width: 80,
-                  height: 80,
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
-                    shape: BoxShape.circle,
-                  ),
-                  child: const Icon(
-                    Icons.mic_rounded,
-                    size: 45,
-                    color: AppColors.primaryMagenta,
-                  ),
-                ),
-        ),
-      ),
-    );
-
     return Stack(
       alignment: Alignment.center,
       children: [
-        // Pulse ring
+        // Pulse ring when recording
         if (isRecording)
           AnimatedBuilder(
             animation: _pulseController,
@@ -436,7 +364,7 @@ class _VoicePracticeScreenState extends ConsumerState<VoicePracticeScreen>
                     shape: BoxShape.circle,
                     color: Colors.transparent,
                     border: Border.all(
-                      color: AppColors.error.withValues(alpha: 0.6),
+                      color: cs.error.withValues(alpha: 0.5),
                       width: 3,
                     ),
                   ),
@@ -444,35 +372,53 @@ class _VoicePracticeScreenState extends ConsumerState<VoicePracticeScreen>
               );
             },
           ),
-        // Wrapped clickable circle (full control ripple + pressed animation)
+        // Microphone circle
         Semantics(
           button: true,
           label: isRecording ? 'Stop recording' : 'Start recording',
           child: MouseRegion(
             cursor: SystemMouseCursors.click,
             child: Material(
-              color: Colors.transparent,
-              shape: const CircleBorder(),
+              color: cs.surfaceContainerHighest,
+              shape: CircleBorder(
+                side: BorderSide(color: cs.outlineVariant, width: 1.5),
+              ),
               clipBehavior: Clip.antiAlias,
               child: InkWell(
                 customBorder: const CircleBorder(),
                 mouseCursor: SystemMouseCursors.click,
-                hoverColor: Colors.white.withValues(alpha: 0.10),
-                highlightColor: Colors.white.withValues(alpha: 0.20),
-                splashColor: Colors.white.withValues(alpha: 0.30),
-                onTap: isBusy
+                hoverColor: cs.onSurface.withValues(alpha: 0.08),
+                highlightColor: cs.onSurface.withValues(alpha: 0.14),
+                splashColor: cs.onSurface.withValues(alpha: 0.20),
+                onTap: _isBusy
                     ? null
                     : () => _handleMicrophoneTap(controller, isRecording),
-                onHighlightChanged: (isPressed) {
-                  setState(() {
-                    _isMicrophonePressed = isPressed;
-                  });
-                },
-                child: AnimatedScale(
-                  scale: _isMicrophonePressed ? 0.96 : 1.0,
-                  duration: const Duration(milliseconds: 120),
-                  curve: Curves.easeOut,
-                  child: microphoneCircle,
+                child: AnimatedContainer(
+                  duration: const Duration(milliseconds: 300),
+                  width: 160,
+                  height: 160,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(color: cs.outlineVariant, width: 1.5),
+                  ),
+                  child: Center(
+                    child: AnimatedSwitcher(
+                      duration: const Duration(milliseconds: 300),
+                      child: isRecording
+                          ? Icon(
+                              key: const ValueKey('recording'),
+                              Icons.stop_rounded,
+                              size: 56,
+                              color: cs.error,
+                            )
+                          : Icon(
+                              key: const ValueKey('idle'),
+                              Icons.mic_rounded,
+                              size: 56,
+                              color: cs.primary,
+                            ),
+                    ),
+                  ),
                 ),
               ),
             ),
@@ -485,28 +431,35 @@ class _VoicePracticeScreenState extends ConsumerState<VoicePracticeScreen>
   Future<void> _handleStartRecording(
     VoiceRecordingController controller,
   ) async {
-    if (!mounted) return;
-    if (_isStartupInProgress ||
-        ref.read(voiceRecordingControllerProvider).isRecording) {
-      return;
-    }
+    if (!mounted || _isBusy) return;
+    if (ref.read(voiceRecordingControllerProvider).isRecording) return;
 
-    final hasPermission = await controller.hasPermission();
-    if (!mounted) return;
+    _isBusy = true;
 
-    if (!hasPermission) {
-      await controller.requestPermission();
+    try {
+      final hasPermission = await controller.hasPermission();
       if (!mounted) return;
 
-      final currentState = ref.read(voiceRecordingControllerProvider);
-      if (currentState is PermissionDeniedState) return;
-    }
+      if (!hasPermission) {
+        await controller.requestPermission();
+        if (!mounted) return;
 
-    if (!mounted) return;
-    await controller.startRecording();
+        final currentState = ref.read(voiceRecordingControllerProvider);
+        if (currentState is PermissionDeniedState) return;
+      }
+
+      if (!mounted) return;
+      await controller.startRecording();
+    } finally {
+      if (mounted) _isBusy = false;
+    }
   }
 
-  Widget _buildTimerDisplay(VoiceRecordingState state, TextTheme textTheme) {
+  Widget _buildTimerDisplay(
+    VoiceRecordingState state,
+    TextTheme textTheme,
+    ColorScheme cs,
+  ) {
     final duration = state.duration ?? Duration.zero;
 
     return Column(
@@ -516,7 +469,7 @@ class _VoicePracticeScreenState extends ConsumerState<VoicePracticeScreen>
           style: textTheme.displayMedium?.copyWith(
             fontSize: 56,
             fontWeight: FontWeight.w700,
-            color: Colors.white,
+            color: cs.onSurface,
             fontFeatures: const [FontFeature.tabularFigures()],
           ),
         ),
@@ -527,10 +480,8 @@ class _VoicePracticeScreenState extends ConsumerState<VoicePracticeScreen>
               : (state.hasRecording ? 'Recording saved' : 'Ready to record'),
           style: textTheme.bodyLarge?.copyWith(
             color: state.isRecording
-                ? AppColors.warning
-                : (state.hasRecording
-                      ? AppColors.success
-                      : AppColors.textSecondary),
+                ? cs.secondary
+                : (state.hasRecording ? cs.tertiary : cs.onSurfaceVariant),
             fontWeight: state.isRecording || state.hasRecording
                 ? FontWeight.w600
                 : FontWeight.normal,
@@ -547,6 +498,7 @@ class _VoicePracticeScreenState extends ConsumerState<VoicePracticeScreen>
     bool isRecording,
     bool hasRecording,
     bool isDisabled,
+    ColorScheme cs,
   ) {
     if (isRecording) {
       return LayoutBuilder(
@@ -559,14 +511,12 @@ class _VoicePracticeScreenState extends ConsumerState<VoicePracticeScreen>
             onPressed: isDisabled
                 ? null
                 : () async {
-                    if (_isMicrophoneBusy) return;
-                    _isMicrophoneBusy = true;
+                    if (_isBusy) return;
+                    _isBusy = true;
                     try {
                       await controller.cancelRecording();
-                      if (!context.mounted) return;
-                      // stay on screen; state will go Idle
                     } finally {
-                      _isMicrophoneBusy = false;
+                      if (mounted) _isBusy = false;
                     }
                   },
             icon: Icons.close_rounded,
@@ -577,15 +527,7 @@ class _VoicePracticeScreenState extends ConsumerState<VoicePracticeScreen>
             label: 'Stop Recording',
             onPressed: isDisabled
                 ? null
-                : () async {
-                    if (_isMicrophoneBusy) return;
-                    _isMicrophoneBusy = true;
-                    try {
-                      await controller.stopRecording();
-                    } finally {
-                      _isMicrophoneBusy = false;
-                    }
-                  },
+                : () => _handleStopRecording(controller),
             isLoading: false,
             icon: Icons.stop_rounded,
             iconPosition: IconPosition.start,
@@ -616,34 +558,36 @@ class _VoicePracticeScreenState extends ConsumerState<VoicePracticeScreen>
     if (hasRecording) {
       return Column(
         children: [
-          Container(
-            width: double.infinity,
-            padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
-              color: AppColors.success.withValues(alpha: 0.15),
+          Card(
+            color: cs.surfaceContainerHighest,
+            surfaceTintColor: Colors.transparent,
+            shadowColor: Colors.transparent,
+            elevation: 0,
+            shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(16),
-              border: Border.all(
-                color: AppColors.success.withValues(alpha: 0.5),
-              ),
+              side: BorderSide(color: cs.outlineVariant, width: 1),
             ),
-            child: Row(
-              children: [
-                const Icon(
-                  Icons.check_circle_rounded,
-                  color: AppColors.success,
-                  size: 24,
-                ),
-                const SizedBox(width: 12),
-                Expanded(
-                  child: Text(
-                    'Recording saved — ${_formatDuration(state.duration ?? Duration.zero)}',
-                    style: textTheme.bodyMedium?.copyWith(
-                      color: AppColors.success,
-                      fontWeight: FontWeight.w600,
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: Row(
+                children: [
+                  Icon(
+                    Icons.check_circle_rounded,
+                    color: cs.tertiary,
+                    size: 24,
+                  ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Text(
+                      'Recording saved — ${_formatDuration(state.duration ?? Duration.zero)}',
+                      style: textTheme.bodyMedium?.copyWith(
+                        color: cs.tertiary,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
           const SizedBox(height: 16),
@@ -698,7 +642,7 @@ class _VoicePracticeScreenState extends ConsumerState<VoicePracticeScreen>
         Text(
           'Or tap the microphone above',
           style: textTheme.bodyMedium?.copyWith(
-            color: AppColors.textSecondary.withValues(alpha: 0.7),
+            color: cs.onSurfaceVariant.withValues(alpha: 0.7),
           ),
         ),
       ],

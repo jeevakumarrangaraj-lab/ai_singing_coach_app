@@ -3,9 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:record/record.dart';
 
-import '../../../../core/theme/app_colors.dart';
-import '../../../../core/widgets/glass_card.dart';
-
 class PermissionEducationStep extends ConsumerStatefulWidget {
   const PermissionEducationStep({super.key});
 
@@ -48,6 +45,8 @@ class _PermissionEducationStepState
   }
 
   Future<void> _requestMicrophonePermission() async {
+    if (_isRequesting) return;
+
     setState(() {
       _isRequesting = true;
     });
@@ -113,32 +112,34 @@ class _PermissionEducationStepState
   void _showPermissionResultSnackBar(PermissionStatus status) {
     if (!mounted) return;
 
+    final colorScheme = Theme.of(context).colorScheme;
+
     String message;
     Color backgroundColor;
 
     switch (status) {
       case PermissionStatus.granted:
         message = 'Microphone access granted. You can now record your voice.';
-        backgroundColor = AppColors.success;
+        backgroundColor = colorScheme.primary;
         break;
       case PermissionStatus.denied:
         message =
             'Microphone access denied. You can enable it later in settings to record.';
-        backgroundColor = AppColors.warning;
+        backgroundColor = colorScheme.error;
         break;
       case PermissionStatus.permanentlyDenied:
         message =
             'Microphone access permanently denied. Please enable it in app settings.';
-        backgroundColor = AppColors.error;
+        backgroundColor = colorScheme.error;
         break;
       case PermissionStatus.limited:
         message =
             'Limited microphone access granted. You can record but with restrictions.';
-        backgroundColor = AppColors.warning;
+        backgroundColor = colorScheme.secondary;
         break;
       default:
         message = 'Permission status: ${status.name}';
-        backgroundColor = AppColors.textMuted;
+        backgroundColor = colorScheme.onSurfaceVariant;
     }
 
     ScaffoldMessenger.of(context).showSnackBar(
@@ -150,7 +151,7 @@ class _PermissionEducationStepState
         action: status == PermissionStatus.permanentlyDenied
             ? SnackBarAction(
                 label: 'Open Settings',
-                textColor: Colors.white,
+                textColor: colorScheme.onPrimary,
                 onPressed: _openSettings,
               )
             : null,
@@ -160,10 +161,12 @@ class _PermissionEducationStepState
 
   void _showErrorSnackBar(String message) {
     if (!mounted) return;
+    final colorScheme = Theme.of(context).colorScheme;
+
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(message),
-        backgroundColor: AppColors.error,
+        backgroundColor: colorScheme.error,
         behavior: SnackBarBehavior.floating,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       ),
@@ -172,7 +175,10 @@ class _PermissionEducationStepState
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
+
+    final isRequesting = _isRequesting;
     final isGranted = _permissionStatus == PermissionStatus.granted;
     final isPermanentlyDenied =
         _permissionStatus == PermissionStatus.permanentlyDenied;
@@ -186,32 +192,21 @@ class _PermissionEducationStepState
             width: 80,
             height: 80,
             decoration: BoxDecoration(
-              gradient: isGranted
-                  ? AppColors.microphoneIdleGradient
-                  : LinearGradient(
-                      colors: [
-                        AppColors.primaryCoral.withValues(alpha: 0.6),
-                        AppColors.primaryMagenta.withValues(alpha: 0.6),
-                      ],
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                    ),
+              color: colorScheme.surfaceContainerHighest,
               shape: BoxShape.circle,
-              boxShadow: [
-                BoxShadow(
-                  color: AppColors.primaryCoral.withValues(alpha: 0.3),
-                  blurRadius: 20,
-                  spreadRadius: 2,
-                  offset: const Offset(0, 8),
-                ),
-              ],
+              border: Border.all(
+                color: isGranted
+                    ? colorScheme.primary
+                    : colorScheme.outlineVariant,
+                width: 2,
+              ),
             ),
             child: Icon(
               Icons.mic_rounded,
               size: 40,
               color: isGranted
-                  ? Colors.white
-                  : Colors.white.withValues(alpha: 0.7),
+                  ? colorScheme.primary
+                  : colorScheme.onSurfaceVariant,
             ),
           ),
         ),
@@ -223,6 +218,7 @@ class _PermissionEducationStepState
           style: textTheme.headlineMedium?.copyWith(
             fontSize: 22,
             fontWeight: FontWeight.w700,
+            color: colorScheme.onSurface,
           ),
           textAlign: TextAlign.center,
         ),
@@ -233,101 +229,96 @@ class _PermissionEducationStepState
           'Tuno uses microphone access only when you choose to record a practice session. '
           'You can change this permission later in your device or browser settings.',
           style: textTheme.bodyMedium?.copyWith(
-            color: AppColors.textSecondary.withValues(alpha: 0.85),
+            color: colorScheme.onSurfaceVariant,
             height: 1.5,
           ),
           textAlign: TextAlign.center,
         ),
         const SizedBox(height: 24),
 
-        // Three points in a glassy panel
-        GlassCard(
-          padding: const EdgeInsets.all(20),
-          borderRadius: 18,
-          borderWidth: 1,
-          borderColor: AppColors.border.withValues(alpha: 0.6),
-          backgroundColor: AppColors.surface.withValues(alpha: 0.85),
-          child: Column(
-            children: [
-              _buildInfoPoint(
-                icon: Icons.mic_rounded,
-                title: 'Required for voice recording',
-                description:
-                    'Microphone access is needed to capture your singing for AI feedback.',
-              ),
-              const SizedBox(height: 16),
-              _buildInfoPoint(
-                icon: Icons.security_rounded,
-                title: 'Tuno will not record automatically',
-                description:
-                    'Recording only happens when you explicitly start a practice session.',
-              ),
-              const SizedBox(height: 16),
-              _buildInfoPoint(
-                icon: Icons.settings_rounded,
-                title: 'Permission can be changed later',
-                description:
-                    'You can grant or revoke microphone access anytime in device/browser settings.',
-              ),
-            ],
+        // Three info points in a card
+        Card(
+          clipBehavior: Clip.antiAlias,
+          elevation: 0,
+          color: colorScheme.surfaceContainerHighest,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(18),
+            side: BorderSide(color: colorScheme.outlineVariant),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              children: [
+                _buildInfoPoint(
+                  icon: Icons.mic_rounded,
+                  title: 'Required for voice recording',
+                  description:
+                      'Microphone access is needed to capture your singing for AI feedback.',
+                ),
+                const SizedBox(height: 16),
+                _buildInfoPoint(
+                  icon: Icons.security_rounded,
+                  title: 'Tuno will not record automatically',
+                  description:
+                      'Recording only happens when you explicitly start a practice session.',
+                ),
+                const SizedBox(height: 16),
+                _buildInfoPoint(
+                  icon: Icons.settings_rounded,
+                  title: 'Permission can be changed later',
+                  description:
+                      'You can grant or revoke microphone access anytime in device/browser settings.',
+                ),
+              ],
+            ),
           ),
         ),
         const SizedBox(height: 24),
 
-        // Enable Microphone button
+        // Permission action buttons
         if (!isGranted) ...[
-          SizedBox(
-            width: double.infinity,
-            height: 54,
-            child: ElevatedButton.icon(
-              onPressed: _isRequesting ? null : _requestMicrophonePermission,
-              icon: _isRequesting
-                  ? const SizedBox(
-                      width: 22,
-                      height: 22,
-                      child: CircularProgressIndicator(
-                        strokeWidth: 2,
-                        valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-                      ),
-                    )
-                  : Icon(
-                      isPermanentlyDenied
-                          ? Icons.settings_rounded
-                          : Icons.mic_rounded,
-                      size: 22,
+          FilledButton.icon(
+            onPressed: isRequesting ? null : _requestMicrophonePermission,
+            icon: isRequesting
+                ? SizedBox(
+                    width: 22,
+                    height: 22,
+                    child: CircularProgressIndicator(
+                      strokeWidth: 2,
+                      color: colorScheme.onPrimary,
                     ),
-              label: Text(
-                _isRequesting
-                    ? 'Requesting...'
-                    : isPermanentlyDenied
-                    ? 'Open Settings'
-                    : 'Enable Microphone',
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16,
-                  color: Colors.white,
-                ),
-              ),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: isPermanentlyDenied
-                    ? AppColors.deepPlum
-                    : AppColors.primaryCoral,
-                foregroundColor: Colors.white,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(18),
-                ),
-                elevation: 0,
+                  )
+                : Icon(
+                    isPermanentlyDenied
+                        ? Icons.settings_rounded
+                        : Icons.mic_rounded,
+                    size: 22,
+                  ),
+            label: Text(
+              isRequesting
+                  ? 'Requesting...'
+                  : isPermanentlyDenied
+                  ? 'Open Settings'
+                  : 'Enable Microphone',
+            ),
+            style: FilledButton.styleFrom(
+              minimumSize: const Size(double.infinity, 54),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(18),
               ),
             ),
           ),
           if (isPermanentlyDenied) ...[
             const SizedBox(height: 12),
-            TextButton.icon(
+            OutlinedButton.icon(
               onPressed: _openSettings,
               icon: const Icon(Icons.open_in_new_rounded, size: 18),
               label: const Text('Open App Settings Manually'),
-              style: TextButton.styleFrom(
-                foregroundColor: AppColors.accentGold,
+              style: OutlinedButton.styleFrom(
+                minimumSize: const Size(double.infinity, 54),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(18),
+                ),
               ),
             ),
           ],
@@ -336,17 +327,17 @@ class _PermissionEducationStepState
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
             decoration: BoxDecoration(
-              color: AppColors.success.withValues(alpha: 0.15),
+              color: colorScheme.primary.withValues(alpha: 0.12),
               borderRadius: BorderRadius.circular(14),
               border: Border.all(
-                color: AppColors.success.withValues(alpha: 0.4),
+                color: colorScheme.primary.withValues(alpha: 0.3),
               ),
             ),
             child: Row(
               children: [
-                const Icon(
+                Icon(
                   Icons.check_circle_rounded,
-                  color: AppColors.success,
+                  color: colorScheme.primary,
                   size: 24,
                 ),
                 const SizedBox(width: 12),
@@ -354,7 +345,7 @@ class _PermissionEducationStepState
                   child: Text(
                     'Microphone access granted. You\'re ready to record!',
                     style: textTheme.bodyMedium?.copyWith(
-                      color: AppColors.success,
+                      color: colorScheme.primary,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
@@ -366,35 +357,37 @@ class _PermissionEducationStepState
 
         // Note about continuing without permission
         const SizedBox(height: 16),
-        Container(
-          padding: const EdgeInsets.all(14),
-          decoration: BoxDecoration(
-            color: AppColors.accentGold.withValues(alpha: 0.1),
+        Card(
+          clipBehavior: Clip.antiAlias,
+          elevation: 0,
+          color: colorScheme.surfaceContainerHighest,
+          shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
-            border: Border.all(
-              color: AppColors.accentGold.withValues(alpha: 0.3),
-            ),
+            side: BorderSide(color: colorScheme.outlineVariant),
           ),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Icon(
-                Icons.info_outline_rounded,
-                color: AppColors.accentGold,
-                size: 20,
-              ),
-              const SizedBox(width: 10),
-              Expanded(
-                child: Text(
-                  'You can continue onboarding without microphone access. '
-                  'Recording will require permission when you start a practice session.',
-                  style: textTheme.bodySmall?.copyWith(
-                    color: AppColors.textSecondary.withValues(alpha: 0.9),
-                    height: 1.4,
+          child: Padding(
+            padding: const EdgeInsets.all(14),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Icon(
+                  Icons.info_outline_rounded,
+                  color: colorScheme.onSurfaceVariant,
+                  size: 20,
+                ),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: Text(
+                    'You can continue onboarding without microphone access. '
+                    'Recording will require permission when you start a practice session.',
+                    style: textTheme.bodySmall?.copyWith(
+                      color: colorScheme.onSurfaceVariant,
+                      height: 1.4,
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ],
@@ -406,6 +399,7 @@ class _PermissionEducationStepState
     required String title,
     required String description,
   }) {
+    final colorScheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
 
     return Row(
@@ -415,10 +409,11 @@ class _PermissionEducationStepState
           width: 36,
           height: 36,
           decoration: BoxDecoration(
-            color: AppColors.primaryCoral.withValues(alpha: 0.15),
+            color: colorScheme.surfaceContainerHighest,
             borderRadius: BorderRadius.circular(10),
+            border: Border.all(color: colorScheme.outlineVariant),
           ),
-          child: Icon(icon, size: 18, color: AppColors.primaryCoral),
+          child: Icon(icon, size: 18, color: colorScheme.onSurfaceVariant),
         ),
         const SizedBox(width: 12),
         Expanded(
@@ -429,14 +424,14 @@ class _PermissionEducationStepState
                 title,
                 style: textTheme.titleSmall?.copyWith(
                   fontWeight: FontWeight.w700,
-                  color: AppColors.textPrimary,
+                  color: colorScheme.onSurface,
                 ),
               ),
               const SizedBox(height: 2),
               Text(
                 description,
                 style: textTheme.bodySmall?.copyWith(
-                  color: AppColors.textSecondary.withValues(alpha: 0.85),
+                  color: colorScheme.onSurfaceVariant,
                   height: 1.3,
                 ),
               ),

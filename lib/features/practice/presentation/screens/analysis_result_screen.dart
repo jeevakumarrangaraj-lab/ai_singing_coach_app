@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../../core/theme/app_colors.dart';
-import '../../../../core/enums/icon_position.dart';
-import '../../../../core/widgets/responsive_page_background.dart';
-import '../../../auth/presentation/widgets/auth_elevated_button.dart';
-import '../../../auth/presentation/widgets/auth_secondary_button.dart';
 import '../../../../common/widgets/app_back_button.dart';
 
 class AnalysisResultScreen extends StatelessWidget {
@@ -21,9 +16,8 @@ class AnalysisResultScreen extends StatelessWidget {
   });
 
   String _formatDuration(Duration duration) {
-    String twoDigits(int n) => n.toString().padLeft(2, '0');
-    final minutes = twoDigits(duration.inMinutes.remainder(60));
-    final seconds = twoDigits(duration.inSeconds.remainder(60));
+    final minutes = duration.inMinutes.toString().padLeft(2, '0');
+    final seconds = (duration.inSeconds % 60).toString().padLeft(2, '0');
     return '$minutes:$seconds';
   }
 
@@ -32,107 +26,122 @@ class AnalysisResultScreen extends StatelessWidget {
   }
 
   String _formatDateTime(DateTime dateTime) {
-    return '${dateTime.day}/${dateTime.month}/${dateTime.year} ${dateTime.hour.toString().padLeft(2, '0')}:${dateTime.minute.toString().padLeft(2, '0')}';
+    return '${dateTime.day}/${dateTime.month}/${dateTime.year} '
+        '${dateTime.hour.toString().padLeft(2, '0')}:'
+        '${dateTime.minute.toString().padLeft(2, '0')}';
+  }
+
+  bool get _hasValidData {
+    final fileName = _getFileName();
+    return audioPath.isNotEmpty &&
+        fileName.isNotEmpty &&
+        duration > Duration.zero;
   }
 
   @override
   Widget build(BuildContext context) {
+    final cs = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
     final fileName = _getFileName();
     final formattedDuration = _formatDuration(duration);
 
     return Scaffold(
-      backgroundColor: Colors.transparent,
-      body: Stack(
-        fit: StackFit.expand,
-        children: [
-          ResponsivePageBackground(
-            imagePath: 'assets/images/progress_bg.png',
-            mobileAlignment: Alignment.center,
-            wideAlignment: Alignment.bottomCenter,
-            mobileOverlayAlpha: 0.22,
-            wideOverlayAlpha: 0.14,
-            maxContentWidth: 900,
-            child: SafeArea(
-              child: SingleChildScrollView(
-                padding: const EdgeInsets.all(24),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    const SizedBox(height: 40),
-                    Container(
-                      width: 120,
-                      height: 120,
-                      decoration: BoxDecoration(
-                        gradient: AppColors.primaryButtonGradient,
-                        shape: BoxShape.circle,
-                        boxShadow: [
-                          BoxShadow(
-                            color: AppColors.primaryCoral.withValues(
-                              alpha: 0.4,
-                            ),
-                            blurRadius: 30,
-                            spreadRadius: 5,
-                            offset: const Offset(0, 8),
-                          ),
-                        ],
-                      ),
-                      child: const Icon(
-                        Icons.pending_actions_rounded,
-                        size: 60,
-                        color: Colors.white,
+      backgroundColor: cs.surface,
+      body: SafeArea(
+        child: Center(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.all(24),
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 600),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  // Back button
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Tooltip(
+                      message: 'Back',
+                      child: Semantics(
+                        button: true,
+                        label: 'Back',
+                        child: AppBackButton(
+                          onPressed: () {
+                            if (context.canPop()) {
+                              context.pop();
+                            } else {
+                              context.go('/practice');
+                            }
+                          },
+                          showOnlyIfCanPop: false,
+                        ),
                       ),
                     ),
-                    const SizedBox(height: 32),
-                    Text(
-                      'Analysis Pending',
-                      style: textTheme.headlineLarge?.copyWith(
-                        fontSize: 32,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
+                  ),
+                  const SizedBox(height: 24),
+
+                  // Status icon
+                  Container(
+                    width: 120,
+                    height: 120,
+                    decoration: BoxDecoration(
+                      color: cs.surfaceContainerHighest,
+                      shape: BoxShape.circle,
+                      border: Border.all(color: cs.outlineVariant, width: 1.5),
+                    ),
+                    child: Icon(
+                      Icons.pending_actions_rounded,
+                      size: 60,
+                      color: cs.primary,
+                    ),
+                  ),
+                  const SizedBox(height: 32),
+
+                  // Title
+                  Text(
+                    'Analysis Pending',
+                    style: textTheme.headlineMedium?.copyWith(
+                      fontSize: 28,
+                      fontWeight: FontWeight.bold,
+                      color: cs.onSurface,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 16),
+
+                  // Status message
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 20,
+                      vertical: 12,
+                    ),
+                    decoration: BoxDecoration(
+                      color: cs.surfaceContainerHighest,
+                      borderRadius: BorderRadius.circular(100),
+                      border: Border.all(color: cs.outlineVariant, width: 1),
+                    ),
+                    child: Text(
+                      'AI pitch analysis will be connected in the next phase.',
+                      style: textTheme.bodyMedium?.copyWith(
+                        color: cs.onSurfaceVariant,
+                        fontWeight: FontWeight.w500,
                       ),
                       textAlign: TextAlign.center,
                     ),
-                    const SizedBox(height: 16),
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 24,
-                        vertical: 12,
-                      ),
-                      decoration: BoxDecoration(
-                        color: Colors.black.withValues(alpha: 0.7),
-                        borderRadius: BorderRadius.circular(100),
-                        border: Border.all(
-                          color: AppColors.warning.withValues(alpha: 0.5),
-                        ),
-                      ),
-                      child: Text(
-                        'AI pitch analysis will be connected in the next phase.',
-                        style: textTheme.bodyLarge?.copyWith(
-                          color: AppColors.warning,
-                          fontWeight: FontWeight.w500,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
+                  ),
+                  const SizedBox(height: 40),
+
+                  // Recording Details Card
+                  Card(
+                    color: cs.surfaceContainerHighest,
+                    surfaceTintColor: Colors.transparent,
+                    shadowColor: Colors.transparent,
+                    elevation: 0,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(22),
+                      side: BorderSide(color: cs.outlineVariant, width: 1),
                     ),
-                    const SizedBox(height: 40),
-                    Container(
-                      width: double.infinity,
+                    child: Padding(
                       padding: const EdgeInsets.all(24),
-                      decoration: BoxDecoration(
-                        color: Colors.black.withValues(alpha: 0.78),
-                        borderRadius: BorderRadius.circular(24),
-                        border: Border.all(
-                          color: AppColors.border.withValues(alpha: 0.65),
-                        ),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withValues(alpha: 0.25),
-                            blurRadius: 16,
-                            offset: const Offset(0, 8),
-                          ),
-                        ],
-                      ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -140,77 +149,172 @@ class AnalysisResultScreen extends StatelessWidget {
                             'Recording Details',
                             style: textTheme.titleLarge?.copyWith(
                               fontWeight: FontWeight.bold,
-                              color: Colors.white,
+                              color: cs.onSurface,
                             ),
                           ),
                           const SizedBox(height: 24),
-                          _buildDetailRow(
-                            context,
-                            icon: Icons.audiotrack_rounded,
-                            label: 'File Name',
-                            value: fileName,
-                          ),
-                          const SizedBox(height: 16),
-                          _buildDetailRow(
-                            context,
-                            icon: Icons.timer_rounded,
-                            label: 'Duration',
-                            value: formattedDuration,
-                          ),
-                          const SizedBox(height: 16),
-                          _buildDetailRow(
-                            context,
-                            icon: Icons.calendar_today_rounded,
-                            label: 'Recorded',
-                            value: _formatDateTime(recordedAt),
-                          ),
+
+                          if (!_hasValidData) ...[
+                            // Invalid data state
+                            Container(
+                              width: double.infinity,
+                              padding: const EdgeInsets.all(20),
+                              decoration: BoxDecoration(
+                                color: cs.errorContainer,
+                                borderRadius: BorderRadius.circular(16),
+                                border: Border.all(
+                                  color: cs.error.withValues(alpha: 0.3),
+                                ),
+                              ),
+                              child: Row(
+                                children: [
+                                  Icon(
+                                    Icons.warning_amber_rounded,
+                                    color: cs.error,
+                                    size: 28,
+                                  ),
+                                  const SizedBox(width: 16),
+                                  Expanded(
+                                    child: Text(
+                                      'Unable to load recording details. '
+                                      'Navigation data may be missing or invalid.',
+                                      style: textTheme.bodyMedium?.copyWith(
+                                        color: cs.onErrorContainer,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ] else ...[
+                            _buildDetailRow(
+                              context,
+                              icon: Icons.audiotrack_rounded,
+                              label: 'File Name',
+                              value: fileName,
+                            ),
+                            const SizedBox(height: 16),
+                            _buildDetailRow(
+                              context,
+                              icon: Icons.timer_rounded,
+                              label: 'Duration',
+                              value: formattedDuration,
+                            ),
+                            const SizedBox(height: 16),
+                            _buildDetailRow(
+                              context,
+                              icon: Icons.calendar_today_rounded,
+                              label: 'Recorded',
+                              value: _formatDateTime(recordedAt),
+                            ),
+                          ],
                         ],
                       ),
                     ),
-                    const SizedBox(height: 32),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: AuthSecondaryButton(
-                            label: 'New Recording',
-                            onPressed: () => context.go('/practice'),
-                            icon: Icons.mic_rounded,
-                            iconPosition: IconPosition.start,
+                  ),
+                  const SizedBox(height: 32),
+
+                  // Action buttons
+                  LayoutBuilder(
+                    builder: (context, constraints) {
+                      const minWidthForRow = 480.0;
+                      final useRowLayout =
+                          constraints.maxWidth >= minWidthForRow;
+
+                      final practiceAgainButton = Tooltip(
+                        message: 'Practice Again',
+                        child: FilledButton(
+                          onPressed: () => context.go('/practice'),
+                          style: FilledButton.styleFrom(
+                            padding: const EdgeInsets.symmetric(vertical: 16),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(18),
+                            ),
+                          ),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(Icons.mic_rounded, size: 20),
+                              const SizedBox(width: 8),
+                              Text(
+                                'Practice Again',
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
-                        const SizedBox(width: 16),
-                        Expanded(
-                          child: AuthElevatedButton(
-                            label: 'Back to Dashboard',
-                            onPressed: () => context.go('/home'),
-                            isLoading: false,
-                            icon: Icons.home_rounded,
-                            iconPosition: IconPosition.start,
+                      );
+
+                      final backToReviewButton = Tooltip(
+                        message: 'Back to Review',
+                        child: OutlinedButton(
+                          onPressed: () {
+                            if (context.canPop()) {
+                              context.pop();
+                            } else {
+                              context.go('/practice');
+                            }
+                          },
+                          style: OutlinedButton.styleFrom(
+                            padding: const EdgeInsets.symmetric(vertical: 16),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(18),
+                            ),
+                            side: BorderSide(color: cs.outline, width: 1.5),
+                          ),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(Icons.arrow_back_rounded, size: 20),
+                              const SizedBox(width: 8),
+                              Text(
+                                'Back to Review',
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
-                      ],
-                    ),
-                    const SizedBox(height: 40),
-                  ],
-                ),
+                      );
+
+                      if (useRowLayout) {
+                        return Row(
+                          children: [
+                            Expanded(child: practiceAgainButton),
+                            const SizedBox(width: 16),
+                            Expanded(child: backToReviewButton),
+                          ],
+                        );
+                      }
+
+                      return Column(
+                        children: [
+                          SizedBox(
+                            width: double.infinity,
+                            child: practiceAgainButton,
+                          ),
+                          const SizedBox(height: 12),
+                          SizedBox(
+                            width: double.infinity,
+                            child: backToReviewButton,
+                          ),
+                        ],
+                      );
+                    },
+                  ),
+                  const SizedBox(height: 40),
+                ],
               ),
             ),
           ),
-          // Back button on top of everything
-          Positioned(
-            top: 8,
-            left: 8,
-            child: AppBackButton(
-              onPressed: () {
-                if (context.canPop()) {
-                  context.pop();
-                } else {
-                  context.go('/home');
-                }
-              },
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }
@@ -221,6 +325,7 @@ class AnalysisResultScreen extends StatelessWidget {
     required String label,
     required String value,
   }) {
+    final cs = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
 
     return Row(
@@ -229,10 +334,10 @@ class AnalysisResultScreen extends StatelessWidget {
           width: 48,
           height: 48,
           decoration: BoxDecoration(
-            color: AppColors.primaryCoral.withValues(alpha: 0.15),
+            color: cs.primaryContainer,
             borderRadius: BorderRadius.circular(16),
           ),
-          child: Icon(icon, color: AppColors.primaryCoral, size: 24),
+          child: Icon(icon, color: cs.primary, size: 24),
         ),
         const SizedBox(width: 16),
         Expanded(
@@ -242,7 +347,7 @@ class AnalysisResultScreen extends StatelessWidget {
               Text(
                 label,
                 style: textTheme.bodySmall?.copyWith(
-                  color: AppColors.textMuted,
+                  color: cs.onSurfaceVariant,
                   fontWeight: FontWeight.w500,
                 ),
               ),
@@ -250,7 +355,7 @@ class AnalysisResultScreen extends StatelessWidget {
               Text(
                 value,
                 style: textTheme.bodyLarge?.copyWith(
-                  color: Colors.white,
+                  color: cs.onSurface,
                   fontWeight: FontWeight.w500,
                 ),
                 overflow: TextOverflow.ellipsis,

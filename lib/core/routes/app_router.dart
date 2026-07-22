@@ -7,6 +7,7 @@ import '../../features/onboarding/presentation/onboarding_completion_provider.da
 import '../../features/onboarding/presentation/screens/onboarding_screen.dart';
 import '../../features/practice/presentation/practice_router.dart';
 import '../../screens/home_screen.dart';
+import '../../screens/settings_screen.dart';
 import '../../screens/welcome_screen.dart';
 import '../../features/splash/presentation/screens/splash_screen.dart';
 
@@ -40,6 +41,11 @@ GoRouter _buildRouter(Ref ref) {
         path: '/home',
         name: 'home',
         builder: (context, state) => const HomeScreen(),
+      ),
+      GoRoute(
+        path: '/settings',
+        name: 'settings',
+        builder: (context, state) => const SettingsScreen(),
       ),
       ...PracticeRoutes().routes,
       ...const AuthRoutes().routes,

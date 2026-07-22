@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
-import '../../../../core/theme/app_colors.dart';
 import '../../../../core/enums/icon_position.dart';
 
 class AuthDestructiveButton extends StatelessWidget {
@@ -23,19 +22,19 @@ class AuthDestructiveButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cs = Theme.of(context).colorScheme;
+
     return SizedBox(
       width: double.infinity,
       height: 54,
       child: DecoratedBox(
         decoration: BoxDecoration(
           color: isLoading
-              ? AppColors.error.withValues(alpha: 0.15)
-              : AppColors.error.withValues(alpha: 0.1),
+              ? cs.error.withValues(alpha: 0.15)
+              : cs.error.withValues(alpha: 0.1),
           borderRadius: BorderRadius.circular(18),
           border: Border.all(
-            color: isLoading
-                ? AppColors.error.withValues(alpha: 0.5)
-                : AppColors.error,
+            color: isLoading ? cs.error.withValues(alpha: 0.5) : cs.error,
             width: 1.5,
           ),
         ),
@@ -45,18 +44,16 @@ class AuthDestructiveButton extends StatelessWidget {
           child: InkWell(
             onTap: isLoading ? null : onPressed,
             borderRadius: BorderRadius.circular(18),
-            splashColor: AppColors.error.withValues(alpha: 0.15),
-            highlightColor: AppColors.error.withValues(alpha: 0.1),
+            splashColor: cs.error.withValues(alpha: 0.15),
+            highlightColor: cs.error.withValues(alpha: 0.1),
             child: Center(
               child: isLoading
-                  ? const SizedBox(
+                  ? SizedBox(
                       width: 22,
                       height: 22,
                       child: CircularProgressIndicator(
                         strokeWidth: 2,
-                        valueColor: AlwaysStoppedAnimation<Color>(
-                          AppColors.error,
-                        ),
+                        valueColor: AlwaysStoppedAnimation<Color>(cs.error),
                       ),
                     )
                   : Row(
@@ -65,21 +62,21 @@ class AuthDestructiveButton extends StatelessWidget {
                       children: [
                         if (icon != null &&
                             iconPosition == IconPosition.start) ...[
-                          Icon(icon, color: AppColors.error, size: 22),
+                          Icon(icon, color: cs.error, size: 22),
                           const SizedBox(width: 8),
                         ],
                         Text(
                           label,
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 16,
-                            color: AppColors.error,
+                            color: cs.error,
                           ),
                         ),
                         if (icon != null &&
                             iconPosition == IconPosition.end) ...[
                           const SizedBox(width: 8),
-                          Icon(icon, color: AppColors.error, size: 22),
+                          Icon(icon, color: cs.error, size: 22),
                         ],
                       ],
                     ),

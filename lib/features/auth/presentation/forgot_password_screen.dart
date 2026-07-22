@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../core/theme/app_colors.dart';
-import '../../../core/widgets/responsive_page_background.dart';
 import '../presentation/auth_controller.dart';
 import 'widgets/auth_elevated_button.dart';
 import 'widgets/auth_text_field.dart';
@@ -52,130 +50,128 @@ class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
     final authState = ref.watch(authControllerProvider);
 
     return Scaffold(
-      backgroundColor: Colors.transparent,
-      body: ResponsivePageBackground(
-        imagePath: 'assets/images/signup_bg.png',
-        mobileAlignment: Alignment.center,
-        wideAlignment: Alignment.bottomCenter,
-        mobileOverlayAlpha: 0.28,
-        wideOverlayAlpha: 0.18,
-        maxContentWidth: 520,
-        child: SafeArea(
-          child: LayoutBuilder(
-            builder: (context, constraints) {
-              final horizontalPadding = constraints.maxWidth < 420
-                  ? 18.0
-                  : 28.0;
-              final maxFormWidth = constraints.maxWidth < 420
-                  ? double.infinity
-                  : 420.0;
+      backgroundColor: colorScheme.surface,
+      body: SafeArea(
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            final horizontalPadding = constraints.maxWidth < 420 ? 18.0 : 28.0;
+            final verticalPadding = 22.0;
+            final minHeight = (constraints.maxHeight - verticalPadding * 2)
+                .clamp(0.0, double.infinity);
 
-              return SingleChildScrollView(
-                padding: EdgeInsets.symmetric(
-                  horizontal: horizontalPadding,
-                  vertical: 22,
-                ),
-                child: ConstrainedBox(
-                  constraints: BoxConstraints(minHeight: constraints.maxHeight),
-                  child: Center(
-                    child: ConstrainedBox(
-                      constraints: BoxConstraints(maxWidth: maxFormWidth),
-                      child: Form(
-                        key: _formKey,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          mainAxisSize: MainAxisSize.min,
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: <Widget>[
-                            const AppBackButton(),
-                            const SizedBox(height: 10),
-                            Text(
-                              'Reset password',
-                              style: textTheme.headlineMedium?.copyWith(
-                                fontSize: 34,
-                                fontWeight: FontWeight.w800,
-                              ),
+            return SingleChildScrollView(
+              padding: EdgeInsets.symmetric(
+                horizontal: horizontalPadding,
+                vertical: verticalPadding,
+              ),
+              child: ConstrainedBox(
+                constraints: BoxConstraints(minHeight: minHeight),
+                child: Center(
+                  child: ConstrainedBox(
+                    constraints: const BoxConstraints(maxWidth: 420),
+                    child: Form(
+                      key: _formKey,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: <Widget>[
+                          AppBackButton(
+                            onPressed: () {
+                              if (context.canPop()) {
+                                context.pop();
+                              } else {
+                                context.go('/login');
+                              }
+                            },
+                          ),
+                          const SizedBox(height: 10),
+                          Text(
+                            'Reset password',
+                            style: textTheme.headlineMedium?.copyWith(
+                              fontSize: 34,
+                              fontWeight: FontWeight.w800,
+                              color: colorScheme.onSurface,
                             ),
-                            const SizedBox(height: 8),
-                            Text(
-                              'Enter your email and we\'ll send you a reset link.',
-                              style: textTheme.bodyMedium?.copyWith(
-                                fontSize: 16,
-                                color: AppColors.textSecondary.withValues(
-                                  alpha: 0.85,
-                                ),
-                                height: 1.4,
-                              ),
+                          ),
+                          const SizedBox(height: 8),
+                          Text(
+                            'Enter your email and we\'ll send you a reset link.',
+                            style: textTheme.bodyMedium?.copyWith(
+                              fontSize: 16,
+                              color: colorScheme.onSurfaceVariant,
+                              height: 1.4,
                             ),
-                            const SizedBox(height: 26),
-                            AuthTextField(
-                              controller: _emailController,
-                              labelText: 'Email',
-                              hintText: 'you@example.com',
-                              keyboardType: TextInputType.emailAddress,
-                              validator: _validateEmail,
-                            ),
-                            const SizedBox(height: 22),
-                            AuthElevatedButton(
-                              label: 'Send reset link',
-                              isLoading:
-                                  authState.isLoading &&
-                                  authState.action == AuthAction.forgotPassword,
-                              onPressed: () async {
-                                final valid =
-                                    _formKey.currentState?.validate() ?? false;
-                                if (!valid) return;
+                          ),
+                          const SizedBox(height: 26),
+                          AuthTextField(
+                            controller: _emailController,
+                            labelText: 'Email',
+                            hintText: 'you@example.com',
+                            keyboardType: TextInputType.emailAddress,
+                            validator: _validateEmail,
+                          ),
+                          const SizedBox(height: 22),
+                          AuthElevatedButton(
+                            label: 'Send reset link',
+                            isLoading:
+                                authState.isLoading &&
+                                authState.action == AuthAction.forgotPassword,
+                            onPressed: () async {
+                              final valid =
+                                  _formKey.currentState?.validate() ?? false;
+                              if (!valid) return;
 
-                                final email = _emailController.text.trim();
+                              final email = _emailController.text.trim();
 
-                                final message = await ref
-                                    .read(authControllerProvider.notifier)
-                                    .forgotPassword(email: email);
+                              final message = await ref
+                                  .read(authControllerProvider.notifier)
+                                  .forgotPassword(email: email);
 
+                              if (!context.mounted) return;
+                              if (message != null) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text(message),
+                                    backgroundColor: colorScheme.error,
+                                  ),
+                                );
+                              } else {
                                 if (!context.mounted) return;
-                                if (message != null) {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      content: Text(message),
-                                      backgroundColor: AppColors.error,
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text(
+                                      'Reset link sent. Please check your email.',
                                     ),
-                                  );
-                                } else {
-                                  if (!context.mounted) return;
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
-                                      content: Text(
-                                        'Reset link sent. Please check your email.',
-                                      ),
-                                    ),
-                                  );
-                                }
-                              },
-                            ),
-                            const SizedBox(height: 14),
-                            TextButton(
-                              onPressed: () => context.go('/login'),
-                              child: Text(
-                                'Back to login',
-                                style: textTheme.bodyMedium?.copyWith(
-                                  color: AppColors.primaryLight,
-                                  fontWeight: FontWeight.w600,
-                                ),
+                                  ),
+                                );
+                              }
+                            },
+                          ),
+                          const SizedBox(height: 14),
+                          TextButton(
+                            onPressed: () => context.go('/login'),
+                            child: Text(
+                              'Back to login',
+                              style: textTheme.bodyMedium?.copyWith(
+                                color: colorScheme.primary,
+                                fontWeight: FontWeight.w600,
                               ),
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ),
                   ),
                 ),
-              );
-            },
-          ),
+              ),
+            );
+          },
         ),
       ),
     );

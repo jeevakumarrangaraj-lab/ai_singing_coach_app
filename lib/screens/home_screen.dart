@@ -1,144 +1,215 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../core/theme/app_colors.dart';
-import '../core/enums/icon_position.dart';
-import '../features/auth/presentation/widgets/auth_elevated_button.dart';
-import '../core/widgets/glass_card.dart';
-import '../core/widgets/responsive_page_background.dart';
-
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final cs = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
 
     return Scaffold(
-      backgroundColor: Colors.transparent,
-      extendBody: true,
-      extendBodyBehindAppBar: true,
+      backgroundColor: cs.surface,
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: cs.surface,
+        elevation: 0,
+        surfaceTintColor: Colors.transparent,
         title: Text(
           'Tuno',
           style: textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
         ),
         actions: [
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.notifications_none_rounded),
+          Tooltip(
+            message: 'Notifications',
+            child: Semantics(
+              button: true,
+              label: 'Notifications',
+              child: IconButton(
+                onPressed: () {},
+                icon: const Icon(Icons.notifications_none_rounded),
+              ),
+            ),
+          ),
+          const SizedBox(width: 4),
+          Tooltip(
+            message: 'Settings',
+            child: Semantics(
+              button: true,
+              label: 'Settings',
+              child: IconButton(
+                onPressed: () => context.push('/settings'),
+                icon: const Icon(Icons.settings_rounded),
+              ),
+            ),
           ),
         ],
       ),
-      body: ResponsivePageBackground(
-        imagePath: 'assets/images/dashboard_bg.png',
-        mobileAlignment: Alignment.center,
-        wideAlignment: Alignment.bottomCenter,
-        mobileOverlayAlpha: 0.24,
-        wideOverlayAlpha: 0.14,
-        maxContentWidth: 1200,
-        child: SafeArea(
+      body: SafeArea(
+        child: Center(
           child: SingleChildScrollView(
             padding: const EdgeInsets.all(20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Hello, Singer 👋',
-                  style: textTheme.headlineMedium?.copyWith(
-                    fontSize: 28,
-                    fontWeight: FontWeight.bold,
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 1200),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // ── Greeting ──
+                  Text(
+                    'Hello, Singer 👋',
+                    style: textTheme.headlineMedium?.copyWith(
+                      fontSize: 28,
+                      fontWeight: FontWeight.bold,
+                      color: cs.onSurface,
+                    ),
                   ),
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  'Ready to improve your voice today?',
-                  style: textTheme.bodyMedium?.copyWith(
-                    fontSize: 16,
-                    color: AppColors.textSecondary.withValues(alpha: 0.85),
+                  const SizedBox(height: 8),
+                  Text(
+                    'Ready to improve your voice today?',
+                    style: textTheme.bodyMedium?.copyWith(
+                      fontSize: 16,
+                      color: cs.onSurfaceVariant,
+                    ),
                   ),
-                ),
-                const SizedBox(height: 28),
-                GlassCard(
-                  borderRadius: 24,
-                  padding: const EdgeInsets.all(24),
-                  child: Column(
-                    children: [
-                      Container(
-                        width: 105,
-                        height: 105,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          gradient: AppColors.primaryButtonGradient,
-                        ),
-                        child: const Icon(
-                          Icons.mic_rounded,
-                          size: 55,
-                          color: Colors.white,
-                        ),
-                      ),
-                      const SizedBox(height: 18),
-                      Text(
-                        'Start Voice Practice',
-                        style: textTheme.titleLarge?.copyWith(
-                          fontSize: 22,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
-                      ),
-                      const SizedBox(height: 8),
-                      Text(
-                        'Record your voice and receive instant feedback.',
-                        textAlign: TextAlign.center,
-                        style: textTheme.bodyMedium?.copyWith(
-                          color: AppColors.textSecondary.withValues(
-                            alpha: 0.85,
+                  const SizedBox(height: 28),
+
+                  // ── Main Practice Card ──
+                  Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(22),
+                      side: BorderSide(color: cs.outlineVariant, width: 1),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(24),
+                      child: Column(
+                        children: [
+                          // Mic circle
+                          Container(
+                            width: 105,
+                            height: 105,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: cs.surfaceContainerHighest,
+                              border: Border.all(
+                                color: cs.outlineVariant,
+                                width: 1.5,
+                              ),
+                            ),
+                            child: Icon(
+                              Icons.mic_rounded,
+                              size: 55,
+                              color: cs.primary,
+                            ),
                           ),
-                        ),
-                      ),
-                      const SizedBox(height: 20),
-                      AuthElevatedButton(
-                        label: 'Start Practice',
-                        onPressed: () {
-                          context.push('/practice');
-                        },
-                        isLoading: false,
-                        icon: Icons.fiber_manual_record_rounded,
-                        iconPosition: IconPosition.start,
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 28),
-                Text(
-                  'Your Progress',
-                  style: textTheme.titleLarge?.copyWith(
-                    fontSize: 21,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const SizedBox(height: 16),
-                Row(
-                  children: [
-                    Expanded(
-                      child: _ProgressCard(
-                        title: 'Practice',
-                        value: '0 min',
-                        icon: Icons.timer_outlined,
+                          const SizedBox(height: 18),
+                          Text(
+                            'Start Voice Practice',
+                            style: textTheme.titleLarge?.copyWith(
+                              fontSize: 22,
+                              fontWeight: FontWeight.bold,
+                              color: cs.onSurface,
+                            ),
+                          ),
+                          const SizedBox(height: 8),
+                          Text(
+                            'Record your voice and receive instant feedback.',
+                            textAlign: TextAlign.center,
+                            style: textTheme.bodyMedium?.copyWith(
+                              color: cs.onSurfaceVariant,
+                            ),
+                          ),
+                          const SizedBox(height: 20),
+                          Tooltip(
+                            message: 'Start Practice',
+                            child: Semantics(
+                              button: true,
+                              label: 'Start Practice',
+                              child: SizedBox(
+                                width: double.infinity,
+                                height: 54,
+                                child: FilledButton(
+                                  onPressed: () => context.push('/practice'),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Icon(
+                                        Icons.fiber_manual_record_rounded,
+                                        size: 22,
+                                      ),
+                                      const SizedBox(width: 8),
+                                      const Text(
+                                        'Start Practice',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 16,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                    const SizedBox(width: 14),
-                    Expanded(
-                      child: _ProgressCard(
-                        title: 'Streak',
-                        value: '0 days',
-                        icon: Icons.local_fire_department_outlined,
-                      ),
+                  ),
+                  const SizedBox(height: 28),
+
+                  // ── Progress Section ──
+                  Text(
+                    'Your Progress',
+                    style: textTheme.titleLarge?.copyWith(
+                      fontSize: 21,
+                      fontWeight: FontWeight.bold,
+                      color: cs.onSurface,
                     ),
-                  ],
-                ),
-              ],
+                  ),
+                  const SizedBox(height: 16),
+
+                  LayoutBuilder(
+                    builder: (context, constraints) {
+                      final useColumns = constraints.maxWidth >= 360;
+                      if (useColumns) {
+                        return Row(
+                          children: [
+                            Expanded(
+                              child: _ProgressCard(
+                                title: 'Practice',
+                                value: '0 min',
+                                icon: Icons.timer_outlined,
+                              ),
+                            ),
+                            const SizedBox(width: 14),
+                            Expanded(
+                              child: _ProgressCard(
+                                title: 'Streak',
+                                value: '0 days',
+                                icon: Icons.local_fire_department_outlined,
+                              ),
+                            ),
+                          ],
+                        );
+                      }
+                      return Column(
+                        children: [
+                          _ProgressCard(
+                            title: 'Practice',
+                            value: '0 min',
+                            icon: Icons.timer_outlined,
+                          ),
+                          const SizedBox(height: 14),
+                          _ProgressCard(
+                            title: 'Streak',
+                            value: '0 days',
+                            icon: Icons.local_fire_department_outlined,
+                          ),
+                        ],
+                      );
+                    },
+                  ),
+                ],
+              ),
             ),
           ),
         ),
@@ -160,31 +231,36 @@ class _ProgressCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cs = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
 
-    return GlassCard(
-      borderRadius: 20,
-      padding: const EdgeInsets.all(18),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Icon(icon, color: AppColors.primaryCoral, size: 30),
-          const SizedBox(height: 18),
-          Text(
-            value,
-            style: textTheme.titleLarge?.copyWith(
-              fontSize: 21,
-              fontWeight: FontWeight.bold,
+    return Card(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(22),
+        side: BorderSide(color: cs.outlineVariant, width: 1),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(18),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Icon(icon, color: cs.primary, size: 30),
+            const SizedBox(height: 18),
+            Text(
+              value,
+              style: textTheme.titleLarge?.copyWith(
+                fontSize: 21,
+                fontWeight: FontWeight.bold,
+                color: cs.onSurface,
+              ),
             ),
-          ),
-          const SizedBox(height: 5),
-          Text(
-            title,
-            style: textTheme.bodyMedium?.copyWith(
-              color: AppColors.textSecondary.withValues(alpha: 0.65),
+            const SizedBox(height: 5),
+            Text(
+              title,
+              style: textTheme.bodyMedium?.copyWith(color: cs.onSurfaceVariant),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

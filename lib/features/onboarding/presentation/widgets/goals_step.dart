@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../core/theme/app_colors.dart';
-import '../../../../core/widgets/glass_card.dart';
 import '../../domain/onboarding_profile.dart';
 import '../onboarding_controller.dart';
-import '../onboarding_state.dart';
 
 class GoalsStep extends ConsumerWidget {
   const GoalsStep({super.key});
@@ -14,6 +11,7 @@ class GoalsStep extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(onboardingControllerProvider);
     final controller = ref.read(onboardingControllerProvider.notifier);
+    final colorScheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
 
     final goals = SingingGoal.values;
@@ -26,6 +24,7 @@ class GoalsStep extends ConsumerWidget {
           style: textTheme.headlineMedium?.copyWith(
             fontSize: 22,
             fontWeight: FontWeight.w700,
+            color: colorScheme.onSurface,
           ),
           textAlign: TextAlign.center,
         ),
@@ -33,7 +32,7 @@ class GoalsStep extends ConsumerWidget {
         Text(
           'Select all that apply. You can change these later.',
           style: textTheme.bodyMedium?.copyWith(
-            color: AppColors.textSecondary.withValues(alpha: 0.85),
+            color: colorScheme.onSurfaceVariant,
             height: 1.4,
           ),
           textAlign: TextAlign.center,
@@ -42,72 +41,63 @@ class GoalsStep extends ConsumerWidget {
         LayoutBuilder(
           builder: (context, constraints) {
             final isWide = constraints.maxWidth >= 600;
-            if (isWide) {
-              return _buildTwoColumnGrid(context, goals, state, controller);
-            }
-            return _buildSingleColumn(context, goals, state, controller);
-          },
-        ),
-      ],
-    );
-  }
+            final spacing = 12.0;
+            final childWidth = isWide
+                ? (constraints.maxWidth - spacing) / 2
+                : constraints.maxWidth;
 
-  Widget _buildSingleColumn(
-    BuildContext context,
-    List<SingingGoal> goals,
-    OnboardingState state,
-    OnboardingController controller,
-  ) {
-    return Column(
-      children: goals
-          .map(
-            (goal) => Padding(
-              padding: const EdgeInsets.only(bottom: 12),
-              child: _GoalCard(
-                goal: goal,
-                isSelected: state.selectedGoals.contains(goal),
-                onTap: () => controller.toggleGoal(goal),
-              ),
-            ),
-          )
-          .toList(),
-    );
-  }
-
-  Widget _buildTwoColumnGrid(
-    BuildContext context,
-    List<SingingGoal> goals,
-    OnboardingState state,
-    OnboardingController controller,
-  ) {
-    return Column(
-      children: [
-        for (var i = 0; i < goals.length; i += 2)
-          Padding(
-            padding: const EdgeInsets.only(bottom: 12),
-            child: Row(
+            return Column(
               children: [
-                Expanded(
-                  child: _GoalCard(
-                    goal: goals[i],
-                    isSelected: state.selectedGoals.contains(goals[i]),
-                    onTap: () => controller.toggleGoal(goals[i]),
-                  ),
+                Wrap(
+                  spacing: spacing,
+                  runSpacing: spacing,
+                  children: goals.map((goal) {
+                    return SizedBox(
+                      width: childWidth,
+                      child: _GoalCard(
+                        goal: goal,
+                        isSelected: state.selectedGoals.contains(goal),
+                        onTap: () => controller.toggleGoal(goal),
+                      ),
+                    );
+                  }).toList(),
                 ),
-                if (i + 1 < goals.length) ...[
-                  const SizedBox(width: 12),
-                  Expanded(
-                    child: _GoalCard(
-                      goal: goals[i + 1],
-                      isSelected: state.selectedGoals.contains(goals[i + 1]),
-                      onTap: () => controller.toggleGoal(goals[i + 1]),
+                if (state.errorMessage != null) ...[
+                  const SizedBox(height: 8),
+                  Container(
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: colorScheme.error.withValues(alpha: 0.15),
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(
+                        color: colorScheme.error.withValues(alpha: 0.4),
+                      ),
+                    ),
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.error_outline_rounded,
+                          color: colorScheme.error,
+                          size: 20,
+                        ),
+                        const SizedBox(width: 10),
+                        Expanded(
+                          child: Text(
+                            state.errorMessage!,
+                            style: textTheme.bodyMedium?.copyWith(
+                              color: colorScheme.error,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                ] else
-                  const Expanded(child: SizedBox()),
+                ],
               ],
-            ),
-          ),
+            );
+          },
+        ),
       ],
     );
   }
@@ -126,65 +116,79 @@ class _GoalCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
 
     return Semantics(
       selected: isSelected,
       button: true,
-      child: InkWell(
-        onTap: onTap,
-        borderRadius: BorderRadius.circular(18),
-        splashColor: AppColors.primaryCoral.withValues(alpha: 0.12),
-        highlightColor: AppColors.primaryCoral.withValues(alpha: 0.06),
-        child: GlassCard(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
-          borderRadius: 18,
-          borderWidth: isSelected ? 2 : 1,
-          borderColor: isSelected
-              ? AppColors.primaryCoral
-              : AppColors.border.withValues(alpha: 0.6),
-          backgroundColor: isSelected
-              ? AppColors.primaryCoral.withValues(alpha: 0.12)
-              : AppColors.surface.withValues(alpha: 0.85),
-          child: Row(
-            children: [
-              Container(
-                width: 26,
-                height: 26,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  border: Border.all(
-                    color: isSelected
-                        ? AppColors.primaryCoral
-                        : AppColors.border.withValues(alpha: 0.6),
-                    width: 2,
+      label: '${goal.label} goal',
+      child: Card(
+        clipBehavior: Clip.antiAlias,
+        elevation: 0,
+        color: colorScheme.surfaceContainerHighest,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(18),
+          side: BorderSide(
+            color: isSelected
+                ? colorScheme.primary
+                : colorScheme.outlineVariant,
+            width: isSelected ? 2 : 1,
+          ),
+        ),
+        child: InkWell(
+          onTap: onTap,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
+            child: Row(
+              children: [
+                Container(
+                  width: 48,
+                  height: 48,
+                  decoration: BoxDecoration(
+                    color: colorScheme.surfaceContainerHighest,
+                    borderRadius: BorderRadius.circular(14),
+                    border: Border.all(
+                      color: isSelected
+                          ? colorScheme.primary
+                          : colorScheme.outlineVariant,
+                    ),
                   ),
-                  color: isSelected
-                      ? AppColors.primaryCoral
-                      : Colors.transparent,
-                ),
-                child: isSelected
-                    ? const Icon(
-                        Icons.check_rounded,
-                        size: 16,
-                        color: Colors.white,
-                      )
-                    : null,
-              ),
-              const SizedBox(width: 16),
-              Expanded(
-                child: Text(
-                  goal.label,
-                  style: textTheme.titleMedium?.copyWith(
-                    fontSize: 17,
-                    fontWeight: FontWeight.w600,
+                  child: Icon(
+                    Icons.flag_rounded,
+                    size: 24,
                     color: isSelected
-                        ? AppColors.primaryCoral
-                        : AppColors.textPrimary,
+                        ? colorScheme.primary
+                        : colorScheme.onSurfaceVariant,
                   ),
                 ),
-              ),
-            ],
+                const SizedBox(width: 16),
+                Expanded(
+                  child: Text(
+                    goal.label,
+                    style: textTheme.titleMedium?.copyWith(
+                      fontSize: 17,
+                      fontWeight: FontWeight.w700,
+                      color: colorScheme.onSurface,
+                    ),
+                  ),
+                ),
+                if (isSelected)
+                  Container(
+                    width: 26,
+                    height: 26,
+                    decoration: BoxDecoration(
+                      color: colorScheme.primary,
+                      shape: BoxShape.circle,
+                    ),
+                    child: Icon(
+                      Icons.check_rounded,
+                      size: 16,
+                      color: colorScheme.onPrimary,
+                    ),
+                  ),
+              ],
+            ),
           ),
         ),
       ),

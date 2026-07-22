@@ -3,8 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-import '../../../../core/theme/app_colors.dart';
-import '../../../../core/widgets/glass_card.dart';
 import '../../../../features/auth/presentation/auth_controller.dart';
 import '../../domain/onboarding_profile.dart';
 import '../onboarding_controller.dart';
@@ -28,6 +26,7 @@ class _OnboardingReviewStepState extends ConsumerState<OnboardingReviewStep> {
     final state = ref.watch(onboardingControllerProvider);
     final controller = ref.read(onboardingControllerProvider.notifier);
     final textTheme = Theme.of(context).textTheme;
+    final colorScheme = Theme.of(context).colorScheme;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -37,6 +36,7 @@ class _OnboardingReviewStepState extends ConsumerState<OnboardingReviewStep> {
           style: textTheme.headlineMedium?.copyWith(
             fontSize: 22,
             fontWeight: FontWeight.w700,
+            color: colorScheme.onSurface,
           ),
           textAlign: TextAlign.center,
         ),
@@ -44,7 +44,7 @@ class _OnboardingReviewStepState extends ConsumerState<OnboardingReviewStep> {
         Text(
           'Check your selections and edit if needed.',
           style: textTheme.bodyMedium?.copyWith(
-            color: AppColors.textSecondary.withValues(alpha: 0.85),
+            color: colorScheme.onSurfaceVariant.withValues(alpha: 0.85),
             height: 1.4,
           ),
           textAlign: TextAlign.center,
@@ -89,26 +89,20 @@ class _OnboardingReviewStepState extends ConsumerState<OnboardingReviewStep> {
                 ? null
                 : _handleCompleteSetup,
             icon: (state.isLoading || _isSubmitting)
-                ? const SizedBox(
+                ? SizedBox(
                     width: 22,
                     height: 22,
                     child: CircularProgressIndicator(
                       strokeWidth: 2.5,
-                      valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                      valueColor: AlwaysStoppedAnimation<Color>(
+                        colorScheme.onPrimary,
+                      ),
                     ),
                   )
                 : const Icon(Icons.check_rounded, size: 22),
             label: const Text(
               'Complete Setup',
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
-            ),
-            style: FilledButton.styleFrom(
-              backgroundColor: AppColors.primaryCoral,
-              foregroundColor: Colors.white,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(18),
-              ),
-              elevation: 0,
             ),
           ),
         ),
@@ -143,7 +137,7 @@ class _OnboardingReviewStepState extends ConsumerState<OnboardingReviewStep> {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: const Text('Please sign in again to complete your setup.'),
-            backgroundColor: AppColors.warning,
+            backgroundColor: Theme.of(context).colorScheme.error,
             behavior: SnackBarBehavior.floating,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12),
@@ -184,7 +178,7 @@ class _OnboardingReviewStepState extends ConsumerState<OnboardingReviewStep> {
               currentState.errorMessage ??
                   'We couldn\'t save your setup. Please try again.',
             ),
-            backgroundColor: AppColors.error,
+            backgroundColor: Theme.of(context).colorScheme.error,
             behavior: SnackBarBehavior.floating,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12),
@@ -199,7 +193,7 @@ class _OnboardingReviewStepState extends ConsumerState<OnboardingReviewStep> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('Something went wrong: $error'),
-          backgroundColor: AppColors.error,
+          backgroundColor: Theme.of(context).colorScheme.error,
           behavior: SnackBarBehavior.floating,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
@@ -227,59 +221,61 @@ class _ReviewCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
+    final colorScheme = Theme.of(context).colorScheme;
 
-    return GlassCard(
-      padding: const EdgeInsets.all(18),
-      borderRadius: 16,
-      borderWidth: 1,
-      borderColor: AppColors.border.withValues(alpha: 0.6),
-      backgroundColor: AppColors.surface.withValues(alpha: 0.85),
-      child: Row(
-        children: [
-          Container(
-            width: 44,
-            height: 44,
-            decoration: BoxDecoration(
-              color: AppColors.primaryCoral.withValues(alpha: 0.15),
-              borderRadius: BorderRadius.circular(12),
+    return Card(
+      color: colorScheme.surfaceContainerHighest,
+      elevation: 0,
+      clipBehavior: Clip.antiAlias,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16),
+        side: BorderSide(color: colorScheme.outlineVariant),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(18),
+        child: Row(
+          children: [
+            Container(
+              width: 44,
+              height: 44,
+              decoration: BoxDecoration(
+                color: colorScheme.primary.withValues(alpha: 0.15),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Icon(icon, size: 22, color: colorScheme.primary),
             ),
-            child: Icon(icon, size: 22, color: AppColors.primaryCoral),
-          ),
-          const SizedBox(width: 16),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  title,
-                  style: textTheme.bodySmall?.copyWith(
-                    color: AppColors.textMuted,
-                    fontWeight: FontWeight.w600,
-                    fontSize: 12,
+            const SizedBox(width: 16),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    style: textTheme.bodySmall?.copyWith(
+                      color: colorScheme.onSurfaceVariant,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 12,
+                    ),
                   ),
-                ),
-                const SizedBox(height: 2),
-                Text(
-                  value,
-                  style: textTheme.titleMedium?.copyWith(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w700,
-                    color: AppColors.textPrimary,
+                  const SizedBox(height: 2),
+                  Text(
+                    value,
+                    style: textTheme.titleMedium?.copyWith(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w700,
+                      color: colorScheme.onSurface,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-          TextButton.icon(
-            onPressed: onEdit,
-            icon: const Icon(Icons.edit_rounded, size: 16),
-            label: const Text('Edit'),
-            style: TextButton.styleFrom(
-              foregroundColor: AppColors.accentGold,
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+            TextButton.icon(
+              onPressed: onEdit,
+              icon: const Icon(Icons.edit_rounded, size: 16),
+              label: const Text('Edit'),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -294,102 +290,93 @@ class _GoalsReviewCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
+    final colorScheme = Theme.of(context).colorScheme;
 
-    return GlassCard(
-      padding: const EdgeInsets.all(18),
-      borderRadius: 16,
-      borderWidth: 1,
-      borderColor: AppColors.border.withValues(alpha: 0.6),
-      backgroundColor: AppColors.surface.withValues(alpha: 0.85),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Container(
-                width: 44,
-                height: 44,
-                decoration: BoxDecoration(
-                  color: AppColors.primaryCoral.withValues(alpha: 0.15),
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: const Icon(
-                  Icons.flag_rounded,
-                  size: 22,
-                  color: AppColors.primaryCoral,
-                ),
-              ),
-              const SizedBox(width: 16),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Singing Goals',
-                      style: textTheme.bodySmall?.copyWith(
-                        color: AppColors.textMuted,
-                        fontWeight: FontWeight.w600,
-                        fontSize: 12,
-                      ),
-                    ),
-                    const SizedBox(height: 2),
-                    Text(
-                      goals.isEmpty
-                          ? 'No goals selected'
-                          : '${goals.length} goal(s) selected',
-                      style: textTheme.titleMedium?.copyWith(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w700,
-                        color: AppColors.textPrimary,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              TextButton.icon(
-                onPressed: onEdit,
-                icon: const Icon(Icons.edit_rounded, size: 16),
-                label: const Text('Edit'),
-                style: TextButton.styleFrom(
-                  foregroundColor: AppColors.accentGold,
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 8,
-                    vertical: 4,
+    return Card(
+      color: colorScheme.surfaceContainerHighest,
+      elevation: 0,
+      clipBehavior: Clip.antiAlias,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16),
+        side: BorderSide(color: colorScheme.outlineVariant),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(18),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Container(
+                  width: 44,
+                  height: 44,
+                  decoration: BoxDecoration(
+                    color: colorScheme.primary.withValues(alpha: 0.15),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Icon(
+                    Icons.flag_rounded,
+                    size: 22,
+                    color: colorScheme.primary,
                   ),
                 ),
+                const SizedBox(width: 16),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Singing Goals',
+                        style: textTheme.bodySmall?.copyWith(
+                          color: colorScheme.onSurfaceVariant,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 12,
+                        ),
+                      ),
+                      const SizedBox(height: 2),
+                      Text(
+                        goals.isEmpty
+                            ? 'No goals selected'
+                            : '${goals.length} goal(s) selected',
+                        style: textTheme.titleMedium?.copyWith(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w700,
+                          color: colorScheme.onSurface,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                TextButton.icon(
+                  onPressed: onEdit,
+                  icon: const Icon(Icons.edit_rounded, size: 16),
+                  label: const Text('Edit'),
+                ),
+              ],
+            ),
+            if (goals.isNotEmpty) ...[
+              const SizedBox(height: 12),
+              Wrap(
+                spacing: 8,
+                runSpacing: 8,
+                children: goals.map((goal) {
+                  return Chip(
+                    label: Text(
+                      goal.label,
+                      style: TextStyle(color: colorScheme.onSurface),
+                    ),
+                    backgroundColor: colorScheme.surfaceContainerHigh,
+                    side: BorderSide(color: colorScheme.outlineVariant),
+                    shape: const StadiumBorder(),
+                    visualDensity: VisualDensity.compact,
+                    materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                    padding: const EdgeInsets.symmetric(horizontal: 4),
+                  );
+                }).toList(),
               ),
             ],
-          ),
-          if (goals.isNotEmpty) ...[
-            const SizedBox(height: 12),
-            Wrap(
-              spacing: 8,
-              runSpacing: 8,
-              children: goals.map((goal) {
-                return Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 12,
-                    vertical: 6,
-                  ),
-                  decoration: BoxDecoration(
-                    color: AppColors.primaryCoral.withValues(alpha: 0.12),
-                    borderRadius: BorderRadius.circular(20),
-                    border: Border.all(
-                      color: AppColors.primaryCoral.withValues(alpha: 0.3),
-                    ),
-                  ),
-                  child: Text(
-                    goal.label,
-                    style: textTheme.bodySmall?.copyWith(
-                      color: AppColors.primaryCoral,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                );
-              }).toList(),
-            ),
           ],
-        ],
+        ),
       ),
     );
   }
@@ -401,6 +388,7 @@ class _MicrophonePermissionCard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final textTheme = Theme.of(context).textTheme;
+    final colorScheme = Theme.of(context).colorScheme;
 
     return FutureBuilder<bool>(
       future: _checkMicrophonePermission(),
@@ -408,84 +396,90 @@ class _MicrophonePermissionCard extends ConsumerWidget {
         final hasPermission = snapshot.data ?? false;
         final isLoading = snapshot.connectionState == ConnectionState.waiting;
 
-        return GlassCard(
-          padding: const EdgeInsets.all(18),
-          borderRadius: 16,
-          borderWidth: 1,
-          borderColor: AppColors.border.withValues(alpha: 0.6),
-          backgroundColor: AppColors.surface.withValues(alpha: 0.85),
-          child: Row(
-            children: [
-              Container(
-                width: 44,
-                height: 44,
-                decoration: BoxDecoration(
-                  color: (hasPermission ? AppColors.success : AppColors.warning)
-                      .withValues(alpha: 0.15),
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: isLoading
-                    ? const Center(
-                        child: SizedBox(
-                          width: 20,
-                          height: 20,
-                          child: CircularProgressIndicator(strokeWidth: 2),
+        return Card(
+          color: colorScheme.surfaceContainerHighest,
+          elevation: 0,
+          clipBehavior: Clip.antiAlias,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+            side: BorderSide(color: colorScheme.outlineVariant),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(18),
+            child: Row(
+              children: [
+                Container(
+                  width: 44,
+                  height: 44,
+                  decoration: BoxDecoration(
+                    color:
+                        (hasPermission
+                                ? colorScheme.primary
+                                : colorScheme.error)
+                            .withValues(alpha: 0.15),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: isLoading
+                      ? Center(
+                          child: SizedBox(
+                            width: 20,
+                            height: 20,
+                            child: CircularProgressIndicator(
+                              strokeWidth: 2,
+                              valueColor: AlwaysStoppedAnimation<Color>(
+                                colorScheme.primary,
+                              ),
+                            ),
+                          ),
+                        )
+                      : Icon(
+                          hasPermission
+                              ? Icons.mic_rounded
+                              : Icons.mic_off_rounded,
+                          size: 22,
+                          color: hasPermission
+                              ? colorScheme.primary
+                              : colorScheme.error,
                         ),
-                      )
-                    : Icon(
-                        hasPermission
-                            ? Icons.mic_rounded
-                            : Icons.mic_off_rounded,
-                        size: 22,
-                        color: hasPermission
-                            ? AppColors.success
-                            : AppColors.warning,
-                      ),
-              ),
-              const SizedBox(width: 16),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Microphone Access',
-                      style: textTheme.bodySmall?.copyWith(
-                        color: AppColors.textMuted,
-                        fontWeight: FontWeight.w600,
-                        fontSize: 12,
-                      ),
-                    ),
-                    const SizedBox(height: 2),
-                    Text(
-                      isLoading
-                          ? 'Checking permission...'
-                          : hasPermission
-                          ? 'Permission granted'
-                          : 'Permission not granted (required for recording)',
-                      style: textTheme.titleMedium?.copyWith(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w700,
-                        color: hasPermission
-                            ? AppColors.success
-                            : AppColors.warning,
-                      ),
-                    ),
-                  ],
                 ),
-              ),
-              TextButton.icon(
-                onPressed: () => _requestPermission(context),
-                icon: const Icon(Icons.settings_rounded, size: 16),
-                label: const Text('Change'),
-                style: TextButton.styleFrom(
-                  foregroundColor: AppColors.accentGold,
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 8,
-                    vertical: 4,
+                const SizedBox(width: 16),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Microphone Access',
+                        style: textTheme.bodySmall?.copyWith(
+                          color: colorScheme.onSurfaceVariant,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 12,
+                        ),
+                      ),
+                      const SizedBox(height: 2),
+                      Text(
+                        isLoading
+                            ? 'Checking permission...'
+                            : hasPermission
+                            ? 'Permission granted'
+                            : 'Permission not granted (required for recording)',
+                        style: textTheme.titleMedium?.copyWith(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w700,
+                          color: hasPermission
+                              ? colorScheme.primary
+                              : colorScheme.error,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-              ),
-            ],
+                TextButton.icon(
+                  onPressed: () => _requestPermission(context),
+                  icon: const Icon(Icons.settings_rounded, size: 16),
+                  label: const Text('Change'),
+                ),
+              ],
+            ),
           ),
         );
       },
@@ -513,12 +507,9 @@ class _MicrophonePermissionCard extends ConsumerWidget {
                   : 'Microphone permission denied.',
             ),
             backgroundColor: status.isGranted
-                ? AppColors.success
-                : AppColors.warning,
+                ? null
+                : Theme.of(context).colorScheme.error,
             behavior: SnackBarBehavior.floating,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
-            ),
           ),
         );
       }
@@ -527,11 +518,8 @@ class _MicrophonePermissionCard extends ConsumerWidget {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: const Text('Could not request permission.'),
-            backgroundColor: AppColors.error,
+            backgroundColor: Theme.of(context).colorScheme.error,
             behavior: SnackBarBehavior.floating,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
-            ),
           ),
         );
       }
