@@ -23,6 +23,10 @@ abstract class AuthRepository {
 
   Future<AuthFailure?> reloadCurrentUser();
 
+  Future<AuthFailure?> updateDisplayName(String displayName);
+
+  Future<AuthFailure?> deleteUser();
+
   bool get currentUserEmailVerified;
 
   Future<void> signOut();

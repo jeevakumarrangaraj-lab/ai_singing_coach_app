@@ -1,214 +1,309 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-class HomeScreen extends StatelessWidget {
+import '../core/widgets/dashboard_music_decorations.dart';
+import '../core/widgets/metallic_gold_border.dart';
+import '../core/widgets/tuno_bottom_navigation.dart';
+import '../core/widgets/tuno_microphone_emblem.dart';
+import '../features/auth/presentation/auth_controller.dart';
+import '../features/notifications/presentation/notification_controller.dart';
+
+class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  ConsumerState<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends ConsumerState<HomeScreen> {
+  int _currentNavIndex = 0;
+  final ScrollController _scrollController = ScrollController();
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) {
+        _scrollController.jumpTo(0);
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  void _onDestinationSelected(int index) {
+    switch (index) {
+      case 0:
+        break;
+      case 1:
+        context.push('/practice/modes');
+        break;
+      case 2:
+        context.push('/practice');
+        break;
+      case 3:
+        _showComingSoon('Progress');
+        break;
+      case 4:
+        _showComingSoon('Profile');
+        break;
+    }
+    if (index != _currentNavIndex) {
+      setState(() => _currentNavIndex = index);
+    }
+  }
+
+  void _showComingSoon(String feature) {
+    if (!mounted) return;
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('$feature coming soon'),
+        behavior: SnackBarBehavior.floating,
+        margin: const EdgeInsets.all(16),
+        duration: const Duration(seconds: 2),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final authState = ref.watch(authControllerProvider);
+    final user = authState.user;
+    final displayName = user?.displayName?.isNotEmpty == true
+        ? user!.displayName!
+        : 'Singer';
+    final cs = Theme.of(context).colorScheme;
+    final textTheme = Theme.of(context).textTheme;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final unreadCount = ref.watch(
+      notificationControllerProvider.select((s) => s.unreadCount),
+    );
+
+    return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.surface,
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          return SingleChildScrollView(
+            controller: _scrollController,
+            physics: const ClampingScrollPhysics(),
+            child: ConstrainedBox(
+              constraints: BoxConstraints(minHeight: constraints.maxHeight),
+              child: Stack(
+                children: [
+                  // ── Background musical decorations ──
+                  // Paints across the full scrollable content.
+                  // Wrapped with IgnorePointer so taps pass through.
+                  Positioned.fill(
+                    child: const IgnorePointer(
+                      ignoring: true,
+                      child: DashboardMusicDecorations(),
+                    ),
+                  ),
+                  // ── Foreground content ──
+                  Center(
+                    child: ConstrainedBox(
+                      constraints: const BoxConstraints(maxWidth: 760),
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(20, 0, 20, 140),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            // ── Header (Tuno logo + icons) ──
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(30, 8, 0, 8),
+                              child: Row(
+                                children: [
+                                  Text(
+                                    'Tuno',
+                                    style: textTheme.headlineMedium?.copyWith(
+                                      fontSize: 28,
+                                      fontWeight: FontWeight.w800,
+                                      color: cs.onSurface,
+                                    ),
+                                  ),
+                                  const Spacer(),
+                                  _NotificationBellButton(
+                                    unreadCount: unreadCount,
+                                    onPressed: () =>
+                                        context.push('/notifications'),
+                                  ),
+                                  const SizedBox(width: 8),
+                                  _HeaderIconButton(
+                                    icon: Icons.settings_rounded,
+                                    tooltip: 'Settings',
+                                    onPressed: () => context.push('/settings'),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            // ── Greeting ──
+                            const SizedBox(height: 30),
+                            Text(
+                              'Hello, $displayName 👋',
+                              style: textTheme.headlineMedium?.copyWith(
+                                fontSize: 30,
+                                fontWeight: FontWeight.w800,
+                                color: cs.onSurface,
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+                            Text(
+                              'Ready to improve your voice today?',
+                              style: textTheme.bodyLarge?.copyWith(
+                                fontSize: 16,
+                                color: cs.onSurfaceVariant,
+                                height: 1.4,
+                              ),
+                            ),
+                            const SizedBox(height: 32),
+
+                            // ── Main Practice Card ──
+                            _MainPracticeCard(
+                              onTap: () => context.push('/practice/modes'),
+                            ),
+                            const SizedBox(height: 32),
+
+                            // ── Progress Section ──
+                            Text(
+                              'Your Progress',
+                              style: textTheme.headlineSmall?.copyWith(
+                                fontSize: 22,
+                                fontWeight: FontWeight.w700,
+                                color: cs.onSurface,
+                              ),
+                            ),
+                            const SizedBox(height: 16),
+                            LayoutBuilder(
+                              builder: (context, constraints) {
+                                final useRow = constraints.maxWidth >= 400;
+                                if (useRow) {
+                                  return Row(
+                                    children: [
+                                      Expanded(
+                                        child: _PracticeProgressCard(
+                                          isDark: isDark,
+                                        ),
+                                      ),
+                                      const SizedBox(width: 14),
+                                      Expanded(
+                                        child: _StreakProgressCard(
+                                          isDark: isDark,
+                                        ),
+                                      ),
+                                    ],
+                                  );
+                                }
+                                return Column(
+                                  children: [
+                                    _PracticeProgressCard(isDark: isDark),
+                                    const SizedBox(height: 14),
+                                    _StreakProgressCard(isDark: isDark),
+                                  ],
+                                );
+                              },
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
+      ),
+      bottomNavigationBar: TunoBottomNavigation(
+        currentIndex: _currentNavIndex,
+        onDestinationSelected: _onDestinationSelected,
+      ),
+    );
+  }
+}
+
+/// Notification bell header button with unread badge.
+///
+/// Shows a small cyan badge when [unreadCount] > 0.
+/// Badge displays the exact number up to 99, then "99+".
+class _NotificationBellButton extends StatelessWidget {
+  const _NotificationBellButton({
+    required this.unreadCount,
+    required this.onPressed,
+  });
+
+  final int unreadCount;
+  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
-    final textTheme = Theme.of(context).textTheme;
+    final showBadge = unreadCount > 0;
 
-    return Scaffold(
-      backgroundColor: cs.surface,
-      appBar: AppBar(
-        backgroundColor: cs.surface,
-        elevation: 0,
-        surfaceTintColor: Colors.transparent,
-        title: Text(
-          'Tuno',
-          style: textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
-        ),
-        actions: [
-          Tooltip(
-            message: 'Notifications',
-            child: Semantics(
-              button: true,
-              label: 'Notifications',
-              child: IconButton(
-                onPressed: () {},
-                icon: const Icon(Icons.notifications_none_rounded),
-              ),
-            ),
-          ),
-          const SizedBox(width: 4),
-          Tooltip(
-            message: 'Settings',
-            child: Semantics(
-              button: true,
-              label: 'Settings',
-              child: IconButton(
-                onPressed: () => context.push('/settings'),
-                icon: const Icon(Icons.settings_rounded),
-              ),
-            ),
-          ),
-        ],
-      ),
-      body: SafeArea(
-        child: Center(
-          child: SingleChildScrollView(
-            padding: const EdgeInsets.all(20),
+    final semanticsLabel = showBadge
+        ? 'Notifications, $unreadCount unread'
+        : 'Notifications';
+
+    return Tooltip(
+      message: 'Notifications',
+      child: Semantics(
+        button: true,
+        label: semanticsLabel,
+        child: MouseRegion(
+          cursor: SystemMouseCursors.click,
+          child: InkWell(
+            onTap: onPressed,
+            borderRadius: BorderRadius.circular(14),
+            hoverColor: cs.onSurface.withValues(alpha: 0.06),
+            focusColor: cs.onSurface.withValues(alpha: 0.10),
+            splashColor: cs.onSurface.withValues(alpha: 0.12),
             child: ConstrainedBox(
-              constraints: const BoxConstraints(maxWidth: 1200),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // ── Greeting ──
-                  Text(
-                    'Hello, Singer 👋',
-                    style: textTheme.headlineMedium?.copyWith(
-                      fontSize: 28,
-                      fontWeight: FontWeight.bold,
+              constraints: const BoxConstraints(minWidth: 48, minHeight: 48),
+              child: Padding(
+                padding: const EdgeInsets.all(8),
+                child: Stack(
+                  clipBehavior: Clip.none,
+                  children: [
+                    Icon(
+                      Icons.notifications_outlined,
+                      size: 24,
                       color: cs.onSurface,
                     ),
-                  ),
-                  const SizedBox(height: 8),
-                  Text(
-                    'Ready to improve your voice today?',
-                    style: textTheme.bodyMedium?.copyWith(
-                      fontSize: 16,
-                      color: cs.onSurfaceVariant,
-                    ),
-                  ),
-                  const SizedBox(height: 28),
-
-                  // ── Main Practice Card ──
-                  Card(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(22),
-                      side: BorderSide(color: cs.outlineVariant, width: 1),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(24),
-                      child: Column(
-                        children: [
-                          // Mic circle
-                          Container(
-                            width: 105,
-                            height: 105,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: cs.surfaceContainerHighest,
-                              border: Border.all(
-                                color: cs.outlineVariant,
-                                width: 1.5,
-                              ),
-                            ),
-                            child: Icon(
-                              Icons.mic_rounded,
-                              size: 55,
-                              color: cs.primary,
-                            ),
+                    if (showBadge)
+                      Positioned(
+                        right: -4,
+                        top: -4,
+                        child: Container(
+                          constraints: const BoxConstraints(
+                            minWidth: 18,
+                            minHeight: 18,
                           ),
-                          const SizedBox(height: 18),
-                          Text(
-                            'Start Voice Practice',
-                            style: textTheme.titleLarge?.copyWith(
-                              fontSize: 22,
-                              fontWeight: FontWeight.bold,
-                              color: cs.onSurface,
-                            ),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 4,
+                            vertical: 1,
                           ),
-                          const SizedBox(height: 8),
-                          Text(
-                            'Record your voice and receive instant feedback.',
+                          decoration: const BoxDecoration(
+                            color: Color(0xFF12B5C1),
+                            shape: BoxShape.circle,
+                          ),
+                          child: Text(
+                            unreadCount > 99 ? '99+' : '$unreadCount',
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 10,
+                              fontWeight: FontWeight.w700,
+                              height: 1.3,
+                            ),
                             textAlign: TextAlign.center,
-                            style: textTheme.bodyMedium?.copyWith(
-                              color: cs.onSurfaceVariant,
-                            ),
                           ),
-                          const SizedBox(height: 20),
-                          Tooltip(
-                            message: 'Start Practice',
-                            child: Semantics(
-                              button: true,
-                              label: 'Start Practice',
-                              child: SizedBox(
-                                width: double.infinity,
-                                height: 54,
-                                child: FilledButton(
-                                  onPressed: () => context.push('/practice'),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      Icon(
-                                        Icons.fiber_manual_record_rounded,
-                                        size: 22,
-                                      ),
-                                      const SizedBox(width: 8),
-                                      const Text(
-                                        'Start Practice',
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 16,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
+                        ),
                       ),
-                    ),
-                  ),
-                  const SizedBox(height: 28),
-
-                  // ── Progress Section ──
-                  Text(
-                    'Your Progress',
-                    style: textTheme.titleLarge?.copyWith(
-                      fontSize: 21,
-                      fontWeight: FontWeight.bold,
-                      color: cs.onSurface,
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-
-                  LayoutBuilder(
-                    builder: (context, constraints) {
-                      final useColumns = constraints.maxWidth >= 360;
-                      if (useColumns) {
-                        return Row(
-                          children: [
-                            Expanded(
-                              child: _ProgressCard(
-                                title: 'Practice',
-                                value: '0 min',
-                                icon: Icons.timer_outlined,
-                              ),
-                            ),
-                            const SizedBox(width: 14),
-                            Expanded(
-                              child: _ProgressCard(
-                                title: 'Streak',
-                                value: '0 days',
-                                icon: Icons.local_fire_department_outlined,
-                              ),
-                            ),
-                          ],
-                        );
-                      }
-                      return Column(
-                        children: [
-                          _ProgressCard(
-                            title: 'Practice',
-                            value: '0 min',
-                            icon: Icons.timer_outlined,
-                          ),
-                          const SizedBox(height: 14),
-                          _ProgressCard(
-                            title: 'Streak',
-                            value: '0 days',
-                            icon: Icons.local_fire_department_outlined,
-                          ),
-                        ],
-                      );
-                    },
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),
@@ -218,48 +313,444 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-class _ProgressCard extends StatelessWidget {
-  const _ProgressCard({
-    required this.title,
-    required this.value,
+/// Header icon button with tooltip, semantics, and 48px touch target.
+class _HeaderIconButton extends StatelessWidget {
+  const _HeaderIconButton({
     required this.icon,
+    required this.tooltip,
+    required this.onPressed,
   });
 
-  final String title;
-  final String value;
   final IconData icon;
+  final String tooltip;
+  final VoidCallback onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    final cs = Theme.of(context).colorScheme;
+    return Tooltip(
+      message: tooltip,
+      child: Semantics(
+        button: true,
+        label: tooltip,
+        child: MouseRegion(
+          cursor: SystemMouseCursors.click,
+          child: InkWell(
+            onTap: onPressed,
+            borderRadius: BorderRadius.circular(14),
+            hoverColor: cs.onSurface.withValues(alpha: 0.06),
+            focusColor: cs.onSurface.withValues(alpha: 0.10),
+            splashColor: cs.onSurface.withValues(alpha: 0.12),
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(minWidth: 48, minHeight: 48),
+              child: Padding(
+                padding: const EdgeInsets.all(8),
+                child: Icon(icon, size: 24, color: cs.onSurface),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+/// Main Practice Card with TunoMicrophoneEmblem and gradient CTA.
+/// Reference bounds: x=52, y=405, width=918, height=553, radius ~34.
+class _MainPracticeCard extends StatelessWidget {
+  const _MainPracticeCard({required this.onTap});
+
+  final VoidCallback onTap;
+
+  // CTA gradient: cyan-to-deep-blue
+  static const _ctaGradient = LinearGradient(
+    colors: [Color(0xFF008BA6), Color(0xFF006D98), Color(0xFF014B75)],
+    begin: Alignment.centerLeft,
+    end: Alignment.centerRight,
+    stops: [0.0, 0.52, 1.0],
+  );
+
+  // Metallic-gold border gradient (thin highlight)
+  static const _goldBorderGradient = LinearGradient(
+    colors: [
+      Color(0xFFFFF2A6),
+      Color(0xFFE3B94F),
+      Color(0xFFA86D16),
+      Color(0xFFF4D675),
+    ],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+  );
 
   @override
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
 
-    return Card(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(22),
-        side: BorderSide(color: cs.outlineVariant, width: 1),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(18),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Icon(icon, color: cs.primary, size: 30),
-            const SizedBox(height: 18),
-            Text(
-              value,
-              style: textTheme.titleLarge?.copyWith(
-                fontSize: 21,
-                fontWeight: FontWeight.bold,
-                color: cs.onSurface,
+    return MetallicGoldBorder(
+      borderRadius: BorderRadius.circular(34),
+      padding: 1.5,
+      boxShadow: const [
+        BoxShadow(color: Color(0x1AD9A62E), blurRadius: 5, spreadRadius: 0),
+      ],
+      child: Card(
+        color: cs.surface,
+        surfaceTintColor: Colors.transparent,
+        shadowColor: Colors.transparent,
+        elevation: 0,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(32.7),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(24, 24, 24, 24),
+          child: Column(
+            children: [
+              // Microphone Emblem — reference size (~128 design px)
+              TunoMicrophoneEmblem(diameter: 128, compact: false),
+              // Gap after microphone
+              const SizedBox(height: 24),
+              Text(
+                'Start Voice Practice',
+                style: textTheme.headlineSmall?.copyWith(
+                  fontSize: 22,
+                  fontWeight: FontWeight.w800,
+                  color: cs.onSurface,
+                ),
+                textAlign: TextAlign.center,
               ),
+              const SizedBox(height: 10),
+              Text(
+                'Record your voice and receive instant feedback.',
+                textAlign: TextAlign.center,
+                style: textTheme.bodyLarge?.copyWith(
+                  fontSize: 15,
+                  color: cs.onSurfaceVariant,
+                  height: 1.4,
+                ),
+              ),
+              const SizedBox(height: 24),
+              // Gradient CTA with thin metallic-gold highlight border
+              Semantics(
+                button: true,
+                label: 'Start Practice',
+                child: MouseRegion(
+                  cursor: SystemMouseCursors.click,
+                  child: _GradientCTAButton(
+                    gradient: _ctaGradient,
+                    goldBorderGradient: _goldBorderGradient,
+                    onPressed: onTap,
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Container(
+                          width: 10,
+                          height: 10,
+                          decoration: const BoxDecoration(
+                            color: Colors.white,
+                            shape: BoxShape.circle,
+                          ),
+                        ),
+                        const SizedBox(width: 10),
+                        Text(
+                          'Start Practice',
+                          style: textTheme.titleMedium?.copyWith(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w700,
+                            color: Colors.white,
+                            letterSpacing: 0.2,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+/// Gradient CTA button with thin metallic-gold border layer.
+class _GradientCTAButton extends StatefulWidget {
+  const _GradientCTAButton({
+    required this.gradient,
+    required this.goldBorderGradient,
+    required this.onPressed,
+    required this.child,
+  });
+
+  final LinearGradient gradient;
+  final LinearGradient goldBorderGradient;
+  final VoidCallback onPressed;
+  final Widget child;
+
+  @override
+  State<_GradientCTAButton> createState() => _GradientCTAButtonState();
+}
+
+class _GradientCTAButtonState extends State<_GradientCTAButton> {
+  bool _hovered = false;
+  bool _focused = false;
+
+  @override
+  Widget build(BuildContext context) {
+    final shadowColor = _hovered || _focused
+        ? const Color(0xFF12B5C1).withValues(alpha: 0.35)
+        : const Color(0xFF0069A0).withValues(alpha: 0.25);
+
+    return Focus(
+      onFocusChange: (v) => setState(() => _focused = v),
+      child: MouseRegion(
+        onEnter: (_) => setState(() => _hovered = true),
+        onExit: (_) => setState(() => _hovered = false),
+        child: Container(
+          height: 56,
+          width: double.infinity,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            gradient: widget.gradient,
+            boxShadow: [
+              BoxShadow(
+                color: shadowColor,
+                blurRadius: _hovered || _focused ? 16 : 10,
+                spreadRadius: 0,
+                offset: const Offset(0, 4),
+              ),
+            ],
+          ),
+          child: Stack(
+            children: [
+              // Thin metallic-gold border layer (1px padding for thin highlight)
+              Positioned.fill(
+                child: IgnorePointer(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      gradient: widget.goldBorderGradient,
+                    ),
+                    padding: const EdgeInsets.all(1),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(19),
+                        gradient: widget.gradient,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              // Button content
+              Material(
+                color: Colors.transparent,
+                borderRadius: BorderRadius.circular(20),
+                child: InkWell(
+                  onTap: widget.onPressed,
+                  borderRadius: BorderRadius.circular(20),
+                  splashColor: Colors.white.withValues(alpha: 0.18),
+                  highlightColor: Colors.white.withValues(alpha: 0.10),
+                  hoverColor: Colors.transparent,
+                  focusColor: Colors.transparent,
+                  child: Center(child: widget.child),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+/// Base progress card with shared styling.
+class _ProgressCardBase extends StatelessWidget {
+  const _ProgressCardBase({
+    required this.child,
+    required this.isDark,
+    this.backgroundColor,
+  });
+
+  final Widget child;
+  final bool isDark;
+  final Color? backgroundColor;
+
+  @override
+  Widget build(BuildContext context) {
+    final cs = Theme.of(context).colorScheme;
+    return Card(
+      color:
+          backgroundColor ??
+          (isDark
+              ? cs.surfaceContainerHighest.withValues(alpha: 0.8)
+              : cs.surface),
+      surfaceTintColor: Colors.transparent,
+      shadowColor: Colors.transparent,
+      elevation: 0,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(19)),
+      child: child,
+    );
+  }
+}
+
+/// Practice progress card with cyan accent.
+/// Reference: left card ~x=52, width=440, height=265, ratio ~1.66.
+class _PracticeProgressCard extends StatelessWidget {
+  const _PracticeProgressCard({required this.isDark});
+
+  final bool isDark;
+
+  @override
+  Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+    final cyan = isDark ? const Color(0xFF12B5C1) : const Color(0xFF008BA6);
+
+    return AspectRatio(
+      aspectRatio: 1.68,
+      child: MetallicGoldBorder(
+        borderRadius: BorderRadius.circular(19),
+        padding: 1.0,
+        boxShadow: const [],
+        gradientOpacity: 0.6,
+        child: _ProgressCardBase(
+          isDark: isDark,
+          backgroundColor: isDark
+              ? const Color(0xFF061E31)
+              : const Color(0xFFF3FAFF),
+          child: Center(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                // White circular badge with stopwatch icon
+                Container(
+                  width: 42,
+                  height: 42,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    shape: BoxShape.circle,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withValues(alpha: 0.06),
+                        blurRadius: 6,
+                        offset: const Offset(0, 2),
+                      ),
+                    ],
+                  ),
+                  child: Icon(Icons.timer_outlined, size: 22, color: cyan),
+                ),
+                const SizedBox(height: 14),
+                Text(
+                  '0 min',
+                  style: textTheme.titleLarge?.copyWith(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w800,
+                    color: isDark ? Colors.white : const Color(0xFF062A5E),
+                    height: 1.2,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 2),
+                Text(
+                  'Practice',
+                  style: textTheme.bodySmall?.copyWith(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w500,
+                    color: isDark
+                        ? const Color(0xFFA9B8C9)
+                        : const Color(0xFF7890A8),
+                    height: 1.2,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ],
             ),
-            const SizedBox(height: 5),
-            Text(
-              title,
-              style: textTheme.bodyMedium?.copyWith(color: cs.onSurfaceVariant),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+/// Streak progress card with metallic-gold accent.
+/// Reference: right card ~x=530, width=440, height=265, ratio ~1.66.
+class _StreakProgressCard extends StatelessWidget {
+  const _StreakProgressCard({required this.isDark});
+
+  final bool isDark;
+
+  @override
+  Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+    final gold = isDark ? const Color(0xFFE3B94F) : const Color(0xFFB8860B);
+
+    return AspectRatio(
+      aspectRatio: 1.68,
+      child: MetallicGoldBorder(
+        borderRadius: BorderRadius.circular(19),
+        padding: 1.0,
+        boxShadow: const [],
+        gradientOpacity: 0.6,
+        child: _ProgressCardBase(
+          isDark: isDark,
+          backgroundColor: isDark
+              ? const Color(0xFF061E31)
+              : const Color(0xFFFFF8EA),
+          child: Center(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                // White circular badge with flame icon
+                Container(
+                  width: 42,
+                  height: 42,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    shape: BoxShape.circle,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withValues(alpha: 0.06),
+                        blurRadius: 6,
+                        offset: const Offset(0, 2),
+                      ),
+                    ],
+                  ),
+                  child: Icon(
+                    Icons.local_fire_department_rounded,
+                    size: 22,
+                    color: gold,
+                  ),
+                ),
+                const SizedBox(height: 14),
+                Text(
+                  '0 days',
+                  style: textTheme.titleLarge?.copyWith(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w800,
+                    color: isDark ? Colors.white : const Color(0xFF062A5E),
+                    height: 1.2,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 2),
+                Text(
+                  'Streak',
+                  style: textTheme.bodySmall?.copyWith(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w500,
+                    color: isDark
+                        ? const Color(0xFFA9B8C9)
+                        : const Color(0xFF7890A8),
+                    height: 1.2,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ],
             ),
-          ],
+          ),
         ),
       ),
     );

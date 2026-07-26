@@ -1,6 +1,17 @@
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../core/theme/app_colors.dart';
+import '../core/widgets/tuno_gradient_button.dart';
+import '../core/widgets/tuno_microphone_emblem.dart';
+import '../core/widgets/tuno_music_background.dart';
+
+/// Welcome / landing screen shown to unauthenticated users.
+///
+/// Uses a native Flutter 1024×1536 design canvas scaled by [FittedBox].
+/// All positions are in the canonical canvas coordinate system.
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({super.key});
 
@@ -13,6 +24,10 @@ class _WelcomeScreenState extends State<WelcomeScreen>
   late final AnimationController _controller;
   late final Animation<double> _fade;
   late final Animation<double> _slide;
+
+  static const double _canvasWidth = 1024.0;
+  static const double _canvasHeight = 1536.0;
+  static const double _designAspectRatio = _canvasWidth / _canvasHeight;
 
   @override
   void initState() {
@@ -38,304 +53,293 @@ class _WelcomeScreenState extends State<WelcomeScreen>
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-    final textTheme = Theme.of(context).textTheme;
+    final theme = Theme.of(context);
+    final cs = theme.colorScheme;
+    final isDark = theme.brightness == Brightness.dark;
+    final disableAnimations = MediaQuery.of(context).disableAnimations;
 
-    return Scaffold(
-      backgroundColor: colorScheme.surface,
-      body: SafeArea(
-        child: LayoutBuilder(
-          builder: (context, constraints) {
-            final isSmall = constraints.maxWidth < 420;
-            final horizontal = isSmall ? 18.0 : 28.0;
-
-            return SingleChildScrollView(
-              padding: EdgeInsets.symmetric(
-                horizontal: horizontal,
-                vertical: 18,
-              ),
-              child: FadeTransition(
-                opacity: _fade,
-                child: Transform.translate(
-                  offset: Offset(0, _slide.value),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      const SizedBox(height: 4),
-                      Text(
-                        'Tuno',
-                        style: textTheme.titleLarge?.copyWith(
-                          fontWeight: FontWeight.w900,
-                          letterSpacing: 0.2,
-                          color: colorScheme.onSurface,
-                        ),
-                      ),
-                      const SizedBox(height: 12),
-                      Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          _MicHeader(isSmall: isSmall),
-                          const SizedBox(height: 12),
-                          _FeatureGrid(isSmall: isSmall),
-                        ],
-                      ),
-                      const SizedBox(height: 8),
-                      _BottomCta(isSmall: isSmall),
-                      const SizedBox(height: 6),
-                    ],
-                  ),
-                ),
-              ),
-            );
-          },
-        ),
-      ),
-    );
-  }
-}
-
-class _MicHeader extends StatelessWidget {
-  const _MicHeader({required this.isSmall});
-
-  final bool isSmall;
-
-  @override
-  Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-    final textTheme = Theme.of(context).textTheme;
-
-    return _ThemeCard(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 14),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Container(
-              width: 120,
-              height: 120,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: colorScheme.primary,
-              ),
-              child: Icon(
-                Icons.mic_rounded,
-                size: 55,
-                color: colorScheme.onPrimary,
-              ),
-            ),
-            const SizedBox(height: 10),
-            Text(
-              'Train Your Voice with AI',
-              textAlign: TextAlign.center,
-              maxLines: 2,
-              style: textTheme.headlineMedium?.copyWith(
-                fontSize: isSmall ? 32 : 36,
-                fontWeight: FontWeight.w900,
-                height: 1.1,
-                color: colorScheme.onSurface,
-              ),
-            ),
-            const SizedBox(height: 6),
-            Text(
-              'Improve your pitch, melody, rhythm, and breathing.',
-              textAlign: TextAlign.center,
-              maxLines: 2,
-              style: textTheme.bodyMedium?.copyWith(
-                fontSize: isSmall ? 15 : 16,
-                color: colorScheme.onSurfaceVariant,
-                height: 1.35,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class _FeatureGrid extends StatelessWidget {
-  const _FeatureGrid({required this.isSmall});
-
-  final bool isSmall;
-
-  @override
-  Widget build(BuildContext context) {
-    const cards = [
-      'AI Pitch Detection',
-      'Melody Analysis',
-      'Daily Practice',
-      'Track Progress',
-    ];
-
-    final width = MediaQuery.of(context).size.width;
-    final isVeryNarrow = width < 340;
-
-    return _ThemeCard(
-      child: Padding(
-        padding: const EdgeInsets.all(10),
-        child: isVeryNarrow
-            ? Column(
-                mainAxisSize: MainAxisSize.min,
-                children: cards
-                    .map(
-                      (label) => Padding(
-                        padding: const EdgeInsets.only(bottom: 8),
-                        child: _FeatureCard(label: label),
-                      ),
-                    )
-                    .toList(),
-              )
-            : Wrap(
-                spacing: 10,
-                runSpacing: 10,
-                alignment: WrapAlignment.center,
-                children: cards
-                    .map(
-                      (label) => SizedBox(
-                        width: (width - 48) / 2,
-                        child: _FeatureCard(label: label),
-                      ),
-                    )
-                    .toList(),
-              ),
-      ),
-    );
-  }
-}
-
-class _BottomCta extends StatelessWidget {
-  const _BottomCta({required this.isSmall});
-
-  final bool isSmall;
-
-  @override
-  Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-    final textTheme = Theme.of(context).textTheme;
-
-    return _ThemeCard(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 14),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            SizedBox(
-              width: double.infinity,
-              height: isSmall ? 50 : 54,
-              child: FilledButton(
-                style: FilledButton.styleFrom(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                ),
-                onPressed: () => context.go('/signup'),
-                child: Text(
-                  'Get Started',
-                  style: TextStyle(fontSize: 17, fontWeight: FontWeight.w900),
-                ),
-              ),
-            ),
-            const SizedBox(height: 10),
-            Text(
-              'Already have an account?',
-              textAlign: TextAlign.center,
-              style: textTheme.bodyMedium?.copyWith(
-                color: colorScheme.onSurfaceVariant,
-                fontWeight: FontWeight.w700,
-                fontSize: 15,
-              ),
-            ),
-            const SizedBox(height: 4),
-            Center(
-              child: TextButton(
-                onPressed: () => context.go('/login'),
-                child: Text(
-                  'Login',
-                  style: textTheme.bodyMedium?.copyWith(
-                    fontWeight: FontWeight.w900,
-                    color: colorScheme.primary,
-                    fontSize: 15,
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class _ThemeCard extends StatelessWidget {
-  const _ThemeCard({required this.child});
-
-  final Widget child;
-
-  @override
-  Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-
-    return Container(
-      decoration: BoxDecoration(
-        color: colorScheme.surfaceContainerHighest,
-        borderRadius: BorderRadius.circular(22),
-        border: Border.all(color: colorScheme.outlineVariant, width: 1),
-      ),
-      child: child,
-    );
-  }
-}
-
-class _FeatureCard extends StatelessWidget {
-  const _FeatureCard({required this.label});
-
-  final String label;
-
-  @override
-  Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-    final textTheme = Theme.of(context).textTheme;
-
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-      decoration: BoxDecoration(
-        color: colorScheme.surfaceContainerHighest,
-        borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: colorScheme.outlineVariant, width: 1),
-      ),
-      child: Row(
+    // ── Foreground content (all existing widgets, unchanged) ──
+    final Widget foregroundStack = SizedBox(
+      width: _canvasWidth,
+      height: _canvasHeight,
+      child: Stack(
         children: [
-          Container(
-            width: 36,
-            height: 36,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: colorScheme.primary,
-            ),
-            child: Icon(
-              Icons.check_rounded,
-              size: 20,
-              color: colorScheme.onPrimary,
+          // ── Back arrow (reference: hit area 88×88, icon 48, #12B5C1) ──
+          Positioned(
+            left: 60,
+            top: 75,
+            child: SizedBox(
+              width: 88,
+              height: 88,
+              child: Material(
+                color: Colors.transparent,
+                shape: const CircleBorder(),
+                clipBehavior: Clip.antiAlias,
+                child: InkWell(
+                  customBorder: const CircleBorder(),
+                  onTap: () {
+                    if (context.canPop()) {
+                      context.pop();
+                    } else {
+                      context.go('/login');
+                    }
+                  },
+                  child: Center(
+                    child: Icon(
+                      Icons.arrow_back_ios_new_rounded,
+                      color: AppColors.tunoBackArrow,
+                      size: 48,
+                    ),
+                  ),
+                ),
+              ),
             ),
           ),
-          const SizedBox(width: 8),
-          Expanded(
-            child: FittedBox(
-              fit: BoxFit.scaleDown,
-              alignment: Alignment.centerLeft,
-              child: Text(
-                label,
-                maxLines: 1,
-                style: textTheme.bodyMedium?.copyWith(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w900,
-                  color: colorScheme.onSurface,
+
+          // ── "Tuno" branding ──
+          Positioned(
+            left: 0,
+            top: 105,
+            width: _canvasWidth,
+            child: Text(
+              'Tuno',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 104,
+                fontWeight: FontWeight.w800,
+                color: cs.onSurface,
+                height: 1.0,
+              ),
+            ),
+          ),
+
+          // ── "AI SINGING COACH" subtitle ──
+          Positioned(
+            left: 0,
+            top: 218,
+            width: _canvasWidth,
+            child: Text(
+              'AI SINGING COACH',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 27,
+                fontWeight: FontWeight.w500,
+                letterSpacing: 5.5,
+                color: cs.onSurfaceVariant,
+              ),
+            ),
+          ),
+
+          // ── Microphone emblem ──
+          Positioned(
+            left: 332,
+            top: 334,
+            child: TunoMicrophoneEmblem(diameter: 360),
+          ),
+
+          // ── Main heading ──
+          Positioned(
+            left: 120,
+            top: 758,
+            width: 784,
+            child: Text(
+              'Your Personal\nAI Singing Coach',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 75,
+                fontWeight: FontWeight.w800,
+                height: 1.13,
+                color: cs.onSurface,
+              ),
+            ),
+          ),
+
+          // ── Tagline with gold separator dots ──
+          Positioned(
+            left: 0,
+            top: 972,
+            width: _canvasWidth,
+            child: Text.rich(
+              TextSpan(
+                style: TextStyle(
+                  fontSize: 33,
+                  fontWeight: FontWeight.w400,
+                  color: cs.onSurfaceVariant,
+                ),
+                children: [
+                  const TextSpan(text: 'Practice'),
+                  const TextSpan(
+                    text: ' • ',
+                    style: TextStyle(color: AppColors.tunoGold),
+                  ),
+                  const TextSpan(text: 'Improve'),
+                  const TextSpan(
+                    text: ' • ',
+                    style: TextStyle(color: AppColors.tunoGold),
+                  ),
+                  const TextSpan(text: 'Achieve'),
+                ],
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ),
+
+          // ── "Get Started" button (reference dimensions + gradient) ──
+          Positioned(
+            left: 145,
+            top: 1094,
+            width: 734,
+            height: 122,
+            child: TunoGradientButton(
+              label: 'Get Started',
+              trailingIcon: Icons.arrow_forward_rounded,
+              trailingIconColor: AppColors.tunoGoldPrimary,
+              trailingIconSize: 42,
+              onPressed: () {
+                debugPrint('WELCOME: Get Started tapped');
+                context.go('/signup');
+              },
+              fullWidth: true,
+              height: 122,
+              borderRadius: 61,
+              semanticLabel: 'Get Started',
+              labelFontSize: 42,
+              labelFontWeight: FontWeight.w700,
+              gradient: const LinearGradient(
+                begin: Alignment.centerLeft,
+                end: Alignment.centerRight,
+                colors: [
+                  Color(0xFF008BA6),
+                  Color(0xFF006D98),
+                  Color(0xFF014B75),
+                ],
+                stops: [0.0, 0.52, 1.0],
+              ),
+            ),
+          ),
+
+          // ── "Login" outlined button (reference dimensions) ──
+          Positioned(
+            left: 145,
+            top: 1248,
+            width: 734,
+            height: 114,
+            child: SizedBox(
+              width: 734,
+              height: 114,
+              child: OutlinedButton(
+                onPressed: () {
+                  debugPrint('WELCOME: Login tapped');
+                  context.go('/login');
+                },
+                style: OutlinedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(57),
+                  ),
+                  side: BorderSide(
+                    color: isDark
+                        ? AppColors.tunoWelcomeOutlineDark
+                        : AppColors.tunoWelcomeOutlineLight,
+                    width: 1.5,
+                  ),
+                  padding: EdgeInsets.zero,
+                  backgroundColor: isDark
+                      ? AppColors.tunoWelcomeSurfaceDark
+                      : AppColors.tunoWelcomeSurfaceLight,
+                ),
+                child: Text(
+                  'Login',
+                  style: TextStyle(
+                    fontSize: 40,
+                    fontWeight: FontWeight.w600,
+                    color: isDark
+                        ? AppColors.tunoWelcomeButtonLabelDark
+                        : AppColors.tunoWelcomeButtonLabelLight,
+                  ),
                 ),
               ),
+            ),
+          ),
+
+          // ── Page indicator dots ──
+          Positioned(
+            left: 0,
+            top: 1430,
+            width: _canvasWidth,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                _dot(filled: true, color: cs.primary, size: 14),
+                const SizedBox(width: 14),
+                _dot(filled: false, color: cs.onSurfaceVariant, size: 11),
+                const SizedBox(width: 14),
+                _dot(filled: false, color: cs.onSurfaceVariant, size: 11),
+              ],
             ),
           ),
         ],
+      ),
+    );
+
+    // Entrance animation wrapper — always preserves the child
+    final Widget animatedForeground = disableAnimations
+        ? foregroundStack
+        : FadeTransition(
+            opacity: _fade,
+            child: Transform.translate(
+              offset: Offset(0, _slide.value),
+              child: foregroundStack,
+            ),
+          );
+
+    // Unified canvas: background + foreground share the same 1024×1536 space
+    return Scaffold(
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          final availableWidth = constraints.maxWidth;
+          final availableHeight = constraints.maxHeight;
+
+          final canvasWidth = math.min(
+            availableWidth,
+            availableHeight * _designAspectRatio,
+          );
+
+          final canvasHeight = canvasWidth / _designAspectRatio;
+
+          return ColoredBox(
+            color: theme.scaffoldBackgroundColor,
+            child: Center(
+              child: SizedBox(
+                width: canvasWidth,
+                height: canvasHeight,
+                child: FittedBox(
+                  fit: BoxFit.contain,
+                  child: SizedBox(
+                    width: _canvasWidth,
+                    height: _canvasHeight,
+                    child: ClipRect(
+                      child: TunoMusicBackground(
+                        variant: TunoMusicBackgroundVariant.welcome,
+                        child: animatedForeground,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
+
+  Widget _dot({required bool filled, required Color color, double size = 8}) {
+    return Container(
+      width: size,
+      height: size,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        color: filled ? color : color.withValues(alpha: 0.35),
       ),
     );
   }

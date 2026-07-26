@@ -97,6 +97,34 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
+  Future<AuthFailure?> updateDisplayName(String displayName) async {
+    try {
+      await _authService.updateDisplayName(displayName);
+      return null;
+    } on FirebaseAuthException catch (e) {
+      return AuthFailure(message: _mapFirebaseError(e));
+    } catch (_) {
+      return const AuthFailure(
+        message: 'Failed to update display name. Please try again.',
+      );
+    }
+  }
+
+  @override
+  Future<AuthFailure?> deleteUser() async {
+    try {
+      await _authService.deleteUser();
+      return null;
+    } on FirebaseAuthException catch (e) {
+      return AuthFailure(message: _mapFirebaseError(e));
+    } catch (_) {
+      return const AuthFailure(
+        message: 'Failed to delete account. Please try again.',
+      );
+    }
+  }
+
+  @override
   Future<void> signOut() => _authService.signOut();
 
   String _mapFirebaseError(FirebaseAuthException e) {
@@ -111,6 +139,8 @@ class AuthRepositoryImpl implements AuthRepository {
         return 'Too many attempts. Please try again later.';
       case 'network-request-failed':
         return 'Check your internet connection.';
+      case 'requires-recent-login':
+        return 'This action requires a recent login. Please log out and log back in, then try again.';
       case 'email-already-in-use':
         return 'An account already exists for this email.';
       case 'weak-password':

@@ -14,6 +14,7 @@ class AuthTextField extends StatelessWidget {
     this.onChanged,
     this.textInputAction,
     this.onFieldSubmitted,
+    this.prefixIcon,
   });
 
   final TextEditingController controller;
@@ -27,6 +28,7 @@ class AuthTextField extends StatelessWidget {
   final ValueChanged<String>? onChanged;
   final TextInputAction? textInputAction;
   final ValueChanged<String>? onFieldSubmitted;
+  final Widget? prefixIcon;
 
   @override
   Widget build(BuildContext context) {
@@ -43,6 +45,7 @@ class AuthTextField extends StatelessWidget {
       decoration: InputDecoration(
         labelText: labelText,
         hintText: hintText,
+        prefixIcon: prefixIcon,
         suffixIcon: onToggleObscure != null
             ? IconButton(
                 onPressed: onToggleObscure,

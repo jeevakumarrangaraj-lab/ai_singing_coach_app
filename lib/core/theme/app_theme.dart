@@ -36,25 +36,27 @@ class AppTheme {
   }
 
   // ─────────────────────────────────────────────────────────────
-  // Dark theme  –  monochrome
+  // Dark theme  –  Tuno
   // ─────────────────────────────────────────────────────────────
 
   static ThemeData get darkTheme {
-    const bg = AppColors.darkBackground;
-    const surface = AppColors.darkSurface;
-    const elevated = AppColors.darkElevatedSurface;
-    const primaryText = AppColors.darkPrimaryText;
-    const secondaryText = AppColors.darkSecondaryText;
-    const border = AppColors.darkBorder;
-    const primaryBtn = AppColors.darkPrimaryButton;
-    const btnText = AppColors.darkButtonText;
-    const error = AppColors.error;
-    const gold = AppColors.accentGold;
+    const bg = AppColors.tunoDarkBackground;
+    const surface = AppColors.tunoDarkSurface;
+    const elevated = AppColors.tunoDarkElevatedSurface;
+    const primaryText = AppColors.tunoDarkPrimaryText;
+    const secondaryText = AppColors.tunoDarkSecondaryText;
+    const mutedText = AppColors.tunoDarkMutedText;
+    const border = AppColors.tunoDarkBorder;
+    const divider = AppColors.tunoDarkDivider;
+    const primaryBtn = AppColors.tunoCyan;
+    const btnText = AppColors.tunoDarkBackground;
+    const error = AppColors.darkError;
+    const gold = AppColors.tunoGold;
 
     final textTheme = _buildTextTheme(
       primary: primaryText,
       secondary: secondaryText,
-      muted: secondaryText.withValues(alpha: 0.65),
+      muted: mutedText,
     );
 
     final colorScheme = ColorScheme.dark(
@@ -63,14 +65,16 @@ class AppTheme {
       surfaceContainerHighest: elevated,
       primary: primaryBtn,
       onPrimary: btnText,
-      primaryContainer: border,
-      secondary: gold,
+      primaryContainer: AppColors.tunoDeepBlue,
+      secondary: AppColors.tunoTeal,
       onSecondary: bg,
-      secondaryContainer: border,
-      tertiary: AppColors.rewardGold,
+      secondaryContainer: Color(0xFF0A3D4D),
+      tertiary: gold,
+      onTertiary: bg,
       error: error,
       onError: Colors.white,
       outline: border,
+      outlineVariant: divider,
     );
 
     return ThemeData(
@@ -99,8 +103,9 @@ class AppTheme {
         behavior: SnackBarBehavior.floating,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         insetPadding: const EdgeInsets.all(16),
+        backgroundColor: elevated,
         contentTextStyle: textTheme.bodyMedium?.copyWith(
-          color: Colors.white,
+          color: primaryText,
           fontWeight: FontWeight.w500,
         ),
       ),
@@ -205,11 +210,7 @@ class AppTheme {
       ),
 
       // ── Dividers ──
-      dividerTheme: DividerThemeData(
-        color: border.withValues(alpha: 0.6),
-        thickness: 1,
-        space: 0,
-      ),
+      dividerTheme: DividerThemeData(color: divider, thickness: 1, space: 0),
 
       // ── Progress ──
       progressIndicatorTheme: ProgressIndicatorThemeData(
@@ -268,20 +269,19 @@ class AppTheme {
   }
 
   // ─────────────────────────────────────────────────────────────
-  // Light theme  –  monochrome
+  // Light theme  –  Tuno
   // ─────────────────────────────────────────────────────────────
 
   static ThemeData get lightTheme {
-    const bg = AppColors.lightBackground;
-    const surface = AppColors.lightSurface;
-    const elevated = AppColors.lightElevatedSurface;
-    const primaryText = AppColors.lightPrimaryText;
-    const secondaryText = AppColors.lightSecondaryText;
-    const border = AppColors.lightBorder;
-    const primaryBtn = AppColors.lightPrimaryButton;
-    const btnText = AppColors.lightButtonText;
-    const error = AppColors.error;
-    const gold = AppColors.accentGold;
+    const bg = AppColors.tunoLightBackground;
+    const surface = AppColors.tunoLightSurface;
+    const primaryText = AppColors.tunoLightPrimaryText;
+    const secondaryText = AppColors.tunoLightSecondaryText;
+    const border = AppColors.tunoLightBorder;
+    const primaryBtn = AppColors.tunoDeepBlue;
+    const btnText = Colors.white;
+    const error = AppColors.lightError;
+    const gold = AppColors.tunoGold;
 
     final textTheme = _buildTextTheme(
       primary: primaryText,
@@ -292,17 +292,19 @@ class AppTheme {
     final colorScheme = ColorScheme.light(
       surface: surface,
       onSurface: primaryText,
-      surfaceContainerHighest: elevated,
+      surfaceContainerHighest: AppColors.lightSurfaceContainerHighest,
       primary: primaryBtn,
       onPrimary: btnText,
-      primaryContainer: border,
-      secondary: gold,
+      primaryContainer: AppColors.tunoCyan,
+      secondary: AppColors.tunoTeal,
       onSecondary: bg,
-      secondaryContainer: border,
-      tertiary: AppColors.rewardGold,
+      secondaryContainer: Color(0xFFE0F7F7),
+      tertiary: gold,
+      onTertiary: primaryText,
       error: error,
       onError: Colors.white,
       outline: border,
+      outlineVariant: border.withValues(alpha: 0.5),
     );
 
     return ThemeData(
@@ -331,6 +333,7 @@ class AppTheme {
         behavior: SnackBarBehavior.floating,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         insetPadding: const EdgeInsets.all(16),
+        backgroundColor: primaryText.withValues(alpha: 0.9),
         contentTextStyle: textTheme.bodyMedium?.copyWith(
           color: Colors.white,
           fontWeight: FontWeight.w500,
@@ -339,7 +342,7 @@ class AppTheme {
 
       // ── Dialogs ──
       dialogTheme: DialogThemeData(
-        backgroundColor: elevated,
+        backgroundColor: surface,
         surfaceTintColor: Colors.transparent,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(22)),
         titleTextStyle: textTheme.titleLarge?.copyWith(
@@ -426,7 +429,7 @@ class AppTheme {
 
       // ── Cards ──
       cardTheme: CardThemeData(
-        color: elevated,
+        color: surface,
         surfaceTintColor: Colors.transparent,
         shadowColor: Colors.transparent,
         elevation: 0,
@@ -438,7 +441,7 @@ class AppTheme {
 
       // ── Dividers ──
       dividerTheme: DividerThemeData(
-        color: border.withValues(alpha: 0.6),
+        color: border.withValues(alpha: 0.5),
         thickness: 1,
         space: 0,
       ),

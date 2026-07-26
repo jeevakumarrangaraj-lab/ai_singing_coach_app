@@ -13,41 +13,61 @@ class LanguageStep extends ConsumerWidget {
     final controller = ref.read(onboardingControllerProvider.notifier);
     final colorScheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
+    final isDark = colorScheme.brightness == Brightness.dark;
 
     final languages = OnboardingLanguage.values;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
+        // Heading
         Text(
-          'What language do you sing in?',
+          'Choose your coaching language',
           style: textTheme.headlineMedium?.copyWith(
             fontSize: 22,
             fontWeight: FontWeight.w700,
-            color: colorScheme.onSurface,
+            color: const Color(0xFFF7F7F7),
           ),
           textAlign: TextAlign.center,
         ),
         const SizedBox(height: 8),
+        // Subtitle
         Text(
-          'This helps us tailor your practice recommendations.',
+          'Select the language you prefer for coaching instructions and AI feedback.',
           style: textTheme.bodyMedium?.copyWith(
-            color: colorScheme.onSurfaceVariant,
+            color: const Color(0xFFAAB8C8),
             height: 1.4,
           ),
           textAlign: TextAlign.center,
         ),
         const SizedBox(height: 24),
-        ...languages.map(
-          (language) => Padding(
-            padding: const EdgeInsets.only(bottom: 12),
-            child: _LanguageCard(
-              language: language,
-              isSelected: state.selectedLanguage == language,
-              onTap: () => controller.selectLanguage(language),
-            ),
-          ),
+        // Language cards
+        LayoutBuilder(
+          builder: (context, constraints) {
+            final isWide = constraints.maxWidth >= 600;
+            final spacing = 12.0;
+            final childWidth = isWide
+                ? (constraints.maxWidth - spacing) / 2
+                : constraints.maxWidth;
+
+            return Wrap(
+              spacing: spacing,
+              runSpacing: spacing,
+              children: languages.map((language) {
+                return SizedBox(
+                  width: childWidth,
+                  child: _LanguageCard(
+                    language: language,
+                    isSelected: state.selectedLanguage == language,
+                    onTap: () => controller.selectLanguage(language),
+                    isDark: isDark,
+                  ),
+                );
+              }).toList(),
+            );
+          },
         ),
+        // Validation error
         if (state.errorMessage != null) ...[
           const SizedBox(height: 8),
           Container(
@@ -90,110 +110,165 @@ class _LanguageCard extends StatelessWidget {
     required this.language,
     required this.isSelected,
     required this.onTap,
+    required this.isDark,
   });
 
   final OnboardingLanguage language;
   final bool isSelected;
   final VoidCallback onTap;
+  final bool isDark;
 
-  String _getDescription(OnboardingLanguage lang) {
-    switch (lang) {
-      case OnboardingLanguage.english:
-        return 'Practice with English songs and exercises.';
-      case OnboardingLanguage.tamil:
-        return 'Practice with Tamil songs and exercises.';
-      case OnboardingLanguage.hindi:
-        return 'Practice with Hindi songs and exercises.';
-    }
-  }
+  // Color constants matching the design spec
+  static const Color _cardSurface = Color(0xFF061E31); // tunoDarkSurface
+  static const Color _cardBorder = Color(0xFF41647D); // tunoLoginBorder
+  static const Color _selectedBgStart = Color(0xFF008BA6);
+  static const Color _selectedBgMid = Color(0xFF006D98);
+  static const Color _selectedBgEnd = Color(0xFF014B75);
+  static const Color _cyanInnerOutline = Color(0xFF12B5C1); // tunoBackArrow
+  static const Color _textWhite = Color(0xFFF7F7F7);
+  static const Color _iconCyan = Color(0xFF12B5C1);
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-    final textTheme = Theme.of(context).textTheme;
-    final description = _getDescription(language);
-
     return Semantics(
       selected: isSelected,
       button: true,
       label: '${language.label} language',
-      child: Card(
-        clipBehavior: Clip.antiAlias,
-        elevation: 0,
-        color: colorScheme.surfaceContainerHighest,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(18),
-          side: BorderSide(
-            color: isSelected
-                ? colorScheme.primary
-                : colorScheme.outlineVariant,
-            width: isSelected ? 2 : 1,
-          ),
-        ),
-        child: InkWell(
+      child: MouseRegion(
+        cursor: SystemMouseCursors.click,
+        child: GestureDetector(
           onTap: onTap,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
-            child: Row(
+          child: AnimatedContainer(
+            duration: const Duration(milliseconds: 180),
+            curve: Curves.easeOut,
+            height: 72, // Minimum 48px interaction target
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(19),
+              // Base surface
+              color: isSelected
+                  ? null // gradient below
+                  : _cardSurface,
+              // Gradient for selected state
+              gradient: isSelected
+                  ? const LinearGradient(
+                      colors: [
+                        _selectedBgStart,
+                        _selectedBgMid,
+                        _selectedBgEnd,
+                      ],
+                      begin: Alignment.centerLeft,
+                      end: Alignment.centerRight,
+                    )
+                  : null,
+              // Borders: inner cyan + outer metallic gold when selected
+              border: isSelected
+                  ? null // handled by Stack below
+                  : Border.all(color: _cardBorder, width: 1.2),
+            ),
+            child: Stack(
               children: [
-                Container(
-                  width: 48,
-                  height: 48,
-                  decoration: BoxDecoration(
-                    color: colorScheme.surfaceContainerHighest,
-                    borderRadius: BorderRadius.circular(14),
-                    border: Border.all(
-                      color: isSelected
-                          ? colorScheme.primary
-                          : colorScheme.outlineVariant,
+                // Inner cyan outline for selected state
+                if (isSelected)
+                  Positioned.fill(
+                    child: IgnorePointer(
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(17),
+                          border: Border.all(
+                            color: _cyanInnerOutline.withValues(alpha: 0.85),
+                            width: 1.5,
+                          ),
+                        ),
+                      ),
                     ),
                   ),
-                  child: Icon(
-                    Icons.language_rounded,
-                    size: 24,
-                    color: isSelected
-                        ? colorScheme.primary
-                        : colorScheme.onSurfaceVariant,
+                // Outer metallic-gold highlight for selected state
+                if (isSelected)
+                  Positioned.fill(
+                    child: IgnorePointer(
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(19),
+                          gradient: const LinearGradient(
+                            colors: [
+                              Color(0xFFFFF2A6),
+                              Color(0xFFE3B94F),
+                              Color(0xFFA86D16),
+                              Color(0xFFF4D675),
+                            ],
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                          ),
+                        ),
+                        padding: const EdgeInsets.all(2),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(17),
+                            gradient: const LinearGradient(
+                              colors: [
+                                _selectedBgStart,
+                                _selectedBgMid,
+                                _selectedBgEnd,
+                              ],
+                              begin: Alignment.centerLeft,
+                              end: Alignment.centerRight,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
                   ),
-                ),
-                const SizedBox(width: 16),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                // Card content
+                Center(
+                  child: Row(
                     children: [
-                      Text(
-                        language.label,
-                        style: textTheme.titleMedium?.copyWith(
-                          fontSize: 17,
-                          fontWeight: FontWeight.w700,
-                          color: colorScheme.onSurface,
+                      // Cyan globe icon
+                      Container(
+                        width: 44,
+                        height: 44,
+                        decoration: BoxDecoration(
+                          color: _iconCyan.withValues(alpha: 0.18),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: Icon(
+                          Icons.language_rounded,
+                          size: 22,
+                          color: _iconCyan,
                         ),
                       ),
-                      const SizedBox(height: 4),
-                      Text(
-                        description,
-                        style: textTheme.bodyMedium?.copyWith(
-                          color: colorScheme.onSurfaceVariant,
-                          height: 1.3,
+                      const SizedBox(width: 16),
+                      // Language name
+                      Expanded(
+                        child: Text(
+                          language.label,
+                          style: const TextStyle(
+                            fontSize: 17,
+                            fontWeight: FontWeight.w700,
+                            color: _textWhite,
+                            letterSpacing: 0.1,
+                          ),
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ),
+                      // Check indicator for selected
+                      if (isSelected)
+                        Container(
+                          width: 26,
+                          height: 26,
+                          decoration: BoxDecoration(
+                            color: _cyanInnerOutline,
+                            shape: BoxShape.circle,
+                          ),
+                          child: const Icon(
+                            Icons.check_rounded,
+                            size: 16,
+                            color: Colors.white,
+                          ),
+                        ),
                     ],
                   ),
                 ),
-                if (isSelected)
-                  Container(
-                    width: 26,
-                    height: 26,
-                    decoration: BoxDecoration(
-                      color: colorScheme.primary,
-                      shape: BoxShape.circle,
-                    ),
-                    child: Icon(
-                      Icons.check_rounded,
-                      size: 16,
-                      color: colorScheme.onPrimary,
-                    ),
-                  ),
               ],
             ),
           ),

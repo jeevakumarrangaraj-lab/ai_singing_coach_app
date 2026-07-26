@@ -1,7 +1,10 @@
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../core/widgets/tuno_dashboard_background.dart';
 import '../../../../core/enums/icon_position.dart';
 import '../../presentation/voice_recording_controller.dart';
 import '../../domain/voice_recording_state.dart';
@@ -10,6 +13,7 @@ import '../../../auth/presentation/widgets/auth_secondary_button.dart';
 import '../../../auth/presentation/widgets/auth_destructive_button.dart';
 import '../../../../common/widgets/app_back_button.dart';
 import '../../../../common/utils/navigation_helpers.dart';
+import '../../../../core/theme/app_colors.dart';
 
 class VoicePracticeScreen extends ConsumerStatefulWidget {
   const VoicePracticeScreen({super.key});
@@ -87,7 +91,6 @@ class _VoicePracticeScreenState extends ConsumerState<VoicePracticeScreen>
 
   late final AnimationController _pulseController;
 
-  late final Animation<double> _pulseScale;
   bool _isBusy = false;
 
   @override
@@ -96,9 +99,6 @@ class _VoicePracticeScreenState extends ConsumerState<VoicePracticeScreen>
     _pulseController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 900),
-    );
-    _pulseScale = Tween<double>(begin: 1.0, end: 1.08).animate(
-      CurvedAnimation(parent: _pulseController, curve: Curves.easeInOut),
     );
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -143,96 +143,102 @@ class _VoicePracticeScreenState extends ConsumerState<VoicePracticeScreen>
 
     return Scaffold(
       backgroundColor: cs.surface,
-      body: Stack(
-        children: [
-          SafeArea(
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.all(24),
-              child: Center(
-                child: ConstrainedBox(
-                  constraints: const BoxConstraints(maxWidth: 600),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const SizedBox(height: 32),
-                      Text(
-                        'Voice Practice',
-                        style: textTheme.headlineLarge?.copyWith(
-                          fontSize: 32,
-                          fontWeight: FontWeight.w800,
-                        ),
-                      ),
-                      const SizedBox(height: 16),
-                      Text(
-                        'Record your singing and get AI-powered feedback on pitch, rhythm, and tone.',
-                        textAlign: TextAlign.center,
-                        style: textTheme.bodyLarge?.copyWith(
-                          color: cs.onSurfaceVariant,
-                          fontSize: 16,
-                        ),
-                      ),
-                      const SizedBox(height: 48),
-                      _buildRecordingUI(state, controller, textTheme, cs),
-                      const SizedBox(height: 48),
-                      if (state.isError)
-                        Card(
-                          color: cs.surfaceContainerHighest,
-                          surfaceTintColor: Colors.transparent,
-                          shadowColor: Colors.transparent,
-                          elevation: 0,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(16),
-                            side: BorderSide(
-                              color: cs.outlineVariant,
-                              width: 1,
-                            ),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(16),
-                            child: Row(
-                              children: [
-                                Icon(
-                                  Icons.error_outline,
-                                  color: cs.error,
-                                  size: 24,
-                                ),
-                                const SizedBox(width: 12),
-                                Expanded(
-                                  child: Text(
-                                    state.whenOrNull(error: (msg) => msg) ??
-                                        'An error occurred',
-                                    style: textTheme.bodyMedium?.copyWith(
-                                      color: cs.error,
-                                    ),
-                                  ),
-                                ),
-                                TextButton(
-                                  onPressed: () => controller.reset(),
-                                  child: Text('Dismiss'),
-                                ),
-                              ],
-                            ),
+      body: TunoDashboardBackground(
+        child: Stack(
+          children: [
+            SafeArea(
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.only(
+                  left: 24,
+                  right: 24,
+                  bottom: 120,
+                ),
+                child: Center(
+                  child: ConstrainedBox(
+                    constraints: const BoxConstraints(maxWidth: 600),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const SizedBox(height: 44),
+                        // ── Title — centered, below back button ──
+                        Text(
+                          'Voice Practice',
+                          style: textTheme.headlineLarge?.copyWith(
+                            fontSize: 32,
+                            fontWeight: FontWeight.w800,
                           ),
                         ),
-                    ],
+                        const SizedBox(height: 12),
+                        Text(
+                          'Record your singing and get AI-powered feedback on pitch, rhythm, and tone.',
+                          textAlign: TextAlign.center,
+                          style: textTheme.bodyLarge?.copyWith(
+                            color: cs.onSurfaceVariant,
+                            fontSize: 16,
+                          ),
+                        ),
+                        const SizedBox(height: 32),
+                        _buildRecordingUI(state, controller, textTheme, cs),
+                        const SizedBox(height: 48),
+                        if (state.isError)
+                          _buildErrorCard(state, textTheme, cs, controller),
+                      ],
+                    ),
                   ),
                 ),
               ),
             ),
-          ),
-          // Back button as last Stack child so it is clickable
-          Positioned(
-            top: 8,
-            left: 8,
-            child: Tooltip(
-              message: 'Back',
-              child: AppBackButton(
-                onPressed: _handleBackPressed,
-                showOnlyIfCanPop: false,
+            // Back button — positioned at SafeArea top-left
+            Positioned(
+              top: 8,
+              left: 8,
+              child: Tooltip(
+                message: 'Back',
+                child: AppBackButton(
+                  onPressed: _handleBackPressed,
+                  showOnlyIfCanPop: false,
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildErrorCard(
+    VoiceRecordingState state,
+    TextTheme textTheme,
+    ColorScheme cs,
+    VoiceRecordingController controller,
+  ) {
+    return Card(
+      color: cs.surfaceContainerHighest,
+      surfaceTintColor: Colors.transparent,
+      shadowColor: Colors.transparent,
+      elevation: 0,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16),
+        side: BorderSide(color: cs.outlineVariant, width: 1),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Row(
+          children: [
+            Icon(Icons.error_outline, color: cs.error, size: 24),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Text(
+                state.whenOrNull(error: (msg) => msg) ?? 'An error occurred',
+                style: textTheme.bodyMedium?.copyWith(color: cs.error),
+              ),
+            ),
+            TextButton(
+              onPressed: () => controller.reset(),
+              child: Text('Dismiss'),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -247,7 +253,6 @@ class _VoicePracticeScreenState extends ConsumerState<VoicePracticeScreen>
     final isRequestingPermission = state is RequestingPermissionState;
     final isPermissionDenied = state is PermissionDeniedState;
     final hasRecording = state.hasRecording;
-    // Only _isBusy disables buttons – RecordingState must NOT disable Stop.
     final isDisabled = _isBusy;
 
     if (isRequestingPermission) {
@@ -293,167 +298,220 @@ class _VoicePracticeScreenState extends ConsumerState<VoicePracticeScreen>
       );
     }
 
+    // ── Premium Recording Panel ──
     return Column(
       children: [
-        _buildMicrophoneButton(isRecording, controller, textTheme, cs),
-        const SizedBox(height: 32),
-        _buildTimerDisplay(state, textTheme, cs),
-        const SizedBox(height: 32),
-        _buildActionButtons(
-          state,
-          controller,
-          textTheme,
-          isRecording,
-          hasRecording,
-          isDisabled,
-          cs,
+        // Recording panel card
+        Container(
+          width: double.infinity,
+          padding: const EdgeInsets.symmetric(vertical: 36, horizontal: 20),
+          decoration: BoxDecoration(
+            gradient: AppColors.recordingPanelGradient,
+            borderRadius: BorderRadius.circular(30),
+            border: Border.all(
+              color: AppColors.borderBlue.withValues(alpha: 0.85),
+              width: 1,
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: AppColors.baseNavy.withValues(alpha: 0.50),
+                blurRadius: 20,
+                spreadRadius: 0,
+                offset: const Offset(0, 8),
+              ),
+            ],
+          ),
+          child: Stack(
+            children: [
+              // Soft cyan inner glow along top edge
+              Positioned(
+                top: 0,
+                left: 0,
+                right: 0,
+                child: Container(
+                  height: 1,
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.centerLeft,
+                      end: Alignment.centerRight,
+                      colors: [
+                        AppColors.cyanAccent.withValues(alpha: 0.0),
+                        AppColors.cyanAccent.withValues(alpha: 0.25),
+                        AppColors.cyanAccent.withValues(alpha: 0.0),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  // ── Microphone emblem with concentric pulse rings ──
+                  _buildMicrophoneSection(isRecording, controller, cs),
+                  const SizedBox(height: 28),
+                  // ── Timer display ──
+                  _buildTimerDisplay(state, textTheme, cs),
+                  const SizedBox(height: 28),
+                  // ── Action buttons ──
+                  _buildActionButtons(
+                    state,
+                    controller,
+                    textTheme,
+                    isRecording,
+                    hasRecording,
+                    isDisabled,
+                    cs,
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+        // ── Instruction text below panel ──
+        const SizedBox(height: 20),
+        Text(
+          'Or tap the microphone above',
+          style: textTheme.bodyMedium?.copyWith(
+            color: cs.onSurfaceVariant.withValues(alpha: 0.7),
+          ),
         ),
       ],
     );
   }
 
-  // Unified stop handler – called by both microphone tap and Stop button.
-  Future<void> _handleStopRecording(VoiceRecordingController controller) async {
-    if (!mounted || _isBusy) return;
-    _isBusy = true;
+  // ─────────────────────────────────────────────────────────────
+  // MICROPHONE SECTION — Premium gradient circle with gold ring
+  // ─────────────────────────────────────────────────────────────
 
-    try {
-      final path = await controller.stopRecording();
-      if (!mounted) return;
-      if (path != null && path.isNotEmpty) {
-        context.go('/practice/review', extra: path);
-      }
-    } finally {
-      if (mounted) _isBusy = false;
-    }
-  }
-
-  Future<void> _handleMicrophoneTap(
-    VoiceRecordingController controller,
-    bool isRecording,
-  ) async {
-    if (!mounted || _isBusy) return;
-
-    if (isRecording) {
-      await _handleStopRecording(controller);
-    } else {
-      await _handleStartRecording(controller);
-    }
-  }
-
-  Widget _buildMicrophoneButton(
+  Widget _buildMicrophoneSection(
     bool isRecording,
     VoiceRecordingController controller,
-    TextTheme textTheme,
     ColorScheme cs,
   ) {
-    return Stack(
-      alignment: Alignment.center,
-      children: [
-        // Pulse ring when recording
-        if (isRecording)
-          AnimatedBuilder(
-            animation: _pulseController,
-            builder: (context, child) {
-              return Transform.scale(
-                scale: _pulseScale.value,
-                child: Container(
-                  width: 190,
-                  height: 190,
+    const micDiameter = 180.0;
+    const goldRingWidth = 2.5;
+
+    return Semantics(
+      button: true,
+      label: isRecording ? 'Stop recording' : 'Start recording',
+      child: MouseRegion(
+        cursor: SystemMouseCursors.click,
+        child: GestureDetector(
+          onTap: _isBusy
+              ? null
+              : () => _handleMicrophoneTap(controller, isRecording),
+          child: SizedBox(
+            width: micDiameter,
+            height: micDiameter,
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                // Concentric cyan pulse rings
+                ..._buildConcentricRings(isRecording),
+
+                // Microphone circle with gradient + gold ring
+                Container(
+                  width: micDiameter,
+                  height: micDiameter,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: Colors.transparent,
-                    border: Border.all(
-                      color: cs.error.withValues(alpha: 0.5),
-                      width: 3,
+                    gradient: const LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: [
+                        Color(0xFF00A6BA),
+                        Color(0xFF007F9C),
+                        Color(0xFF014065),
+                      ],
+                      stops: [0.0, 0.55, 1.0],
                     ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: AppColors.cyanAccent.withValues(alpha: 0.15),
+                        blurRadius: 14,
+                        spreadRadius: 1,
+                      ),
+                    ],
+                  ),
+                  child: Stack(
+                    children: [
+                      // Metallic-gold outer ring
+                      Positioned.fill(
+                        child: CustomPaint(
+                          painter: _GoldRingPainter(
+                            strokeWidth: goldRingWidth,
+                            radius: micDiameter / 2 - goldRingWidth / 2,
+                            center: Offset(micDiameter / 2, micDiameter / 2),
+                          ),
+                        ),
+                      ),
+                      // White microphone or stop icon
+                      Center(
+                        child: AnimatedSwitcher(
+                          duration: const Duration(milliseconds: 300),
+                          child: isRecording
+                              ? Icon(
+                                  key: const ValueKey('recording'),
+                                  Icons.stop_rounded,
+                                  size: 56,
+                                  color: Colors.white,
+                                )
+                              : Icon(
+                                  key: const ValueKey('idle'),
+                                  Icons.mic_rounded,
+                                  size: 56,
+                                  color: Colors.white,
+                                ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-              );
-            },
-          ),
-        // Microphone circle
-        Semantics(
-          button: true,
-          label: isRecording ? 'Stop recording' : 'Start recording',
-          child: MouseRegion(
-            cursor: SystemMouseCursors.click,
-            child: Material(
-              color: cs.surfaceContainerHighest,
-              shape: CircleBorder(
-                side: BorderSide(color: cs.outlineVariant, width: 1.5),
-              ),
-              clipBehavior: Clip.antiAlias,
-              child: InkWell(
-                customBorder: const CircleBorder(),
-                mouseCursor: SystemMouseCursors.click,
-                hoverColor: cs.onSurface.withValues(alpha: 0.08),
-                highlightColor: cs.onSurface.withValues(alpha: 0.14),
-                splashColor: cs.onSurface.withValues(alpha: 0.20),
-                onTap: _isBusy
-                    ? null
-                    : () => _handleMicrophoneTap(controller, isRecording),
-                child: AnimatedContainer(
-                  duration: const Duration(milliseconds: 300),
-                  width: 160,
-                  height: 160,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    border: Border.all(color: cs.outlineVariant, width: 1.5),
-                  ),
-                  child: Center(
-                    child: AnimatedSwitcher(
-                      duration: const Duration(milliseconds: 300),
-                      child: isRecording
-                          ? Icon(
-                              key: const ValueKey('recording'),
-                              Icons.stop_rounded,
-                              size: 56,
-                              color: cs.error,
-                            )
-                          : Icon(
-                              key: const ValueKey('idle'),
-                              Icons.mic_rounded,
-                              size: 56,
-                              color: cs.primary,
-                            ),
-                    ),
-                  ),
-                ),
-              ),
+              ],
             ),
           ),
         ),
-      ],
+      ),
     );
   }
 
-  Future<void> _handleStartRecording(
-    VoiceRecordingController controller,
-  ) async {
-    if (!mounted || _isBusy) return;
-    if (ref.read(voiceRecordingControllerProvider).isRecording) return;
+  /// Build 3 concentric cyan pulse rings around the microphone.
+  List<Widget> _buildConcentricRings(bool isRecording) {
+    return List.generate(3, (i) {
+      final baseRadius = 96.0 + i * 24.0;
+      final alpha = isRecording
+          ? (0.25 - i * 0.07).clamp(0.06, 0.25)
+          : (0.10 - i * 0.025).clamp(0.03, 0.10);
 
-    _isBusy = true;
+      return AnimatedBuilder(
+        animation: _pulseController,
+        builder: (context, child) {
+          final pulseOffset = isRecording
+              ? (math.sin(_pulseController.value * math.pi * 2 + i * 2.0) *
+                        0.03 *
+                        baseRadius)
+                    .clamp(0.0, 6.0)
+              : 0.0;
 
-    try {
-      final hasPermission = await controller.hasPermission();
-      if (!mounted) return;
-
-      if (!hasPermission) {
-        await controller.requestPermission();
-        if (!mounted) return;
-
-        final currentState = ref.read(voiceRecordingControllerProvider);
-        if (currentState is PermissionDeniedState) return;
-      }
-
-      if (!mounted) return;
-      await controller.startRecording();
-    } finally {
-      if (mounted) _isBusy = false;
-    }
+          return Container(
+            width: (baseRadius + pulseOffset) * 2,
+            height: (baseRadius + pulseOffset) * 2,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              border: Border.all(
+                color: AppColors.cyanAccent.withValues(alpha: alpha),
+                width: 1.2,
+              ),
+            ),
+          );
+        },
+      );
+    });
   }
+
+  // ─────────────────────────────────────────────────────────────
+  // TIMER DISPLAY
+  // ─────────────────────────────────────────────────────────────
 
   Widget _buildTimerDisplay(
     VoiceRecordingState state,
@@ -461,27 +519,28 @@ class _VoicePracticeScreenState extends ConsumerState<VoicePracticeScreen>
     ColorScheme cs,
   ) {
     final duration = state.duration ?? Duration.zero;
+    final statusColor = state.isRecording
+        ? AppColors.cyanAccent
+        : (state.hasRecording ? cs.onSurface : cs.onSurfaceVariant);
 
     return Column(
       children: [
         Text(
           _formatDuration(duration),
           style: textTheme.displayMedium?.copyWith(
-            fontSize: 56,
+            fontSize: 52,
             fontWeight: FontWeight.w700,
-            color: cs.onSurface,
+            color: Colors.white,
             fontFeatures: const [FontFeature.tabularFigures()],
           ),
         ),
-        const SizedBox(height: 8),
+        const SizedBox(height: 6),
         Text(
           state.isRecording
               ? 'Recording...'
               : (state.hasRecording ? 'Recording saved' : 'Ready to record'),
           style: textTheme.bodyLarge?.copyWith(
-            color: state.isRecording
-                ? cs.secondary
-                : (state.hasRecording ? cs.tertiary : cs.onSurfaceVariant),
+            color: statusColor,
             fontWeight: state.isRecording || state.hasRecording
                 ? FontWeight.w600
                 : FontWeight.normal,
@@ -490,6 +549,10 @@ class _VoicePracticeScreenState extends ConsumerState<VoicePracticeScreen>
       ],
     );
   }
+
+  // ─────────────────────────────────────────────────────────────
+  // ACTION BUTTONS
+  // ─────────────────────────────────────────────────────────────
 
   Widget _buildActionButtons(
     VoiceRecordingState state,
@@ -523,15 +586,7 @@ class _VoicePracticeScreenState extends ConsumerState<VoicePracticeScreen>
             iconPosition: IconPosition.start,
           );
 
-          final stopButton = AuthElevatedButton(
-            label: 'Stop Recording',
-            onPressed: isDisabled
-                ? null
-                : () => _handleStopRecording(controller),
-            isLoading: false,
-            icon: Icons.stop_rounded,
-            iconPosition: IconPosition.start,
-          );
+          final stopButton = _buildPremiumStopButton(isDisabled, controller);
 
           if (useRowLayout) {
             return Row(
@@ -627,25 +682,237 @@ class _VoicePracticeScreenState extends ConsumerState<VoicePracticeScreen>
       );
     }
 
-    return Column(
-      children: [
-        AuthElevatedButton(
-          label: 'Start Recording',
-          onPressed: isDisabled
-              ? null
-              : () => _handleStartRecording(controller),
-          isLoading: false,
-          icon: Icons.fiber_manual_record_rounded,
-          iconPosition: IconPosition.start,
-        ),
-        const SizedBox(height: 16),
-        Text(
-          'Or tap the microphone above',
-          style: textTheme.bodyMedium?.copyWith(
-            color: cs.onSurfaceVariant.withValues(alpha: 0.7),
+    // ── Premium Start Recording button ──
+    return _buildPremiumStartButton(isDisabled, controller);
+  }
+
+  /// Premium Start Recording button with cyan-to-deep-blue gradient
+  /// and metallic-gold border.
+  Widget _buildPremiumStartButton(
+    bool isDisabled,
+    VoiceRecordingController controller,
+  ) {
+    return SizedBox(
+      width: double.infinity,
+      height: 52,
+      child: Material(
+        color: Colors.transparent,
+        borderRadius: BorderRadius.circular(26),
+        child: InkWell(
+          onTap: isDisabled ? null : () => _handleStartRecording(controller),
+          borderRadius: BorderRadius.circular(26),
+          splashFactory: InkRipple.splashFactory,
+          hoverColor: Colors.white.withValues(alpha: 0.08),
+          focusColor: Colors.white.withValues(alpha: 0.12),
+          child: Container(
+            decoration: BoxDecoration(
+              gradient: isDisabled
+                  ? LinearGradient(
+                      colors: [
+                        AppColors.recBtnStart.withValues(alpha: 0.4),
+                        AppColors.recBtnEnd.withValues(alpha: 0.4),
+                      ],
+                    )
+                  : AppColors.recordingButtonGradient,
+              borderRadius: BorderRadius.circular(26),
+              border: Border.all(
+                color: AppColors.goldPrimary.withValues(
+                  alpha: isDisabled ? 0.3 : 0.85,
+                ),
+                width: 1.5,
+              ),
+              boxShadow: isDisabled
+                  ? null
+                  : [
+                      BoxShadow(
+                        color: AppColors.deepBlueAccent.withValues(alpha: 0.35),
+                        blurRadius: 8,
+                        offset: const Offset(0, 3),
+                      ),
+                    ],
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.fiber_manual_record_rounded,
+                  size: 20,
+                  color: Colors.white.withValues(alpha: isDisabled ? 0.4 : 1.0),
+                ),
+                const SizedBox(width: 10),
+                Text(
+                  'Start Recording',
+                  style: TextStyle(
+                    fontSize: 17,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.white.withValues(
+                      alpha: isDisabled ? 0.4 : 1.0,
+                    ),
+                    letterSpacing: 0.3,
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
-      ],
+      ),
     );
+  }
+
+  /// Premium Stop button with the same styling.
+  Widget _buildPremiumStopButton(
+    bool isDisabled,
+    VoiceRecordingController controller,
+  ) {
+    return SizedBox(
+      height: 52,
+      child: Material(
+        color: Colors.transparent,
+        borderRadius: BorderRadius.circular(26),
+        child: InkWell(
+          onTap: isDisabled ? null : () => _handleStopRecording(controller),
+          borderRadius: BorderRadius.circular(26),
+          splashFactory: InkRipple.splashFactory,
+          child: Container(
+            decoration: BoxDecoration(
+              gradient: AppColors.recordingButtonGradient,
+              borderRadius: BorderRadius.circular(26),
+              border: Border.all(
+                color: AppColors.goldPrimary.withValues(alpha: 0.85),
+                width: 1.5,
+              ),
+              boxShadow: [
+                BoxShadow(
+                  color: AppColors.deepBlueAccent.withValues(alpha: 0.35),
+                  blurRadius: 8,
+                  offset: const Offset(0, 3),
+                ),
+              ],
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(Icons.stop_rounded, size: 20, color: Colors.white),
+                const SizedBox(width: 10),
+                const Text(
+                  'Stop Recording',
+                  style: TextStyle(
+                    fontSize: 17,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.white,
+                    letterSpacing: 0.3,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  // ─────────────────────────────────────────────────────────────
+  // HANDLERS (preserving all original logic)
+  // ─────────────────────────────────────────────────────────────
+
+  Future<void> _handleStopRecording(VoiceRecordingController controller) async {
+    if (!mounted || _isBusy) return;
+    _isBusy = true;
+
+    try {
+      final path = await controller.stopRecording();
+      if (!mounted) return;
+      if (path != null && path.isNotEmpty) {
+        context.go('/practice/review', extra: path);
+      }
+    } finally {
+      if (mounted) _isBusy = false;
+    }
+  }
+
+  Future<void> _handleMicrophoneTap(
+    VoiceRecordingController controller,
+    bool isRecording,
+  ) async {
+    if (!mounted || _isBusy) return;
+
+    if (isRecording) {
+      await _handleStopRecording(controller);
+    } else {
+      await _handleStartRecording(controller);
+    }
+  }
+
+  Future<void> _handleStartRecording(
+    VoiceRecordingController controller,
+  ) async {
+    if (!mounted || _isBusy) return;
+    if (ref.read(voiceRecordingControllerProvider).isRecording) return;
+
+    _isBusy = true;
+
+    try {
+      final hasPermission = await controller.hasPermission();
+      if (!mounted) return;
+
+      if (!hasPermission) {
+        await controller.requestPermission();
+        if (!mounted) return;
+
+        final currentState = ref.read(voiceRecordingControllerProvider);
+        if (currentState is PermissionDeniedState) return;
+      }
+
+      if (!mounted) return;
+      await controller.startRecording();
+    } finally {
+      if (mounted) _isBusy = false;
+    }
+  }
+}
+
+// ─────────────────────────────────────────────────────────────
+// GOLD RING PAINTER — Metallic-gold sweep gradient ring
+// ─────────────────────────────────────────────────────────────
+
+class _GoldRingPainter extends CustomPainter {
+  const _GoldRingPainter({
+    required this.strokeWidth,
+    required this.radius,
+    required this.center,
+  });
+
+  final double strokeWidth;
+  final double radius;
+  final Offset center;
+
+  static const SweepGradient _goldSweepGradient = SweepGradient(
+    colors: [
+      Color(0xFFFFF2A6),
+      Color(0xFFE3B94F),
+      Color(0xFFA86D16),
+      Color(0xFFF4D675),
+      Color(0xFFFFF2A6),
+    ],
+    stops: [0.0, 0.25, 0.50, 0.75, 1.0],
+  );
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = strokeWidth
+      ..shader = _goldSweepGradient.createShader(
+        Rect.fromCircle(center: center, radius: radius),
+      );
+
+    canvas.drawCircle(center, radius, paint);
+  }
+
+  @override
+  bool shouldRepaint(covariant _GoldRingPainter oldDelegate) {
+    return oldDelegate.strokeWidth != strokeWidth ||
+        oldDelegate.radius != radius ||
+        oldDelegate.center != center;
   }
 }

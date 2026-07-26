@@ -44,6 +44,19 @@ class AuthService {
     await user.reload();
   }
 
+  Future<void> updateDisplayName(String displayName) async {
+    final user = _firebaseAuth.currentUser;
+    if (user == null) throw StateError('No authenticated user.');
+    await user.updateDisplayName(displayName);
+    await user.reload();
+  }
+
+  Future<void> deleteUser() async {
+    final user = _firebaseAuth.currentUser;
+    if (user == null) throw StateError('No authenticated user.');
+    await user.delete();
+  }
+
   Future<void> signOut() async {
     await _firebaseAuth.signOut();
   }

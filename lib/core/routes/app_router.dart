@@ -1,26 +1,41 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../features/auth/presentation/auth_controller.dart';
 import '../../features/auth/presentation/auth_router.dart';
+import '../../features/notifications/presentation/screens/notifications_screen.dart';
 import '../../features/onboarding/presentation/onboarding_completion_provider.dart';
 import '../../features/onboarding/presentation/screens/onboarding_screen.dart';
 import '../../features/practice/presentation/practice_router.dart';
+import '../../features/settings/presentation/screens/account_settings_screen.dart';
+import '../../features/settings/presentation/screens/preferences_screen.dart';
 import '../../screens/home_screen.dart';
 import '../../screens/settings_screen.dart';
 import '../../screens/welcome_screen.dart';
 import '../../features/splash/presentation/screens/splash_screen.dart';
 
-/// Reads the latest [authControllerProvider] and [onboardingCompletionProvider]
-/// state at the moment the redirect closure is invoked.
-///
-/// Because the GoRouter provider itself is rebuilt whenever either
-/// watched provider emits a new state, the `ref` passed into this
-/// function always points to the current [Ref] with fresh data.
+class _GoRouterRefreshNotifier extends ChangeNotifier {
+  _GoRouterRefreshNotifier(Ref ref) {
+    ref.listen<AuthState>(authControllerProvider, (_, __) => notifyListeners());
+    ref.listen<OnboardingCompletionState>(
+      onboardingCompletionProvider,
+      (_, __) => notifyListeners(),
+    );
+  }
+}
+
+final _goRouterRefreshNotifierProvider = Provider<_GoRouterRefreshNotifier>((
+  ref,
+) {
+  return _GoRouterRefreshNotifier(ref);
+});
+
 GoRouter _buildRouter(Ref ref) {
   return GoRouter(
     initialLocation: '/',
     debugLogDiagnostics: false,
+    refreshListenable: ref.watch(_goRouterRefreshNotifierProvider),
     routes: [
       GoRoute(
         path: '/',
@@ -47,26 +62,38 @@ GoRouter _buildRouter(Ref ref) {
         name: 'settings',
         builder: (context, state) => const SettingsScreen(),
       ),
+      GoRoute(
+        path: '/settings/account',
+        name: 'accountSettings',
+        builder: (context, state) => const AccountSettingsScreen(),
+      ),
+      GoRoute(
+        path: '/settings/preferences',
+        name: 'preferences',
+        builder: (context, state) => const PreferencesScreen(),
+      ),
+      GoRoute(
+        path: '/notifications',
+        name: 'notifications',
+        builder: (context, state) => const NotificationsScreen(),
+      ),
       ...PracticeRoutes().routes,
       ...const AuthRoutes().routes,
     ],
     redirect: (context, state) {
       final location = state.matchedLocation;
 
-      // Always allow the Splash route to build.
-      // Splash itself navigates after auth restoration + min duration.
       if (location == '/') return null;
 
-      // Read the latest state every time redirect is called.
       final authState = ref.read(authControllerProvider);
       final user = authState.user;
 
-      // Don't redirect while auth restoration is in progress.
-      if (authState.isLoading) return null;
+      if (authState.isLoading) {
+        return null;
+      }
 
       final isAuthenticated = user != null;
 
-      // Routes that a signed-out user may access freely.
       const publicRoutes = <String>[
         '/welcome',
         '/login',
@@ -75,48 +102,31 @@ GoRouter _buildRouter(Ref ref) {
       ];
       final isPublicRoute = publicRoutes.contains(location);
 
-      // ── Signed-out users ──────────────────────────────────────────────
       if (!isAuthenticated) {
-        // Allow access to public authentication routes.
         if (isPublicRoute) return null;
-        // Everything else → welcome page.
-        return '/welcome';
+        return '/login';
       }
 
-      // ── Signed-in users ───────────────────────────────────────────────
       final isVerified = user.emailVerified;
 
-      // Unverified email → verification screen.
       if (!isVerified) {
         if (location != '/verify-email') return '/verify-email';
         return null;
       }
 
-      // ── Verified users — check onboarding completion ─────────────────
       final onboardingState = ref.read(onboardingCompletionProvider);
 
-      // While onboarding status is loading, protect post-auth routes from
-      // showing Dashboard content before we know the completion status.
-      // Never redirect splash, public auth routes, verify-email, or
-      // onboarding itself during this loading window.
       if (onboardingState.isLoading) {
-        const protectedDuringLoading = <String>['/home'];
-        if (protectedDuringLoading.contains(location)) {
-          return '/onboarding';
-        }
         return null;
       }
 
       final onboardingCompleted = onboardingState.isCompleted;
 
       if (!onboardingCompleted) {
-        // Incomplete onboarding → onboarding flow.
         if (location != '/onboarding') return '/onboarding';
         return null;
       }
 
-      // ── Verified & onboarding completed ──────────────────────────────
-      // Redirect away from auth-related pages and onboarding to home.
       if (location == '/verify-email' ||
           location == '/onboarding' ||
           isPublicRoute) {
@@ -129,14 +139,5 @@ GoRouter _buildRouter(Ref ref) {
 }
 
 final appRouterProvider = Provider<GoRouter>((ref) {
-  // Watch both providers so the router rebuilds (and redirect re-evaluates)
-  // when either auth state or onboarding-completion state changes.
-  ref.watch(authControllerProvider);
-  ref.watch(onboardingCompletionProvider);
-
-  final router = _buildRouter(ref);
-
-  ref.onDispose(router.dispose);
-
-  return router;
+  return _buildRouter(ref);
 });
