@@ -1,0 +1,1778 @@
+{
+  "@@locale": "en",
+  "@@last_modified": "2025-01-01T00:00:00.000000",
+
+  "languages": "Languages",
+  "@languages": {
+    "description": "Title for the Languages screen"
+  },
+  "chooseAppLanguage": "Choose the language used throughout Tuno",
+  "@chooseAppLanguage": {
+    "description": "Subtitle on the Languages screen"
+  },
+  "systemDefault": "System Default",
+  "@systemDefault": {
+    "description": "Option label for using the system default language"
+  },
+  "useDeviceLanguage": "Use your device language",
+  "@useDeviceLanguage": {
+    "description": "Supporting text for the system default option"
+  },
+  "english": "English",
+  "@english": {
+    "description": "Option label for English language"
+  },
+  "tamil": "தமிழ்",
+  "@tamil": {
+    "description": "Option label for Tamil language"
+  },
+  "hindi": "हिन्दी",
+  "@hindi": {
+    "description": "Option label for Hindi language"
+  },
+  "back": "Back",
+  "@back": {
+    "description": "Accessibility label for the back button"
+  },
+  "languageChanged": "Language changed",
+  "@languageChanged": {
+    "description": "Snackbar message shown after changing the language"
+  },
+  "settings": "Settings",
+  "@settings": {
+    "description": "Title for the Settings screen"
+  },
+
+  "home": "Home",
+  "@home": {
+    "description": "Bottom navigation label for Home"
+  },
+  "practice": "Practice",
+  "@practice": {
+    "description": "Bottom navigation label for Practice"
+  },
+  "record": "Record",
+  "@record": {
+    "description": "Bottom navigation label for Record"
+  },
+  "progress": "Progress",
+  "@progress": {
+    "description": "Bottom navigation label for Progress"
+  },
+  "profile": "Profile",
+  "@profile": {
+    "description": "Bottom navigation label for Profile"
+  },
+
+  "account": "Account",
+  "@account": {
+    "description": "Settings row label for Account"
+  },
+  "practicePreferences": "Practice Preferences",
+  "@practicePreferences": {
+    "description": "Settings row label for Practice Preferences"
+  },
+  "audioAndRecording": "Audio & Recording",
+  "@audioAndRecording": {
+    "description": "Settings row label for Audio and Recording"
+  },
+  "notificationPreferences": "Notification Preferences",
+  "@notificationPreferences": {
+    "description": "Settings row and screen title for Notification Preferences"
+  },
+  "privacyAndSecurity": "Privacy & Security",
+  "@privacyAndSecurity": {
+    "description": "Settings row and screen title for Privacy and Security"
+  },
+  "helpAndSupport": "Help & Support",
+  "@helpAndSupport": {
+    "description": "Settings row label for Help and Support"
+  },
+  "aboutTuno": "About Tuno",
+  "@aboutTuno": {
+    "description": "Settings row label for About Tuno"
+  },
+  "featureComingSoon": "{label} will be available soon.",
+  "@featureComingSoon": {
+    "description": "Snackbar for features not yet implemented",
+    "placeholders": {
+      "label": {
+        "type": "String"
+      }
+    }
+  },
+  "appearance": "Appearance",
+  "@appearance": {
+    "description": "Title for the Appearance bottom sheet"
+  },
+  "light": "Light",
+  "@light": {
+    "description": "Theme option label for Light mode"
+  },
+  "dark": "Dark",
+  "@dark": {
+    "description": "Theme option label for Dark mode"
+  },
+  "logout": "Logout",
+  "@logout": {
+    "description": "Button text for Logout"
+  },
+  "logoutConfirmTitle": "Logout",
+  "@logoutConfirmTitle": {
+    "description": "Title for the logout confirmation dialog"
+  },
+  "logoutConfirmContent": "Are you sure you want to log out?",
+  "@logoutConfirmContent": {
+    "description": "Content for the logout confirmation dialog"
+  },
+  "cancel": "Cancel",
+  "@cancel": {
+    "description": "Button text for Cancel"
+  },
+
+  "preferences": "Preferences",
+  "@preferences": {
+    "description": "Title for the Preferences screen"
+  },
+  "backToSettings": "Back to Settings",
+  "@backToSettings": {
+    "description": "Semantic label for back button to settings"
+  },
+  "coachingFeedback": "Coaching Feedback",
+  "@coachingFeedback": {
+    "description": "Section title for Coaching Feedback"
+  },
+  "recordingPreferences": "Recording Preferences",
+  "@recordingPreferences": {
+    "description": "Section title for Recording Preferences"
+  },
+  "generalBehaviour": "General Behaviour",
+  "@generalBehaviour": {
+    "description": "Section title for General Behaviour"
+  },
+  "countInBeforeRecording": "Count-in before recording",
+  "@countInBeforeRecording": {
+    "description": "Toggle label for count-in before recording"
+  },
+  "autoSaveCompletedRecordings": "Automatically save completed recordings",
+  "@autoSaveCompletedRecordings": {
+    "description": "Toggle label for auto-save completed recordings"
+  },
+  "showHeadphoneRecommendation": "Show headphone recommendation",
+  "@showHeadphoneRecommendation": {
+    "description": "Toggle label for headphone recommendation"
+  },
+  "confirmBeforeDeleting": "Confirm before deleting a recording",
+  "@confirmBeforeDeleting": {
+    "description": "Toggle label for confirm before deleting"
+  },
+  "reduceAnimations": "Reduce animations",
+  "@reduceAnimations": {
+    "description": "Toggle label for reduce animations"
+  },
+  "countInEnabled": "Count-in enabled",
+  "@countInEnabled": {
+    "description": "Snackbar message when count-in is enabled"
+  },
+  "countInDisabled": "Count-in disabled",
+  "@countInDisabled": {
+    "description": "Snackbar message when count-in is disabled"
+  },
+  "autoSaveEnabled": "Auto-save enabled",
+  "@autoSaveEnabled": {
+    "description": "Snackbar message when auto-save is enabled"
+  },
+  "autoSaveDisabled": "Auto-save disabled",
+  "@autoSaveDisabled": {
+    "description": "Snackbar message when auto-save is disabled"
+  },
+  "headphoneReminderEnabled": "Headphone reminder enabled",
+  "@headphoneReminderEnabled": {
+    "description": "Snackbar message when headphone reminder is enabled"
+  },
+  "headphoneReminderDisabled": "Headphone reminder disabled",
+  "@headphoneReminderDisabled": {
+    "description": "Snackbar message when headphone reminder is disabled"
+  },
+  "deleteConfirmationEnabled": "Delete confirmation enabled",
+  "@deleteConfirmationEnabled": {
+    "description": "Snackbar message when delete confirmation is enabled"
+  },
+  "deleteConfirmationDisabled": "Delete confirmation disabled",
+  "@deleteConfirmationDisabled": {
+    "description": "Snackbar message when delete confirmation is disabled"
+  },
+  "reducedAnimations": "Reduced animations",
+  "@reducedAnimations": {
+    "description": "Snackbar message when reduce animations is enabled"
+  },
+  "animationsRestored": "Animations restored",
+  "@animationsRestored": {
+    "description": "Snackbar message when reduce animations is disabled"
+  },
+  "defaultPracticeMode": "Default Practice Mode",
+  "@defaultPracticeMode": {
+    "description": "Label for the default practice mode selector"
+  },
+  "simple": "Simple",
+  "@simple": {
+    "description": "Feedback detail option: simple"
+  },
+  "detailed": "Detailed",
+  "@detailed": {
+    "description": "Feedback detail option: detailed"
+  },
+  "defaultModeLabel": "Default mode: {mode}",
+  "@defaultModeLabel": {
+    "description": "Snackbar when default practice mode changes",
+    "placeholders": {
+      "mode": {
+        "type": "String"
+      }
+    }
+  },
+
+  "audioAndVideo": "Audio & Video",
+  "@audioAndVideo": {
+    "description": "Title for the Audio and Video settings screen"
+  },
+  "defaultRecordingType": "Default Recording Type",
+  "@defaultRecordingType": {
+    "description": "Section title for default recording type"
+  },
+  "audioQuality": "Audio Quality",
+  "@audioQuality": {
+    "description": "Section title for audio quality"
+  },
+  "recordingBehaviour": "Recording Behaviour",
+  "@recordingBehaviour": {
+    "description": "Section title for recording behaviour"
+  },
+  "microphoneAccess": "Microphone Access",
+  "@microphoneAccess": {
+    "description": "Section title for microphone access"
+  },
+  "noiseReduction": "Noise Reduction",
+  "@noiseReduction": {
+    "description": "Toggle label for noise reduction"
+  },
+  "countdownBeforeRecording": "Countdown before recording",
+  "@countdownBeforeRecording": {
+    "description": "Toggle label for countdown before recording"
+  },
+  "autoPlayAfterCapture": "Auto-play recording after capture",
+  "@autoPlayAfterCapture": {
+    "description": "Toggle label for auto-play after capture"
+  },
+  "showHeadphonesReminder": "Show headphones reminder",
+  "@showHeadphonesReminder": {
+    "description": "Toggle label for headphones reminder"
+  },
+  "noiseReductionEnabled": "Noise reduction enabled",
+  "@noiseReductionEnabled": {
+    "description": "Snackbar message when noise reduction is enabled"
+  },
+  "noiseReductionDisabled": "Noise reduction disabled",
+  "@noiseReductionDisabled": {
+    "description": "Snackbar message when noise reduction is disabled"
+  },
+  "countdownEnabled": "Countdown enabled",
+  "@countdownEnabled": {
+    "description": "Snackbar message when countdown is enabled"
+  },
+  "countdownDisabled": "Countdown disabled",
+  "@countdownDisabled": {
+    "description": "Snackbar message when countdown is disabled"
+  },
+  "autoPlayEnabled": "Auto-play enabled",
+  "@autoPlayEnabled": {
+    "description": "Snackbar message when auto-play is enabled"
+  },
+  "autoPlayDisabled": "Auto-play disabled",
+  "@autoPlayDisabled": {
+    "description": "Snackbar message when auto-play is disabled"
+  },
+  "headphonesReminderEnabled": "Headphones reminder enabled",
+  "@headphonesReminderEnabled": {
+    "description": "Snackbar message for headphones reminder enabled"
+  },
+  "headphonesReminderDisabled": "Headphones reminder disabled",
+  "@headphonesReminderDisabled": {
+    "description": "Snackbar message for headphones reminder disabled"
+  },
+  "granted": "Granted",
+  "@granted": {
+    "description": "Label for granted permission status"
+  },
+  "notGrantedTapToAllow": "Not granted — tap to allow",
+  "@notGrantedTapToAllow": {
+    "description": "Label for not granted permission status"
+  },
+  "couldNotCheckPermission": "Could not check microphone permission",
+  "@couldNotCheckPermission": {
+    "description": "Error message when unable to check permission"
+  },
+  "microphoneGranted": "Microphone access granted",
+  "@microphoneGranted": {
+    "description": "Snackbar message for microphone granted"
+  },
+  "microphoneDenied": "Microphone access denied",
+  "@microphoneDenied": {
+    "description": "Snackbar message for microphone denied"
+  },
+  "couldNotRequestPermission": "Could not request microphone permission",
+  "@couldNotRequestPermission": {
+    "description": "Error message when unable to request permission"
+  },
+  "microphonePermissionDialogTitle": "Microphone Permission",
+  "@microphonePermissionDialogTitle": {
+    "description": "Title for microphone permission dialog"
+  },
+  "microphonePermissionDialogContent": "Microphone permission has been permanently denied. Please enable it in your system settings.",
+  "@microphonePermissionDialogContent": {
+    "description": "Content for microphone permission permanently denied dialog"
+  },
+  "openSettings": "Open Settings",
+  "@openSettings": {
+    "description": "Button text to open system settings"
+  },
+  "audio": "Audio",
+  "@audio": {
+    "description": "Recording type option: Audio"
+  },
+  "video": "Video",
+  "@video": {
+    "description": "Recording type option: Video"
+  },
+  "standard": "Standard",
+  "@standard": {
+    "description": "Audio quality option: Standard"
+  },
+  "high": "High",
+  "@high": {
+    "description": "Audio quality option: High"
+  },
+  "defaultRecordingTypeLabel": "Default recording type: {type}",
+  "@defaultRecordingTypeLabel": {
+    "description": "Snackbar when recording type changes",
+    "placeholders": {
+      "type": {
+        "type": "String"
+      }
+    }
+  },
+  "audioQualityLabel": "Audio quality: {quality}",
+  "@audioQualityLabel": {
+    "description": "Snackbar when audio quality changes",
+    "placeholders": {
+      "quality": {
+        "type": "String"
+      }
+    }
+  },
+
+  "personalInformation": "Personal Information",
+  "@personalInformation": {
+    "description": "Label for personal information settings"
+  },
+  "emailAddress": "Email Address",
+  "@emailAddress": {
+    "description": "Label for email address"
+  },
+  "changePassword": "Change Password",
+  "@changePassword": {
+    "description": "Label for change password action"
+  },
+  "emailVerification": "Email Verification",
+  "@emailVerification": {
+    "description": "Label for email verification"
+  },
+  "signOut": "Sign Out",
+  "@signOut": {
+    "description": "Label for sign out action"
+  },
+  "deleteAccount": "Delete Account",
+  "@deleteAccount": {
+    "description": "Label for delete account action"
+  },
+  "tunoSinger": "Tuno Singer",
+  "@tunoSinger": {
+    "description": "Default display name when user has no name set"
+  },
+  "noEmail": "No email",
+  "@noEmail": {
+    "description": "Text shown when user has no email"
+  },
+  "emailVerified": "Email verified",
+  "@emailVerified": {
+    "description": "Label for verified email status"
+  },
+  "emailNotVerified": "Email not verified",
+  "@emailNotVerified": {
+    "description": "Label for not verified email status"
+  },
+  "verified": "Verified",
+  "@verified": {
+    "description": "Short label for verified status"
+  },
+  "notVerified": "Not verified",
+  "@notVerified": {
+    "description": "Short label for not verified status"
+  },
+  "signInWithProvider": "Sign in with {providers}",
+  "@signInWithProvider": {
+    "description": "Label showing sign-in provider(s)",
+    "placeholders": {
+      "providers": {
+        "type": "String"
+      }
+    }
+  },
+  "password": "Password",
+  "@password": {
+    "description": "Provider name for password-based authentication"
+  },
+  "google": "Google",
+  "@google": {
+    "description": "Provider name for Google authentication"
+  },
+  "apple": "Apple",
+  "@apple": {
+    "description": "Provider name for Apple authentication"
+  },
+  "facebook": "Facebook",
+  "@facebook": {
+    "description": "Provider name for Facebook authentication"
+  },
+  "displayName": "Display name",
+  "@displayName": {
+    "description": "Label for display name text field"
+  },
+  "enterYourName": "Enter your name",
+  "@enterYourName": {
+    "description": "Hint text for display name field"
+  },
+  "nameCannotBeEmpty": "Name cannot be empty",
+  "@nameCannotBeEmpty": {
+    "description": "Validation message for empty name"
+  },
+  "save": "Save",
+  "@save": {
+    "description": "Button text for Save"
+  },
+  "displayNameUpdated": "Display name updated.",
+  "@displayNameUpdated": {
+    "description": "Snackbar message when display name is updated"
+  },
+  "emailAddressDialogTitle": "Email Address",
+  "@emailAddressDialogTitle": {
+    "description": "Title for the email address dialog"
+  },
+  "yourEmailIs": "Your authenticated email address is:",
+  "@yourEmailIs": {
+    "description": "Label before showing the user's email"
+  },
+  "emailChangeNotSupported": "Changing your email is not currently supported in this version of Tuno. A verified-before-update flow will be added in a future release.",
+  "@emailChangeNotSupported": {
+    "description": "Message about email change not being supported"
+  },
+  "close": "Close",
+  "@close": {
+    "description": "Button text for Close"
+  },
+  "noEmailOnRecord": "No email address on record.",
+  "@noEmailOnRecord": {
+    "description": "Snackbar message when no email is on record"
+  },
+  "passwordResetSent": "Password reset email sent to {email}. Check your inbox.",
+  "@passwordResetSent": {
+    "description": "Snackbar when password reset email is sent",
+    "placeholders": {
+      "email": {
+        "type": "String"
+      }
+    }
+  },
+  "emailAlreadyVerified": "Your email is already verified.",
+  "@emailAlreadyVerified": {
+    "description": "Snackbar when email is already verified"
+  },
+  "verificationEmailSent": "Verification email sent. Check your inbox.",
+  "@verificationEmailSent": {
+    "description": "Snackbar when verification email is sent"
+  },
+  "signOutDialogTitle": "Sign Out",
+  "@signOutDialogTitle": {
+    "description": "Title for sign out confirmation dialog"
+  },
+  "signOutDialogContent": "Are you sure you want to sign out?",
+  "@signOutDialogContent": {
+    "description": "Content for sign out confirmation dialog"
+  },
+  "deleteAccountDialogTitle": "Delete Account",
+  "@deleteAccountDialogTitle": {
+    "description": "Title for delete account dialog"
+  },
+  "deleteAccountWarning": "This action is permanent and cannot be undone. All your account data will be lost.",
+  "@deleteAccountWarning": {
+    "description": "Warning message in delete account dialog"
+  },
+  "typeDeleteToConfirm": "Type DELETE below to confirm:",
+  "@typeDeleteToConfirm": {
+    "description": "Instruction text for delete confirmation"
+  },
+  "typeDelete": "Type DELETE",
+  "@typeDelete": {
+    "description": "Hint text for the delete confirmation field"
+  },
+  "deleteFirestoreNote": "Firestore data cleanup still needs a separate backend process. Your authentication account will be deleted, but any stored documents may remain.",
+  "@deleteFirestoreNote": {
+    "description": "Note about Firestore data cleanup in delete dialog"
+  },
+  "permanentlyDelete": "Permanently Delete",
+  "@permanentlyDelete": {
+    "description": "Button text for permanent deletion"
+  },
+  "accountDeleted": "Account deleted.",
+  "@accountDeleted": {
+    "description": "Snackbar when account is deleted"
+  },
+
+  "securityStatus": "Security Status",
+  "@securityStatus": {
+    "description": "Section title for security status"
+  },
+  "emailVerificationStatus": "Email Verification",
+  "@emailVerificationStatus": {
+    "description": "Label for email verification status"
+  },
+  "authenticationProvider": "Authentication Provider",
+  "@authenticationProvider": {
+    "description": "Label for authentication provider"
+  },
+  "noProviderData": "No provider data",
+  "@noProviderData": {
+    "description": "Text when no provider data is available"
+  },
+  "accountCreated": "Account Created",
+  "@accountCreated": {
+    "description": "Label for account creation date"
+  },
+  "recommendations": "Recommendations",
+  "@recommendations": {
+    "description": "Section label for security recommendations"
+  },
+  "verifyEmailRecommendation": "Verify your email address to secure your account.",
+  "@verifyEmailRecommendation": {
+    "description": "Security recommendation to verify email"
+  },
+  "strongPasswordRecommendation": "Use a strong, unique password. Consider changing it periodically.",
+  "@strongPasswordRecommendation": {
+    "description": "Security recommendation for strong password"
+  },
+  "keepEmailUpdatedRecommendation": "Keep your email address up to date to receive security notifications.",
+  "@keepEmailUpdatedRecommendation": {
+    "description": "Security recommendation to keep email updated"
+  },
+  "passwordAndAuth": "Password & Authentication",
+  "@passwordAndAuth": {
+    "description": "Section title for Password and Authentication"
+  },
+  "sendPasswordResetEmail": "Send Password Reset Email",
+  "@sendPasswordResetEmail": {
+    "description": "Label for send password reset email action"
+  },
+  "resetPasswordSubtitle": "Receive a link to reset your password via email.",
+  "@resetPasswordSubtitle": {
+    "description": "Subtitle for password reset action"
+  },
+  "directPasswordChangeFuture": "Change password directly in the app will be available in a future update.",
+  "@directPasswordChangeFuture": {
+    "description": "Info message about direct password change feature"
+  },
+  "socialAuthInfo": "You signed in with {providers}. Password management is handled by your provider.",
+  "@socialAuthInfo": {
+    "description": "Info message for social auth users",
+    "placeholders": {
+      "providers": {
+        "type": "String"
+      }
+    }
+  },
+  "appPermissions": "App Permissions",
+  "@appPermissions": {
+    "description": "Section title for app permissions"
+  },
+  "microphone": "Microphone",
+  "@microphone": {
+    "description": "Label for microphone permission"
+  },
+  "micRequiredDescription": "Required for voice recording and practice features.",
+  "@micRequiredDescription": {
+    "description": "Description for microphone permission requirement"
+  },
+  "checking": "Checking...",
+  "@checking": {
+    "description": "Label when checking permission status"
+  },
+  "unknownStatus": "Unknown",
+  "@unknownStatus": {
+    "description": "Label for unknown permission status"
+  },
+  "denied": "Denied",
+  "@denied": {
+    "description": "Label for denied permission status"
+  },
+  "permanentlyDenied": "Permanently Denied",
+  "@permanentlyDenied": {
+    "description": "Label for permanently denied permission status"
+  },
+  "restricted": "Restricted",
+  "@restricted": {
+    "description": "Label for restricted permission status"
+  },
+  "provisional": "Provisional",
+  "@provisional": {
+    "description": "Label for provisional permission status"
+  },
+  "openSystemSettingsLabel": "Open system settings for {permission}",
+  "@openSystemSettingsLabel": {
+    "description": "Semantic label for opening system settings for a permission",
+    "placeholders": {
+      "permission": {
+        "type": "String"
+      }
+    }
+  },
+  "permissionSettings": "Settings",
+  "@permissionSettings": {
+    "description": "Button text to open settings for a permission"
+  },
+  "privacyControls": "Privacy Controls",
+  "@privacyControls": {
+    "description": "Section title for privacy controls"
+  },
+  "analyticsNotConfigured": "Analytics collection is not currently configured for Tuno. No usage data is being collected.",
+  "@analyticsNotConfigured": {
+    "description": "Info message about analytics not being configured"
+  },
+  "crashDiagnosticsNotEnabled": "Crash and error diagnostics are not currently enabled. Diagnostic reports will be available when crash reporting is configured.",
+  "@crashDiagnosticsNotEnabled": {
+    "description": "Info message about crash diagnostics not being enabled"
+  },
+  "aiProcessingNotAvailable": "Personalized AI processing is not currently available. Privacy controls for AI features will be added in a future release.",
+  "@aiProcessingNotAvailable": {
+    "description": "Info message about AI processing not being available"
+  },
+  "additionalPrivacyControls": "Additional privacy controls will become available when these services are enabled.",
+  "@additionalPrivacyControls": {
+    "description": "Note about additional privacy controls"
+  },
+  "dataAndAccount": "Data & Account",
+  "@dataAndAccount": {
+    "description": "Section title for Data and Account"
+  },
+  "exportMyData": "Export My Data",
+  "@exportMyData": {
+    "description": "Label for export my data action"
+  },
+  "exportDataSubtitle": "Download a copy of your Tuno data.",
+  "@exportDataSubtitle": {
+    "description": "Subtitle for export data action"
+  },
+  "signOutSubtitle": "Sign out of your Tuno account.",
+  "@signOutSubtitle": {
+    "description": "Subtitle for sign out action"
+  },
+  "deleteAccountSubtitle": "Permanently delete your account and all associated data.",
+  "@deleteAccountSubtitle": {
+    "description": "Subtitle for delete account action"
+  },
+  "exportDataDialogTitle": "Export My Data",
+  "@exportDataDialogTitle": {
+    "description": "Title for export data dialog"
+  },
+  "exportDataDialogContent": "Data export requires a trusted backend process to compile and deliver your account data securely.",
+  "@exportDataDialogContent": {
+    "description": "Content for export data dialog"
+  },
+  "exportDataDialogFuture": "This feature will be available when an export endpoint is configured on the Tuno backend server.",
+  "@exportDataDialogFuture": {
+    "description": "Future availability note in export data dialog"
+  },
+  "deleteAccountDialogContent": "Account deletion requires a secure backend process to:",
+  "@deleteAccountDialogContent": {
+    "description": "Content introduction for delete account dialog"
+  },
+  "deleteAuthAccount": "Delete your Auth account",
+  "@deleteAuthAccount": {
+    "description": "Bullet point: delete auth account"
+  },
+  "deleteFirestoreDocs": "Remove all Firestore documents and subcollections",
+  "@deleteFirestoreDocs": {
+    "description": "Bullet point: delete Firestore docs"
+  },
+  "deleteStorageRecordings": "Delete all uploaded recordings from Storage",
+  "@deleteStorageRecordings": {
+    "description": "Bullet point: delete storage recordings"
+  },
+  "deleteMetadata": "Remove any associated metadata",
+  "@deleteMetadata": {
+    "description": "Bullet point: delete metadata"
+  },
+  "deleteCannotBeDoneFromApp": "This cannot be done safely from the app alone. A trusted Cloud Function or Admin SDK backend is required.",
+  "@deleteCannotBeDoneFromApp": {
+    "description": "Info about deletion requiring backend"
+  },
+  "contactSupportToDelete": "To delete your account now, please contact Tuno support.",
+  "@contactSupportToDelete": {
+    "description": "Instruction to contact support for deletion"
+  },
+
+  "chooseUpdates": "Choose which updates you want to receive",
+  "@chooseUpdates": {
+    "description": "Subtitle for notification preferences"
+  },
+  "allowNotifications": "Allow Notifications",
+  "@allowNotifications": {
+    "description": "Master toggle label for allowing notifications"
+  },
+  "practiceReminders": "Practice Reminders",
+  "@practiceReminders": {
+    "description": "Toggle label for practice reminders"
+  },
+  "aiAnalysisUpdates": "AI Analysis Updates",
+  "@aiAnalysisUpdates": {
+    "description": "Toggle label for AI analysis updates"
+  },
+  "streakReminders": "Streak Reminders",
+  "@streakReminders": {
+    "description": "Toggle label for streak reminders"
+  },
+  "coinsAndAchievements": "Coins & Achievements",
+  "@coinsAndAchievements": {
+    "description": "Toggle label for coins and achievements notifications"
+  },
+  "weeklyChallenges": "Weekly Challenges",
+  "@weeklyChallenges": {
+    "description": "Toggle label for weekly challenges notifications"
+  },
+  "productUpdates": "Product Updates",
+  "@productUpdates": {
+    "description": "Toggle label for product updates notifications"
+  },
+  "reminderTime": "Reminder Time",
+  "@reminderTime": {
+    "description": "Label for reminder time selector"
+  },
+  "tapToChangeReminderTime": "Tap to change reminder time",
+  "@tapToChangeReminderTime": {
+    "description": "Tooltip for reminder time selector"
+  },
+  "notificationDeliveryNotImplemented": "Notification delivery is not yet implemented. Your preferences are saved locally and will be used once delivery is available.",
+  "@notificationDeliveryNotImplemented": {
+    "description": "Info banner content about notification delivery not implemented"
+  },
+  "dismiss": "Dismiss",
+  "@dismiss": {
+    "description": "Button label for dismiss"
+  },
+  "youCanChangeAnytime": "You can change these preferences anytime.",
+  "@youCanChangeAnytime": {
+    "description": "Note at bottom of notification preferences"
+  },
+  "labelUnavailable": "{label} (unavailable)",
+  "@labelUnavailable": {
+    "description": "Label suffix for disabled toggle",
+    "placeholders": {
+      "label": {
+        "type": "String"
+      }
+    }
+  },
+  "enableNotificationsFirst": "{label} – enable notifications first",
+  "@enableNotificationsFirst": {
+    "description": "Tooltip for disabled toggle when notifications are off",
+    "placeholders": {
+      "label": {
+        "type": "String"
+      }
+    }
+  },
+
+  "notificationsTitle": "Notifications",
+  "@notificationsTitle": {
+    "description": "Title for the Notifications screen"
+  },
+  "allCaughtUp": "You're all caught up",
+  "@allCaughtUp": {
+    "description": "Empty state title when no notifications"
+  },
+  "emptyNotificationsMessage": "Practice updates, analysis results and achievements will appear here.",
+  "@emptyNotificationsMessage": {
+    "description": "Empty state description when no notifications"
+  },
+  "markAllAsRead": "Mark all as read",
+  "@markAllAsRead": {
+    "description": "Button to mark all notifications as read"
+  },
+  "justNow": "Just now",
+  "@justNow": {
+    "description": "Relative time label for just now"
+  },
+  "minutesAgo": "{minutes}m ago",
+  "@minutesAgo": {
+    "description": "Relative time label for minutes ago",
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "hoursAgo": "{hours}h ago",
+  "@hoursAgo": {
+    "description": "Relative time label for hours ago",
+    "placeholders": {
+      "hours": {
+        "type": "int"
+      }
+    }
+  },
+  "yesterday": "Yesterday",
+  "@yesterday": {
+    "description": "Relative time label for yesterday"
+  },
+  "daysAgo": "{days}d ago",
+  "@daysAgo": {
+    "description": "Relative time label for days ago",
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "markAsUnread": "Mark as unread",
+  "@markAsUnread": {
+    "description": "Action label to mark notification as unread"
+  },
+  "markAsRead": "Mark as read",
+  "@markAsRead": {
+    "description": "Action label to mark notification as read"
+  },
+  "delete": "Delete",
+  "@delete": {
+    "description": "Action label to delete notification"
+  },
+  "unreadCountSemantic": "Notifications, {count} unread",
+  "@unreadCountSemantic": {
+    "description": "Semantic label for notification bell with unread count",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "notifications": "Notifications",
+  "@notifications": {
+    "description": "Tooltip for notification bell button"
+  },
+
+  "tuno": "Tuno",
+  "@tuno": {
+    "description": "Brand name shown on home screen"
+  },
+  "helloUser": "Hello, {name} 👋",
+  "@helloUser": {
+    "description": "Greeting on home screen with user name",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "readyToImprove": "Ready to improve your voice today?",
+  "@readyToImprove": {
+    "description": "Subtitle asking user if they are ready to practice"
+  },
+  "yourProgress": "Your Progress",
+  "@yourProgress": {
+    "description": "Section heading for progress on home screen"
+  },
+  "startVoicePractice": "Start Voice Practice",
+  "@startVoicePractice": {
+    "description": "Heading on the main practice card"
+  },
+  "recordAndGetFeedback": "Record your voice and receive instant feedback.",
+  "@recordAndGetFeedback": {
+    "description": "Description on the practice card"
+  },
+  "startPractice": "Start Practice",
+  "@startPractice": {
+    "description": "Button and tooltip text for start practice"
+  },
+  "zeroMin": "0 min",
+  "@zeroMin": {
+    "description": "Placeholder practice duration"
+  },
+  "practiceLabel": "Practice",
+  "@practiceLabel": {
+    "description": "Label under practice duration on home card"
+  },
+  "zeroDays": "0 days",
+  "@zeroDays": {
+    "description": "Placeholder streak days"
+  },
+  "streak": "Streak",
+  "@streak": {
+    "description": "Label under streak on home card"
+  },
+  "featureComingSoonSimple": "{feature} coming soon",
+  "@featureComingSoonSimple": {
+    "description": "Simple snackbar for feature coming soon",
+    "placeholders": {
+      "feature": {
+        "type": "String"
+      }
+    }
+  },
+
+  "aiSingingCoach": "AI SINGING COACH",
+  "@aiSingingCoach": {
+    "description": "Subtitle brand text on welcome screen"
+  },
+  "yourPersonalAiCoach": "Your Personal\nAI Singing Coach",
+  "@yourPersonalAiCoach": {
+    "description": "Main heading on welcome screen"
+  },
+  "practiceImproveAchieve": "Practice • Improve • Achieve",
+  "@practiceImproveAchieve": {
+    "description": "Tagline on welcome screen"
+  },
+  "getStarted": "Get Started",
+  "@getStarted": {
+    "description": "Button text on welcome screen"
+  },
+  "login": "Login",
+  "@login": {
+    "description": "Button text for login"
+  },
+
+  "welcomeBack": "Welcome Back! 👋",
+  "@welcomeBack": {
+    "description": "Heading on login screen"
+  },
+  "loginToContinue": "Login to continue",
+  "@loginToContinue": {
+    "description": "Subtitle on login screen"
+  },
+  "emailIsRequired": "Email is required.",
+  "@emailIsRequired": {
+    "description": "Validation message for empty email"
+  },
+  "enterValidEmail": "Enter a valid email.",
+  "@enterValidEmail": {
+    "description": "Validation message for invalid email"
+  },
+  "passwordIsRequired": "Password is required.",
+  "@passwordIsRequired": {
+    "description": "Validation message for empty password"
+  },
+  "passwordMinLength": "Password must be at least 6 characters.",
+  "@passwordMinLength": {
+    "description": "Validation message for short password"
+  },
+  "emailFieldLabel": "Email Address",
+  "@emailFieldLabel": {
+    "description": "Label for email input field"
+  },
+  "emailHint": "Enter your email",
+  "@emailHint": {
+    "description": "Hint text for email input"
+  },
+  "passwordFieldLabel": "Password",
+  "@passwordFieldLabel": {
+    "description": "Label for password input field"
+  },
+  "passwordHint": "Enter your password",
+  "@passwordHint": {
+    "description": "Hint text for password input"
+  },
+  "showPassword": "Show password",
+  "@showPassword": {
+    "description": "Semantic label for show password button"
+  },
+  "hidePassword": "Hide password",
+  "@hidePassword": {
+    "description": "Semantic label for hide password button"
+  },
+  "forgotPassword": "Forgot Password?",
+  "@forgotPassword": {
+    "description": "Link text for forgot password"
+  },
+  "orContinueWith": "or continue with",
+  "@orContinueWith": {
+    "description": "Divider label between login methods"
+  },
+  "loginWithGoogle": "Login with Google. Coming soon.",
+  "@loginWithGoogle": {
+    "description": "Semantic label for Google login button"
+  },
+  "loginWithApple": "Login with Apple. Coming soon.",
+  "@loginWithApple": {
+    "description": "Semantic label for Apple login button"
+  },
+  "dontHaveAccount": "Don't have an account? ",
+  "@dontHaveAccount": {
+    "description": "Prefix text for sign up navigation"
+  },
+  "signUp": "Sign Up",
+  "@signUp": {
+    "description": "Action text for sign up navigation"
+  },
+  "goToSignUp": "Go to sign up",
+  "@goToSignUp": {
+    "description": "Semantic label for sign up link"
+  },
+  "loginSuccessful": "Login successful.",
+  "@loginSuccessful": {
+    "description": "Snackbar message for successful login"
+  },
+  "authComingSoon": "{provider} authentication coming soon.",
+  "@authComingSoon": {
+    "description": "Snackbar for auth providers coming soon",
+    "placeholders": {
+      "provider": {
+        "type": "String"
+      }
+    }
+  },
+
+  "createAccount": "Create Account",
+  "@createAccount": {
+    "description": "Heading on sign up screen"
+  },
+  "joinTuno": "Join Tuno and start your\nsinging journey",
+  "@joinTuno": {
+    "description": "Subtitle on sign up screen"
+  },
+  "fullName": "Full Name",
+  "@fullName": {
+    "description": "Label for full name input"
+  },
+  "fullNameHint": "Enter your full name",
+  "@fullNameHint": {
+    "description": "Hint for full name input"
+  },
+  "emailHintSignup": "you@example.com",
+  "@emailHintSignup": {
+    "description": "Hint text for email on signup"
+  },
+  "passwordHintSignup": "At least 6 characters",
+  "@passwordHintSignup": {
+    "description": "Hint text for password on signup"
+  },
+  "fullNameRequired": "Full name is required.",
+  "@fullNameRequired": {
+    "description": "Validation message for empty full name"
+  },
+  "nameMinLength": "Name must be at least 2 characters.",
+  "@nameMinLength": {
+    "description": "Validation message for short name"
+  },
+  "alreadyHaveAccount": "Already have an account? ",
+  "@alreadyHaveAccount": {
+    "description": "Prefix text for login navigation"
+  },
+  "goToLogin": "Go to login",
+  "@goToLogin": {
+    "description": "Semantic label for login link"
+  },
+  "signUpWithGoogle": "Sign up with Google. Coming soon.",
+  "@signUpWithGoogle": {
+    "description": "Semantic label for Google sign up button"
+  },
+  "signUpWithApple": "Sign up with Apple. Coming soon.",
+  "@signUpWithApple": {
+    "description": "Semantic label for Apple sign up button"
+  },
+
+  "resetPassword": "Reset password",
+  "@resetPassword": {
+    "description": "Heading on forgot password screen"
+  },
+  "enterEmailForReset": "Enter your email and we'll send you a reset link.",
+  "@enterEmailForReset": {
+    "description": "Instructions on forgot password screen"
+  },
+  "email": "Email",
+  "@email": {
+    "description": "Label for email field on forgot password screen"
+  },
+  "emailHintReset": "you@example.com",
+  "@emailHintReset": {
+    "description": "Hint for email on forgot password screen"
+  },
+  "sendResetLink": "Send reset link",
+  "@sendResetLink": {
+    "description": "Button text for send reset link"
+  },
+  "backToLogin": "Back to login",
+  "@backToLogin": {
+    "description": "Link text to go back to login"
+  },
+  "resetLinkSent": "Reset link sent. Please check your email.",
+  "@resetLinkSent": {
+    "description": "Snackbar when reset link is sent"
+  },
+  "goBack": "Go back",
+  "@goBack": {
+    "description": "Semantic label for back button on login screen"
+  },
+
+"yourEmailIsNotVerified":"Your email is not verified yet.",
+"@yourEmailIsNotVerified":{"description":"Message shown when email verification check fails"},
+"verifyYourEmail":"Verify your email",
+  "@verifyYourEmail": {
+    "description": "Heading on email verification screen"
+  },
+  "signedInAs": "Signed in as {email}",
+  "@signedInAs": {
+    "description": "Shows the signed-in email",
+    "placeholders": {
+      "email": {
+        "type": "String"
+      }
+    }
+  },
+  "signedIn": "Signed in",
+  "@signedIn": {
+    "description": "Fallback when no email is shown"
+  },
+  "verificationInstructions": "Open your email inbox and click the verification link to complete your sign up. After verifying, tap the button below.",
+  "@verificationInstructions": {
+    "description": "Instructions on email verification screen"
+  },
+  "iHaveVerified": "I Have Verified",
+  "@iHaveVerified": {
+    "description": "Button to confirm email verification"
+  },
+  "resendEmail": "Resend Email",
+  "@resendEmail": {
+    "description": "Button to resend verification email"
+  },
+  "logOut": "Log Out",
+  "@logOut": {
+    "description": "Button to log out from verification screen"
+  },
+  "emailVerifiedSuccess": "Email verified.",
+  "@emailVerifiedSuccess": {
+    "description": "Snackbar when email is verified"
+  },
+  "failedToVerify": "Failed to verify email.",
+  "@failedToVerify": {
+    "description": "Error message when verification fails"
+  },
+  "verificationSent": "Verification email sent.",
+  "@verificationSent": {
+    "description": "Snackbar when verification email is sent"
+  },
+  "failedToResend": "Failed to resend verification email.",
+  "@failedToResend": {
+    "description": "Error message when resend fails"
+  },
+  "yourEmailIsVerified": "Your email is verified.",
+  "@yourEmailIsVerified": {
+    "description": "Message shown when email is already verified"
+  },
+
+  "setupTunoExperience": "Set up your Tuno experience",
+  "@setupTunoExperience": {
+    "description": "Heading on onboarding screen"
+  },
+  "stepOf": "Step {current} of {total}",
+  "@stepOf": {
+    "description": "Step indicator text",
+    "placeholders": {
+      "current": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "continueAction": "Continue",
+  "@continueAction": {
+    "description": "Button text for continue"
+  },
+  "chooseCoachingLanguage": "Choose your coaching language",
+  "@chooseCoachingLanguage": {
+    "description": "Heading for language selection on onboarding"
+  },
+  "coachingLanguageSubtitle": "Select the language you prefer for coaching instructions and AI feedback.",
+  "@coachingLanguageSubtitle": {
+    "description": "Subtitle for language selection"
+  },
+  "languageLabel": "{label} language",
+  "@languageLabel": {
+    "description": "Semantic label for language card",
+    "placeholders": {
+      "label": {
+        "type": "String"
+      }
+    }
+  },
+
+  "whatIsYourExperience": "What is your singing experience?",
+  "@whatIsYourExperience": {
+    "description": "Heading for experience step"
+  },
+  "experienceSubtitle": "This helps us personalize your practice sessions.",
+  "@experienceSubtitle": {
+    "description": "Subtitle for experience step"
+  },
+  "beginner": "Beginner",
+  "@beginner": {
+    "description": "Experience level label: Beginner"
+  },
+  "beginnerDescription": "I am starting my singing journey.",
+  "@beginnerDescription": {
+    "description": "Description for beginner level"
+  },
+  "intermediate": "Intermediate",
+  "@intermediate": {
+    "description": "Experience level label: Intermediate"
+  },
+  "intermediateDescription": "I understand basic pitch and rhythm.",
+  "@intermediateDescription": {
+    "description": "Description for intermediate level"
+  },
+  "advanced": "Advanced",
+  "@advanced": {
+    "description": "Experience level label: Advanced"
+  },
+  "advancedDescription": "I practise regularly and want detailed improvement.",
+  "@advancedDescription": {
+    "description": "Description for advanced level"
+  },
+  "professional": "Professional",
+  "@professional": {
+    "description": "Experience level label: Professional"
+  },
+  "professionalDescription": "I perform, teach or record professionally.",
+  "@professionalDescription": {
+    "description": "Description for professional level"
+  },
+  "experienceLabel": "{label} experience",
+  "@experienceLabel": {
+    "description": "Semantic label for experience card",
+    "placeholders": {
+      "label": {
+        "type": "String"
+      }
+    }
+  },
+
+  "whatAreYourGoals": "What are your singing goals?",
+  "@whatAreYourGoals": {
+    "description": "Heading for goals step"
+  },
+  "goalsSubtitle": "Select all that apply. You can change these later.",
+  "@goalsSubtitle": {
+    "description": "Subtitle for goals step"
+  },
+  "goalLabel": "{label} goal",
+  "@goalLabel": {
+    "description": "Semantic label for goal card",
+    "placeholders": {
+      "label": {
+        "type": "String"
+      }
+    }
+  },
+
+  "yourVoiceStaysInControl": "Your voice stays in your control",
+  "@yourVoiceStaysInControl": {
+    "description": "Heading for permission education step"
+  },
+  "permissionEducationMessage": "Tuno uses microphone access only when you choose to record a practice session. You can change this permission later in your device or browser settings.",
+  "@permissionEducationMessage": {
+    "description": "Message explaining microphone usage"
+  },
+  "requiredForRecording": "Required for voice recording",
+  "@requiredForRecording": {
+    "description": "Info point title: required for recording"
+  },
+  "requiredForRecordingDesc": "Microphone access is needed to capture your singing for AI feedback.",
+  "@requiredForRecordingDesc": {
+    "description": "Info point description: required for recording"
+  },
+  "noAutoRecord": "Tuno will not record automatically",
+  "@noAutoRecord": {
+    "description": "Info point title: no auto recording"
+  },
+  "noAutoRecordDesc": "Recording only happens when you explicitly start a practice session.",
+  "@noAutoRecordDesc": {
+    "description": "Info point description: no auto recording"
+  },
+  "permissionCanBeChanged": "Permission can be changed later",
+  "@permissionCanBeChanged": {
+    "description": "Info point title: permission can be changed"
+  },
+  "permissionCanBeChangedDesc": "You can grant or revoke microphone access anytime in device/browser settings.",
+  "@permissionCanBeChangedDesc": {
+    "description": "Info point description: permission can be changed"
+  },
+  "requestingPermission": "Requesting...",
+  "@requestingPermission": {
+    "description": "Label while requesting microphone permission"
+  },
+  "enableMicrophone": "Enable Microphone",
+  "@enableMicrophone": {
+    "description": "Button to enable microphone permission"
+  },
+  "openAppSettingsManually": "Open App Settings Manually",
+  "@openAppSettingsManually": {
+    "description": "Button to open app settings manually"
+  },
+  "microphoneGrantedMessage": "Microphone access granted. You're ready to record!",
+  "@microphoneGrantedMessage": {
+    "description": "Message when microphone is granted"
+  },
+  "continueWithoutMic": "You can continue onboarding without microphone access. Recording will require permission when you start a practice session.",
+  "@continueWithoutMic": {
+    "description": "Info about continuing without microphone"
+  },
+  "micPermissionGrantedSnackbar": "Microphone access granted. You can now record your voice.",
+  "@micPermissionGrantedSnackbar": {
+    "description": "Snackbar when microphone is granted"
+  },
+  "micPermissionDeniedSnackbar": "Microphone access denied. You can enable it later in settings to record.",
+  "@micPermissionDeniedSnackbar": {
+    "description": "Snackbar when microphone is denied"
+  },
+  "micPermissionPermanentlyDeniedSnackbar": "Microphone access permanently denied. Please enable it in app settings.",
+  "@micPermissionPermanentlyDeniedSnackbar": {
+    "description": "Snackbar when microphone is permanently denied"
+  },
+  "micPermissionLimitedSnackbar": "Limited microphone access granted. You can record but with restrictions.",
+  "@micPermissionLimitedSnackbar": {
+    "description": "Snackbar for limited microphone permission"
+  },
+  "permissionStatusLabel": "Permission status: {status}",
+  "@permissionStatusLabel": {
+    "description": "Fallback label for unknown permission status",
+    "placeholders": {
+      "status": {
+        "type": "String"
+      }
+    }
+  },
+  "failedToRequestPermission": "Failed to request permission. Please try again.",
+  "@failedToRequestPermission": {
+    "description": "Error message when permission request fails"
+  },
+
+  "reviewYourSetup": "Review your setup",
+  "@reviewYourSetup": {
+    "description": "Heading for review step"
+  },
+  "reviewSubtitle": "Check your selections and edit if needed.",
+  "@reviewSubtitle": {
+    "description": "Subtitle for review step"
+  },
+  "languageSection": "Language",
+  "@languageSection": {
+    "description": "Section label for language review"
+  },
+  "experienceLevel": "Experience Level",
+  "@experienceLevel": {
+    "description": "Section label for experience review"
+  },
+  "singingGoals": "Singing Goals",
+  "@singingGoals": {
+    "description": "Section label for goals review"
+  },
+  "noGoalsSelected": "No goals selected",
+  "@noGoalsSelected": {
+    "description": "Text when no goals are selected"
+  },
+  "goalsSelected": "{count} goal(s) selected",
+  "@goalsSelected": {
+    "description": "Text showing number of selected goals",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "micAccess": "Microphone Access",
+  "@micAccess": {
+    "description": "Section label for microphone review"
+  },
+  "checkingPermission": "Checking permission...",
+  "@checkingPermission": {
+    "description": "Text while checking permission status"
+  },
+  "permissionGranted": "Permission granted",
+  "@permissionGranted": {
+    "description": "Text when permission is granted"
+  },
+  "permissionNotGranted": "Permission not granted (required for recording)",
+  "@permissionNotGranted": {
+    "description": "Text when permission is not granted"
+  },
+  "change": "Change",
+  "@change": {
+    "description": "Button text for change action"
+  },
+  "edit": "Edit",
+  "@edit": {
+    "description": "Button text for edit action"
+  },
+  "completeSetup": "Complete Setup",
+  "@completeSetup": {
+    "description": "Button text for completing setup"
+  },
+  "pleaseSignInAgain": "Please sign in again to complete your setup.",
+  "@pleaseSignInAgain": {
+    "description": "Snackbar when user needs to sign in again"
+  },
+  "notSelected": "Not selected",
+  "@notSelected": {
+    "description": "Text when nothing is selected"
+  },
+  "setupSaveFailed": "We couldn't save your setup. Please try again.",
+  "@setupSaveFailed": {
+    "description": "Error message when setup save fails"
+  },
+  "somethingWentWrong": "Something went wrong: {error}",
+  "@somethingWentWrong": {
+    "description": "Generic error message",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "micPermissionGrantedShort": "Microphone permission granted.",
+  "@micPermissionGrantedShort": {
+    "description": "Snackbar when microphone is granted from review step"
+  },
+  "micPermissionDeniedShort": "Microphone permission denied.",
+  "@micPermissionDeniedShort": {
+    "description": "Snackbar when microphone is denied from review step"
+  },
+  "couldNotRequestMicPermission": "Could not request permission.",
+  "@couldNotRequestMicPermission": {
+    "description": "Error when permission request fails"
+  },
+
+  "choosePracticeMode": "Choose Practice Mode",
+  "@choosePracticeMode": {
+    "description": "Title for practice mode screen"
+  },
+  "whatWouldYouLikeToDo": "What would you like to do?",
+  "@whatWouldYouLikeToDo": {
+    "description": "Subtitle for practice mode screen"
+  },
+  "soloPractice": "Solo Practice",
+  "@soloPractice": {
+    "description": "Practice mode: Solo Practice"
+  },
+  "soloPracticeDesc": "Sing with your voice only",
+  "@soloPracticeDesc": {
+    "description": "Description for Solo Practice mode"
+  },
+  "tunoExercises": "Tuno Exercises",
+  "@tunoExercises": {
+    "description": "Practice mode: Tuno Exercises"
+  },
+  "tunoExercisesDesc": "Practice with guided exercises",
+  "@tunoExercisesDesc": {
+    "description": "Description for Tuno Exercises mode"
+  },
+  "uploadSong": "Upload Song",
+  "@uploadSong": {
+    "description": "Practice mode: Upload Song"
+  },
+  "uploadSongDesc": "Upload your own track",
+  "@uploadSongDesc": {
+    "description": "Description for Upload Song mode"
+  },
+  "backingTrack": "Backing Track",
+  "@backingTrack": {
+    "description": "Practice mode: Backing Track"
+  },
+  "backingTrackDesc": "Sing with your own track",
+  "@backingTrackDesc": {
+    "description": "Description for Backing Track mode"
+  },
+  "tapToStart": "{title}, {description}. Tap to start.",
+  "@tapToStart": {
+    "description": "Semantic label for available mode card",
+    "placeholders": {
+      "title": {
+        "type": "String"
+      },
+      "description": {
+        "type": "String"
+      }
+    }
+  },
+  "modeNotAvailable": "{title}, {description}. Not available.",
+  "@modeNotAvailable": {
+    "description": "Semantic label for unavailable mode card",
+    "placeholders": {
+      "title": {
+        "type": "String"
+      },
+      "description": {
+        "type": "String"
+      }
+    }
+  },
+  "modeComingSoon": "{title} — Coming soon",
+  "@modeComingSoon": {
+    "description": "Tooltip for unavailable practice mode",
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "tunoExercisesComingSoon": "Tuno Exercises will be available in a future update.",
+  "@tunoExercisesComingSoon": {
+    "description": "Snackbar when Tuno Exercises is tapped"
+  },
+  "backingTracksComingSoon": "Backing Tracks will be available in a future update.",
+  "@backingTracksComingSoon": {
+    "description": "Snackbar when Backing Track is tapped"
+  },
+
+  "voicePractice": "Voice Practice",
+  "@voicePractice": {
+    "description": "Title for voice practice screen"
+  },
+  "voicePracticeSubtitle": "Record your singing and get AI-powered feedback on pitch, rhythm, and tone.",
+  "@voicePracticeSubtitle": {
+    "description": "Subtitle for voice practice screen"
+  },
+  "requestingMicPermission": "Requesting microphone permission...",
+  "@requestingMicPermission": {
+    "description": "Message while requesting microphone permission"
+  },
+  "micPermissionRequired": "Microphone Permission Required",
+  "@micPermissionRequired": {
+    "description": "Title when microphone permission is denied"
+  },
+  "enableMicInSettings": "Please enable microphone access in settings to record your voice.",
+  "@enableMicInSettings": {
+    "description": "Message to enable microphone"
+  },
+  "openSettings": "Open Settings",
+  "@openSettings": {
+    "description": "Button text to open settings"
+  },
+  "recording": "Recording...",
+  "@recording": {
+    "description": "Status label when recording"
+  },
+  "recordingSaved": "Recording saved",
+  "@recordingSaved": {
+    "description": "Status label when recording is saved"
+  },
+  "readyToRecord": "Ready to record",
+  "@readyToRecord": {
+    "description": "Status label when ready to record"
+  },
+  "startRecording": "Start Recording",
+  "@startRecording": {
+    "description": "Button to start recording"
+  },
+  "stopRecording": "Stop Recording",
+  "@stopRecording": {
+    "description": "Button to stop recording"
+  },
+  "cancel": "Cancel",
+  "@cancel": {
+    "description": "Button to cancel recording"
+  },
+  "deleteAndRecordAgain": "Delete & Record Again",
+  "@deleteAndRecordAgain": {
+    "description": "Button to delete and record again"
+  },
+  "reviewRecording": "Review Recording",
+  "@reviewRecording": {
+    "description": "Button to review recording"
+  },
+  "orTapMicAbove": "Or tap the microphone above",
+  "@orTapMicAbove": {
+    "description": "Instruction text below recording panel"
+  },
+  "discardRecordingTitle": "Discard recording?",
+  "@discardRecordingTitle": {
+    "description": "Dialog title for discarding recording"
+  },
+  "discardRecordingContent": "Your current recording will not be saved.",
+  "@discardRecordingContent": {
+    "description": "Dialog content for discarding recording"
+  },
+  "keepRecording": "Keep Recording",
+  "@keepRecording": {
+    "description": "Button to keep recording"
+  },
+  "discardAndGoBack": "Discard and Go Back",
+  "@discardAndGoBack": {
+    "description": "Button to discard and go back"
+  },
+  "recordingSavedDuration": "Recording saved — {duration}",
+  "@recordingSavedDuration": {
+    "description": "Message showing recording saved with duration",
+    "placeholders": {
+      "duration": {
+        "type": "String"
+      }
+    }
+  },
+  "anErrorOccurred": "An error occurred",
+  "@anErrorOccurred": {
+    "description": "Fallback error message"
+  },
+  "failedToDeleteRecording": "Failed to delete recording. Please try again.",
+  "@failedToDeleteRecording": {
+    "description": "Error message when delete fails"
+  },
+  "startRecordingSemantic": "Start recording",
+  "@startRecordingSemantic": {
+    "description": "Semantic label for start recording button"
+  },
+  "stopRecordingSemantic": "Stop recording",
+  "@stopRecordingSemantic": {
+    "description": "Semantic label for stop recording button"
+  },
+
+  "reviewRecordingTitle": "Review Recording",
+  "@reviewRecordingTitle": {
+    "description": "Title for recording review screen"
+  },
+  "play": "Play",
+  "@play": {
+    "description": "Tooltip and semantics for play button"
+  },
+  "pause": "Pause",
+  "@pause": {
+    "description": "Tooltip and semantics for pause button"
+  },
+  "replayFromBeginning": "Replay from beginning",
+  "@replayFromBeginning": {
+    "description": "Tooltip and semantics for replay button"
+  },
+  "forwardTenSeconds": "Forward 10 seconds",
+  "@forwardTenSeconds": {
+    "description": "Tooltip and semantics for forward button"
+  },
+  "continueToAnalysis": "Continue to Analysis",
+  "@continueToAnalysis": {
+    "description": "Button to continue to analysis"
+  },
+  "unableToLoadAudio": "Unable to load audio file. The recording may be missing or corrupted.",
+  "@unableToLoadAudio": {
+    "description": "Error message when audio fails to load"
+  },
+
+  "analysisPending": "Analysis Pending",
+  "@analysisPending": {
+    "description": "Title for analysis result screen"
+  },
+  "aiAnalysisComingSoon": "AI pitch analysis will be connected in the next phase.",
+  "@aiAnalysisComingSoon": {
+    "description": "Message about AI analysis coming soon"
+  },
+  "recordingDetails": "Recording Details",
+  "@recordingDetails": {
+    "description": "Section title for recording details"
+  },
+  "fileName": "File Name",
+  "@fileName": {
+    "description": "Label for file name"
+  },
+  "duration": "Duration",
+  "@duration": {
+    "description": "Label for duration"
+  },
+  "recorded": "Recorded",
+  "@recorded": {
+    "description": "Label for recorded date/time"
+  },
+  "practiceAgain": "Practice Again",
+  "@practiceAgain": {
+    "description": "Button text for practice again"
+  },
+  "backToReview": "Back to Review",
+  "@backToReview": {
+    "description": "Button text for back to review"
+  },
+  "unableToLoadDetails": "Unable to load recording details. Navigation data may be missing or invalid.",
+  "@unableToLoadDetails": {
+    "description": "Error message when recording details cannot be loaded"
+  },
+
+  "uploadReferenceSong": "Upload Reference Song",
+  "@uploadReferenceSong": {
+    "description": "Title for reference track screen"
+  },
+  "chooseSongToPractice": "Choose the song you want to practise.",
+  "@chooseSongToPractice": {
+    "description": "Subtitle for reference track screen"
+  },
+  "chooseAudioFile": "Choose an audio file",
+  "@chooseAudioFile": {
+    "description": "Title in the file selection card"
+  },
+  "audioFileFormats": "MP3, WAV, M4A or AAC — maximum 50 MB",
+  "@audioFileFormats": {
+    "description": "Supported file formats and size limit"
+  },
+  "selectSong": "Select Song",
+  "@selectSong": {
+    "description": "Button to select a song"
+  },
+  "selecting": "Selecting...",
+  "@selecting": {
+    "description": "Label while selecting a file"
+  },
+  "remove": "Remove",
+  "@remove": {
+    "description": "Button to remove selected track"
+  },
+  "replaceSong": "Replace Song",
+  "@replaceSong": {
+    "description": "Button to replace selected track"
+  },
+  "trackSelected": "Track selected. Practice setup will be connected next.",
+  "@trackSelected": {
+    "description": "Message when track is selected"
+  },
+  "couldNotSelectFile": "Could not select file",
+  "@couldNotSelectFile": {
+    "description": "Error title when file selection fails"
+  },
+  "unexpectedError": "An unexpected error occurred.",
+  "@unexpectedError": {
+    "description": "Fallback error message"
+  },
+  "retry": "Retry",
+  "@retry": {
+    "description": "Button to retry file selection"
+  },
+  "privacyNote": "Your reference track remains on this device and is not uploaded.",
+  "@privacyNote": {
+    "description": "Privacy note about reference track staying on device"
+  },
+  "tunoLogoSemanticLabel": "Tuno logo",
+  "@tunoLogoSemanticLabel": {
+    "description": "Semantic label for the Tuno logo on the splash screen"
+  }
+}
+
