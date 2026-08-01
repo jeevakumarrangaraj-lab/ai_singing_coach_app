@@ -1106,6 +1106,21 @@ class AppLocalizationsTa extends AppLocalizations {
       'எங்களால் உங்கள் அமைப்பைச் சேமிக்க முடியவில்லை. மீண்டும் முயற்சிக்கவும்.';
 
   @override
+  String get onboardingLanguageRequired => 'தொடர மொழியைத் தேர்ந்தெடுக்கவும்.';
+
+  @override
+  String get onboardingExperienceRequired =>
+      'தொடர உங்கள் அனுபவ நிலையைத் தேர்ந்தெடுக்கவும்.';
+
+  @override
+  String get onboardingGoalRequired =>
+      'தொடர குறைந்தது ஒரு இலக்கையாவது தேர்ந்தெடுக்கவும்.';
+
+  @override
+  String get onboardingCheckFailed =>
+      'ஏதோ தவறு ஏற்பட்டது. மீண்டும் முயற்சிக்கவும்.';
+
+  @override
   String somethingWentWrong(String error) {
     return 'ஏதோ தவறு ஏற்பட்டது: $error';
   }
@@ -1339,4 +1354,66 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String get tunoLogoSemanticLabel => 'Tuno லோகோ';
+
+  @override
+  String get voiceRecordingStartFailed =>
+      'பதிவைத் தொடங்க முடியவில்லை. மீண்டும் முயற்சிக்கவும்.';
+
+  @override
+  String get voiceRecordingStopFailed =>
+      'பதிவை நிறுத்த முடியவில்லை. மீண்டும் முயற்சிக்கவும்.';
+
+  @override
+  String get voiceRecordingPlaybackFailed =>
+      'இயக்கத்தைத் தொடங்க முடியவில்லை. மீண்டும் முயற்சிக்கவும்.';
+
+  @override
+  String get voiceRecordingPauseFailed =>
+      'இயக்கத்தை இடைநிறுத்த முடியவில்லை. மீண்டும் முயற்சிக்கவும்.';
+
+  @override
+  String get voiceRecordingResumeFailed =>
+      'இயக்கத்தை மீண்டும் தொடங்க முடியவில்லை. மீண்டும் முயற்சிக்கவும்.';
+
+  @override
+  String get voiceRecordingSeekFailed =>
+      'இயக்க நிலையை மாற்ற முடியவில்லை. மீண்டும் முயற்சிக்கவும்.';
+
+  @override
+  String get referenceTrackUnsupportedFormat =>
+      'ஆதரிக்கப்படாத கோப்பு வடிவம். MP3, WAV, M4A அல்லது AAC கோப்பைத் தேர்ந்தெடுக்கவும்.';
+
+  @override
+  String get referenceTrackFileTooLarge =>
+      'கோப்பு மிகப் பெரியது. அனுமதிக்கப்பட்ட அதிகபட்ச அளவு 50 MB.';
+
+  @override
+  String get referenceTrackUnreadableFile =>
+      'இந்த இயங்குதளத்தில் கோப்பின் உள்ளடக்கத்தைப் படிக்க முடியவில்லை. மீண்டும் முயற்சிக்கவும்.';
+
+  @override
+  String get referenceTrackMissingPath =>
+      'கோப்பின் இருப்பிடத்தை தீர்மானிக்க முடியவில்லை. மீண்டும் முயற்சிக்கவும்.';
+
+  @override
+  String get improvePitchAccuracy => 'சுருதி துல்லியத்தை மேம்படுத்து';
+
+  @override
+  String get increaseVocalRange => 'குரல் வீச்சை அதிகரி';
+
+  @override
+  String get improveBreathControl => 'மூச்சுக் கட்டுப்பாட்டை மேம்படுத்து';
+
+  @override
+  String get improveRhythmTiming => 'தாளம் மற்றும் நேரத்தை மேம்படுத்து';
+
+  @override
+  String get improveVoiceStability => 'குரல் நிலைத்தன்மையை மேம்படுத்து';
+
+  @override
+  String get buildSingingConfidence => 'பாடல் நம்பிக்கையை வளர்';
+
+  @override
+  String get couldNotOpenSettingsManualInstructions =>
+      'அமைப்புகளைத் திற முடியவில்லை. மைக்ரோஃபோன் அணுகலை கைமுறையாக இயக்கவும்.';
 }

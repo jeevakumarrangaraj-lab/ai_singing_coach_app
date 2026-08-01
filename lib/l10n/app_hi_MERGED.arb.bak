@@ -1798,33 +1798,5 @@
   "referenceTrackMissingPath": "फ़ाइल का स्थान निर्धारित नहीं कर सके। कृपया पुनः प्रयास करें।",
   "@referenceTrackMissingPath": {
     "description": "Error message when the file location cannot be determined on this platform"
-  },
-  "improvePitchAccuracy": "पिच सटीकता में सुधार करें",
-  "@improvePitchAccuracy": {
-    "description": "Singing goal: improve pitch accuracy"
-  },
-  "increaseVocalRange": "स्वर सीमा बढ़ाएँ",
-  "@increaseVocalRange": {
-    "description": "Singing goal: increase vocal range"
-  },
-  "improveBreathControl": "श्वास नियंत्रण में सुधार करें",
-  "@improveBreathControl": {
-    "description": "Singing goal: improve breath control"
-  },
-  "improveRhythmTiming": "लय और समय में सुधार करें",
-  "@improveRhythmTiming": {
-    "description": "Singing goal: improve rhythm and timing"
-  },
-  "improveVoiceStability": "आवाज़ की स्थिरता में सुधार करें",
-  "@improveVoiceStability": {
-    "description": "Singing goal: improve voice stability"
-  },
-  "buildSingingConfidence": "गायन आत्मविश्वास बढ़ाएँ",
-  "@buildSingingConfidence": {
-    "description": "Singing goal: build singing confidence"
-  },
-  "couldNotOpenSettingsManualInstructions": "सेटिंग्स खोली नहीं जा सकीं। कृपया माइक्रोफ़ोन एक्सेस को मैन्युअल रूप से सक्षम करें।",
-  "@couldNotOpenSettingsManualInstructions": {
-    "description": "Error message when settings cannot be opened automatically"
   }
 }

@@ -24,10 +24,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get english => 'English';
 
   @override
-  String get tamil => 'தமிழ்';
+  String get tamil => 'α«ñα««α«┐α«┤α»ì';
 
   @override
-  String get hindi => 'हिन्दी';
+  String get hindi => 'αñ╣αñ┐αñ¿αÑìαñªαÑÇ';
 
   @override
   String get back => 'Back';
@@ -230,7 +230,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get granted => 'Granted';
 
   @override
-  String get notGrantedTapToAllow => 'Not granted — tap to allow';
+  String get notGrantedTapToAllow => 'Not granted ΓÇö tap to allow';
 
   @override
   String get couldNotCheckPermission => 'Could not check microphone permission';
@@ -606,7 +606,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String enableNotificationsFirst(String label) {
-    return '$label – enable notifications first';
+    return '$label ΓÇô enable notifications first';
   }
 
   @override
@@ -665,7 +665,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String helloUser(String name) {
-    return 'Hello, $name 👋';
+    return 'Hello, $name ≡ƒæï';
   }
 
   @override
@@ -708,7 +708,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get yourPersonalAiCoach => 'Your Personal\nAI Singing Coach';
 
   @override
-  String get practiceImproveAchieve => 'Practice • Improve • Achieve';
+  String get practiceImproveAchieve => 'Practice ΓÇó Improve ΓÇó Achieve';
 
   @override
   String get getStarted => 'Get Started';
@@ -717,7 +717,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get login => 'Login';
 
   @override
-  String get welcomeBack => 'Welcome Back! 👋';
+  String get welcomeBack => 'Welcome Back! ≡ƒæï';
 
   @override
   String get loginToContinue => 'Login to continue';
@@ -1084,6 +1084,21 @@ class AppLocalizationsEn extends AppLocalizations {
       'We couldn\'t save your setup. Please try again.';
 
   @override
+  String get onboardingLanguageRequired =>
+      'Please select a language to continue.';
+
+  @override
+  String get onboardingExperienceRequired =>
+      'Please select your experience level to continue.';
+
+  @override
+  String get onboardingGoalRequired =>
+      'Please select at least one goal to continue.';
+
+  @override
+  String get onboardingCheckFailed => 'Something went wrong. Please try again.';
+
+  @override
   String somethingWentWrong(String error) {
     return 'Something went wrong: $error';
   }
@@ -1139,7 +1154,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String modeComingSoon(String title) {
-    return '$title — Coming soon';
+    return '$title ΓÇö Coming soon';
   }
 
   @override
@@ -1206,7 +1221,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String recordingSavedDuration(String duration) {
-    return 'Recording saved — $duration';
+    return 'Recording saved ΓÇö $duration';
   }
 
   @override
@@ -1283,7 +1298,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get chooseAudioFile => 'Choose an audio file';
 
   @override
-  String get audioFileFormats => 'MP3, WAV, M4A or AAC — maximum 50 MB';
+  String get audioFileFormats => 'MP3, WAV, M4A or AAC ΓÇö maximum 50 MB';
 
   @override
   String get selectSong => 'Select Song';
@@ -1316,4 +1331,66 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get tunoLogoSemanticLabel => 'Tuno logo';
+
+  @override
+  String get voiceRecordingStartFailed =>
+      'Could not start recording. Please try again.';
+
+  @override
+  String get voiceRecordingStopFailed =>
+      'Could not stop recording. Please try again.';
+
+  @override
+  String get voiceRecordingPlaybackFailed =>
+      'Could not start playback. Please try again.';
+
+  @override
+  String get voiceRecordingPauseFailed =>
+      'Could not pause playback. Please try again.';
+
+  @override
+  String get voiceRecordingResumeFailed =>
+      'Could not resume playback. Please try again.';
+
+  @override
+  String get voiceRecordingSeekFailed =>
+      'Could not change the playback position. Please try again.';
+
+  @override
+  String get referenceTrackUnsupportedFormat =>
+      'Unsupported file format. Please choose an MP3, WAV, M4A, or AAC file.';
+
+  @override
+  String get referenceTrackFileTooLarge =>
+      'File too large. Maximum allowed size is 50 MB.';
+
+  @override
+  String get referenceTrackUnreadableFile =>
+      'Could not read the file content on this platform. Please try again.';
+
+  @override
+  String get referenceTrackMissingPath =>
+      'Could not determine the file location. Please try again.';
+
+  @override
+  String get improvePitchAccuracy => 'Improve pitch accuracy';
+
+  @override
+  String get increaseVocalRange => 'Increase vocal range';
+
+  @override
+  String get improveBreathControl => 'Improve breath control';
+
+  @override
+  String get improveRhythmTiming => 'Improve rhythm and timing';
+
+  @override
+  String get improveVoiceStability => 'Improve voice stability';
+
+  @override
+  String get buildSingingConfidence => 'Build singing confidence';
+
+  @override
+  String get couldNotOpenSettingsManualInstructions =>
+      'Could not open settings. Please enable microphone access manually.';
 }

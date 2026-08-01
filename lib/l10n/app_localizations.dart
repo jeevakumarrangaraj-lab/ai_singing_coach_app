@@ -133,13 +133,13 @@ abstract class AppLocalizations {
   /// Option label for Tamil language
   ///
   /// In en, this message translates to:
-  /// **'தமிழ்'**
+  /// **'α«ñα««α«┐α«┤α»ì'**
   String get tamil;
 
   /// Option label for Hindi language
   ///
   /// In en, this message translates to:
-  /// **'हिन्दी'**
+  /// **'αñ╣αñ┐αñ¿αÑìαñªαÑÇ'**
   String get hindi;
 
   /// Accessibility label for the back button
@@ -535,7 +535,7 @@ abstract class AppLocalizations {
   /// Label for not granted permission status
   ///
   /// In en, this message translates to:
-  /// **'Not granted — tap to allow'**
+  /// **'Not granted ΓÇö tap to allow'**
   String get notGrantedTapToAllow;
 
   /// Error message when unable to check permission
@@ -574,7 +574,7 @@ abstract class AppLocalizations {
   /// **'Microphone permission has been permanently denied. Please enable it in your system settings.'**
   String get microphonePermissionDialogContent;
 
-  /// Button text to open settings
+  /// Button text for Open Settings
   ///
   /// In en, this message translates to:
   /// **'Open Settings'**
@@ -1207,7 +1207,7 @@ abstract class AppLocalizations {
   /// Tooltip for disabled toggle when notifications are off
   ///
   /// In en, this message translates to:
-  /// **'{label} – enable notifications first'**
+  /// **'{label} ΓÇô enable notifications first'**
   String enableNotificationsFirst(String label);
 
   /// Title for the Notifications screen
@@ -1303,7 +1303,7 @@ abstract class AppLocalizations {
   /// Greeting on home screen with user name
   ///
   /// In en, this message translates to:
-  /// **'Hello, {name} 👋'**
+  /// **'Hello, {name} ≡ƒæï'**
   String helloUser(String name);
 
   /// Subtitle asking user if they are ready to practice
@@ -1381,7 +1381,7 @@ abstract class AppLocalizations {
   /// Tagline on welcome screen
   ///
   /// In en, this message translates to:
-  /// **'Practice • Improve • Achieve'**
+  /// **'Practice ΓÇó Improve ΓÇó Achieve'**
   String get practiceImproveAchieve;
 
   /// Button text on welcome screen
@@ -1399,7 +1399,7 @@ abstract class AppLocalizations {
   /// Heading on login screen
   ///
   /// In en, this message translates to:
-  /// **'Welcome Back! 👋'**
+  /// **'Welcome Back! ≡ƒæï'**
   String get welcomeBack;
 
   /// Subtitle on login screen
@@ -2056,6 +2056,30 @@ abstract class AppLocalizations {
   /// **'We couldn\'t save your setup. Please try again.'**
   String get setupSaveFailed;
 
+  /// Validation error when no language is selected during onboarding
+  ///
+  /// In en, this message translates to:
+  /// **'Please select a language to continue.'**
+  String get onboardingLanguageRequired;
+
+  /// Validation error when no experience level is selected during onboarding
+  ///
+  /// In en, this message translates to:
+  /// **'Please select your experience level to continue.'**
+  String get onboardingExperienceRequired;
+
+  /// Validation error when no goals are selected during onboarding
+  ///
+  /// In en, this message translates to:
+  /// **'Please select at least one goal to continue.'**
+  String get onboardingGoalRequired;
+
+  /// Error message when onboarding completion check fails
+  ///
+  /// In en, this message translates to:
+  /// **'Something went wrong. Please try again.'**
+  String get onboardingCheckFailed;
+
   /// Generic error message
   ///
   /// In en, this message translates to:
@@ -2155,7 +2179,7 @@ abstract class AppLocalizations {
   /// Tooltip for unavailable practice mode
   ///
   /// In en, this message translates to:
-  /// **'{title} — Coming soon'**
+  /// **'{title} ΓÇö Coming soon'**
   String modeComingSoon(String title);
 
   /// Snackbar when Tuno Exercises is tapped
@@ -2275,7 +2299,7 @@ abstract class AppLocalizations {
   /// Message showing recording saved with duration
   ///
   /// In en, this message translates to:
-  /// **'Recording saved — {duration}'**
+  /// **'Recording saved ΓÇö {duration}'**
   String recordingSavedDuration(String duration);
 
   /// Fallback error message
@@ -2419,7 +2443,7 @@ abstract class AppLocalizations {
   /// Supported file formats and size limit
   ///
   /// In en, this message translates to:
-  /// **'MP3, WAV, M4A or AAC — maximum 50 MB'**
+  /// **'MP3, WAV, M4A or AAC ΓÇö maximum 50 MB'**
   String get audioFileFormats;
 
   /// Button to select a song
@@ -2481,6 +2505,108 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Tuno logo'**
   String get tunoLogoSemanticLabel;
+
+  /// Error message when recording fails to start
+  ///
+  /// In en, this message translates to:
+  /// **'Could not start recording. Please try again.'**
+  String get voiceRecordingStartFailed;
+
+  /// Error message when recording fails to stop
+  ///
+  /// In en, this message translates to:
+  /// **'Could not stop recording. Please try again.'**
+  String get voiceRecordingStopFailed;
+
+  /// Error message when audio playback fails to start
+  ///
+  /// In en, this message translates to:
+  /// **'Could not start playback. Please try again.'**
+  String get voiceRecordingPlaybackFailed;
+
+  /// Error message when audio playback fails to pause
+  ///
+  /// In en, this message translates to:
+  /// **'Could not pause playback. Please try again.'**
+  String get voiceRecordingPauseFailed;
+
+  /// Error message when audio playback fails to resume
+  ///
+  /// In en, this message translates to:
+  /// **'Could not resume playback. Please try again.'**
+  String get voiceRecordingResumeFailed;
+
+  /// Error message when changing the playback position fails
+  ///
+  /// In en, this message translates to:
+  /// **'Could not change the playback position. Please try again.'**
+  String get voiceRecordingSeekFailed;
+
+  /// Error message when the selected file has an unsupported format
+  ///
+  /// In en, this message translates to:
+  /// **'Unsupported file format. Please choose an MP3, WAV, M4A, or AAC file.'**
+  String get referenceTrackUnsupportedFormat;
+
+  /// Error message when the selected file exceeds the size limit
+  ///
+  /// In en, this message translates to:
+  /// **'File too large. Maximum allowed size is 50 MB.'**
+  String get referenceTrackFileTooLarge;
+
+  /// Error message when the file content cannot be read on this platform
+  ///
+  /// In en, this message translates to:
+  /// **'Could not read the file content on this platform. Please try again.'**
+  String get referenceTrackUnreadableFile;
+
+  /// Error message when the file location cannot be determined on this platform
+  ///
+  /// In en, this message translates to:
+  /// **'Could not determine the file location. Please try again.'**
+  String get referenceTrackMissingPath;
+
+  /// Singing goal: improve pitch accuracy
+  ///
+  /// In en, this message translates to:
+  /// **'Improve pitch accuracy'**
+  String get improvePitchAccuracy;
+
+  /// Singing goal: increase vocal range
+  ///
+  /// In en, this message translates to:
+  /// **'Increase vocal range'**
+  String get increaseVocalRange;
+
+  /// Singing goal: improve breath control
+  ///
+  /// In en, this message translates to:
+  /// **'Improve breath control'**
+  String get improveBreathControl;
+
+  /// Singing goal: improve rhythm and timing
+  ///
+  /// In en, this message translates to:
+  /// **'Improve rhythm and timing'**
+  String get improveRhythmTiming;
+
+  /// Singing goal: improve voice stability
+  ///
+  /// In en, this message translates to:
+  /// **'Improve voice stability'**
+  String get improveVoiceStability;
+
+  /// Singing goal: build singing confidence
+  ///
+  /// In en, this message translates to:
+  /// **'Build singing confidence'**
+  String get buildSingingConfidence;
+
+  /// Error message when settings cannot be opened automatically
+  ///
+  /// In en, this message translates to:
+  /// **'Could not open settings. Please enable microphone access manually.'**
+  String get couldNotOpenSettingsManualInstructions;
 }
 
 class _AppLocalizationsDelegate
