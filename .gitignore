@@ -43,3 +43,10 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Temp/backup files from ARB repair work
+*.bak
+check*.py
+diag_*.ps1
+missing_check_results.txt
+output.txt
