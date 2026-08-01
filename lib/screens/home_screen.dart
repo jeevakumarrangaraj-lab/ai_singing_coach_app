@@ -8,6 +8,7 @@ import '../core/widgets/tuno_bottom_navigation.dart';
 import '../core/widgets/tuno_microphone_emblem.dart';
 import '../features/auth/presentation/auth_controller.dart';
 import '../features/notifications/presentation/notification_controller.dart';
+import '../l10n/app_localizations.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
@@ -37,6 +38,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   }
 
   void _onDestinationSelected(int index) {
+    final l10n = AppLocalizations.of(context)!;
     switch (index) {
       case 0:
         break;
@@ -47,10 +49,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         context.push('/practice');
         break;
       case 3:
-        _showComingSoon('Progress');
+        _showComingSoon(l10n.progress, l10n);
         break;
       case 4:
-        _showComingSoon('Profile');
+        _showComingSoon(l10n.profile, l10n);
         break;
     }
     if (index != _currentNavIndex) {
@@ -58,11 +60,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     }
   }
 
-  void _showComingSoon(String feature) {
+  void _showComingSoon(String feature, AppLocalizations l10n) {
     if (!mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text('$feature coming soon'),
+        content: Text(l10n.featureComingSoonSimple(feature)),
         behavior: SnackBarBehavior.floating,
         margin: const EdgeInsets.all(16),
         duration: const Duration(seconds: 2),
@@ -72,11 +74,12 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final authState = ref.watch(authControllerProvider);
     final user = authState.user;
     final displayName = user?.displayName?.isNotEmpty == true
         ? user!.displayName!
-        : 'Singer';
+        : l10n.tunoSinger;
     final cs = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
     final isDark = Theme.of(context).brightness == Brightness.dark;
@@ -101,7 +104,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   Positioned.fill(
                     child: const IgnorePointer(
                       ignoring: true,
-                      child: DashboardMusicDecorations(),
+                      child: DashboardMusicDecorations(animate: true),
                     ),
                   ),
                   // ── Foreground content ──
@@ -119,7 +122,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                               child: Row(
                                 children: [
                                   Text(
-                                    'Tuno',
+                                    l10n.tuno,
                                     style: textTheme.headlineMedium?.copyWith(
                                       fontSize: 28,
                                       fontWeight: FontWeight.w800,
@@ -131,11 +134,12 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                     unreadCount: unreadCount,
                                     onPressed: () =>
                                         context.push('/notifications'),
+                                    l10n: l10n,
                                   ),
                                   const SizedBox(width: 8),
                                   _HeaderIconButton(
                                     icon: Icons.settings_rounded,
-                                    tooltip: 'Settings',
+                                    tooltip: l10n.settings,
                                     onPressed: () => context.push('/settings'),
                                   ),
                                 ],
@@ -144,7 +148,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                             // ── Greeting ──
                             const SizedBox(height: 30),
                             Text(
-                              'Hello, $displayName 👋',
+                              l10n.helloUser(displayName),
                               style: textTheme.headlineMedium?.copyWith(
                                 fontSize: 30,
                                 fontWeight: FontWeight.w800,
@@ -153,7 +157,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                             ),
                             const SizedBox(height: 8),
                             Text(
-                              'Ready to improve your voice today?',
+                              l10n.readyToImprove,
                               style: textTheme.bodyLarge?.copyWith(
                                 fontSize: 16,
                                 color: cs.onSurfaceVariant,
@@ -165,12 +169,13 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                             // ── Main Practice Card ──
                             _MainPracticeCard(
                               onTap: () => context.push('/practice/modes'),
+                              l10n: l10n,
                             ),
                             const SizedBox(height: 32),
 
                             // ── Progress Section ──
                             Text(
-                              'Your Progress',
+                              l10n.yourProgress,
                               style: textTheme.headlineSmall?.copyWith(
                                 fontSize: 22,
                                 fontWeight: FontWeight.w700,
@@ -187,12 +192,14 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                       Expanded(
                                         child: _PracticeProgressCard(
                                           isDark: isDark,
+                                          l10n: l10n,
                                         ),
                                       ),
                                       const SizedBox(width: 14),
                                       Expanded(
                                         child: _StreakProgressCard(
                                           isDark: isDark,
+                                          l10n: l10n,
                                         ),
                                       ),
                                     ],
@@ -200,9 +207,15 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                 }
                                 return Column(
                                   children: [
-                                    _PracticeProgressCard(isDark: isDark),
+                                    _PracticeProgressCard(
+                                      isDark: isDark,
+                                      l10n: l10n,
+                                    ),
                                     const SizedBox(height: 14),
-                                    _StreakProgressCard(isDark: isDark),
+                                    _StreakProgressCard(
+                                      isDark: isDark,
+                                      l10n: l10n,
+                                    ),
                                   ],
                                 );
                               },
@@ -234,10 +247,12 @@ class _NotificationBellButton extends StatelessWidget {
   const _NotificationBellButton({
     required this.unreadCount,
     required this.onPressed,
+    required this.l10n,
   });
 
   final int unreadCount;
   final VoidCallback onPressed;
+  final AppLocalizations l10n;
 
   @override
   Widget build(BuildContext context) {
@@ -245,11 +260,11 @@ class _NotificationBellButton extends StatelessWidget {
     final showBadge = unreadCount > 0;
 
     final semanticsLabel = showBadge
-        ? 'Notifications, $unreadCount unread'
-        : 'Notifications';
+        ? l10n.unreadCountSemantic(unreadCount)
+        : l10n.notifications;
 
     return Tooltip(
-      message: 'Notifications',
+      message: l10n.notifications,
       child: Semantics(
         button: true,
         label: semanticsLabel,
@@ -358,9 +373,10 @@ class _HeaderIconButton extends StatelessWidget {
 /// Main Practice Card with TunoMicrophoneEmblem and gradient CTA.
 /// Reference bounds: x=52, y=405, width=918, height=553, radius ~34.
 class _MainPracticeCard extends StatelessWidget {
-  const _MainPracticeCard({required this.onTap});
+  const _MainPracticeCard({required this.onTap, required this.l10n});
 
   final VoidCallback onTap;
+  final AppLocalizations l10n;
 
   // CTA gradient: cyan-to-deep-blue
   static const _ctaGradient = LinearGradient(
@@ -410,7 +426,7 @@ class _MainPracticeCard extends StatelessWidget {
               // Gap after microphone
               const SizedBox(height: 24),
               Text(
-                'Start Voice Practice',
+                l10n.startVoicePractice,
                 style: textTheme.headlineSmall?.copyWith(
                   fontSize: 22,
                   fontWeight: FontWeight.w800,
@@ -420,7 +436,7 @@ class _MainPracticeCard extends StatelessWidget {
               ),
               const SizedBox(height: 10),
               Text(
-                'Record your voice and receive instant feedback.',
+                l10n.recordAndGetFeedback,
                 textAlign: TextAlign.center,
                 style: textTheme.bodyLarge?.copyWith(
                   fontSize: 15,
@@ -432,7 +448,7 @@ class _MainPracticeCard extends StatelessWidget {
               // Gradient CTA with thin metallic-gold highlight border
               Semantics(
                 button: true,
-                label: 'Start Practice',
+                label: l10n.startPractice,
                 child: MouseRegion(
                   cursor: SystemMouseCursors.click,
                   child: _GradientCTAButton(
@@ -452,7 +468,7 @@ class _MainPracticeCard extends StatelessWidget {
                         ),
                         const SizedBox(width: 10),
                         Text(
-                          'Start Practice',
+                          l10n.startPractice,
                           style: textTheme.titleMedium?.copyWith(
                             fontSize: 16,
                             fontWeight: FontWeight.w700,
@@ -596,9 +612,10 @@ class _ProgressCardBase extends StatelessWidget {
 /// Practice progress card with cyan accent.
 /// Reference: left card ~x=52, width=440, height=265, ratio ~1.66.
 class _PracticeProgressCard extends StatelessWidget {
-  const _PracticeProgressCard({required this.isDark});
+  const _PracticeProgressCard({required this.isDark, required this.l10n});
 
   final bool isDark;
+  final AppLocalizations l10n;
 
   @override
   Widget build(BuildContext context) {
@@ -642,7 +659,7 @@ class _PracticeProgressCard extends StatelessWidget {
                 ),
                 const SizedBox(height: 14),
                 Text(
-                  '0 min',
+                  l10n.zeroMin,
                   style: textTheme.titleLarge?.copyWith(
                     fontSize: 18,
                     fontWeight: FontWeight.w800,
@@ -653,7 +670,7 @@ class _PracticeProgressCard extends StatelessWidget {
                 ),
                 const SizedBox(height: 2),
                 Text(
-                  'Practice',
+                  l10n.practiceLabel,
                   style: textTheme.bodySmall?.copyWith(
                     fontSize: 13,
                     fontWeight: FontWeight.w500,
@@ -676,9 +693,10 @@ class _PracticeProgressCard extends StatelessWidget {
 /// Streak progress card with metallic-gold accent.
 /// Reference: right card ~x=530, width=440, height=265, ratio ~1.66.
 class _StreakProgressCard extends StatelessWidget {
-  const _StreakProgressCard({required this.isDark});
+  const _StreakProgressCard({required this.isDark, required this.l10n});
 
   final bool isDark;
+  final AppLocalizations l10n;
 
   @override
   Widget build(BuildContext context) {
@@ -726,7 +744,7 @@ class _StreakProgressCard extends StatelessWidget {
                 ),
                 const SizedBox(height: 14),
                 Text(
-                  '0 days',
+                  l10n.zeroDays,
                   style: textTheme.titleLarge?.copyWith(
                     fontSize: 18,
                     fontWeight: FontWeight.w800,
@@ -737,7 +755,7 @@ class _StreakProgressCard extends StatelessWidget {
                 ),
                 const SizedBox(height: 2),
                 Text(
-                  'Streak',
+                  l10n.streak,
                   style: textTheme.bodySmall?.copyWith(
                     fontSize: 13,
                     fontWeight: FontWeight.w500,

@@ -12,6 +12,7 @@ import '../widgets/onboarding_review_step.dart';
 import '../widgets/permission_education_step.dart';
 import '../onboarding_controller.dart';
 import '../onboarding_state.dart';
+import '../../../../l10n/app_localizations.dart';
 
 class OnboardingScreen extends ConsumerStatefulWidget {
   const OnboardingScreen({super.key});
@@ -35,6 +36,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
     final controller = ref.read(onboardingControllerProvider.notifier);
     final colorScheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
+    final l10n = AppLocalizations.of(context)!;
 
     return Scaffold(
       backgroundColor: AppColors.tunoDarkBackground,
@@ -60,7 +62,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
                           Text(
-                            'Set up your Tuno experience',
+                            l10n.setupTunoExperience,
                             style: textTheme.headlineMedium?.copyWith(
                               fontSize: 32,
                               fontWeight: FontWeight.w800,
@@ -70,7 +72,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                           ),
                           const SizedBox(height: 8),
                           Text(
-                            'Step ${state.currentStep + 1} of 5',
+                            l10n.stepOf(state.currentStep + 1, 5),
                             style: textTheme.bodyMedium?.copyWith(
                               fontSize: 16,
                               color: colorScheme.onSurfaceVariant,
@@ -104,6 +106,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                                             !state.isLoading
                                         ? controller.previousStep
                                         : null,
+                                    l10n: l10n,
                                   ),
                                 ),
                                 const SizedBox(width: 16),
@@ -117,6 +120,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                                               controller.nextStep();
                                             }
                                           },
+                                    l10n: l10n,
                                   ),
                                 ),
                               ],
@@ -129,6 +133,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                                     onPressed: !state.isLoading
                                         ? controller.previousStep
                                         : null,
+                                    l10n: l10n,
                                   ),
                                 ),
                                 const SizedBox(width: 16),
@@ -260,7 +265,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
     OnboardingState state,
     OnboardingController controller,
   ) {
-switch (state.currentStep) {
+    switch (state.currentStep) {
       case 0:
         return const LanguageStep();
       case 1:
@@ -275,7 +280,9 @@ switch (state.currentStep) {
         return _buildStepPlaceholder(
           context,
           'Review',
-          state.errorMessage,
+          state.errorCode == null
+              ? null
+              : AppLocalizations.of(context)!.setupSaveFailed,
         );
     }
   }
@@ -283,9 +290,10 @@ switch (state.currentStep) {
 
 /// Outlined back button matching the login screen style.
 class _OutlinedBackButton extends StatelessWidget {
-  const _OutlinedBackButton({required this.onPressed});
+  const _OutlinedBackButton({required this.onPressed, required this.l10n});
 
   final VoidCallback? onPressed;
+  final AppLocalizations l10n;
 
   @override
   Widget build(BuildContext context) {
@@ -297,11 +305,11 @@ class _OutlinedBackButton extends StatelessWidget {
 
     return Semantics(
       button: true,
-      label: 'Back',
+      label: l10n.back,
       child: OutlinedButton.icon(
         onPressed: onPressed,
         icon: const Icon(Icons.arrow_back_ios_new_rounded, size: 18),
-        label: const Text('Back'),
+        label: Text(l10n.back),
         style: OutlinedButton.styleFrom(
           foregroundColor: colorScheme.onSurface,
           side: BorderSide(color: borderColor, width: 1.5),
@@ -318,9 +326,10 @@ class _OutlinedBackButton extends StatelessWidget {
 
 /// Gradient continue button with metallic-gold border matching login screen.
 class _GradientContinueButton extends StatefulWidget {
-  const _GradientContinueButton({required this.onPressed});
+  const _GradientContinueButton({required this.onPressed, required this.l10n});
 
   final VoidCallback? onPressed;
+  final AppLocalizations l10n;
 
   @override
   State<_GradientContinueButton> createState() =>
@@ -363,7 +372,7 @@ class _GradientContinueButtonState extends State<_GradientContinueButton> {
     return Semantics(
       button: true,
       enabled: enabled,
-      label: 'Continue',
+      label: widget.l10n.continueAction,
       child: MouseRegion(
         onEnter: (_) => setState(() => _hovered = true),
         onExit: (_) => setState(() => _hovered = false),
@@ -416,21 +425,21 @@ class _GradientContinueButtonState extends State<_GradientContinueButton> {
                     highlightColor: Colors.white.withValues(alpha: 0.10),
                     hoverColor: Colors.transparent,
                     focusColor: Colors.transparent,
-                    child: const Center(
+                    child: Center(
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Text(
-                            'Continue',
-                            style: TextStyle(
+                            widget.l10n.continueAction,
+                            style: const TextStyle(
                               color: Colors.white,
                               fontSize: 16,
                               fontWeight: FontWeight.w700,
                               letterSpacing: 0.2,
                             ),
                           ),
-                          SizedBox(width: 8),
-                          Icon(
+                          const SizedBox(width: 8),
+                          const Icon(
                             Icons.arrow_forward_ios_rounded,
                             size: 18,
                             color: Colors.white,

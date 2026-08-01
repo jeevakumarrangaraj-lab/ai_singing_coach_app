@@ -4,13 +4,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../auth/presentation/auth_controller.dart';
 import '../data/onboarding_providers.dart';
 import '../data/onboarding_repository.dart';
+import 'onboarding_state.dart' show OnboardingErrorCode;
 
 /// State representing the completion status of onboarding.
 class OnboardingCompletionState {
   const OnboardingCompletionState({
     required this.isLoading,
     required this.isCompleted,
-    this.errorMessage,
+    this.errorCode,
   });
 
   /// True while a Firestore call is in-flight.
@@ -19,20 +20,20 @@ class OnboardingCompletionState {
   /// True only when the authenticated user has completed onboarding.
   final bool isCompleted;
 
-  /// A user-friendly error description, or null.
-  final String? errorMessage;
+  /// Error code that consuming widgets map to an l10n getter.
+  final OnboardingErrorCode? errorCode;
 
   OnboardingCompletionState copyWith({
     bool? isLoading,
     bool? isCompleted,
-    Object? errorMessage = _shouldClear,
+    Object? errorCode = _shouldClearCode,
   }) {
     return OnboardingCompletionState(
       isLoading: isLoading ?? this.isLoading,
       isCompleted: isCompleted ?? this.isCompleted,
-      errorMessage: identical(errorMessage, _shouldClear)
-          ? this.errorMessage
-          : errorMessage as String?,
+      errorCode: identical(errorCode, _shouldClearCode)
+          ? this.errorCode
+          : errorCode as OnboardingErrorCode?,
     );
   }
 
@@ -41,7 +42,7 @@ class OnboardingCompletionState {
       const OnboardingCompletionState(
         isLoading: true,
         isCompleted: false,
-        errorMessage: null,
+        errorCode: null,
       );
 
   /// Safe default when there is no authenticated user.
@@ -49,11 +50,11 @@ class OnboardingCompletionState {
       const OnboardingCompletionState(
         isLoading: false,
         isCompleted: false,
-        errorMessage: null,
+        errorCode: null,
       );
 }
 
-const _shouldClear = Object();
+const _shouldClearCode = Object();
 
 class OnboardingCompletionController
     extends StateNotifier<OnboardingCompletionState> {
@@ -97,7 +98,7 @@ class OnboardingCompletionController
     state = const OnboardingCompletionState(
       isLoading: false,
       isCompleted: true,
-      errorMessage: null,
+      errorCode: null,
     );
   }
 
@@ -116,7 +117,7 @@ class OnboardingCompletionController
       return;
     }
 
-    state = state.copyWith(isLoading: true, errorMessage: null);
+    state = state.copyWith(isLoading: true, errorCode: null);
     await _loadCompletion(userId);
   }
 
@@ -151,7 +152,7 @@ class OnboardingCompletionController
       state = OnboardingCompletionState(
         isLoading: false,
         isCompleted: completed,
-        errorMessage: null,
+        errorCode: null,
       );
     } catch (error, stackTrace) {
       debugPrint('Onboarding completion check failed: $error');
@@ -164,7 +165,7 @@ class OnboardingCompletionController
       state = OnboardingCompletionState(
         isLoading: false,
         isCompleted: false,
-        errorMessage: 'Something went wrong. Please try again.',
+        errorCode: OnboardingErrorCode.checkFailed,
       );
     }
   }

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../l10n/app_localizations.dart';
 import '../../domain/onboarding_profile.dart';
 import '../onboarding_controller.dart';
+import '../onboarding_state.dart' show OnboardingErrorCode;
 
 class ExperienceStep extends ConsumerWidget {
   const ExperienceStep({super.key});
@@ -13,6 +15,7 @@ class ExperienceStep extends ConsumerWidget {
     final controller = ref.read(onboardingControllerProvider.notifier);
     final colorScheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
+    final l10n = AppLocalizations.of(context)!;
 
     final experiences = SingingExperience.values;
 
@@ -20,7 +23,7 @@ class ExperienceStep extends ConsumerWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Text(
-          'What is your singing experience?',
+          l10n.whatIsYourExperience,
           style: textTheme.headlineMedium?.copyWith(
             fontSize: 22,
             fontWeight: FontWeight.w700,
@@ -30,7 +33,7 @@ class ExperienceStep extends ConsumerWidget {
         ),
         const SizedBox(height: 8),
         Text(
-          'This helps us personalize your practice sessions.',
+          l10n.experienceSubtitle,
           style: textTheme.bodyMedium?.copyWith(
             color: colorScheme.onSurfaceVariant,
             height: 1.4,
@@ -45,11 +48,58 @@ class ExperienceStep extends ConsumerWidget {
               experience: experience,
               isSelected: state.experienceLevel == experience,
               onTap: () => controller.selectExperience(experience),
+              l10n: l10n,
             ),
           ),
         ),
+        // Validation error
+        if (state.errorCode != null) ...[
+          const SizedBox(height: 8),
+          Container(
+            padding: const EdgeInsets.all(12),
+            decoration: BoxDecoration(
+              color: colorScheme.error.withValues(alpha: 0.15),
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(
+                color: colorScheme.error.withValues(alpha: 0.4),
+              ),
+            ),
+            child: Row(
+              children: [
+                Icon(
+                  Icons.error_outline_rounded,
+                  color: colorScheme.error,
+                  size: 20,
+                ),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: Text(
+                    _errorMessage(context, state.errorCode!),
+                    style: textTheme.bodyMedium?.copyWith(
+                      color: colorScheme.error,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
       ],
     );
+  }
+
+  /// Maps [OnboardingErrorCode] to the correct l10n error string.
+  String _errorMessage(BuildContext context, OnboardingErrorCode code) {
+    final l10n = AppLocalizations.of(context)!;
+    return switch (code) {
+      OnboardingErrorCode.languageRequired => l10n.onboardingLanguageRequired,
+      OnboardingErrorCode.experienceRequired =>
+        l10n.onboardingExperienceRequired,
+      OnboardingErrorCode.goalRequired => l10n.onboardingGoalRequired,
+      OnboardingErrorCode.saveFailed => l10n.setupSaveFailed,
+      OnboardingErrorCode.checkFailed => l10n.onboardingCheckFailed,
+    };
   }
 }
 
@@ -58,22 +108,37 @@ class _ExperienceCard extends StatelessWidget {
     required this.experience,
     required this.isSelected,
     required this.onTap,
+    required this.l10n,
   });
 
   final SingingExperience experience;
   final bool isSelected;
   final VoidCallback onTap;
+  final AppLocalizations l10n;
+
+  String _getLabel(SingingExperience exp) {
+    switch (exp) {
+      case SingingExperience.beginner:
+        return l10n.beginner;
+      case SingingExperience.intermediate:
+        return l10n.intermediate;
+      case SingingExperience.advanced:
+        return l10n.advanced;
+      case SingingExperience.professional:
+        return l10n.professional;
+    }
+  }
 
   String _getDescription(SingingExperience exp) {
     switch (exp) {
       case SingingExperience.beginner:
-        return 'I am starting my singing journey.';
+        return l10n.beginnerDescription;
       case SingingExperience.intermediate:
-        return 'I understand basic pitch and rhythm.';
+        return l10n.intermediateDescription;
       case SingingExperience.advanced:
-        return 'I practise regularly and want detailed improvement.';
+        return l10n.advancedDescription;
       case SingingExperience.professional:
-        return 'I perform, teach or record professionally.';
+        return l10n.professionalDescription;
     }
   }
 
@@ -100,7 +165,7 @@ class _ExperienceCard extends StatelessWidget {
     return Semantics(
       selected: isSelected,
       button: true,
-      label: '${experience.label} experience',
+      label: l10n.experienceLabel(_getLabel(experience)),
       child: Card(
         clipBehavior: Clip.antiAlias,
         elevation: 0,
@@ -146,7 +211,7 @@ class _ExperienceCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        experience.label,
+                        _getLabel(experience),
                         style: textTheme.titleMedium?.copyWith(
                           fontSize: 17,
                           fontWeight: FontWeight.w700,

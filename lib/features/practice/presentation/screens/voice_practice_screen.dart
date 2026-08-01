@@ -3,6 +3,7 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:ai_singing_coach/l10n/app_localizations.dart';
 
 import '../../../../core/widgets/tuno_dashboard_background.dart';
 import '../../../../core/enums/icon_position.dart';
@@ -35,26 +36,26 @@ class _VoicePracticeScreenState extends ConsumerState<VoicePracticeScreen>
       final currentState = ref.read(voiceRecordingControllerProvider);
       final controller = ref.read(voiceRecordingControllerProvider.notifier);
 
-      if (!context.mounted) return;
-
       // Recording: confirm discard.
       if (currentState.isRecording) {
+        if (!context.mounted) return;
         final cs = Theme.of(context).colorScheme;
+        final l10n = AppLocalizations.of(context)!;
         final shouldDiscard = await showDialog<bool>(
           context: context,
           builder: (dialogContext) => AlertDialog(
             backgroundColor: cs.surfaceContainerHighest,
-            title: const Text('Discard recording?'),
-            content: const Text('Your current recording will not be saved.'),
+            title: Text(l10n.discardRecordingTitle),
+            content: Text(l10n.discardRecordingContent),
             actions: [
               TextButton(
                 onPressed: () => Navigator.of(dialogContext).pop(false),
-                child: const Text('Keep Recording'),
+                child: Text(l10n.keepRecording),
               ),
               TextButton(
                 onPressed: () => Navigator.of(dialogContext).pop(true),
                 style: TextButton.styleFrom(foregroundColor: cs.error),
-                child: const Text('Discard and Go Back'),
+                child: Text(l10n.discardAndGoBack),
               ),
             ],
           ),
@@ -140,10 +141,12 @@ class _VoicePracticeScreenState extends ConsumerState<VoicePracticeScreen>
     final controller = ref.read(voiceRecordingControllerProvider.notifier);
     final cs = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
+    final l10n = AppLocalizations.of(context)!;
 
     return Scaffold(
       backgroundColor: cs.surface,
       body: TunoDashboardBackground(
+        animate: true,
         child: Stack(
           children: [
             SafeArea(
@@ -162,7 +165,7 @@ class _VoicePracticeScreenState extends ConsumerState<VoicePracticeScreen>
                         const SizedBox(height: 44),
                         // ── Title — centered, below back button ──
                         Text(
-                          'Voice Practice',
+                          l10n.voicePractice,
                           style: textTheme.headlineLarge?.copyWith(
                             fontSize: 32,
                             fontWeight: FontWeight.w800,
@@ -170,7 +173,7 @@ class _VoicePracticeScreenState extends ConsumerState<VoicePracticeScreen>
                         ),
                         const SizedBox(height: 12),
                         Text(
-                          'Record your singing and get AI-powered feedback on pitch, rhythm, and tone.',
+                          l10n.voicePracticeSubtitle,
                           textAlign: TextAlign.center,
                           style: textTheme.bodyLarge?.copyWith(
                             color: cs.onSurfaceVariant,
@@ -193,7 +196,7 @@ class _VoicePracticeScreenState extends ConsumerState<VoicePracticeScreen>
               top: 8,
               left: 8,
               child: Tooltip(
-                message: 'Back',
+                message: l10n.back,
                 child: AppBackButton(
                   onPressed: _handleBackPressed,
                   showOnlyIfCanPop: false,
@@ -212,6 +215,8 @@ class _VoicePracticeScreenState extends ConsumerState<VoicePracticeScreen>
     ColorScheme cs,
     VoiceRecordingController controller,
   ) {
+    final l10n = AppLocalizations.of(context)!;
+    final code = state.errorCode;
     return Card(
       color: cs.surfaceContainerHighest,
       surfaceTintColor: Colors.transparent,
@@ -229,18 +234,37 @@ class _VoicePracticeScreenState extends ConsumerState<VoicePracticeScreen>
             const SizedBox(width: 12),
             Expanded(
               child: Text(
-                state.whenOrNull(error: (msg) => msg) ?? 'An error occurred',
+                code == null
+                    ? l10n.anErrorOccurred
+                    : _errorMessage(context, code),
                 style: textTheme.bodyMedium?.copyWith(color: cs.error),
               ),
             ),
             TextButton(
               onPressed: () => controller.reset(),
-              child: Text('Dismiss'),
+              child: Text(l10n.dismiss),
             ),
           ],
         ),
       ),
     );
+  }
+
+  /// Maps [VoiceRecordingErrorCode] to the correct l10n error string.
+  String _errorMessage(BuildContext context, VoiceRecordingErrorCode code) {
+    final l10n = AppLocalizations.of(context)!;
+    return switch (code) {
+      VoiceRecordingErrorCode.permissionDenied => l10n.micPermissionRequired,
+      VoiceRecordingErrorCode.startFailed => l10n.voiceRecordingStartFailed,
+      VoiceRecordingErrorCode.stopFailed => l10n.voiceRecordingStopFailed,
+      VoiceRecordingErrorCode.playbackFailed =>
+        l10n.voiceRecordingPlaybackFailed,
+      VoiceRecordingErrorCode.pauseFailed => l10n.voiceRecordingPauseFailed,
+      VoiceRecordingErrorCode.resumeFailed => l10n.voiceRecordingResumeFailed,
+      VoiceRecordingErrorCode.seekFailed => l10n.voiceRecordingSeekFailed,
+      VoiceRecordingErrorCode.deleteFailed => l10n.failedToDeleteRecording,
+      VoiceRecordingErrorCode.audioPathMissing => l10n.unableToLoadAudio,
+    };
   }
 
   Widget _buildRecordingUI(
@@ -249,6 +273,7 @@ class _VoicePracticeScreenState extends ConsumerState<VoicePracticeScreen>
     TextTheme textTheme,
     ColorScheme cs,
   ) {
+    final l10n = AppLocalizations.of(context)!;
     final isRecording = state.isRecording;
     final isRequestingPermission = state is RequestingPermissionState;
     final isPermissionDenied = state is PermissionDeniedState;
@@ -261,7 +286,7 @@ class _VoicePracticeScreenState extends ConsumerState<VoicePracticeScreen>
           CircularProgressIndicator(color: cs.primary),
           const SizedBox(height: 24),
           Text(
-            'Requesting microphone permission...',
+            l10n.requestingMicPermission,
             style: textTheme.bodyLarge?.copyWith(color: cs.onSurfaceVariant),
           ),
         ],
@@ -274,19 +299,19 @@ class _VoicePracticeScreenState extends ConsumerState<VoicePracticeScreen>
           Icon(Icons.mic_off_rounded, size: 80, color: cs.error),
           const SizedBox(height: 24),
           Text(
-            'Microphone Permission Required',
+            l10n.micPermissionRequired,
             style: textTheme.titleLarge?.copyWith(color: cs.onSurface),
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 12),
           Text(
-            'Please enable microphone access in settings to record your voice.',
+            l10n.enableMicInSettings,
             textAlign: TextAlign.center,
             style: textTheme.bodyMedium?.copyWith(color: cs.onSurfaceVariant),
           ),
           const SizedBox(height: 24),
           AuthElevatedButton(
-            label: 'Open Settings',
+            label: l10n.openSettings,
             onPressed: () async {
               await controller.requestPermission();
             },
@@ -370,7 +395,7 @@ class _VoicePracticeScreenState extends ConsumerState<VoicePracticeScreen>
         // ── Instruction text below panel ──
         const SizedBox(height: 20),
         Text(
-          'Or tap the microphone above',
+          l10n.orTapMicAbove,
           style: textTheme.bodyMedium?.copyWith(
             color: cs.onSurfaceVariant.withValues(alpha: 0.7),
           ),
@@ -390,10 +415,13 @@ class _VoicePracticeScreenState extends ConsumerState<VoicePracticeScreen>
   ) {
     const micDiameter = 180.0;
     const goldRingWidth = 2.5;
+    final l10n = AppLocalizations.of(context)!;
 
     return Semantics(
       button: true,
-      label: isRecording ? 'Stop recording' : 'Start recording',
+      label: isRecording
+          ? l10n.stopRecordingSemantic
+          : l10n.startRecordingSemantic,
       child: MouseRegion(
         cursor: SystemMouseCursors.click,
         child: GestureDetector(
@@ -518,6 +546,7 @@ class _VoicePracticeScreenState extends ConsumerState<VoicePracticeScreen>
     TextTheme textTheme,
     ColorScheme cs,
   ) {
+    final l10n = AppLocalizations.of(context)!;
     final duration = state.duration ?? Duration.zero;
     final statusColor = state.isRecording
         ? AppColors.cyanAccent
@@ -537,8 +566,8 @@ class _VoicePracticeScreenState extends ConsumerState<VoicePracticeScreen>
         const SizedBox(height: 6),
         Text(
           state.isRecording
-              ? 'Recording...'
-              : (state.hasRecording ? 'Recording saved' : 'Ready to record'),
+              ? l10n.recording
+              : (state.hasRecording ? l10n.recordingSaved : l10n.readyToRecord),
           style: textTheme.bodyLarge?.copyWith(
             color: statusColor,
             fontWeight: state.isRecording || state.hasRecording
@@ -563,6 +592,7 @@ class _VoicePracticeScreenState extends ConsumerState<VoicePracticeScreen>
     bool isDisabled,
     ColorScheme cs,
   ) {
+    final l10n = AppLocalizations.of(context)!;
     if (isRecording) {
       return LayoutBuilder(
         builder: (context, constraints) {
@@ -570,7 +600,7 @@ class _VoicePracticeScreenState extends ConsumerState<VoicePracticeScreen>
           final useRowLayout = constraints.maxWidth >= minWidthForRow;
 
           final cancelButton = AuthSecondaryButton(
-            label: 'Cancel',
+            label: l10n.cancel,
             onPressed: isDisabled
                 ? null
                 : () async {
@@ -634,7 +664,9 @@ class _VoicePracticeScreenState extends ConsumerState<VoicePracticeScreen>
                   const SizedBox(width: 12),
                   Expanded(
                     child: Text(
-                      'Recording saved — ${_formatDuration(state.duration ?? Duration.zero)}',
+                      l10n.recordingSavedDuration(
+                        _formatDuration(state.duration ?? Duration.zero),
+                      ),
                       style: textTheme.bodyMedium?.copyWith(
                         color: cs.tertiary,
                         fontWeight: FontWeight.w600,
@@ -650,7 +682,7 @@ class _VoicePracticeScreenState extends ConsumerState<VoicePracticeScreen>
             children: [
               Expanded(
                 child: AuthDestructiveButton(
-                  label: 'Delete & Record Again',
+                  label: l10n.deleteAndRecordAgain,
                   onPressed: () {
                     final path = state.audioPath;
                     if (path != null) {
@@ -664,7 +696,7 @@ class _VoicePracticeScreenState extends ConsumerState<VoicePracticeScreen>
               const SizedBox(width: 16),
               Expanded(
                 child: AuthElevatedButton(
-                  label: 'Review Recording',
+                  label: l10n.reviewRecording,
                   onPressed: () {
                     final path = state.audioPath;
                     if (path != null) {
@@ -692,6 +724,7 @@ class _VoicePracticeScreenState extends ConsumerState<VoicePracticeScreen>
     bool isDisabled,
     VoiceRecordingController controller,
   ) {
+    final l10n = AppLocalizations.of(context)!;
     return SizedBox(
       width: double.infinity,
       height: 52,
@@ -741,7 +774,7 @@ class _VoicePracticeScreenState extends ConsumerState<VoicePracticeScreen>
                 ),
                 const SizedBox(width: 10),
                 Text(
-                  'Start Recording',
+                  l10n.startRecording,
                   style: TextStyle(
                     fontSize: 17,
                     fontWeight: FontWeight.w700,
@@ -764,6 +797,7 @@ class _VoicePracticeScreenState extends ConsumerState<VoicePracticeScreen>
     bool isDisabled,
     VoiceRecordingController controller,
   ) {
+    final l10n = AppLocalizations.of(context)!;
     return SizedBox(
       height: 52,
       child: Material(
@@ -794,8 +828,8 @@ class _VoicePracticeScreenState extends ConsumerState<VoicePracticeScreen>
               children: [
                 Icon(Icons.stop_rounded, size: 20, color: Colors.white),
                 const SizedBox(width: 10),
-                const Text(
-                  'Stop Recording',
+                Text(
+                  l10n.stopRecording,
                   style: TextStyle(
                     fontSize: 17,
                     fontWeight: FontWeight.w700,
@@ -821,7 +855,7 @@ class _VoicePracticeScreenState extends ConsumerState<VoicePracticeScreen>
 
     try {
       final path = await controller.stopRecording();
-      if (!mounted) return;
+      if (!context.mounted) return;
       if (path != null && path.isNotEmpty) {
         context.go('/practice/review', extra: path);
       }

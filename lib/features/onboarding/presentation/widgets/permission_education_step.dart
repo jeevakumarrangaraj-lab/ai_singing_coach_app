@@ -3,6 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:record/record.dart';
 
+import '../../../../l10n/app_localizations.dart';
+
 class PermissionEducationStep extends ConsumerStatefulWidget {
   const PermissionEducationStep({super.key});
 
@@ -91,7 +93,9 @@ class _PermissionEducationStepState
           setState(() {
             _isRequesting = false;
           });
-          _showErrorSnackBar('Failed to request permission. Please try again.');
+          _showErrorSnackBar(
+            AppLocalizations.of(context)!.failedToRequestPermission,
+          );
         }
       }
     }
@@ -103,7 +107,7 @@ class _PermissionEducationStepState
     } catch (_) {
       if (mounted) {
         _showErrorSnackBar(
-          'Could not open settings. Please enable microphone access manually.',
+          AppLocalizations.of(context)!.couldNotOpenSettingsManualInstructions,
         );
       }
     }
@@ -113,32 +117,30 @@ class _PermissionEducationStepState
     if (!mounted) return;
 
     final colorScheme = Theme.of(context).colorScheme;
+    final l10n = AppLocalizations.of(context)!;
 
     String message;
     Color backgroundColor;
 
     switch (status) {
       case PermissionStatus.granted:
-        message = 'Microphone access granted. You can now record your voice.';
+        message = l10n.micPermissionGrantedSnackbar;
         backgroundColor = colorScheme.primary;
         break;
       case PermissionStatus.denied:
-        message =
-            'Microphone access denied. You can enable it later in settings to record.';
+        message = l10n.micPermissionDeniedSnackbar;
         backgroundColor = colorScheme.error;
         break;
       case PermissionStatus.permanentlyDenied:
-        message =
-            'Microphone access permanently denied. Please enable it in app settings.';
+        message = l10n.micPermissionPermanentlyDeniedSnackbar;
         backgroundColor = colorScheme.error;
         break;
       case PermissionStatus.limited:
-        message =
-            'Limited microphone access granted. You can record but with restrictions.';
+        message = l10n.micPermissionLimitedSnackbar;
         backgroundColor = colorScheme.secondary;
         break;
       default:
-        message = 'Permission status: ${status.name}';
+        message = l10n.permissionStatusLabel(status.name);
         backgroundColor = colorScheme.onSurfaceVariant;
     }
 
@@ -150,7 +152,7 @@ class _PermissionEducationStepState
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         action: status == PermissionStatus.permanentlyDenied
             ? SnackBarAction(
-                label: 'Open Settings',
+                label: l10n.openSettings,
                 textColor: colorScheme.onPrimary,
                 onPressed: _openSettings,
               )
@@ -177,6 +179,7 @@ class _PermissionEducationStepState
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
+    final l10n = AppLocalizations.of(context)!;
 
     final isRequesting = _isRequesting;
     final isGranted = _permissionStatus == PermissionStatus.granted;
@@ -214,7 +217,7 @@ class _PermissionEducationStepState
 
         // Title
         Text(
-          'Your voice stays in your control',
+          l10n.yourVoiceStaysInControl,
           style: textTheme.headlineMedium?.copyWith(
             fontSize: 22,
             fontWeight: FontWeight.w700,
@@ -226,8 +229,7 @@ class _PermissionEducationStepState
 
         // Message
         Text(
-          'Tuno uses microphone access only when you choose to record a practice session. '
-          'You can change this permission later in your device or browser settings.',
+          l10n.permissionEducationMessage,
           style: textTheme.bodyMedium?.copyWith(
             color: colorScheme.onSurfaceVariant,
             height: 1.5,
@@ -251,23 +253,20 @@ class _PermissionEducationStepState
               children: [
                 _buildInfoPoint(
                   icon: Icons.mic_rounded,
-                  title: 'Required for voice recording',
-                  description:
-                      'Microphone access is needed to capture your singing for AI feedback.',
+                  title: l10n.requiredForRecording,
+                  description: l10n.requiredForRecordingDesc,
                 ),
                 const SizedBox(height: 16),
                 _buildInfoPoint(
                   icon: Icons.security_rounded,
-                  title: 'Tuno will not record automatically',
-                  description:
-                      'Recording only happens when you explicitly start a practice session.',
+                  title: l10n.noAutoRecord,
+                  description: l10n.noAutoRecordDesc,
                 ),
                 const SizedBox(height: 16),
                 _buildInfoPoint(
                   icon: Icons.settings_rounded,
-                  title: 'Permission can be changed later',
-                  description:
-                      'You can grant or revoke microphone access anytime in device/browser settings.',
+                  title: l10n.permissionCanBeChanged,
+                  description: l10n.permissionCanBeChangedDesc,
                 ),
               ],
             ),
@@ -296,10 +295,10 @@ class _PermissionEducationStepState
                   ),
             label: Text(
               isRequesting
-                  ? 'Requesting...'
+                  ? l10n.requestingPermission
                   : isPermanentlyDenied
-                  ? 'Open Settings'
-                  : 'Enable Microphone',
+                  ? l10n.openSettings
+                  : l10n.enableMicrophone,
             ),
             style: FilledButton.styleFrom(
               minimumSize: const Size(double.infinity, 54),
@@ -313,7 +312,7 @@ class _PermissionEducationStepState
             OutlinedButton.icon(
               onPressed: _openSettings,
               icon: const Icon(Icons.open_in_new_rounded, size: 18),
-              label: const Text('Open App Settings Manually'),
+              label: Text(l10n.openAppSettingsManually),
               style: OutlinedButton.styleFrom(
                 minimumSize: const Size(double.infinity, 54),
                 shape: RoundedRectangleBorder(
@@ -343,7 +342,7 @@ class _PermissionEducationStepState
                 const SizedBox(width: 12),
                 Expanded(
                   child: Text(
-                    'Microphone access granted. You\'re ready to record!',
+                    l10n.microphoneGrantedMessage,
                     style: textTheme.bodyMedium?.copyWith(
                       color: colorScheme.primary,
                       fontWeight: FontWeight.w600,
@@ -378,8 +377,7 @@ class _PermissionEducationStepState
                 const SizedBox(width: 10),
                 Expanded(
                   child: Text(
-                    'You can continue onboarding without microphone access. '
-                    'Recording will require permission when you start a practice session.',
+                    l10n.continueWithoutMic,
                     style: textTheme.bodySmall?.copyWith(
                       color: colorScheme.onSurfaceVariant,
                       height: 1.4,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:ai_singing_coach/l10n/app_localizations.dart';
 
 import '../../domain/reference_track_state.dart';
 import '../reference_track_controller.dart';
@@ -40,10 +41,12 @@ class _ReferenceTrackScreenState extends ConsumerState<ReferenceTrackScreen> {
     final controller = ref.read(referenceTrackProvider.notifier);
     final cs = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
+    final l10n = AppLocalizations.of(context)!;
 
     return Scaffold(
       backgroundColor: cs.surface,
       body: TunoDashboardBackground(
+        animate: true,
         child: SafeArea(
           child: Stack(
             children: [
@@ -57,7 +60,7 @@ class _ReferenceTrackScreenState extends ConsumerState<ReferenceTrackScreen> {
                       children: [
                         const SizedBox(height: 32),
                         Text(
-                          'Upload Reference Song',
+                          l10n.uploadReferenceSong,
                           style: textTheme.headlineLarge?.copyWith(
                             fontSize: 32,
                             fontWeight: FontWeight.w800,
@@ -66,7 +69,7 @@ class _ReferenceTrackScreenState extends ConsumerState<ReferenceTrackScreen> {
                         ),
                         const SizedBox(height: 12),
                         Text(
-                          'Choose the song you want to practise.',
+                          l10n.chooseSongToPractice,
                           style: textTheme.bodyLarge?.copyWith(
                             color: cs.onSurfaceVariant,
                             fontSize: 16,
@@ -83,7 +86,7 @@ class _ReferenceTrackScreenState extends ConsumerState<ReferenceTrackScreen> {
                 top: 8,
                 left: 8,
                 child: Tooltip(
-                  message: 'Back',
+                  message: l10n.back,
                   child: AppBackButton(
                     onPressed: _handleBackPressed,
                     showOnlyIfCanPop: false,
@@ -122,6 +125,7 @@ class _ReferenceTrackScreenState extends ConsumerState<ReferenceTrackScreen> {
     ColorScheme cs,
     bool isPicking,
   ) {
+    final l10n = AppLocalizations.of(context)!;
     return Column(
       children: [
         Card(
@@ -144,7 +148,7 @@ class _ReferenceTrackScreenState extends ConsumerState<ReferenceTrackScreen> {
                 ),
                 const SizedBox(height: 24),
                 Text(
-                  'Choose an audio file',
+                  l10n.chooseAudioFile,
                   style: textTheme.titleLarge?.copyWith(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
@@ -153,7 +157,7 @@ class _ReferenceTrackScreenState extends ConsumerState<ReferenceTrackScreen> {
                 ),
                 const SizedBox(height: 12),
                 Text(
-                  'MP3, WAV, M4A or AAC — maximum 50 MB',
+                  l10n.audioFileFormats,
                   style: textTheme.bodyMedium?.copyWith(
                     color: cs.onSurfaceVariant,
                     fontSize: 14,
@@ -175,7 +179,7 @@ class _ReferenceTrackScreenState extends ConsumerState<ReferenceTrackScreen> {
                           ),
                         )
                       : const Icon(Icons.upload_file_rounded, size: 20),
-                  label: Text(isPicking ? 'Selecting...' : 'Select Song'),
+                  label: Text(isPicking ? l10n.selecting : l10n.selectSong),
                   style: FilledButton.styleFrom(
                     padding: const EdgeInsets.symmetric(
                       horizontal: 32,
@@ -199,6 +203,7 @@ class _ReferenceTrackScreenState extends ConsumerState<ReferenceTrackScreen> {
     TextTheme textTheme,
     ColorScheme cs,
   ) {
+    final l10n = AppLocalizations.of(context)!;
     final track = state.track!;
 
     return Column(
@@ -308,7 +313,7 @@ class _ReferenceTrackScreenState extends ConsumerState<ReferenceTrackScreen> {
                       const SizedBox(width: 8),
                       Expanded(
                         child: Text(
-                          'Your reference track remains on this device and is not uploaded.',
+                          l10n.privacyNote,
                           style: textTheme.bodySmall?.copyWith(
                             color: cs.tertiary,
                             fontSize: 12,
@@ -328,7 +333,7 @@ class _ReferenceTrackScreenState extends ConsumerState<ReferenceTrackScreen> {
                           Icons.delete_outline_rounded,
                           size: 18,
                         ),
-                        label: const Text('Remove'),
+                        label: Text(l10n.remove),
                         style: OutlinedButton.styleFrom(
                           foregroundColor: cs.error,
                           side: BorderSide(color: cs.error, width: 1.5),
@@ -341,7 +346,7 @@ class _ReferenceTrackScreenState extends ConsumerState<ReferenceTrackScreen> {
                       child: FilledButton.icon(
                         onPressed: () => controller.pickReferenceTrack(),
                         icon: const Icon(Icons.swap_horiz_rounded, size: 18),
-                        label: const Text('Replace Song'),
+                        label: Text(l10n.replaceSong),
                         style: FilledButton.styleFrom(
                           padding: const EdgeInsets.symmetric(vertical: 14),
                         ),
@@ -372,7 +377,7 @@ class _ReferenceTrackScreenState extends ConsumerState<ReferenceTrackScreen> {
               const SizedBox(width: 12),
               Expanded(
                 child: Text(
-                  'Track selected. Practice setup will be connected next.',
+                  l10n.trackSelected,
                   style: textTheme.bodyMedium?.copyWith(
                     color: cs.primary,
                     fontSize: 14,
@@ -393,6 +398,7 @@ class _ReferenceTrackScreenState extends ConsumerState<ReferenceTrackScreen> {
     TextTheme textTheme,
     ColorScheme cs,
   ) {
+    final l10n = AppLocalizations.of(context)!;
     return Column(
       children: [
         Card(
@@ -411,7 +417,7 @@ class _ReferenceTrackScreenState extends ConsumerState<ReferenceTrackScreen> {
                 Icon(Icons.error_outline_rounded, size: 72, color: cs.error),
                 const SizedBox(height: 24),
                 Text(
-                  'Could not select file',
+                  l10n.couldNotSelectFile,
                   style: textTheme.titleLarge?.copyWith(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
@@ -420,7 +426,9 @@ class _ReferenceTrackScreenState extends ConsumerState<ReferenceTrackScreen> {
                 ),
                 const SizedBox(height: 12),
                 Text(
-                  state.errorMessage ?? 'An unexpected error occurred.',
+                  state.errorCode == null
+                      ? l10n.unexpectedError
+                      : _errorMessage(context, state.errorCode!),
                   style: textTheme.bodyMedium?.copyWith(
                     color: cs.onSurfaceVariant,
                     fontSize: 14,
@@ -431,7 +439,7 @@ class _ReferenceTrackScreenState extends ConsumerState<ReferenceTrackScreen> {
                 FilledButton.icon(
                   onPressed: () => controller.pickReferenceTrack(),
                   icon: const Icon(Icons.refresh_rounded, size: 20),
-                  label: const Text('Retry'),
+                  label: Text(l10n.retry),
                   style: FilledButton.styleFrom(
                     padding: const EdgeInsets.symmetric(
                       horizontal: 32,
@@ -450,6 +458,7 @@ class _ReferenceTrackScreenState extends ConsumerState<ReferenceTrackScreen> {
   }
 
   Widget _buildPrivacyNote(TextTheme textTheme, ColorScheme cs) {
+    final l10n = AppLocalizations.of(context)!;
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -467,7 +476,7 @@ class _ReferenceTrackScreenState extends ConsumerState<ReferenceTrackScreen> {
           const SizedBox(width: 12),
           Expanded(
             child: Text(
-              'Your reference track remains on this device and is not uploaded.',
+              l10n.privacyNote,
               style: textTheme.bodySmall?.copyWith(
                 color: cs.onSurfaceVariant,
                 fontSize: 12,
@@ -483,5 +492,19 @@ class _ReferenceTrackScreenState extends ConsumerState<ReferenceTrackScreen> {
     if (bytes < 1024) return '$bytes B';
     if (bytes < 1024 * 1024) return '${(bytes / 1024).toStringAsFixed(1)} KB';
     return '${(bytes / (1024 * 1024)).toStringAsFixed(1)} MB';
+  }
+
+  /// Maps [ReferenceTrackErrorCode] to the correct l10n error string.
+  String _errorMessage(BuildContext context, ReferenceTrackErrorCode code) {
+    final l10n = AppLocalizations.of(context)!;
+    return switch (code) {
+      ReferenceTrackErrorCode.unsupportedFormat =>
+        l10n.referenceTrackUnsupportedFormat,
+      ReferenceTrackErrorCode.fileTooLarge => l10n.referenceTrackFileTooLarge,
+      ReferenceTrackErrorCode.unreadableFile =>
+        l10n.referenceTrackUnreadableFile,
+      ReferenceTrackErrorCode.missingPath => l10n.referenceTrackMissingPath,
+      ReferenceTrackErrorCode.selectionFailed => l10n.couldNotSelectFile,
+    };
   }
 }

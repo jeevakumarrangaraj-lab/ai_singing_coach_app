@@ -3,10 +3,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:permission_handler/permission_handler.dart';
 
+import '../../../../l10n/app_localizations.dart';
 import '../../../../features/auth/presentation/auth_controller.dart';
+import '../onboarding_labels.dart';
 import '../../domain/onboarding_profile.dart';
 import '../onboarding_controller.dart';
 import '../onboarding_completion_provider.dart';
+import '../onboarding_state.dart' show OnboardingErrorCode;
 
 class OnboardingReviewStep extends ConsumerStatefulWidget {
   const OnboardingReviewStep({super.key});
@@ -27,12 +30,13 @@ class _OnboardingReviewStepState extends ConsumerState<OnboardingReviewStep> {
     final controller = ref.read(onboardingControllerProvider.notifier);
     final textTheme = Theme.of(context).textTheme;
     final colorScheme = Theme.of(context).colorScheme;
+    final l10n = AppLocalizations.of(context)!;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Text(
-          'Review your setup',
+          l10n.reviewYourSetup,
           style: textTheme.headlineMedium?.copyWith(
             fontSize: 22,
             fontWeight: FontWeight.w700,
@@ -42,7 +46,7 @@ class _OnboardingReviewStepState extends ConsumerState<OnboardingReviewStep> {
         ),
         const SizedBox(height: 8),
         Text(
-          'Check your selections and edit if needed.',
+          l10n.reviewSubtitle,
           style: textTheme.bodyMedium?.copyWith(
             color: colorScheme.onSurfaceVariant.withValues(alpha: 0.85),
             height: 1.4,
@@ -53,19 +57,25 @@ class _OnboardingReviewStepState extends ConsumerState<OnboardingReviewStep> {
 
         // Language card
         _ReviewCard(
-          title: 'Language',
-          value: state.selectedLanguage?.label ?? 'Not selected',
+          title: l10n.languageSection,
+          value: state.selectedLanguage == null
+              ? l10n.notSelected
+              : languageLabelText(l10n, state.selectedLanguage!),
           icon: Icons.language_rounded,
           onEdit: () => controller.goToStep(0),
+          l10n: l10n,
         ),
         const SizedBox(height: 12),
 
         // Experience card
         _ReviewCard(
-          title: 'Experience Level',
-          value: state.experienceLevel?.label ?? 'Not selected',
+          title: l10n.experienceLevel,
+          value: state.experienceLevel == null
+              ? l10n.notSelected
+              : experienceLabelText(l10n, state.experienceLevel!),
           icon: Icons.trending_up_rounded,
           onEdit: () => controller.goToStep(1),
+          l10n: l10n,
         ),
         const SizedBox(height: 12),
 
@@ -73,11 +83,12 @@ class _OnboardingReviewStepState extends ConsumerState<OnboardingReviewStep> {
         _GoalsReviewCard(
           goals: state.selectedGoals,
           onEdit: () => controller.goToStep(2),
+          l10n: l10n,
         ),
         const SizedBox(height: 12),
 
         // Microphone permission card
-        const _MicrophonePermissionCard(),
+        _MicrophonePermissionCard(l10n: l10n),
         const SizedBox(height: 24),
 
         // Complete Setup button
@@ -100,9 +111,9 @@ class _OnboardingReviewStepState extends ConsumerState<OnboardingReviewStep> {
                     ),
                   )
                 : const Icon(Icons.check_rounded, size: 22),
-            label: const Text(
-              'Complete Setup',
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+            label: Text(
+              l10n.completeSetup,
+              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
             ),
           ),
         ),
@@ -136,7 +147,7 @@ class _OnboardingReviewStepState extends ConsumerState<OnboardingReviewStep> {
         if (!mounted) return;
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: const Text('Please sign in again to complete your setup.'),
+            content: Text(AppLocalizations.of(context)!.pleaseSignInAgain),
             backgroundColor: Theme.of(context).colorScheme.error,
             behavior: SnackBarBehavior.floating,
             shape: RoundedRectangleBorder(
@@ -172,12 +183,12 @@ class _OnboardingReviewStepState extends ConsumerState<OnboardingReviewStep> {
         _isSubmitting = false;
         if (!mounted) return;
         final currentState = ref.read(onboardingControllerProvider);
+        final errorText = currentState.errorCode == null
+            ? AppLocalizations.of(context)!.setupSaveFailed
+            : _errorCodeToMessage(context, currentState.errorCode!);
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text(
-              currentState.errorMessage ??
-                  'We couldn\'t save your setup. Please try again.',
-            ),
+            content: Text(errorText),
             backgroundColor: Theme.of(context).colorScheme.error,
             behavior: SnackBarBehavior.floating,
             shape: RoundedRectangleBorder(
@@ -190,9 +201,10 @@ class _OnboardingReviewStepState extends ConsumerState<OnboardingReviewStep> {
     } catch (error) {
       _isSubmitting = false;
       if (!mounted) return;
+      final l10n = AppLocalizations.of(context)!;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('Something went wrong: $error'),
+          content: Text(l10n.onboardingCheckFailed),
           backgroundColor: Theme.of(context).colorScheme.error,
           behavior: SnackBarBehavior.floating,
           shape: RoundedRectangleBorder(
@@ -201,7 +213,21 @@ class _OnboardingReviewStepState extends ConsumerState<OnboardingReviewStep> {
           margin: const EdgeInsets.all(16),
         ),
       );
+      return;
     }
+  }
+
+  /// Maps [OnboardingErrorCode] to the correct l10n error string.
+  String _errorCodeToMessage(BuildContext context, OnboardingErrorCode code) {
+    final l10n = AppLocalizations.of(context)!;
+    return switch (code) {
+      OnboardingErrorCode.languageRequired => l10n.onboardingLanguageRequired,
+      OnboardingErrorCode.experienceRequired =>
+        l10n.onboardingExperienceRequired,
+      OnboardingErrorCode.goalRequired => l10n.onboardingGoalRequired,
+      OnboardingErrorCode.saveFailed => l10n.setupSaveFailed,
+      OnboardingErrorCode.checkFailed => l10n.onboardingCheckFailed,
+    };
   }
 }
 
@@ -211,12 +237,14 @@ class _ReviewCard extends StatelessWidget {
     required this.value,
     required this.icon,
     required this.onEdit,
+    required this.l10n,
   });
 
   final String title;
   final String value;
   final IconData icon;
   final VoidCallback onEdit;
+  final AppLocalizations l10n;
 
   @override
   Widget build(BuildContext context) {
@@ -272,7 +300,7 @@ class _ReviewCard extends StatelessWidget {
             TextButton.icon(
               onPressed: onEdit,
               icon: const Icon(Icons.edit_rounded, size: 16),
-              label: const Text('Edit'),
+              label: Text(l10n.edit),
             ),
           ],
         ),
@@ -282,10 +310,15 @@ class _ReviewCard extends StatelessWidget {
 }
 
 class _GoalsReviewCard extends StatelessWidget {
-  const _GoalsReviewCard({required this.goals, required this.onEdit});
+  const _GoalsReviewCard({
+    required this.goals,
+    required this.onEdit,
+    required this.l10n,
+  });
 
   final Set<SingingGoal> goals;
   final VoidCallback onEdit;
+  final AppLocalizations l10n;
 
   @override
   Widget build(BuildContext context) {
@@ -326,7 +359,7 @@ class _GoalsReviewCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Singing Goals',
+                        l10n.singingGoals,
                         style: textTheme.bodySmall?.copyWith(
                           color: colorScheme.onSurfaceVariant,
                           fontWeight: FontWeight.w600,
@@ -336,8 +369,8 @@ class _GoalsReviewCard extends StatelessWidget {
                       const SizedBox(height: 2),
                       Text(
                         goals.isEmpty
-                            ? 'No goals selected'
-                            : '${goals.length} goal(s) selected',
+                            ? l10n.noGoalsSelected
+                            : l10n.goalsSelected(goals.length),
                         style: textTheme.titleMedium?.copyWith(
                           fontSize: 16,
                           fontWeight: FontWeight.w700,
@@ -350,7 +383,7 @@ class _GoalsReviewCard extends StatelessWidget {
                 TextButton.icon(
                   onPressed: onEdit,
                   icon: const Icon(Icons.edit_rounded, size: 16),
-                  label: const Text('Edit'),
+                  label: Text(l10n.edit),
                 ),
               ],
             ),
@@ -362,7 +395,7 @@ class _GoalsReviewCard extends StatelessWidget {
                 children: goals.map((goal) {
                   return Chip(
                     label: Text(
-                      goal.label,
+                      goalLabelText(l10n, goal),
                       style: TextStyle(color: colorScheme.onSurface),
                     ),
                     backgroundColor: colorScheme.surfaceContainerHigh,
@@ -383,7 +416,9 @@ class _GoalsReviewCard extends StatelessWidget {
 }
 
 class _MicrophonePermissionCard extends ConsumerWidget {
-  const _MicrophonePermissionCard();
+  const _MicrophonePermissionCard({required this.l10n});
+
+  final AppLocalizations l10n;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -448,7 +483,7 @@ class _MicrophonePermissionCard extends ConsumerWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Microphone Access',
+                        l10n.micAccess,
                         style: textTheme.bodySmall?.copyWith(
                           color: colorScheme.onSurfaceVariant,
                           fontWeight: FontWeight.w600,
@@ -458,10 +493,10 @@ class _MicrophonePermissionCard extends ConsumerWidget {
                       const SizedBox(height: 2),
                       Text(
                         isLoading
-                            ? 'Checking permission...'
+                            ? l10n.checkingPermission
                             : hasPermission
-                            ? 'Permission granted'
-                            : 'Permission not granted (required for recording)',
+                            ? l10n.permissionGranted
+                            : l10n.permissionNotGranted,
                         style: textTheme.titleMedium?.copyWith(
                           fontSize: 16,
                           fontWeight: FontWeight.w700,
@@ -476,7 +511,7 @@ class _MicrophonePermissionCard extends ConsumerWidget {
                 TextButton.icon(
                   onPressed: () => _requestPermission(context),
                   icon: const Icon(Icons.settings_rounded, size: 16),
-                  label: const Text('Change'),
+                  label: Text(l10n.change),
                 ),
               ],
             ),
@@ -499,12 +534,13 @@ class _MicrophonePermissionCard extends ConsumerWidget {
     try {
       final status = await Permission.microphone.request();
       if (context.mounted) {
+        final l10n = AppLocalizations.of(context)!;
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(
               status.isGranted
-                  ? 'Microphone permission granted.'
-                  : 'Microphone permission denied.',
+                  ? l10n.micPermissionGrantedShort
+                  : l10n.micPermissionDeniedShort,
             ),
             backgroundColor: status.isGranted
                 ? null
@@ -517,7 +553,9 @@ class _MicrophonePermissionCard extends ConsumerWidget {
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: const Text('Could not request permission.'),
+            content: Text(
+              AppLocalizations.of(context)!.couldNotRequestMicPermission,
+            ),
             backgroundColor: Theme.of(context).colorScheme.error,
             behavior: SnackBarBehavior.floating,
           ),

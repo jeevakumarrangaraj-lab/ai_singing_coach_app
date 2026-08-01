@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../domain/onboarding_profile.dart';
 import '../data/onboarding_repository.dart';
 import '../data/onboarding_providers.dart';
-import 'onboarding_state.dart';
+import 'onboarding_state.dart' show OnboardingErrorCode, OnboardingState;
 
 class OnboardingController extends StateNotifier<OnboardingState> {
   OnboardingController({required OnboardingRepository repository})
@@ -22,11 +22,11 @@ class OnboardingController extends StateNotifier<OnboardingState> {
   }
 
   void selectLanguage(OnboardingLanguage language) {
-    state = state.copyWith(selectedLanguage: language, errorMessage: null);
+    state = state.copyWith(selectedLanguage: language, errorCode: null);
   }
 
   void selectExperience(SingingExperience experience) {
-    state = state.copyWith(experienceLevel: experience, errorMessage: null);
+    state = state.copyWith(experienceLevel: experience, errorCode: null);
   }
 
   void toggleGoal(SingingGoal goal) {
@@ -36,14 +36,14 @@ class OnboardingController extends StateNotifier<OnboardingState> {
     } else {
       newGoals.add(goal);
     }
-    state = state.copyWith(selectedGoals: newGoals, errorMessage: null);
+    state = state.copyWith(selectedGoals: newGoals, errorCode: null);
   }
 
   void nextStep() {
     if (state.currentStep < 4) {
       state = state.copyWith(
         currentStep: state.currentStep + 1,
-        errorMessage: null,
+        errorCode: null,
       );
     }
   }
@@ -52,14 +52,14 @@ class OnboardingController extends StateNotifier<OnboardingState> {
     if (state.currentStep > 0) {
       state = state.copyWith(
         currentStep: state.currentStep - 1,
-        errorMessage: null,
+        errorCode: null,
       );
     }
   }
 
   void goToStep(int step) {
     if (step >= 0 && step <= 4) {
-      state = state.copyWith(currentStep: step, errorMessage: null);
+      state = state.copyWith(currentStep: step, errorCode: null);
     }
   }
 
@@ -72,34 +72,26 @@ class OnboardingController extends StateNotifier<OnboardingState> {
     if (state.isLoading) return false;
 
     if (userId.isEmpty) {
-      state = state.copyWith(
-        errorMessage: 'Unable to save your Tuno setup. Please try again.',
-      );
+      state = state.copyWith(errorCode: OnboardingErrorCode.saveFailed);
       return false;
     }
 
     if (state.selectedLanguage == null) {
-      state = state.copyWith(
-        errorMessage: 'Please select a language to continue.',
-      );
+      state = state.copyWith(errorCode: OnboardingErrorCode.languageRequired);
       return false;
     }
 
     if (state.experienceLevel == null) {
-      state = state.copyWith(
-        errorMessage: 'Please select your experience level to continue.',
-      );
+      state = state.copyWith(errorCode: OnboardingErrorCode.experienceRequired);
       return false;
     }
 
     if (state.selectedGoals.isEmpty) {
-      state = state.copyWith(
-        errorMessage: 'Please select at least one goal to continue.',
-      );
+      state = state.copyWith(errorCode: OnboardingErrorCode.goalRequired);
       return false;
     }
 
-    state = state.copyWith(isLoading: true, errorMessage: null);
+    state = state.copyWith(isLoading: true, errorCode: null);
 
     try {
       final profile = OnboardingProfile(
@@ -119,7 +111,7 @@ class OnboardingController extends StateNotifier<OnboardingState> {
       if (_disposed) return false;
       state = state.copyWith(
         isLoading: false,
-        errorMessage: 'We couldn\'t save your setup. Please try again.',
+        errorCode: OnboardingErrorCode.saveFailed,
       );
       return false;
     } catch (error, stackTrace) {
@@ -128,7 +120,7 @@ class OnboardingController extends StateNotifier<OnboardingState> {
       if (_disposed) return false;
       state = state.copyWith(
         isLoading: false,
-        errorMessage: 'Unable to save your Tuno setup. Please try again.',
+        errorCode: OnboardingErrorCode.saveFailed,
       );
       return false;
     }
@@ -139,7 +131,7 @@ class OnboardingController extends StateNotifier<OnboardingState> {
       case 0:
         if (state.selectedLanguage == null) {
           state = state.copyWith(
-            errorMessage: 'Please select a language to continue.',
+            errorCode: OnboardingErrorCode.languageRequired,
           );
           return false;
         }
@@ -147,16 +139,14 @@ class OnboardingController extends StateNotifier<OnboardingState> {
       case 1:
         if (state.experienceLevel == null) {
           state = state.copyWith(
-            errorMessage: 'Please select your experience level to continue.',
+            errorCode: OnboardingErrorCode.experienceRequired,
           );
           return false;
         }
         break;
       case 2:
         if (state.selectedGoals.isEmpty) {
-          state = state.copyWith(
-            errorMessage: 'Please select at least one goal to continue.',
-          );
+          state = state.copyWith(errorCode: OnboardingErrorCode.goalRequired);
           return false;
         }
         break;
@@ -164,7 +154,7 @@ class OnboardingController extends StateNotifier<OnboardingState> {
       case 4:
         break;
     }
-    state = state.copyWith(errorMessage: null);
+    state = state.copyWith(errorCode: null);
     return true;
   }
 }

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import 'package:ai_singing_coach/l10n/app_localizations.dart';
+
 import '../../../../common/widgets/app_back_button.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/widgets/tuno_dashboard_background.dart';
@@ -25,36 +27,36 @@ class _PracticeMode {
   });
 }
 
-const _practiceModes = <_PracticeMode>[
+List<_PracticeMode> _practiceModes(AppLocalizations l10n) => [
   _PracticeMode(
-    title: 'Solo Practice',
-    description: 'Sing with your voice only',
+    title: l10n.soloPractice,
+    description: l10n.soloPracticeDesc,
     icon: Icons.mic_rounded,
     isAvailable: true,
     route: '/practice',
     snackBarMessage: '',
   ),
   _PracticeMode(
-    title: 'Tuno Exercises',
-    description: 'Practice with guided exercises',
+    title: l10n.tunoExercises,
+    description: l10n.tunoExercisesDesc,
     icon: Icons.equalizer_rounded,
     isAvailable: false,
-    snackBarMessage: 'Tuno Exercises will be available in a future update.',
+    snackBarMessage: l10n.tunoExercisesComingSoon,
   ),
   _PracticeMode(
-    title: 'Upload Song',
-    description: 'Upload your own track',
+    title: l10n.uploadSong,
+    description: l10n.uploadSongDesc,
     icon: Icons.upload_file_rounded,
     isAvailable: true,
     route: '/practice/upload',
     snackBarMessage: '',
   ),
   _PracticeMode(
-    title: 'Backing Track',
-    description: 'Sing with your own track',
+    title: l10n.backingTrack,
+    description: l10n.backingTrackDesc,
     icon: Icons.music_note_rounded,
     isAvailable: false,
-    snackBarMessage: 'Backing Tracks will be available in a future update.',
+    snackBarMessage: l10n.backingTracksComingSoon,
   ),
 ];
 
@@ -70,6 +72,7 @@ class _PracticeModeScreenState extends State<PracticeModeScreen> {
 
   void _onDestinationSelected(int index) {
     if (index == _currentNavIndex) return;
+    final l10n = AppLocalizations.of(context)!;
     switch (index) {
       case 0:
         context.go('/home');
@@ -81,10 +84,10 @@ class _PracticeModeScreenState extends State<PracticeModeScreen> {
         context.push('/practice');
         break;
       case 3:
-        _showComingSoon('Progress');
+        _showComingSoon(l10n.progress);
         break;
       case 4:
-        _showComingSoon('Profile');
+        _showComingSoon(l10n.profile);
         break;
     }
     if (index != _currentNavIndex) {
@@ -94,9 +97,10 @@ class _PracticeModeScreenState extends State<PracticeModeScreen> {
 
   void _showComingSoon(String feature) {
     if (!mounted) return;
+    final l10n = AppLocalizations.of(context)!;
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text('$feature coming soon'),
+        content: Text(l10n.featureComingSoonSimple(feature)),
         behavior: SnackBarBehavior.floating,
         margin: const EdgeInsets.all(16),
         duration: const Duration(seconds: 2),
@@ -108,10 +112,12 @@ class _PracticeModeScreenState extends State<PracticeModeScreen> {
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     final cs = Theme.of(context).colorScheme;
+    final l10n = AppLocalizations.of(context)!;
 
     return Scaffold(
       backgroundColor: cs.surface,
       body: TunoDashboardBackground(
+        animate: true,
         child: SafeArea(
           child: LayoutBuilder(
             builder: (context, constraints) {
@@ -130,10 +136,10 @@ class _PracticeModeScreenState extends State<PracticeModeScreen> {
                             const SizedBox(height: 8),
                             // ── Back button ──
                             Tooltip(
-                              message: 'Back',
+                              message: l10n.back,
                               child: Semantics(
                                 button: true,
-                                label: 'Back',
+                                label: l10n.back,
                                 child: AppBackButton(
                                   onPressed: () {
                                     if (context.canPop()) {
@@ -149,7 +155,7 @@ class _PracticeModeScreenState extends State<PracticeModeScreen> {
                             const SizedBox(height: 16),
                             // ── Title ──
                             Text(
-                              'Choose Practice Mode',
+                              l10n.choosePracticeMode,
                               style: textTheme.headlineMedium?.copyWith(
                                 fontSize: 28,
                                 fontWeight: FontWeight.bold,
@@ -158,7 +164,7 @@ class _PracticeModeScreenState extends State<PracticeModeScreen> {
                             ),
                             const SizedBox(height: 8),
                             Text(
-                              'What would you like to do?',
+                              l10n.whatWouldYouLikeToDo,
                               style: textTheme.bodyLarge?.copyWith(
                                 fontSize: 16,
                                 color: cs.onSurfaceVariant,
@@ -166,10 +172,10 @@ class _PracticeModeScreenState extends State<PracticeModeScreen> {
                             ),
                             const SizedBox(height: 28),
                             // ── Practice mode cards ──
-                            ..._practiceModes.map(
+                            ..._practiceModes(l10n).map(
                               (mode) => Padding(
                                 padding: const EdgeInsets.only(bottom: 18),
-                                child: _ModeCard(mode: mode),
+                                child: _ModeCard(mode: mode, l10n: l10n),
                               ),
                             ),
                           ],
@@ -196,9 +202,10 @@ class _PracticeModeScreenState extends State<PracticeModeScreen> {
 // ─────────────────────────────────────────────────────────────
 
 class _ModeCard extends StatefulWidget {
-  const _ModeCard({required this.mode});
+  const _ModeCard({required this.mode, required this.l10n});
 
   final _PracticeMode mode;
+  final AppLocalizations l10n;
 
   @override
   State<_ModeCard> createState() => _ModeCardState();
@@ -213,6 +220,7 @@ class _ModeCardState extends State<_ModeCard> {
     final cs = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
     final mode = widget.mode;
+    final l10n = widget.l10n;
 
     // Card: dark translucent navy gradient, border, cyan inner highlight
     final cardGradient = AppColors.practiceCardGradient;
@@ -226,11 +234,13 @@ class _ModeCardState extends State<_ModeCard> {
     return Semantics(
       button: true,
       label: mode.isAvailable
-          ? '${mode.title}, ${mode.description}. Tap to start.'
-          : '${mode.title}, ${mode.description}. Not available.',
+          ? l10n.tapToStart(mode.title, mode.description)
+          : l10n.modeNotAvailable(mode.title, mode.description),
       enabled: mode.isAvailable,
       child: Tooltip(
-        message: mode.isAvailable ? mode.title : '${mode.title} — Coming soon',
+        message: mode.isAvailable
+            ? mode.title
+            : l10n.modeComingSoon(mode.title),
         child: MouseRegion(
           cursor: mode.isAvailable
               ? SystemMouseCursors.click

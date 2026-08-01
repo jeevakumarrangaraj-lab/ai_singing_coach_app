@@ -4,9 +4,12 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:ai_singing_coach/l10n/app_localizations.dart';
 
 import '../../presentation/voice_recording_controller.dart';
 import '../../../../common/widgets/app_back_button.dart';
+
+import '../../../../core/widgets/metallic_gold_border.dart';
 import '../../../../core/widgets/tuno_dashboard_background.dart';
 
 class RecordingReviewScreen extends ConsumerStatefulWidget {
@@ -149,11 +152,10 @@ class _RecordingReviewScreenState extends ConsumerState<RecordingReviewScreen> {
       if (mounted) context.go('/practice');
     } catch (_) {
       if (mounted) {
+        final l10n = AppLocalizations.of(context)!;
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: const Text(
-              'Failed to delete recording. Please try again.',
-            ),
+            content: Text(l10n.failedToDeleteRecording),
             backgroundColor: Theme.of(context).colorScheme.error,
           ),
         );
@@ -195,298 +197,332 @@ class _RecordingReviewScreenState extends ConsumerState<RecordingReviewScreen> {
     _isBackInProgress = false;
   }
 
+  Widget _buildPlayPauseButton(ColorScheme cs) {
+    final l10n = AppLocalizations.of(context)!;
+    return Tooltip(
+      message: _isPlaying ? l10n.pause : l10n.play,
+      child: Semantics(
+        button: true,
+        label: _isPlaying ? l10n.pause : l10n.play,
+        child: Container(
+          width: 84,
+          height: 84,
+          decoration: const BoxDecoration(
+            shape: BoxShape.circle,
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [
+                Color(0xFFFFF2A6),
+                Color(0xFFE3B94F),
+                Color(0xFFA86D16),
+                Color(0xFFF4D675),
+              ],
+              stops: [0.0, 0.35, 0.72, 1.0],
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: Color(0x1AD9A62E),
+                blurRadius: 8,
+                spreadRadius: 0,
+              ),
+            ],
+          ),
+          padding: const EdgeInsets.all(2),
+          child: ClipOval(
+            child: Material(
+              color: cs.primary,
+              child: InkWell(
+                onTap: _isLoading ? null : _handlePlayPause,
+                child: SizedBox(
+                  width: 80,
+                  height: 80,
+                  child: Icon(
+                    _isPlaying ? Icons.pause_rounded : Icons.play_arrow_rounded,
+                    size: 40,
+                    color: cs.onPrimary,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildSliderSection(ColorScheme cs, TextTheme textTheme) {
+    return Column(
+      children: [
+        SliderTheme(
+          data: SliderTheme.of(context).copyWith(
+            activeTrackColor: cs.primary,
+            inactiveTrackColor: cs.outlineVariant.withValues(alpha: 0.4),
+            thumbColor: cs.primary,
+            overlayColor: cs.primary.withValues(alpha: 0.2),
+            valueIndicatorColor: cs.primary,
+            valueIndicatorTextStyle: textTheme.bodySmall?.copyWith(
+              color: cs.onPrimary,
+            ),
+            trackHeight: 4,
+          ),
+          child: Slider(
+            value: _getSliderValue(),
+            onChanged: (_duration.inMilliseconds > 0 && !_isLoading)
+                ? _onSliderChanged
+                : null,
+            min: 0.0,
+            max: 1.0,
+          ),
+        ),
+        const SizedBox(height: 8),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              _formatDuration(_position),
+              style: textTheme.bodyMedium?.copyWith(
+                color: cs.onSurface,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            Text(
+              _formatDuration(_duration),
+              style: textTheme.bodyMedium?.copyWith(color: cs.onSurfaceVariant),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget _buildControlButtons(ColorScheme cs) {
+    final l10n = AppLocalizations.of(context)!;
+    final bool controlsDisabled = _duration.inMilliseconds <= 0 || _isLoading;
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Tooltip(
+          message: l10n.replayFromBeginning,
+          child: Semantics(
+            button: true,
+            label: l10n.replayFromBeginning,
+            child: IconButton(
+              onPressed: controlsDisabled ? null : _handleReplay,
+              icon: Icon(Icons.replay_rounded, color: cs.primary, size: 28),
+            ),
+          ),
+        ),
+        const SizedBox(width: 24),
+        Tooltip(
+          message: l10n.forwardTenSeconds,
+          child: Semantics(
+            button: true,
+            label: l10n.forwardTenSeconds,
+            child: IconButton(
+              onPressed: controlsDisabled ? null : _handleForward,
+              icon: Icon(Icons.forward_10_rounded, color: cs.primary, size: 28),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildActionButtons(ColorScheme cs, TextTheme textTheme) {
+    final l10n = AppLocalizations.of(context)!;
+    return Row(
+      children: [
+        Expanded(
+          child: Tooltip(
+            message: l10n.continueToAnalysis,
+            child: Semantics(
+              button: true,
+              label: l10n.continueToAnalysis,
+              child: FilledButton(
+                onPressed: _isDeleting || _isLoading
+                    ? null
+                    : _handleContinueToAnalysis,
+                style: FilledButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(18),
+                  ),
+                ),
+                child: Text(
+                  l10n.continueToAnalysis,
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+        const SizedBox(width: 16),
+        Expanded(
+          child: Tooltip(
+            message: l10n.deleteAndRecordAgain,
+            child: Semantics(
+              button: true,
+              label: l10n.deleteAndRecordAgain,
+              child: OutlinedButton(
+                onPressed: _isDeleting || _isLoading
+                    ? null
+                    : _handleDeleteAndRecordAgain,
+                style: OutlinedButton.styleFrom(
+                  foregroundColor: cs.error,
+                  side: BorderSide(color: cs.error, width: 1.5),
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(18),
+                  ),
+                ),
+                child: _isDeleting
+                    ? SizedBox(
+                        width: 20,
+                        height: 20,
+                        child: CircularProgressIndicator(
+                          strokeWidth: 2,
+                          color: cs.error,
+                        ),
+                      )
+                    : Text(
+                        l10n.deleteAndRecordAgain,
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
+    final l10n = AppLocalizations.of(context)!;
 
     final isErrorState = _duration.inMilliseconds <= 0 && !_isLoading;
 
     return Scaffold(
       backgroundColor: cs.surface,
       body: TunoDashboardBackground(
+        animate: true,
         child: SafeArea(
-          child: Center(
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.all(20),
-              child: ConstrainedBox(
-                constraints: const BoxConstraints(maxWidth: 600),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // Back button
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: Tooltip(
-                        message: 'Back',
-                        child: Semantics(
-                          button: true,
-                          label: 'Back',
-                          child: AppBackButton(
-                            onPressed: _handleBack,
-                            showOnlyIfCanPop: false,
-                          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Back button — top-left of SafeArea
+              Padding(
+                padding: const EdgeInsets.only(top: 16, left: 20),
+                child: Tooltip(
+                  message: l10n.back,
+                  child: Semantics(
+                    button: true,
+                    label: l10n.back,
+                    child: SizedBox(
+                      width: 48,
+                      height: 48,
+                      child: Center(
+                        child: AppBackButton(
+                          onPressed: _handleBack,
+                          showOnlyIfCanPop: false,
                         ),
                       ),
                     ),
-                    const SizedBox(height: 20),
-
-                    // Title
-                    Text(
-                      'Review Recording',
-                      style: textTheme.headlineMedium?.copyWith(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                        color: cs.onSurface,
-                      ),
-                    ),
-                    const SizedBox(height: 8),
-                    Text(
-                      _formatDuration(_duration),
-                      style: textTheme.bodyMedium?.copyWith(
-                        color: cs.onSurfaceVariant,
-                      ),
-                    ),
-                    const SizedBox(height: 24),
-
-                    // Player Card
-                    Card(
-                      color: cs.surfaceContainerHighest,
-                      surfaceTintColor: Colors.transparent,
-                      shadowColor: Colors.transparent,
-                      elevation: 0,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(22),
-                        side: BorderSide(color: cs.outlineVariant, width: 1),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(24),
-                        child: Column(
-                          children: [
-                            // Main Play/Pause button
-                            Tooltip(
-                              message: _isPlaying ? 'Pause' : 'Play',
-                              child: Semantics(
-                                button: true,
-                                label: _isPlaying ? 'Pause' : 'Play',
-                                child: Material(
-                                  color: cs.primary,
-                                  shape: const CircleBorder(),
-                                  child: InkWell(
-                                    customBorder: const CircleBorder(),
-                                    onTap: _isLoading ? null : _handlePlayPause,
-                                    child: Container(
-                                      width: 80,
-                                      height: 80,
-                                      alignment: Alignment.center,
-                                      child: Icon(
-                                        _isPlaying
-                                            ? Icons.pause_rounded
-                                            : Icons.play_arrow_rounded,
-                                        size: 40,
-                                        color: cs.onPrimary,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            const SizedBox(height: 24),
-
-                            // Progress slider
-                            Column(
-                              children: [
-                                SliderTheme(
-                                  data: SliderTheme.of(context).copyWith(
-                                    activeTrackColor: cs.primary,
-                                    inactiveTrackColor: cs.outlineVariant
-                                        .withValues(alpha: 0.4),
-                                    thumbColor: cs.primary,
-                                    overlayColor: cs.primary.withValues(
-                                      alpha: 0.2,
-                                    ),
-                                    valueIndicatorColor: cs.primary,
-                                    valueIndicatorTextStyle: textTheme.bodySmall
-                                        ?.copyWith(color: cs.onPrimary),
-                                    trackHeight: 4,
-                                  ),
-                                  child: Slider(
-                                    value: _getSliderValue(),
-                                    onChanged:
-                                        (_duration.inMilliseconds > 0 &&
-                                            !_isLoading)
-                                        ? _onSliderChanged
-                                        : null,
-                                    min: 0.0,
-                                    max: 1.0,
-                                  ),
-                                ),
-                                const SizedBox(height: 8),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      _formatDuration(_position),
-                                      style: textTheme.bodyMedium?.copyWith(
-                                        color: cs.onSurface,
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                    ),
-                                    Text(
-                                      _formatDuration(_duration),
-                                      style: textTheme.bodyMedium?.copyWith(
-                                        color: cs.onSurfaceVariant,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                            const SizedBox(height: 20),
-
-                            // Secondary controls
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Tooltip(
-                                  message: 'Replay from beginning',
-                                  child: Semantics(
-                                    button: true,
-                                    label: 'Replay from beginning',
-                                    child: IconButton(
-                                      onPressed:
-                                          (_duration.inMilliseconds > 0 &&
-                                              !_isLoading)
-                                          ? _handleReplay
-                                          : null,
-                                      icon: Icon(
-                                        Icons.replay_rounded,
-                                        color: cs.primary,
-                                        size: 28,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                const SizedBox(width: 24),
-                                Tooltip(
-                                  message: 'Forward 10 seconds',
-                                  child: Semantics(
-                                    button: true,
-                                    label: 'Forward 10 seconds',
-                                    child: IconButton(
-                                      onPressed:
-                                          (_duration.inMilliseconds > 0 &&
-                                              !_isLoading)
-                                          ? _handleForward
-                                          : null,
-                                      icon: Icon(
-                                        Icons.forward_10_rounded,
-                                        color: cs.primary,
-                                        size: 28,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-
-                            // Error state
-                            if (isErrorState) ...[
-                              const SizedBox(height: 16),
-                              Text(
-                                'Unable to load audio file. The recording may be missing or corrupted.',
-                                textAlign: TextAlign.center,
-                                style: textTheme.bodyMedium?.copyWith(
-                                  color: cs.error,
-                                ),
-                              ),
-                            ],
-                          ],
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 28),
-
-                    // Action buttons
-                    Row(
-                      children: [
-                        Expanded(
-                          child: Tooltip(
-                            message: 'Continue to Analysis',
-                            child: Semantics(
-                              button: true,
-                              label: 'Continue to Analysis',
-                              child: FilledButton(
-                                onPressed: _isDeleting || _isLoading
-                                    ? null
-                                    : _handleContinueToAnalysis,
-                                style: FilledButton.styleFrom(
-                                  padding: const EdgeInsets.symmetric(
-                                    vertical: 16,
-                                  ),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(18),
-                                  ),
-                                ),
-                                child: Text(
-                                  'Continue to Analysis',
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(width: 16),
-                        Expanded(
-                          child: Tooltip(
-                            message: 'Delete and Record Again',
-                            child: Semantics(
-                              button: true,
-                              label: 'Delete and Record Again',
-                              child: OutlinedButton(
-                                onPressed: _isDeleting || _isLoading
-                                    ? null
-                                    : _handleDeleteAndRecordAgain,
-                                style: OutlinedButton.styleFrom(
-                                  foregroundColor: cs.error,
-                                  side: BorderSide(color: cs.error, width: 1.5),
-                                  padding: const EdgeInsets.symmetric(
-                                    vertical: 16,
-                                  ),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(18),
-                                  ),
-                                ),
-                                child: _isDeleting
-                                    ? SizedBox(
-                                        width: 20,
-                                        height: 20,
-                                        child: CircularProgressIndicator(
-                                          strokeWidth: 2,
-                                          color: cs.error,
-                                        ),
-                                      )
-                                    : Text(
-                                        'Delete & Record Again',
-                                        style: const TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
+                  ),
                 ),
               ),
-            ),
+              // Scrollable content
+              Expanded(
+                child: Center(
+                  child: SingleChildScrollView(
+                    padding: const EdgeInsets.only(
+                      top: 8,
+                      left: 20,
+                      right: 20,
+                      bottom: 20,
+                    ),
+                    child: ConstrainedBox(
+                      constraints: const BoxConstraints(maxWidth: 600),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          // Title
+                          Text(
+                            l10n.reviewRecordingTitle,
+                            style: textTheme.headlineMedium?.copyWith(
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
+                              color: cs.onSurface,
+                            ),
+                          ),
+                          const SizedBox(height: 8),
+                          Text(
+                            _formatDuration(_duration),
+                            style: textTheme.bodyMedium?.copyWith(
+                              color: cs.onSurfaceVariant,
+                            ),
+                          ),
+                          const SizedBox(height: 24),
+                          // Player card with metallic-gold border
+                          MetallicGoldBorder(
+                            borderRadius: BorderRadius.circular(22),
+                            padding: 1.5,
+                            child: Card(
+                              color: cs.surfaceContainerHighest,
+                              surfaceTintColor: Colors.transparent,
+                              shadowColor: Colors.transparent,
+                              elevation: 0,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(22),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(24),
+                                child: Column(
+                                  children: [
+                                    // Play/pause button
+                                    _buildPlayPauseButton(cs),
+                                    const SizedBox(height: 24),
+                                    // Slider with timers
+                                    _buildSliderSection(cs, textTheme),
+                                    const SizedBox(height: 20),
+                                    // Replay/Forward controls
+                                    _buildControlButtons(cs),
+                                    // Error state
+                                    if (isErrorState)
+                                      Padding(
+                                        padding: const EdgeInsets.only(top: 16),
+                                        child: Text(
+                                          l10n.unableToLoadAudio,
+                                          textAlign: TextAlign.center,
+                                          style: textTheme.bodyMedium?.copyWith(
+                                            color: cs.error,
+                                          ),
+                                        ),
+                                      ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 28),
+                          // Action buttons
+                          _buildActionButtons(cs, textTheme),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       ),

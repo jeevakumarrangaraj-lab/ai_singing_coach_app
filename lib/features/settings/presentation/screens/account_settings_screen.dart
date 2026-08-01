@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:ai_singing_coach/l10n/app_localizations.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../../features/auth/domain/repositories/auth_repository.dart';
 import '../../../../features/auth/presentation/auth_controller.dart';
 import '../../../../common/widgets/app_back_button.dart';
 import '../../../../core/widgets/dashboard_music_decorations.dart';
@@ -66,6 +66,7 @@ class _AccountSettingsScreenState extends ConsumerState<AccountSettingsScreen> {
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     final user = _user;
+    final l10n = AppLocalizations.of(context)!;
 
     return Scaffold(
       backgroundColor: cs.surface,
@@ -75,7 +76,7 @@ class _AccountSettingsScreenState extends ConsumerState<AccountSettingsScreen> {
           Positioned.fill(
             child: const IgnorePointer(
               ignoring: true,
-              child: DashboardMusicDecorations(),
+              child: DashboardMusicDecorations(animate: true),
             ),
           ),
 
@@ -101,10 +102,10 @@ class _AccountSettingsScreenState extends ConsumerState<AccountSettingsScreen> {
 
                               // ── Header with back button ──
                               Semantics(
-                                label: 'Back to Settings',
+                                label: l10n.backToSettings,
                                 button: true,
                                 child: Tooltip(
-                                  message: 'Back',
+                                  message: l10n.back,
                                   child: AppBackButton(
                                     onPressed: () {
                                       if (context.canPop()) {
@@ -123,7 +124,7 @@ class _AccountSettingsScreenState extends ConsumerState<AccountSettingsScreen> {
                               // ── Title ──
                               Center(
                                 child: Text(
-                                  'Account',
+                                  l10n.account,
                                   style: textTheme.headlineMedium?.copyWith(
                                     fontSize: 28,
                                     fontWeight: FontWeight.bold,
@@ -140,7 +141,7 @@ class _AccountSettingsScreenState extends ConsumerState<AccountSettingsScreen> {
                               // ── Action Cards ──
                               _buildActionCard(
                                 icon: Icons.person_rounded,
-                                label: 'Personal Information',
+                                label: l10n.personalInformation,
                                 onTap: () =>
                                     _showPersonalInfoSheet(user, textTheme),
                               ),
@@ -148,7 +149,7 @@ class _AccountSettingsScreenState extends ConsumerState<AccountSettingsScreen> {
 
                               _buildActionCard(
                                 icon: Icons.email_rounded,
-                                label: 'Email Address',
+                                label: l10n.emailAddress,
                                 trailing: Text(
                                   user?.email ?? '',
                                   style: textTheme.bodySmall?.copyWith(
@@ -163,14 +164,14 @@ class _AccountSettingsScreenState extends ConsumerState<AccountSettingsScreen> {
 
                               _buildActionCard(
                                 icon: Icons.lock_outline_rounded,
-                                label: 'Change Password',
+                                label: l10n.changePassword,
                                 onTap: _handlePasswordReset,
                               ),
                               const SizedBox(height: 12),
 
                               _buildActionCard(
                                 icon: Icons.verified_user_rounded,
-                                label: 'Email Verification',
+                                label: l10n.emailVerification,
                                 trailing: _buildVerificationBadge(user),
                                 onTap: () => _handleEmailVerification(user),
                               ),
@@ -178,7 +179,7 @@ class _AccountSettingsScreenState extends ConsumerState<AccountSettingsScreen> {
 
                               _buildActionCard(
                                 icon: Icons.logout_rounded,
-                                label: 'Sign Out',
+                                label: l10n.signOut,
                                 onTap: _handleSignOut,
                               ),
                               const SizedBox(height: 12),
@@ -206,6 +207,7 @@ class _AccountSettingsScreenState extends ConsumerState<AccountSettingsScreen> {
 
   Widget _buildAccountSummaryCard(User? user, TextTheme textTheme) {
     final providerNames = _getProviderNames(user);
+    final l10n = AppLocalizations.of(context)!;
 
     return Container(
       width: double.infinity,
@@ -229,7 +231,7 @@ class _AccountSettingsScreenState extends ConsumerState<AccountSettingsScreen> {
           Text(
             user?.displayName?.isNotEmpty == true
                 ? user!.displayName!
-                : 'Tuno Singer',
+                : l10n.tunoSinger,
             style: textTheme.titleLarge?.copyWith(
               fontSize: 20,
               fontWeight: FontWeight.w600,
@@ -240,9 +242,9 @@ class _AccountSettingsScreenState extends ConsumerState<AccountSettingsScreen> {
 
           // Email
           Semantics(
-            label: 'Email: ${user?.email ?? ''}',
+            label: '${l10n.emailAddress}: ${user?.email ?? ''}',
             child: Text(
-              user?.email ?? 'No email',
+              user?.email ?? l10n.noEmail,
               style: textTheme.bodyMedium?.copyWith(
                 fontSize: 14,
                 color: cs.onSurfaceVariant,
@@ -254,8 +256,8 @@ class _AccountSettingsScreenState extends ConsumerState<AccountSettingsScreen> {
           // Verification status
           Semantics(
             label: user?.emailVerified == true
-                ? 'Email verified'
-                : 'Email not verified',
+                ? l10n.emailVerified
+                : l10n.emailNotVerified,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -270,7 +272,9 @@ class _AccountSettingsScreenState extends ConsumerState<AccountSettingsScreen> {
                 ),
                 const SizedBox(width: 6),
                 Text(
-                  user?.emailVerified == true ? 'Verified' : 'Not verified',
+                  user?.emailVerified == true
+                      ? l10n.verified
+                      : l10n.notVerified,
                   style: textTheme.bodySmall?.copyWith(
                     color: user?.emailVerified == true
                         ? Colors.greenAccent
@@ -286,7 +290,7 @@ class _AccountSettingsScreenState extends ConsumerState<AccountSettingsScreen> {
           if (providerNames.isNotEmpty) ...[
             const SizedBox(height: 8),
             Text(
-              'Sign in with ${providerNames.join(', ')}',
+              l10n.signInWithProvider(providerNames.join(', ')),
               style: textTheme.bodySmall?.copyWith(
                 fontSize: 12,
                 color: cs.onSurfaceVariant.withValues(alpha: 0.7),
@@ -301,16 +305,17 @@ class _AccountSettingsScreenState extends ConsumerState<AccountSettingsScreen> {
   /// Extract human-readable provider names from the user's provider data.
   List<String> _getProviderNames(User? user) {
     if (user == null) return [];
+    final l10n = AppLocalizations.of(context)!;
     return user.providerData.map((info) {
       switch (info.providerId) {
         case 'password':
-          return 'Password';
+          return l10n.password;
         case 'google.com':
-          return 'Google';
+          return l10n.google;
         case 'apple.com':
-          return 'Apple';
+          return l10n.apple;
         case 'facebook.com':
-          return 'Facebook';
+          return l10n.facebook;
         default:
           return info.providerId;
       }
@@ -379,11 +384,12 @@ class _AccountSettingsScreenState extends ConsumerState<AccountSettingsScreen> {
   // ─────────────────────────────────────────────────────────────
 
   Widget _buildVerificationBadge(User? user) {
+    final l10n = AppLocalizations.of(context)!;
     if (user?.emailVerified == true) {
       return Semantics(
-        label: 'Verified',
+        label: l10n.verified,
         child: Text(
-          'Verified',
+          l10n.verified,
           style: TextStyle(
             color: Colors.greenAccent,
             fontWeight: FontWeight.w600,
@@ -409,11 +415,12 @@ class _AccountSettingsScreenState extends ConsumerState<AccountSettingsScreen> {
   // ─────────────────────────────────────────────────────────────
 
   Widget _buildDeleteAccountCard() {
+    final l10n = AppLocalizations.of(context)!;
     return Semantics(
       button: true,
-      label: 'Delete Account',
+      label: l10n.deleteAccount,
       child: Tooltip(
-        message: 'Delete Account',
+        message: l10n.deleteAccount,
         child: InkWell(
           onTap: _showDeleteConfirmationDialog,
           borderRadius: BorderRadius.circular(20),
@@ -438,7 +445,7 @@ class _AccountSettingsScreenState extends ConsumerState<AccountSettingsScreen> {
                 const SizedBox(width: 16),
                 Expanded(
                   child: Text(
-                    'Delete Account',
+                    l10n.deleteAccount,
                     style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                       fontSize: 16,
                       color: Colors.redAccent,
@@ -467,6 +474,7 @@ class _AccountSettingsScreenState extends ConsumerState<AccountSettingsScreen> {
 
   /// Opens a bottom sheet to edit the display name.
   void _showPersonalInfoSheet(User? user, TextTheme textTheme) {
+    final l10n = AppLocalizations.of(context)!;
     final controller = TextEditingController(text: user?.displayName ?? '');
     final formKey = GlobalKey<FormState>();
     bool isUpdating = false;
@@ -506,7 +514,7 @@ class _AccountSettingsScreenState extends ConsumerState<AccountSettingsScreen> {
                     ),
                     const SizedBox(height: 20),
                     Text(
-                      'Personal Information',
+                      l10n.personalInformation,
                       style: textTheme.titleLarge?.copyWith(
                         fontWeight: FontWeight.w700,
                         color: cs.onSurface,
@@ -515,16 +523,16 @@ class _AccountSettingsScreenState extends ConsumerState<AccountSettingsScreen> {
                     const SizedBox(height: 16),
                     TextFormField(
                       controller: controller,
-                      decoration: const InputDecoration(
-                        labelText: 'Display name',
-                        hintText: 'Enter your name',
-                        prefixIcon: Icon(Icons.person_rounded),
+                      decoration: InputDecoration(
+                        labelText: l10n.displayName,
+                        hintText: l10n.enterYourName,
+                        prefixIcon: const Icon(Icons.person_rounded),
                       ),
                       autofocus: true,
                       textCapitalization: TextCapitalization.words,
                       validator: (value) {
                         if (value == null || value.trim().isEmpty) {
-                          return 'Name cannot be empty';
+                          return l10n.nameCannotBeEmpty;
                         }
                         return null;
                       },
@@ -559,7 +567,7 @@ class _AccountSettingsScreenState extends ConsumerState<AccountSettingsScreen> {
                                   color: Colors.white,
                                 ),
                               )
-                            : const Text('Save'),
+                            : Text(l10n.save),
                       ),
                     ),
                   ],
@@ -578,6 +586,7 @@ class _AccountSettingsScreenState extends ConsumerState<AccountSettingsScreen> {
     TextEditingController controller,
     GlobalKey<FormState> formKey,
   ) async {
+    final l10n = AppLocalizations.of(context)!;
     if (!formKey.currentState!.validate()) return;
 
     setSheetState(() => true); // isUpdating = true
@@ -590,6 +599,7 @@ class _AccountSettingsScreenState extends ConsumerState<AccountSettingsScreen> {
     setSheetState(() => false); // isUpdating = false
 
     if (failure != null) {
+      if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(failure.message),
@@ -608,25 +618,23 @@ class _AccountSettingsScreenState extends ConsumerState<AccountSettingsScreen> {
     if (mounted) {
       ScaffoldMessenger.of(context)
         ..hideCurrentSnackBar()
-        ..showSnackBar(const SnackBar(content: Text('Display name updated.')));
+        ..showSnackBar(SnackBar(content: Text(l10n.displayNameUpdated)));
     }
   }
 
   /// Shows the current email address in a simple dialog.
   void _showEmailInfoDialog(User? user) {
+    final l10n = AppLocalizations.of(context)!;
     showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(22)),
-        title: const Text('Email Address'),
+        title: Text(l10n.emailAddressDialogTitle),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'Your authenticated email address is:',
-              style: Theme.of(ctx).textTheme.bodyMedium,
-            ),
+            Text(l10n.yourEmailIs, style: Theme.of(ctx).textTheme.bodyMedium),
             const SizedBox(height: 8),
             Container(
               width: double.infinity,
@@ -636,7 +644,7 @@ class _AccountSettingsScreenState extends ConsumerState<AccountSettingsScreen> {
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Text(
-                user?.email ?? 'No email',
+                user?.email ?? l10n.noEmail,
                 style: Theme.of(
                   ctx,
                 ).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w600),
@@ -644,7 +652,7 @@ class _AccountSettingsScreenState extends ConsumerState<AccountSettingsScreen> {
             ),
             const SizedBox(height: 12),
             Text(
-              'Changing your email is not currently supported in this version of Tuno. A verified-before-update flow will be added in a future release.',
+              l10n.emailChangeNotSupported,
               style: Theme.of(ctx).textTheme.bodySmall?.copyWith(
                 color: Theme.of(ctx).colorScheme.onSurfaceVariant,
               ),
@@ -654,7 +662,7 @@ class _AccountSettingsScreenState extends ConsumerState<AccountSettingsScreen> {
         actions: [
           TextButton(
             onPressed: () => Navigator.of(ctx).pop(),
-            child: const Text('Close'),
+            child: Text(l10n.close),
           ),
         ],
       ),
@@ -664,9 +672,10 @@ class _AccountSettingsScreenState extends ConsumerState<AccountSettingsScreen> {
   /// Sends a password reset email to the authenticated user's email.
   Future<void> _handlePasswordReset() async {
     if (_isSendingPasswordReset) return;
+    final l10n = AppLocalizations.of(context)!;
     final user = _user;
     if (user?.email == null) {
-      _showSnackBar('No email address on record.');
+      _showSnackBar(l10n.noEmailOnRecord);
       return;
     }
 
@@ -680,9 +689,7 @@ class _AccountSettingsScreenState extends ConsumerState<AccountSettingsScreen> {
       if (!mounted) return;
 
       if (failure == null) {
-        _showSnackBar(
-          'Password reset email sent to ${user.email}. Check your inbox.',
-        );
+        _showSnackBar(l10n.passwordResetSent(user.email!));
       } else {
         _showErrorSnackBar(failure.message);
       }
@@ -695,8 +702,9 @@ class _AccountSettingsScreenState extends ConsumerState<AccountSettingsScreen> {
 
   /// Sends a verification email or shows verified status.
   Future<void> _handleEmailVerification(User? user) async {
+    final l10n = AppLocalizations.of(context)!;
     if (user?.emailVerified == true) {
-      _showSnackBar('Your email is already verified.');
+      _showSnackBar(l10n.emailAlreadyVerified);
       return;
     }
 
@@ -712,7 +720,7 @@ class _AccountSettingsScreenState extends ConsumerState<AccountSettingsScreen> {
       if (!mounted) return;
 
       if (failure == null) {
-        _showSnackBar('Verification email sent. Check your inbox.');
+        _showSnackBar(l10n.verificationEmailSent);
       } else {
         _showErrorSnackBar(failure.message);
       }
@@ -726,21 +734,22 @@ class _AccountSettingsScreenState extends ConsumerState<AccountSettingsScreen> {
   /// Shows a confirmation dialog, then signs out.
   Future<void> _handleSignOut() async {
     if (_isSigningOut) return;
+    final l10n = AppLocalizations.of(context)!;
 
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (ctx) => AlertDialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(22)),
-        title: const Text('Sign Out'),
-        content: const Text('Are you sure you want to sign out?'),
+        title: Text(l10n.signOutDialogTitle),
+        content: Text(l10n.signOutDialogContent),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(ctx).pop(false),
-            child: const Text('Cancel'),
+            child: Text(l10n.cancel),
           ),
           FilledButton(
             onPressed: () => Navigator.of(ctx).pop(true),
-            child: const Text('Sign Out'),
+            child: Text(l10n.signOut),
           ),
         ],
       ),
@@ -761,6 +770,7 @@ class _AccountSettingsScreenState extends ConsumerState<AccountSettingsScreen> {
 
   /// Shows the destructive delete-account dialog requiring "DELETE" text input.
   Future<void> _showDeleteConfirmationDialog() async {
+    final l10n = AppLocalizations.of(context)!;
     _deleteTextController.clear();
     _deleteConfirmed = false;
 
@@ -779,7 +789,7 @@ class _AccountSettingsScreenState extends ConsumerState<AccountSettingsScreen> {
                 children: [
                   Icon(Icons.warning_rounded, color: Colors.redAccent),
                   const SizedBox(width: 8),
-                  const Text('Delete Account'),
+                  Text(l10n.deleteAccountDialogTitle),
                 ],
               ),
               content: Column(
@@ -787,15 +797,14 @@ class _AccountSettingsScreenState extends ConsumerState<AccountSettingsScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'This action is permanent and cannot be undone. '
-                    'All your account data will be lost.',
+                    l10n.deleteAccountWarning,
                     style: Theme.of(ctx).textTheme.bodyMedium?.copyWith(
                       color: Theme.of(ctx).colorScheme.onSurfaceVariant,
                     ),
                   ),
                   const SizedBox(height: 12),
                   Text(
-                    'Type DELETE below to confirm:',
+                    l10n.typeDeleteToConfirm,
                     style: Theme.of(ctx).textTheme.bodySmall?.copyWith(
                       fontWeight: FontWeight.w600,
                     ),
@@ -805,7 +814,7 @@ class _AccountSettingsScreenState extends ConsumerState<AccountSettingsScreen> {
                     controller: _deleteTextController,
                     autofocus: true,
                     decoration: InputDecoration(
-                      hintText: 'Type DELETE',
+                      hintText: l10n.typeDelete,
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12),
                       ),
@@ -819,7 +828,7 @@ class _AccountSettingsScreenState extends ConsumerState<AccountSettingsScreen> {
                   ),
                   const SizedBox(height: 12),
                   Text(
-                    '⚠️ Firestore data cleanup still needs a separate backend process. Your authentication account will be deleted, but any stored documents may remain.',
+                    '⚠️ ${l10n.deleteFirestoreNote}',
                     style: Theme.of(ctx).textTheme.bodySmall?.copyWith(
                       color: Colors.orangeAccent,
                       fontSize: 11,
@@ -830,7 +839,7 @@ class _AccountSettingsScreenState extends ConsumerState<AccountSettingsScreen> {
               actions: [
                 TextButton(
                   onPressed: () => Navigator.of(ctx).pop(false),
-                  child: const Text('Cancel'),
+                  child: Text(l10n.cancel),
                 ),
                 FilledButton(
                   onPressed: localConfirmed && !_isDeleting
@@ -849,7 +858,7 @@ class _AccountSettingsScreenState extends ConsumerState<AccountSettingsScreen> {
                             color: Colors.white,
                           ),
                         )
-                      : const Text('Permanently Delete'),
+                      : Text(l10n.permanentlyDelete),
                 ),
               ],
             );
@@ -870,7 +879,7 @@ class _AccountSettingsScreenState extends ConsumerState<AccountSettingsScreen> {
 
       if (failure == null) {
         // Auth state change will trigger router redirect
-        _showSnackBar('Account deleted.');
+        _showSnackBar(l10n.accountDeleted);
       } else {
         _showErrorSnackBar(failure.message);
       }

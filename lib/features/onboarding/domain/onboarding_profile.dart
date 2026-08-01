@@ -1,12 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 enum OnboardingLanguage {
-  english('English', 'en'),
-  tamil('Tamil', 'ta'),
-  hindi('Hindi', 'hi');
+  english('en'),
+  tamil('ta'),
+  hindi('hi');
 
-  const OnboardingLanguage(this.label, this.code);
-  final String label;
+  const OnboardingLanguage(this.code);
   final String code;
 
   static OnboardingLanguage? fromCode(String code) {
@@ -15,49 +14,17 @@ enum OnboardingLanguage {
     }
     return null;
   }
-
-  static OnboardingLanguage? fromLabel(String label) {
-    for (final lang in OnboardingLanguage.values) {
-      if (lang.label == label) return lang;
-    }
-    return null;
-  }
 }
 
-enum SingingExperience {
-  beginner('Beginner'),
-  intermediate('Intermediate'),
-  advanced('Advanced'),
-  professional('Professional');
-
-  const SingingExperience(this.label);
-  final String label;
-
-  static SingingExperience? fromLabel(String label) {
-    for (final exp in SingingExperience.values) {
-      if (exp.label == label) return exp;
-    }
-    return null;
-  }
-}
+enum SingingExperience { beginner, intermediate, advanced, professional }
 
 enum SingingGoal {
-  improvePitchAccuracy('Improve pitch accuracy'),
-  increaseVocalRange('Increase vocal range'),
-  improveBreathControl('Improve breath control'),
-  improveRhythmTiming('Improve rhythm and timing'),
-  improveVoiceStability('Improve voice stability'),
-  buildSingingConfidence('Build singing confidence');
-
-  const SingingGoal(this.label);
-  final String label;
-
-  static SingingGoal? fromLabel(String label) {
-    for (final goal in SingingGoal.values) {
-      if (goal.label == label) return goal;
-    }
-    return null;
-  }
+  improvePitchAccuracy,
+  increaseVocalRange,
+  improveBreathControl,
+  improveRhythmTiming,
+  improveVoiceStability,
+  buildSingingConfidence,
 }
 
 class OnboardingProfile {

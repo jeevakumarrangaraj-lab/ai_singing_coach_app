@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../core/widgets/dashboard_music_decorations.dart';
+import '../../../../l10n/app_localizations.dart';
 import '../../../practice/presentation/practice_router.dart';
 import '../../domain/app_notification.dart';
 import '../../domain/notification_type.dart';
@@ -27,6 +28,7 @@ class NotificationsScreen extends ConsumerStatefulWidget {
 class _NotificationsScreenState extends ConsumerState<NotificationsScreen> {
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final state = ref.watch(notificationControllerProvider);
     final cs = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
@@ -40,7 +42,7 @@ class _NotificationsScreenState extends ConsumerState<NotificationsScreen> {
           Positioned.fill(
             child: const IgnorePointer(
               ignoring: true,
-              child: DashboardMusicDecorations(),
+              child: DashboardMusicDecorations(animate: true),
             ),
           ),
 
@@ -68,7 +70,7 @@ class _NotificationsScreenState extends ConsumerState<NotificationsScreen> {
                                   const SizedBox(height: 8),
 
                                   // ── Header ──
-                                  _buildHeader(context, cs, textTheme),
+                                  _buildHeader(context, cs, textTheme, l10n),
 
                                   const SizedBox(height: 20),
 
@@ -79,6 +81,7 @@ class _NotificationsScreenState extends ConsumerState<NotificationsScreen> {
                                       cs,
                                       textTheme,
                                       isDark,
+                                      l10n,
                                     )
                                   else
                                     _buildNotificationList(
@@ -87,6 +90,7 @@ class _NotificationsScreenState extends ConsumerState<NotificationsScreen> {
                                       textTheme,
                                       isDark,
                                       state,
+                                      l10n,
                                     ),
                                 ],
                               ),
@@ -104,9 +108,9 @@ class _NotificationsScreenState extends ConsumerState<NotificationsScreen> {
                   top: 16,
                   child: Semantics(
                     button: true,
-                    label: 'Back',
+                    label: l10n.back,
                     child: Tooltip(
-                      message: 'Back',
+                      message: l10n.back,
                       child: MouseRegion(
                         cursor: SystemMouseCursors.click,
                         child: InkWell(
@@ -152,12 +156,13 @@ class _NotificationsScreenState extends ConsumerState<NotificationsScreen> {
     BuildContext context,
     ColorScheme cs,
     TextTheme textTheme,
+    AppLocalizations l10n,
   ) {
     return Row(
       children: [
         const Spacer(),
         Text(
-          'Notifications',
+          l10n.notificationsTitle,
           style: textTheme.headlineMedium?.copyWith(
             fontSize: 28,
             fontWeight: FontWeight.w800,
@@ -178,6 +183,7 @@ class _NotificationsScreenState extends ConsumerState<NotificationsScreen> {
     ColorScheme cs,
     TextTheme textTheme,
     bool isDark,
+    AppLocalizations l10n,
   ) {
     final accentColor = isDark
         ? const Color(0xFF12B5C1)
@@ -211,7 +217,7 @@ class _NotificationsScreenState extends ConsumerState<NotificationsScreen> {
             const SizedBox(height: 28),
 
             Text(
-              "You're all caught up",
+              l10n.allCaughtUp,
               style: textTheme.headlineSmall?.copyWith(
                 fontSize: 22,
                 fontWeight: FontWeight.w700,
@@ -223,8 +229,7 @@ class _NotificationsScreenState extends ConsumerState<NotificationsScreen> {
             const SizedBox(height: 10),
 
             Text(
-              'Practice updates, analysis results and achievements '
-              'will appear here.',
+              l10n.emptyNotificationsMessage,
               style: textTheme.bodyLarge?.copyWith(
                 fontSize: 15,
                 color: cs.onSurfaceVariant,
@@ -238,16 +243,16 @@ class _NotificationsScreenState extends ConsumerState<NotificationsScreen> {
             // "Start Practice" outlined button
             Semantics(
               button: true,
-              label: 'Start Practice',
+              label: l10n.startPractice,
               child: Tooltip(
-                message: 'Start Practice',
+                message: l10n.startPractice,
                 child: MouseRegion(
                   cursor: SystemMouseCursors.click,
                   child: OutlinedButton.icon(
                     onPressed: () => context.push(PracticeRoutes.practiceModes),
                     icon: Icon(Icons.mic_rounded, size: 20, color: accentColor),
                     label: Text(
-                      'Start Practice',
+                      l10n.startPractice,
                       style: textTheme.titleMedium?.copyWith(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
@@ -289,6 +294,7 @@ class _NotificationsScreenState extends ConsumerState<NotificationsScreen> {
     TextTheme textTheme,
     bool isDark,
     NotificationState state,
+    AppLocalizations l10n,
   ) {
     final notifications = state.sortedNotifications;
     final hasUnread = state.unreadCount > 0;
@@ -302,6 +308,7 @@ class _NotificationsScreenState extends ConsumerState<NotificationsScreen> {
             child: _NotificationCard(
               notification: notification,
               isDark: isDark,
+              l10n: l10n,
               onTap: () => _handleNotificationTap(notification),
               onDelete: () {
                 ref
@@ -325,7 +332,7 @@ class _NotificationsScreenState extends ConsumerState<NotificationsScreen> {
         // ── "Mark all as read" button ──
         if (hasUnread) ...[
           const SizedBox(height: 12),
-          _buildMarkAllReadButton(context, cs, textTheme, isDark),
+          _buildMarkAllReadButton(context, cs, textTheme, isDark, l10n),
         ],
 
         // Bottom padding for safe area
@@ -356,6 +363,7 @@ class _NotificationsScreenState extends ConsumerState<NotificationsScreen> {
     ColorScheme cs,
     TextTheme textTheme,
     bool isDark,
+    AppLocalizations l10n,
   ) {
     final accentColor = isDark
         ? const Color(0xFF12B5C1)
@@ -363,9 +371,9 @@ class _NotificationsScreenState extends ConsumerState<NotificationsScreen> {
 
     return Semantics(
       button: true,
-      label: 'Mark all as read',
+      label: l10n.markAllAsRead,
       child: Tooltip(
-        message: 'Mark all as read',
+        message: l10n.markAllAsRead,
         child: MouseRegion(
           cursor: SystemMouseCursors.click,
           child: OutlinedButton.icon(
@@ -374,7 +382,7 @@ class _NotificationsScreenState extends ConsumerState<NotificationsScreen> {
             },
             icon: const Icon(Icons.done_all_rounded, size: 20),
             label: Text(
-              'Mark all as read',
+              l10n.markAllAsRead,
               style: textTheme.titleSmall?.copyWith(
                 fontSize: 15,
                 fontWeight: FontWeight.w600,
@@ -403,6 +411,7 @@ class _NotificationCard extends StatelessWidget {
   const _NotificationCard({
     required this.notification,
     required this.isDark,
+    required this.l10n,
     required this.onTap,
     required this.onDelete,
     required this.onMarkRead,
@@ -411,6 +420,7 @@ class _NotificationCard extends StatelessWidget {
 
   final AppNotification notification;
   final bool isDark;
+  final AppLocalizations l10n;
   final VoidCallback onTap;
   final VoidCallback onDelete;
   final VoidCallback onMarkRead;
@@ -482,7 +492,7 @@ class _NotificationCard extends StatelessWidget {
             cursor: SystemMouseCursors.click,
             child: InkWell(
               onTap: onTap,
-              onLongPress: () => _showActionSheet(context),
+              onLongPress: () => _showActionSheet(context, l10n),
               borderRadius: BorderRadius.circular(18),
               hoverColor: cs.onSurface.withValues(alpha: 0.04),
               focusColor: cs.onSurface.withValues(alpha: 0.08),
@@ -554,7 +564,7 @@ class _NotificationCard extends StatelessWidget {
 
                           // Relative timestamp
                           Text(
-                            _formatRelativeTime(notification.createdAt),
+                            _formatRelativeTime(notification.createdAt, l10n),
                             style: textTheme.bodySmall?.copyWith(
                               fontSize: 11,
                               color: cs.onSurfaceVariant.withValues(alpha: 0.7),
@@ -593,7 +603,7 @@ class _NotificationCard extends StatelessWidget {
 
   // ── Long-press action sheet ─────────────────────────────────
 
-  void _showActionSheet(BuildContext context) {
+  void _showActionSheet(BuildContext context, AppLocalizations l10n) {
     final cs = Theme.of(context).colorScheme;
     showModalBottomSheet(
       context: context,
@@ -639,7 +649,7 @@ class _NotificationCard extends StatelessWidget {
                     color: cs.primary,
                   ),
                   title: Text(
-                    notification.isRead ? 'Mark as unread' : 'Mark as read',
+                    notification.isRead ? l10n.markAsUnread : l10n.markAsRead,
                     style: Theme.of(
                       ctx,
                     ).textTheme.bodyLarge?.copyWith(color: cs.onSurface),
@@ -661,7 +671,7 @@ class _NotificationCard extends StatelessWidget {
                 ListTile(
                   leading: Icon(Icons.delete_outline_rounded, color: cs.error),
                   title: Text(
-                    'Delete',
+                    l10n.delete,
                     style: Theme.of(
                       ctx,
                     ).textTheme.bodyLarge?.copyWith(color: cs.error),
@@ -684,38 +694,38 @@ class _NotificationCard extends StatelessWidget {
 
   // ── Relative timestamp formatting ───────────────────────────
 
-  String _formatRelativeTime(DateTime dateTime) {
+  String _formatRelativeTime(DateTime dateTime, AppLocalizations l10n) {
     final now = DateTime.now();
     final diff = now.difference(dateTime);
 
     if (diff.isNegative) {
       // Future dates (shouldn't happen but handle gracefully)
-      return 'Just now';
+      return l10n.justNow;
     }
 
     if (diff.inSeconds < 60) {
-      return 'Just now';
+      return l10n.justNow;
     }
 
     if (diff.inMinutes < 60) {
       final m = diff.inMinutes;
-      return '${m}m ago';
+      return l10n.minutesAgo(m);
     }
 
     if (diff.inHours < 24) {
       final h = diff.inHours;
-      return '${h}h ago';
+      return l10n.hoursAgo(h);
     }
 
     if (diff.inDays == 1) {
-      return 'Yesterday';
+      return l10n.yesterday;
     }
 
     if (diff.inDays < 30) {
-      return '${diff.inDays}d ago';
+      return l10n.daysAgo(diff.inDays);
     }
 
-    // Fallback to short date
+    // Fallback to short date (unlocalized — no matching ARB key)
     final months = [
       'Jan',
       'Feb',

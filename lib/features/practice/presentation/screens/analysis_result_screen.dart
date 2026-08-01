@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:ai_singing_coach/l10n/app_localizations.dart';
 
 import '../../../../common/widgets/app_back_button.dart';
 import '../../../../core/widgets/tuno_dashboard_background.dart';
@@ -43,12 +44,14 @@ class AnalysisResultScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
+    final l10n = AppLocalizations.of(context)!;
     final fileName = _getFileName();
     final formattedDuration = _formatDuration(duration);
 
     return Scaffold(
       backgroundColor: cs.surface,
       body: TunoDashboardBackground(
+        animate: true,
         child: SafeArea(
           child: Center(
             child: SingleChildScrollView(
@@ -62,10 +65,10 @@ class AnalysisResultScreen extends StatelessWidget {
                     Align(
                       alignment: Alignment.centerLeft,
                       child: Tooltip(
-                        message: 'Back',
+                        message: l10n.back,
                         child: Semantics(
                           button: true,
-                          label: 'Back',
+                          label: l10n.back,
                           child: AppBackButton(
                             onPressed: () {
                               if (context.canPop()) {
@@ -103,7 +106,7 @@ class AnalysisResultScreen extends StatelessWidget {
 
                     // Title
                     Text(
-                      'Analysis Pending',
+                      l10n.analysisPending,
                       style: textTheme.headlineMedium?.copyWith(
                         fontSize: 28,
                         fontWeight: FontWeight.bold,
@@ -125,7 +128,7 @@ class AnalysisResultScreen extends StatelessWidget {
                         border: Border.all(color: cs.outlineVariant, width: 1),
                       ),
                       child: Text(
-                        'AI pitch analysis will be connected in the next phase.',
+                        l10n.aiAnalysisComingSoon,
                         style: textTheme.bodyMedium?.copyWith(
                           color: cs.onSurfaceVariant,
                           fontWeight: FontWeight.w500,
@@ -151,7 +154,7 @@ class AnalysisResultScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Recording Details',
+                              l10n.recordingDetails,
                               style: textTheme.titleLarge?.copyWith(
                                 fontWeight: FontWeight.bold,
                                 color: cs.onSurface,
@@ -181,8 +184,7 @@ class AnalysisResultScreen extends StatelessWidget {
                                     const SizedBox(width: 16),
                                     Expanded(
                                       child: Text(
-                                        'Unable to load recording details. '
-                                        'Navigation data may be missing or invalid.',
+                                        l10n.unableToLoadDetails,
                                         style: textTheme.bodyMedium?.copyWith(
                                           color: cs.onErrorContainer,
                                         ),
@@ -195,21 +197,21 @@ class AnalysisResultScreen extends StatelessWidget {
                               _buildDetailRow(
                                 context,
                                 icon: Icons.audiotrack_rounded,
-                                label: 'File Name',
+                                label: l10n.fileName,
                                 value: fileName,
                               ),
                               const SizedBox(height: 16),
                               _buildDetailRow(
                                 context,
                                 icon: Icons.timer_rounded,
-                                label: 'Duration',
+                                label: l10n.duration,
                                 value: formattedDuration,
                               ),
                               const SizedBox(height: 16),
                               _buildDetailRow(
                                 context,
                                 icon: Icons.calendar_today_rounded,
-                                label: 'Recorded',
+                                label: l10n.recorded,
                                 value: _formatDateTime(recordedAt),
                               ),
                             ],
@@ -227,7 +229,7 @@ class AnalysisResultScreen extends StatelessWidget {
                             constraints.maxWidth >= minWidthForRow;
 
                         final practiceAgainButton = Tooltip(
-                          message: 'Practice Again',
+                          message: l10n.practiceAgain,
                           child: FilledButton(
                             onPressed: () => context.go('/practice'),
                             style: FilledButton.styleFrom(
@@ -243,7 +245,7 @@ class AnalysisResultScreen extends StatelessWidget {
                                 Icon(Icons.mic_rounded, size: 20),
                                 const SizedBox(width: 8),
                                 Text(
-                                  'Practice Again',
+                                  l10n.practiceAgain,
                                   style: const TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.bold,
@@ -255,7 +257,7 @@ class AnalysisResultScreen extends StatelessWidget {
                         );
 
                         final backToReviewButton = Tooltip(
-                          message: 'Back to Review',
+                          message: l10n.backToReview,
                           child: OutlinedButton(
                             onPressed: () {
                               if (context.canPop()) {
@@ -278,7 +280,7 @@ class AnalysisResultScreen extends StatelessWidget {
                                 Icon(Icons.arrow_back_rounded, size: 20),
                                 const SizedBox(width: 8),
                                 Text(
-                                  'Back to Review',
+                                  l10n.backToReview,
                                   style: const TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.bold,

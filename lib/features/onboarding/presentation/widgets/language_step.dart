@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../l10n/app_localizations.dart';
 import '../../domain/onboarding_profile.dart';
 import '../onboarding_controller.dart';
+import '../onboarding_state.dart' show OnboardingErrorCode;
 
 class LanguageStep extends ConsumerWidget {
   const LanguageStep({super.key});
@@ -14,6 +16,7 @@ class LanguageStep extends ConsumerWidget {
     final colorScheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
     final isDark = colorScheme.brightness == Brightness.dark;
+    final l10n = AppLocalizations.of(context)!;
 
     final languages = OnboardingLanguage.values;
 
@@ -22,7 +25,7 @@ class LanguageStep extends ConsumerWidget {
       children: [
         // Heading
         Text(
-          'Choose your coaching language',
+          l10n.chooseCoachingLanguage,
           style: textTheme.headlineMedium?.copyWith(
             fontSize: 22,
             fontWeight: FontWeight.w700,
@@ -33,7 +36,7 @@ class LanguageStep extends ConsumerWidget {
         const SizedBox(height: 8),
         // Subtitle
         Text(
-          'Select the language you prefer for coaching instructions and AI feedback.',
+          l10n.coachingLanguageSubtitle,
           style: textTheme.bodyMedium?.copyWith(
             color: const Color(0xFFAAB8C8),
             height: 1.4,
@@ -61,6 +64,7 @@ class LanguageStep extends ConsumerWidget {
                     isSelected: state.selectedLanguage == language,
                     onTap: () => controller.selectLanguage(language),
                     isDark: isDark,
+                    l10n: l10n,
                   ),
                 );
               }).toList(),
@@ -68,7 +72,7 @@ class LanguageStep extends ConsumerWidget {
           },
         ),
         // Validation error
-        if (state.errorMessage != null) ...[
+        if (state.errorCode != null) ...[
           const SizedBox(height: 8),
           Container(
             padding: const EdgeInsets.all(12),
@@ -89,7 +93,7 @@ class LanguageStep extends ConsumerWidget {
                 const SizedBox(width: 10),
                 Expanded(
                   child: Text(
-                    state.errorMessage!,
+                    _errorMessage(context, state.errorCode!),
                     style: textTheme.bodyMedium?.copyWith(
                       color: colorScheme.error,
                       fontWeight: FontWeight.w500,
@@ -103,6 +107,19 @@ class LanguageStep extends ConsumerWidget {
       ],
     );
   }
+
+  /// Maps [OnboardingErrorCode] to the correct l10n error string.
+  String _errorMessage(BuildContext context, OnboardingErrorCode code) {
+    final l10n = AppLocalizations.of(context)!;
+    return switch (code) {
+      OnboardingErrorCode.languageRequired => l10n.onboardingLanguageRequired,
+      OnboardingErrorCode.experienceRequired =>
+        l10n.onboardingExperienceRequired,
+      OnboardingErrorCode.goalRequired => l10n.onboardingGoalRequired,
+      OnboardingErrorCode.saveFailed => l10n.setupSaveFailed,
+      OnboardingErrorCode.checkFailed => l10n.onboardingCheckFailed,
+    };
+  }
 }
 
 class _LanguageCard extends StatelessWidget {
@@ -111,12 +128,25 @@ class _LanguageCard extends StatelessWidget {
     required this.isSelected,
     required this.onTap,
     required this.isDark,
+    required this.l10n,
   });
 
   final OnboardingLanguage language;
   final bool isSelected;
   final VoidCallback onTap;
   final bool isDark;
+  final AppLocalizations l10n;
+
+  String _localizedName(OnboardingLanguage lang) {
+    switch (lang) {
+      case OnboardingLanguage.english:
+        return l10n.english;
+      case OnboardingLanguage.tamil:
+        return l10n.tamil;
+      case OnboardingLanguage.hindi:
+        return l10n.hindi;
+    }
+  }
 
   // Color constants matching the design spec
   static const Color _cardSurface = Color(0xFF061E31); // tunoDarkSurface
@@ -133,7 +163,7 @@ class _LanguageCard extends StatelessWidget {
     return Semantics(
       selected: isSelected,
       button: true,
-      label: '${language.label} language',
+      label: l10n.languageLabel(_localizedName(language)),
       child: MouseRegion(
         cursor: SystemMouseCursors.click,
         child: GestureDetector(
@@ -241,7 +271,7 @@ class _LanguageCard extends StatelessWidget {
                       // Language name
                       Expanded(
                         child: Text(
-                          language.label,
+                          _localizedName(language),
                           style: const TextStyle(
                             fontSize: 17,
                             fontWeight: FontWeight.w700,
