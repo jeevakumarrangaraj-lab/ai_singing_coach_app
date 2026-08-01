@@ -1,3 +1,4 @@
+import 'package:ai_singing_coach/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -58,6 +59,7 @@ class _PreferencesScreenState extends ConsumerState<PreferencesScreen> {
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     final preferences = ref.watch(preferencesControllerProvider);
+    final l10n = AppLocalizations.of(context)!;
 
     return Scaffold(
       backgroundColor: cs.surface,
@@ -67,7 +69,7 @@ class _PreferencesScreenState extends ConsumerState<PreferencesScreen> {
           Positioned.fill(
             child: const IgnorePointer(
               ignoring: true,
-              child: DashboardMusicDecorations(),
+              child: DashboardMusicDecorations(animate: true),
             ),
           ),
 
@@ -93,10 +95,10 @@ class _PreferencesScreenState extends ConsumerState<PreferencesScreen> {
 
                               // ── Back button ──
                               Semantics(
-                                label: 'Back to Settings',
+                                label: l10n.backToSettings,
                                 button: true,
                                 child: Tooltip(
-                                  message: 'Back',
+                                  message: l10n.back,
                                   child: AppBackButton(
                                     onPressed: () {
                                       if (context.canPop()) {
@@ -115,7 +117,7 @@ class _PreferencesScreenState extends ConsumerState<PreferencesScreen> {
                               // ── Title ──
                               Center(
                                 child: Text(
-                                  'Preferences',
+                                  l10n.preferences,
                                   style: textTheme.headlineMedium?.copyWith(
                                     fontSize: 28,
                                     fontWeight: FontWeight.bold,
@@ -127,25 +129,25 @@ class _PreferencesScreenState extends ConsumerState<PreferencesScreen> {
 
                               // ── Section 1: Practice Preferences ──
                               _buildSectionCard(
-                                title: 'Practice Preferences',
+                                title: l10n.practicePreferences,
                                 child: _buildPracticeModeRow(preferences),
                               ),
                               const SizedBox(height: 16),
 
                               // ── Section 2: Coaching Feedback ──
                               _buildSectionCard(
-                                title: 'Coaching Feedback',
+                                title: l10n.coachingFeedback,
                                 child: _buildFeedbackDetailRow(preferences),
                               ),
                               const SizedBox(height: 16),
 
                               // ── Section 3: Recording Preferences ──
                               _buildSectionCard(
-                                title: 'Recording Preferences',
+                                title: l10n.recordingPreferences,
                                 child: Column(
                                   children: [
                                     _ToggleRow(
-                                      label: 'Count-in before recording',
+                                      label: l10n.countInBeforeRecording,
                                       value: preferences.countInBeforeRecording,
                                       onChanged: (v) {
                                         ref
@@ -156,16 +158,15 @@ class _PreferencesScreenState extends ConsumerState<PreferencesScreen> {
                                             .setCountInBeforeRecording(v);
                                         _showSnackBar(
                                           v
-                                              ? 'Count-in enabled'
-                                              : 'Count-in disabled',
+                                              ? l10n.countInEnabled
+                                              : l10n.countInDisabled,
                                         );
                                       },
                                       accent: _accent,
                                     ),
                                     _sectionDivider(),
                                     _ToggleRow(
-                                      label:
-                                          'Automatically save completed recordings',
+                                      label: l10n.autoSaveCompletedRecordings,
                                       value: preferences
                                           .automaticallySaveRecordings,
                                       onChanged: (v) {
@@ -177,15 +178,15 @@ class _PreferencesScreenState extends ConsumerState<PreferencesScreen> {
                                             .setAutomaticallySaveRecordings(v);
                                         _showSnackBar(
                                           v
-                                              ? 'Auto-save enabled'
-                                              : 'Auto-save disabled',
+                                              ? l10n.autoSaveEnabled
+                                              : l10n.autoSaveDisabled,
                                         );
                                       },
                                       accent: _accent,
                                     ),
                                     _sectionDivider(),
                                     _ToggleRow(
-                                      label: 'Show headphone recommendation',
+                                      label: l10n.showHeadphoneRecommendation,
                                       value: preferences
                                           .showHeadphoneRecommendation,
                                       onChanged: (v) {
@@ -197,8 +198,8 @@ class _PreferencesScreenState extends ConsumerState<PreferencesScreen> {
                                             .setShowHeadphoneRecommendation(v);
                                         _showSnackBar(
                                           v
-                                              ? 'Headphone reminder enabled'
-                                              : 'Headphone reminder disabled',
+                                              ? l10n.headphoneReminderEnabled
+                                              : l10n.headphoneReminderDisabled,
                                         );
                                       },
                                       accent: _accent,
@@ -210,12 +211,11 @@ class _PreferencesScreenState extends ConsumerState<PreferencesScreen> {
 
                               // ── Section 4: General Behaviour ──
                               _buildSectionCard(
-                                title: 'General Behaviour',
+                                title: l10n.generalBehaviour,
                                 child: Column(
                                   children: [
                                     _ToggleRow(
-                                      label:
-                                          'Confirm before deleting a recording',
+                                      label: l10n.confirmBeforeDeleting,
                                       value: preferences.confirmBeforeDeleting,
                                       onChanged: (v) {
                                         ref
@@ -226,15 +226,15 @@ class _PreferencesScreenState extends ConsumerState<PreferencesScreen> {
                                             .setConfirmBeforeDeleting(v);
                                         _showSnackBar(
                                           v
-                                              ? 'Delete confirmation enabled'
-                                              : 'Delete confirmation disabled',
+                                              ? l10n.deleteConfirmationEnabled
+                                              : l10n.deleteConfirmationDisabled,
                                         );
                                       },
                                       accent: _accent,
                                     ),
                                     _sectionDivider(),
                                     _ToggleRow(
-                                      label: 'Reduce animations',
+                                      label: l10n.reduceAnimations,
                                       value: preferences.reduceAnimations,
                                       onChanged: (v) {
                                         ref
@@ -245,8 +245,8 @@ class _PreferencesScreenState extends ConsumerState<PreferencesScreen> {
                                             .setReduceAnimations(v);
                                         _showSnackBar(
                                           v
-                                              ? 'Reduced animations'
-                                              : 'Animations restored',
+                                              ? l10n.reducedAnimations
+                                              : l10n.animationsRestored,
                                         );
                                       },
                                       accent: _accent,
@@ -308,12 +308,29 @@ class _PreferencesScreenState extends ConsumerState<PreferencesScreen> {
   //  PRACTICE MODE ROW
   // ───────────────────────────────────────────────────────────
 
+  String _practiceModeLabel(AppLocalizations l10n, String mode) {
+    switch (mode) {
+      case PracticeMode.soloPractice:
+        return l10n.soloPractice;
+      case PracticeMode.tunoExercises:
+        return l10n.tunoExercises;
+      case PracticeMode.uploadSong:
+        return l10n.uploadSong;
+      case PracticeMode.backingTrack:
+        return l10n.backingTrack;
+      default:
+        return l10n.soloPractice;
+    }
+  }
+
   Widget _buildPracticeModeRow(TunoPreferences preferences) {
     final textTheme = Theme.of(context).textTheme;
+    final l10n = AppLocalizations.of(context)!;
 
     return Semantics(
-      label:
-          'Default Practice Mode: ${PracticeMode.label(preferences.defaultPracticeMode)}',
+      label: l10n.defaultModeLabel(
+        _practiceModeLabel(l10n, preferences.defaultPracticeMode),
+      ),
       child: InkWell(
         onTap: () => _showPracticeModeSheet(preferences),
         borderRadius: BorderRadius.circular(14),
@@ -328,7 +345,7 @@ class _PreferencesScreenState extends ConsumerState<PreferencesScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Default Practice Mode',
+                      l10n.defaultPracticeMode,
                       style: textTheme.bodyLarge?.copyWith(
                         fontSize: 15,
                         color: cs.onSurface,
@@ -337,7 +354,7 @@ class _PreferencesScreenState extends ConsumerState<PreferencesScreen> {
                     ),
                     const SizedBox(height: 2),
                     Text(
-                      PracticeMode.label(preferences.defaultPracticeMode),
+                      _practiceModeLabel(l10n, preferences.defaultPracticeMode),
                       style: textTheme.bodyMedium?.copyWith(
                         fontSize: 13,
                         color: _accent,
@@ -356,6 +373,8 @@ class _PreferencesScreenState extends ConsumerState<PreferencesScreen> {
   }
 
   void _showPracticeModeSheet(TunoPreferences current) {
+    final l10n = AppLocalizations.of(context)!;
+
     showModalBottomSheet(
       context: context,
       shape: const RoundedRectangleBorder(
@@ -381,7 +400,7 @@ class _PreferencesScreenState extends ConsumerState<PreferencesScreen> {
                 ),
                 const SizedBox(height: 20),
                 Text(
-                  'Default Practice Mode',
+                  l10n.defaultPracticeMode,
                   style: Theme.of(ctx).textTheme.titleLarge?.copyWith(
                     fontWeight: FontWeight.w700,
                     color: cs.onSurface,
@@ -391,7 +410,7 @@ class _PreferencesScreenState extends ConsumerState<PreferencesScreen> {
                 ...PracticeMode.values.map((mode) {
                   final selected = current.defaultPracticeMode == mode;
                   return _SelectionOption(
-                    label: PracticeMode.label(mode),
+                    label: _practiceModeLabel(l10n, mode),
                     selected: selected,
                     onTap: () {
                       ref
@@ -399,7 +418,7 @@ class _PreferencesScreenState extends ConsumerState<PreferencesScreen> {
                           .setDefaultPracticeMode(mode);
                       Navigator.of(ctx).pop();
                       _showSnackBar(
-                        'Default mode: ${PracticeMode.label(mode)}',
+                        l10n.defaultModeLabel(_practiceModeLabel(l10n, mode)),
                       );
                     },
                     accent: _accent,
@@ -420,15 +439,18 @@ class _PreferencesScreenState extends ConsumerState<PreferencesScreen> {
 
   Widget _buildFeedbackDetailRow(TunoPreferences preferences) {
     final detail = preferences.feedbackDetail;
+    final l10n = AppLocalizations.of(context)!;
 
     return Semantics(
-      label: 'Feedback detail: ${FeedbackDetail.label(detail)}',
+      container: true,
+      label: l10n.coachingFeedback,
+      explicitChildNodes: true,
       child: Row(
         children: [
           // Simple segment
           Expanded(
             child: _SegmentedOption(
-              label: FeedbackDetail.label(FeedbackDetail.simple),
+              label: l10n.simple,
               selected: detail == FeedbackDetail.simple,
               onTap: () {
                 ref
@@ -443,7 +465,7 @@ class _PreferencesScreenState extends ConsumerState<PreferencesScreen> {
           // Detailed segment
           Expanded(
             child: _SegmentedOption(
-              label: FeedbackDetail.label(FeedbackDetail.detailed),
+              label: l10n.detailed,
               selected: detail == FeedbackDetail.detailed,
               onTap: () {
                 ref
