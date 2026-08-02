@@ -22,13 +22,13 @@ class AppLocalizationsTa extends AppLocalizations {
   String get useDeviceLanguage => 'உங்கள் சாதனத்தின் மொழியைப் பயன்படுத்தவும்';
 
   @override
-  String get english => 'ஆங்கிலம்';
+  String get english => 'English';
 
   @override
   String get tamil => 'தமிழ்';
 
   @override
-  String get hindi => 'இந்தி';
+  String get hindi => 'हिन्दी';
 
   @override
   String get back => 'பின்செல்';

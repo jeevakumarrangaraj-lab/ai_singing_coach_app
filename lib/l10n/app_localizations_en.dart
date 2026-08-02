@@ -24,10 +24,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get english => 'English';
 
   @override
-  String get tamil => 'Tamil';
+  String get tamil => 'தமிழ்';
 
   @override
-  String get hindi => 'Hindi';
+  String get hindi => 'हिन्दी';
 
   @override
   String get back => 'Back';

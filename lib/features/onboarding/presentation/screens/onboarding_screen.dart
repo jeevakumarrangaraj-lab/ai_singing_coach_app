@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../../common/widgets/app_back_button.dart';
+import '../../../../common/widgets/fixed_back_button.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/widgets/tuno_music_background.dart';
 import '../widgets/experience_step.dart';
@@ -94,52 +94,21 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                           const SizedBox(height: 32),
                           _buildCurrentStepContent(context, state, controller),
                           const SizedBox(height: 32),
-                          // Step 5 (Review) has its own "Complete Setup" button
-                          // inside OnboardingReviewStep. Show only Back here.
+                          // Bottom action row: only Continue/Complete button
+                          // Back is handled by the fixed top-left button
                           if (state.currentStep < 4)
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: _OutlinedBackButton(
-                                    onPressed:
-                                        state.currentStep > 0 &&
-                                            !state.isLoading
-                                        ? controller.previousStep
-                                        : null,
-                                    l10n: l10n,
-                                  ),
-                                ),
-                                const SizedBox(width: 16),
-                                Expanded(
-                                  child: _GradientContinueButton(
-                                    onPressed: state.isLoading
-                                        ? null
-                                        : () {
-                                            if (controller
-                                                .validateCurrentStep()) {
-                                              controller.nextStep();
-                                            }
-                                          },
-                                    l10n: l10n,
-                                  ),
-                                ),
-                              ],
+                            _GradientContinueButton(
+                              onPressed: state.isLoading
+                                  ? null
+                                  : () {
+                                      if (controller.validateCurrentStep()) {
+                                        controller.nextStep();
+                                      }
+                                    },
+                              l10n: l10n,
                             )
                           else
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: _OutlinedBackButton(
-                                    onPressed: !state.isLoading
-                                        ? controller.previousStep
-                                        : null,
-                                    l10n: l10n,
-                                  ),
-                                ),
-                                const SizedBox(width: 16),
-                                const Expanded(child: SizedBox.shrink()),
-                              ],
-                            ),
+                            const SizedBox.shrink(), // Review step has its own Complete button
                           const SizedBox(height: 24),
                         ],
                       ),
@@ -147,18 +116,26 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                   ),
                 ),
               ),
-              // Back button on top of everything (last child for hit-test)
+              // Fixed top-left Back button (last child for hit-test priority)
               Positioned(
-                top: 8,
-                left: 8,
-                child: AppBackButton(
-                  onPressed: () {
-                    if (state.currentStep > 0) {
-                      controller.previousStep();
-                    } else {
-                      context.go('/home');
-                    }
-                  },
+                top: 12,
+                left: 16,
+                child: FixedBackButton(
+                  onPressed: state.isLoading
+                      ? null
+                      : () {
+                          if (state.currentStep > 0) {
+                            controller.previousStep();
+                          } else {
+                            // On Language step (step 0), navigate back to welcome screen
+                            if (context.canPop()) {
+                              context.pop();
+                            } else {
+                              context.go('/welcome');
+                            }
+                          }
+                        },
+                  l10n: l10n,
                 ),
               ),
             ],
@@ -285,42 +262,6 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
               : AppLocalizations.of(context)!.setupSaveFailed,
         );
     }
-  }
-}
-
-/// Outlined back button matching the login screen style.
-class _OutlinedBackButton extends StatelessWidget {
-  const _OutlinedBackButton({required this.onPressed, required this.l10n});
-
-  final VoidCallback? onPressed;
-  final AppLocalizations l10n;
-
-  @override
-  Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-    final isDark = colorScheme.brightness == Brightness.dark;
-    final borderColor = isDark
-        ? AppColors.tunoDarkBorder.withValues(alpha: 0.7)
-        : AppColors.tunoLightBorder.withValues(alpha: 0.6);
-
-    return Semantics(
-      button: true,
-      label: l10n.back,
-      child: OutlinedButton.icon(
-        onPressed: onPressed,
-        icon: const Icon(Icons.arrow_back_ios_new_rounded, size: 18),
-        label: Text(l10n.back),
-        style: OutlinedButton.styleFrom(
-          foregroundColor: colorScheme.onSurface,
-          side: BorderSide(color: borderColor, width: 1.5),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16),
-          ),
-          padding: const EdgeInsets.symmetric(vertical: 16),
-          textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-        ),
-      ),
-    );
   }
 }
 

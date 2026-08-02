@@ -17,11 +17,11 @@
   "@useDeviceLanguage": {
     "description": "Supporting text for the system default option"
   },
-  "english": "अंग्रेज़ी",
+  "english": "English",
   "@english": {
     "description": "Option label for English language"
   },
-  "tamil": "तमिल",
+  "tamil": "தமிழ்",
   "@tamil": {
     "description": "Option label for Tamil language"
   },

@@ -21,11 +21,11 @@
   "@english": {
     "description": "Option label for English language"
   },
-  "tamil": "Tamil",
+  "tamil": "தமிழ்",
   "@tamil": {
     "description": "Option label for Tamil language"
   },
-  "hindi": "Hindi",
+  "hindi": "हिन्दी",
   "@hindi": {
     "description": "Option label for Hindi language"
   },

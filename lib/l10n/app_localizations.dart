@@ -133,13 +133,13 @@ abstract class AppLocalizations {
   /// Option label for Tamil language
   ///
   /// In en, this message translates to:
-  /// **'Tamil'**
+  /// **'தமிழ்'**
   String get tamil;
 
   /// Option label for Hindi language
   ///
   /// In en, this message translates to:
-  /// **'Hindi'**
+  /// **'हिन्दी'**
   String get hindi;
 
   /// Accessibility label for the back button

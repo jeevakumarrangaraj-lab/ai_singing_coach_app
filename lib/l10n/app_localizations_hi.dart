@@ -21,10 +21,10 @@ class AppLocalizationsHi extends AppLocalizations {
   String get useDeviceLanguage => 'अपने डिवाइस की भाषा का उपयोग करें';
 
   @override
-  String get english => 'अंग्रेज़ी';
+  String get english => 'English';
 
   @override
-  String get tamil => 'तमिल';
+  String get tamil => 'தமிழ்';
 
   @override
   String get hindi => 'हिन्दी';
