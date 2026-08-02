@@ -89,7 +89,7 @@ class ReferenceTrackController extends StateNotifier<ReferenceTrackState> {
       final extension = _normalizeExtension(file);
       if (extension == null || !_allowedExtensions.contains(extension)) {
         state = const ReferenceTrackError(
-          'Unsupported file format. Please choose an mp3, wav, m4a, or aac file.',
+          ReferenceTrackErrorCode.unsupportedFormat,
         );
         _previousTrack = null;
         return;
@@ -97,9 +97,7 @@ class ReferenceTrackController extends StateNotifier<ReferenceTrackState> {
 
       // ---- Validate size ----
       if (file.size > _maxSizeBytes) {
-        state = const ReferenceTrackError(
-          'File too large. Maximum allowed size is 50 MB.',
-        );
+        state = const ReferenceTrackError(ReferenceTrackErrorCode.fileTooLarge);
         _previousTrack = null;
         return;
       }
@@ -112,7 +110,7 @@ class ReferenceTrackController extends StateNotifier<ReferenceTrackState> {
         bytes = file.bytes;
         if (bytes == null || bytes.isEmpty) {
           state = const ReferenceTrackError(
-            'Could not read the file content on this platform. Please try again.',
+            ReferenceTrackErrorCode.unreadableFile,
           );
           _previousTrack = null;
           return;
@@ -121,7 +119,7 @@ class ReferenceTrackController extends StateNotifier<ReferenceTrackState> {
         localPath = file.path;
         if (localPath == null || localPath.isEmpty) {
           state = const ReferenceTrackError(
-            'Could not determine the file location. Please try again.',
+            ReferenceTrackErrorCode.missingPath,
           );
           _previousTrack = null;
           return;
@@ -145,12 +143,13 @@ class ReferenceTrackController extends StateNotifier<ReferenceTrackState> {
         return;
       }
 
-      // Provide a user‑friendly message even for unexpected errors.
-      final message = e is Exception ? e.toString() : 'Something went wrong.';
-      debugPrint('ReferenceTrackController.pickReferenceTrack error: $message');
+      // Emit a typed code — never expose raw exception details to the user.
+      debugPrint('ReferenceTrackController.pickReferenceTrack error: $e');
       // Do NOT log file bytes or local paths.
 
-      state = ReferenceTrackError('Could not pick the file. $message');
+      state = const ReferenceTrackError(
+        ReferenceTrackErrorCode.selectionFailed,
+      );
       _previousTrack = null;
     } finally {
       _isPicking = false;

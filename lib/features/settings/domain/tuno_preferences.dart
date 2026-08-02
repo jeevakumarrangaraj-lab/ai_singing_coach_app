@@ -1,5 +1,5 @@
 /// ─────────────────────────────────────────────────────────────
-/// TUNA PREFERENCES – IMMUTABLE STATE MODEL
+/// TUNO PREFERENCES – IMMUTABLE STATE MODEL
 /// ─────────────────────────────────────────────────────────────
 ///
 /// Holds all user-configurable preference values for the Tuno app.
@@ -33,22 +33,6 @@ class PracticeMode {
     backingTrack,
   ];
 
-  /// Human-readable label for a mode key.
-  static String label(String mode) {
-    switch (mode) {
-      case soloPractice:
-        return 'Solo Practice';
-      case tunoExercises:
-        return 'Tuno Exercises';
-      case uploadSong:
-        return 'Upload Song';
-      case backingTrack:
-        return 'Backing Track';
-      default:
-        return mode;
-    }
-  }
-
   /// Default practice mode.
   static const String defaultValue = soloPractice;
 }
@@ -59,17 +43,6 @@ class FeedbackDetail {
   static const String detailed = 'detailed';
 
   static const List<String> values = [simple, detailed];
-
-  static String label(String detail) {
-    switch (detail) {
-      case simple:
-        return 'Simple';
-      case detailed:
-        return 'Detailed';
-      default:
-        return detail;
-    }
-  }
 
   static const String defaultValue = simple;
 }

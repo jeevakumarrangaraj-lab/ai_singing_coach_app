@@ -150,7 +150,7 @@ class VoiceRecordingController extends StateNotifier<VoiceRecordingState> {
     try {
       final hasPermission = await _repository.hasPermission();
       if (!hasPermission) {
-        state = const ErrorState('Microphone permission not granted');
+        state = const ErrorState(VoiceRecordingErrorCode.permissionDenied);
         return;
       }
 
@@ -160,7 +160,7 @@ class VoiceRecordingController extends StateNotifier<VoiceRecordingState> {
       );
 
       if (_currentRecordingPath == null) {
-        state = const ErrorState('Failed to start recording');
+        state = const ErrorState(VoiceRecordingErrorCode.startFailed);
         return;
       }
 
@@ -225,10 +225,10 @@ class VoiceRecordingController extends StateNotifier<VoiceRecordingState> {
         return _currentRecordingPath;
       }
 
-      state = const ErrorState('Failed to stop recording');
+      state = const ErrorState(VoiceRecordingErrorCode.stopFailed);
       return null;
     } catch (_) {
-      state = const ErrorState('Failed to stop recording');
+      state = const ErrorState(VoiceRecordingErrorCode.stopFailed);
       return null;
     } finally {
       _isStoppingRecording = false;
@@ -268,7 +268,7 @@ class VoiceRecordingController extends StateNotifier<VoiceRecordingState> {
 
   Future<void> playAudio(String path) async {
     if (path.trim().isEmpty) {
-      state = const ErrorState('Audio path is missing');
+      state = const ErrorState(VoiceRecordingErrorCode.audioPathMissing);
       return;
     }
 
@@ -296,7 +296,7 @@ class VoiceRecordingController extends StateNotifier<VoiceRecordingState> {
       );
     } catch (e) {
       debugPrint('playAudio error: $e');
-      state = ErrorState('Failed to start playback');
+      state = const ErrorState(VoiceRecordingErrorCode.playbackFailed);
       rethrow;
     }
   }
@@ -317,7 +317,7 @@ class VoiceRecordingController extends StateNotifier<VoiceRecordingState> {
       }
     } catch (e) {
       debugPrint('pauseAudio error: $e');
-      state = const ErrorState('Failed to pause playback');
+      state = const ErrorState(VoiceRecordingErrorCode.pauseFailed);
       rethrow;
     }
   }
@@ -329,7 +329,7 @@ class VoiceRecordingController extends StateNotifier<VoiceRecordingState> {
       await _audioPlayer.resume();
     } catch (e) {
       debugPrint('resumeAudio error: $e');
-      state = const ErrorState('Failed to resume playback');
+      state = const ErrorState(VoiceRecordingErrorCode.resumeFailed);
       rethrow;
     }
   }
@@ -347,7 +347,7 @@ class VoiceRecordingController extends StateNotifier<VoiceRecordingState> {
       await _audioPlayer.seek(clamped);
     } catch (e) {
       debugPrint('seekAudio error: $e');
-      state = const ErrorState('Failed to seek');
+      state = const ErrorState(VoiceRecordingErrorCode.seekFailed);
       rethrow;
     }
   }
@@ -380,7 +380,7 @@ class VoiceRecordingController extends StateNotifier<VoiceRecordingState> {
       // Always reset state so UI goes back to idle / voice practice.
       reset();
     } catch (_) {
-      state = const ErrorState('Failed to delete recording');
+      state = const ErrorState(VoiceRecordingErrorCode.deleteFailed);
       reset();
     }
   }

@@ -1,5 +1,38 @@
 import 'package:flutter/foundation.dart';
 
+/// Typed error codes for voice-recording failures.
+///
+/// Controllers emit these typed codes instead of user-facing strings.
+/// Consuming widgets map each code to an l10n getter via AppLocalizations.
+enum VoiceRecordingErrorCode {
+  /// Microphone permission was denied when starting a recording.
+  permissionDenied,
+
+  /// The recording could not be started.
+  startFailed,
+
+  /// The recording could not be stopped.
+  stopFailed,
+
+  /// Audio playback could not be started.
+  playbackFailed,
+
+  /// Audio playback could not be paused.
+  pauseFailed,
+
+  /// Audio playback could not be resumed.
+  resumeFailed,
+
+  /// The playback position could not be changed.
+  seekFailed,
+
+  /// The recording could not be deleted.
+  deleteFailed,
+
+  /// The recording audio path is missing or empty.
+  audioPathMissing,
+}
+
 @immutable
 abstract class VoiceRecordingState {
   const VoiceRecordingState();
@@ -100,19 +133,19 @@ class PausedState extends VoiceRecordingState {
 }
 
 class ErrorState extends VoiceRecordingState {
-  final String message;
+  final VoiceRecordingErrorCode code;
 
-  const ErrorState(this.message);
+  const ErrorState(this.code);
 
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is ErrorState &&
           runtimeType == other.runtimeType &&
-          message == other.message;
+          code == other.code;
 
   @override
-  int get hashCode => message.hashCode;
+  int get hashCode => code.hashCode;
 }
 
 class PermissionGrantedState extends VoiceRecordingState {
@@ -133,6 +166,10 @@ extension VoiceRecordingStateX on VoiceRecordingState {
   bool get isIdle => this is IdleState;
 
   bool get isError => this is ErrorState;
+
+  /// The typed error code, or `null` if not in an error state.
+  VoiceRecordingErrorCode? get errorCode =>
+      (this is ErrorState) ? (this as ErrorState).code : null;
 
   bool get hasRecording =>
       whenOrNull(
@@ -170,7 +207,7 @@ extension VoiceRecordingStateX on VoiceRecordingState {
     T Function(String audioPath, Duration duration)? stopped,
     T Function(String audioPath, Duration position, Duration duration)? playing,
     T Function(String audioPath, Duration position, Duration duration)? paused,
-    T Function(String message)? error,
+    T Function(VoiceRecordingErrorCode code)? error,
   }) {
     switch (this) {
       case IdleState():
@@ -197,8 +234,8 @@ extension VoiceRecordingStateX on VoiceRecordingState {
         duration: final d,
       ):
         return paused?.call(p, pos, d);
-      case ErrorState(message: final m):
-        return error?.call(m);
+      case ErrorState(code: final c):
+        return error?.call(c);
     }
     return null;
   }

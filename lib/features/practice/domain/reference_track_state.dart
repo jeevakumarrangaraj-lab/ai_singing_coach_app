@@ -2,6 +2,27 @@ import 'package:flutter/foundation.dart';
 
 import 'reference_track.dart';
 
+/// Error codes for reference-track picker / validation failures.
+///
+/// Controllers emit these typed codes instead of user-facing strings.
+/// Consuming widgets map each code to an l10n getter via AppLocalizations.
+enum ReferenceTrackErrorCode {
+  /// The chosen file has an extension that is not supported.
+  unsupportedFormat,
+
+  /// The chosen file exceeds the maximum allowed size.
+  fileTooLarge,
+
+  /// The file content could not be read on this platform.
+  unreadableFile,
+
+  /// The file location could not be determined on this platform.
+  missingPath,
+
+  /// The file picker or platform threw an unexpected error.
+  selectionFailed,
+}
+
 /// Union type for the reference‑track file‑picker lifecycle.
 @immutable
 sealed class ReferenceTrackState {
@@ -37,19 +58,19 @@ class ReferenceTrackSelected extends ReferenceTrackState {
 
 /// An error occurred during picking / validation.
 class ReferenceTrackError extends ReferenceTrackState {
-  final String message;
+  final ReferenceTrackErrorCode code;
 
-  const ReferenceTrackError(this.message);
+  const ReferenceTrackError(this.code);
 
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is ReferenceTrackError &&
           runtimeType == other.runtimeType &&
-          message == other.message;
+          code == other.code;
 
   @override
-  int get hashCode => message.hashCode;
+  int get hashCode => code.hashCode;
 }
 
 // ---------------------------------------------------------------------------
@@ -70,17 +91,16 @@ extension ReferenceTrackStateX on ReferenceTrackState {
       ? (this as ReferenceTrackSelected).track
       : null;
 
-  /// The error message, or `null` if not in error.
-  String? get errorMessage => (this is ReferenceTrackError)
-      ? (this as ReferenceTrackError).message
-      : null;
+  /// The typed error code, or `null` if not in error.
+  ReferenceTrackErrorCode? get errorCode =>
+      (this is ReferenceTrackError) ? (this as ReferenceTrackError).code : null;
 
   /// Pattern‑match over all variants.
   T when<T>({
     required T Function() idle,
     required T Function() picking,
     required T Function(ReferenceTrack track) selected,
-    required T Function(String message) error,
+    required T Function(ReferenceTrackErrorCode code) error,
   }) {
     switch (this) {
       case ReferenceTrackIdle():
@@ -89,8 +109,8 @@ extension ReferenceTrackStateX on ReferenceTrackState {
         return picking();
       case ReferenceTrackSelected(track: final t):
         return selected(t);
-      case ReferenceTrackError(message: final m):
-        return error(m);
+      case ReferenceTrackError(code: final c):
+        return error(c);
     }
   }
 
@@ -99,7 +119,7 @@ extension ReferenceTrackStateX on ReferenceTrackState {
     T Function()? idle,
     T Function()? picking,
     T Function(ReferenceTrack track)? selected,
-    T Function(String message)? error,
+    T Function(ReferenceTrackErrorCode code)? error,
   }) {
     switch (this) {
       case ReferenceTrackIdle():
@@ -108,8 +128,8 @@ extension ReferenceTrackStateX on ReferenceTrackState {
         return picking?.call();
       case ReferenceTrackSelected(track: final t):
         return selected?.call(t);
-      case ReferenceTrackError(message: final m):
-        return error?.call(m);
+      case ReferenceTrackError(code: final c):
+        return error?.call(c);
     }
   }
 }
