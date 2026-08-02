@@ -9,353 +9,319 @@ class AppLocalizationsHi extends AppLocalizations {
   AppLocalizationsHi([String locale = 'hi']) : super(locale);
 
   @override
-  String get languages => 'αñ¡αñ╛αñ╖αñ╛αñÅαñü';
+  String get languages => 'भाषाएँ';
 
   @override
-  String get chooseAppLanguage =>
-      'Tuno αñ«αÑçαñé αñëαñ¬αñ»αÑïαñù αñòαÑÇ αñ£αñ╛αñ¿αÑç αñ╡αñ╛αñ▓αÑÇ αñ¡αñ╛αñ╖αñ╛ αñÜαÑüαñ¿αÑçαñé';
+  String get chooseAppLanguage => 'Tuno में उपयोग की जाने वाली भाषा चुनें';
 
   @override
-  String get systemDefault => 'αñ╕αñ┐αñ╕αÑìαñƒαñ« αñíαñ┐αñ½αñ╝αÑëαñ▓αÑìαñƒ';
+  String get systemDefault => 'सिस्टम डिफ़ॉल्ट';
 
   @override
-  String get useDeviceLanguage =>
-      'αñàαñ¬αñ¿αÑç αñíαñ┐αñ╡αñ╛αñçαñ╕ αñòαÑÇ αñ¡αñ╛αñ╖αñ╛ αñòαñ╛ αñëαñ¬αñ»αÑïαñù αñòαñ░αÑçαñé';
+  String get useDeviceLanguage => 'अपने डिवाइस की भाषा का उपयोग करें';
 
   @override
-  String get english => 'αñàαñéαñùαÑìαñ░αÑçαñ£αñ╝αÑÇ';
+  String get english => 'अंग्रेज़ी';
 
   @override
-  String get tamil => 'αññαñ«αñ┐αñ▓';
+  String get tamil => 'तमिल';
 
   @override
-  String get hindi => 'αñ╣αñ┐αñ¿αÑìαñªαÑÇ';
+  String get hindi => 'हिन्दी';
 
   @override
-  String get back => 'αñ╡αñ╛αñ¬αñ╕';
+  String get back => 'वापस';
 
   @override
-  String get languageChanged => 'αñ¡αñ╛αñ╖αñ╛ αñ¼αñªαñ▓ αñªαÑÇ αñùαñê';
+  String get languageChanged => 'भाषा बदल दी गई';
 
   @override
-  String get settings => 'αñ╕αÑçαñƒαñ┐αñéαñùαÑìαñ╕';
+  String get settings => 'सेटिंग्स';
 
   @override
-  String get home => 'αñ╣αÑïαñ«';
+  String get home => 'होम';
 
   @override
-  String get practice => 'αñàαñ¡αÑìαñ»αñ╛αñ╕';
+  String get practice => 'अभ्यास';
 
   @override
-  String get record => 'αñ░αñ┐αñòαÑëαñ░αÑìαñí';
+  String get record => 'रिकॉर्ड';
 
   @override
-  String get progress => 'αñ¬αÑìαñ░αñùαññαñ┐';
+  String get progress => 'प्रगति';
 
   @override
-  String get profile => 'αñ¬αÑìαñ░αÑïαñ½αñ╝αñ╛αñçαñ▓';
+  String get profile => 'प्रोफ़ाइल';
 
   @override
-  String get account => 'αñûαñ╛αññαñ╛';
+  String get account => 'खाता';
 
   @override
-  String get practicePreferences =>
-      'αñàαñ¡αÑìαñ»αñ╛αñ╕ αñ¬αÑìαñ░αñ╛αñÑαñ«αñ┐αñòαññαñ╛αñÅαñü';
+  String get practicePreferences => 'अभ्यास प्राथमिकताएँ';
 
   @override
-  String get audioAndRecording =>
-      'αñæαñíαñ┐αñ»αÑï αñöαñ░ αñ░αñ┐αñòαÑëαñ░αÑìαñíαñ┐αñéαñù';
+  String get audioAndRecording => 'ऑडियो और रिकॉर्डिंग';
 
   @override
-  String get notificationPreferences =>
-      'αñ╕αÑéαñÜαñ¿αñ╛ αñ¬αÑìαñ░αñ╛αñÑαñ«αñ┐αñòαññαñ╛αñÅαñü';
+  String get notificationPreferences => 'सूचना प्राथमिकताएँ';
 
   @override
-  String get privacyAndSecurity =>
-      'αñùαÑïαñ¬αñ¿αÑÇαñ»αññαñ╛ αñöαñ░ αñ╕αÑüαñ░αñòαÑìαñ╖αñ╛';
+  String get privacyAndSecurity => 'गोपनीयता और सुरक्षा';
 
   @override
-  String get helpAndSupport => 'αñ╕αñ╣αñ╛αñ»αññαñ╛ αñöαñ░ αñ╕αñ«αñ░αÑìαñÑαñ¿';
+  String get helpAndSupport => 'सहायता और समर्थन';
 
   @override
-  String get aboutTuno => 'Tuno αñòαÑç αñ¼αñ╛αñ░αÑç αñ«αÑçαñé';
+  String get aboutTuno => 'Tuno के बारे में';
 
   @override
   String featureComingSoon(String label) {
-    return '$label αñ£αñ▓αÑìαñª αñ╣αÑÇ αñëαñ¬αñ▓αñ¼αÑìαñº αñ╣αÑïαñùαñ╛αÑñ';
+    return '$label जल्द ही उपलब्ध होगा।';
   }
 
   @override
-  String get appearance => 'αñªαñ┐αñûαñ╛αñ╡αñƒ';
+  String get appearance => 'दिखावट';
 
   @override
-  String get light => 'αñ▓αñ╛αñçαñƒ';
+  String get light => 'लाइट';
 
   @override
-  String get dark => 'αñíαñ╛αñ░αÑìαñò';
+  String get dark => 'डार्क';
 
   @override
-  String get logout => 'αñ▓αÑëαñù αñåαñëαñƒ';
+  String get logout => 'लॉग आउट';
 
   @override
-  String get logoutConfirmTitle => 'αñ▓αÑëαñù αñåαñëαñƒ';
+  String get logoutConfirmTitle => 'लॉग आउट';
 
   @override
-  String get logoutConfirmContent =>
-      'αñòαÑìαñ»αñ╛ αñåαñ¬ αñ╡αñ╛αñòαñê αñ▓αÑëαñù αñåαñëαñƒ αñòαñ░αñ¿αñ╛ αñÜαñ╛αñ╣αññαÑç αñ╣αÑêαñé?';
+  String get logoutConfirmContent => 'क्या आप वाकई लॉग आउट करना चाहते हैं?';
 
   @override
-  String get cancel => 'αñ░αñªαÑìαñª αñòαñ░αÑçαñé';
+  String get cancel => 'रद्द करें';
 
   @override
-  String get preferences => 'αñ¬αÑìαñ░αñ╛αñÑαñ«αñ┐αñòαññαñ╛αñÅαñü';
+  String get preferences => 'प्राथमिकताएँ';
 
   @override
-  String get backToSettings =>
-      'αñ╕αÑçαñƒαñ┐αñéαñùαÑìαñ╕ αñ¬αñ░ αñ╡αñ╛αñ¬αñ╕ αñ£αñ╛αñÅαñü';
+  String get backToSettings => 'सेटिंग्स पर वापस जाएँ';
 
   @override
-  String get coachingFeedback => 'αñòαÑïαñÜαñ┐αñéαñù αñ½αÑÇαñíαñ¼αÑêαñò';
+  String get coachingFeedback => 'कोचिंग फीडबैक';
 
   @override
-  String get recordingPreferences =>
-      'αñ░αñ┐αñòαÑëαñ░αÑìαñíαñ┐αñéαñù αñ¬αÑìαñ░αñ╛αñÑαñ«αñ┐αñòαññαñ╛αñÅαñü';
+  String get recordingPreferences => 'रिकॉर्डिंग प्राथमिकताएँ';
 
   @override
-  String get generalBehaviour => 'αñ╕αñ╛αñ«αñ╛αñ¿αÑìαñ» αñ╡αÑìαñ»αñ╡αñ╣αñ╛αñ░';
+  String get generalBehaviour => 'सामान्य व्यवहार';
 
   @override
-  String get countInBeforeRecording =>
-      'αñ░αñ┐αñòαÑëαñ░αÑìαñíαñ┐αñéαñù αñ╕αÑç αñ¬αñ╣αñ▓αÑç αñòαñ╛αñëαñéαñƒ-αñçαñ¿';
+  String get countInBeforeRecording => 'रिकॉर्डिंग से पहले काउंट-इन';
 
   @override
   String get autoSaveCompletedRecordings =>
-      'αñ¬αÑéαñ░αÑìαñú αñ░αñ┐αñòαÑëαñ░αÑìαñíαñ┐αñéαñù αñ╕αÑìαñ╡αñÜαñ╛αñ▓αñ┐αññ αñ░αÑéαñ¬ αñ╕αÑç αñ╕αñ╣αÑçαñ£αÑçαñé';
+      'पूर्ण रिकॉर्डिंग स्वचालित रूप से सहेजें';
 
   @override
-  String get showHeadphoneRecommendation =>
-      'αñ╣αÑçαñíαñ½αñ╝αÑïαñ¿ αñàαñ¿αÑüαñ╢αñéαñ╕αñ╛ αñªαñ┐αñûαñ╛αñÅαñü';
+  String get showHeadphoneRecommendation => 'हेडफ़ोन अनुशंसा दिखाएँ';
 
   @override
-  String get confirmBeforeDeleting =>
-      'αñ╣αñƒαñ╛αñ¿αÑç αñ╕αÑç αñ¬αñ╣αñ▓αÑç αñ¬αÑüαñ╖αÑìαñƒαñ┐ αñòαñ░αÑçαñé';
+  String get confirmBeforeDeleting => 'हटाने से पहले पुष्टि करें';
 
   @override
-  String get reduceAnimations => 'αñÅαñ¿αñ┐αñ«αÑçαñ╢αñ¿ αñòαñ« αñòαñ░αÑçαñé';
+  String get reduceAnimations => 'एनिमेशन कम करें';
 
   @override
-  String get countInEnabled => 'αñòαñ╛αñëαñéαñƒ-αñçαñ¿ αñ╕αñòαÑìαñ╖αñ«';
+  String get countInEnabled => 'काउंट-इन सक्षम';
 
   @override
-  String get countInDisabled => 'αñòαñ╛αñëαñéαñƒ-αñçαñ¿ αñàαñòαÑìαñ╖αñ«';
+  String get countInDisabled => 'काउंट-इन अक्षम';
 
   @override
-  String get autoSaveEnabled => 'αñæαñƒαÑï-αñ╕αÑçαñ╡ αñ╕αñòαÑìαñ╖αñ«';
+  String get autoSaveEnabled => 'ऑटो-सेव सक्षम';
 
   @override
-  String get autoSaveDisabled => 'αñæαñƒαÑï-αñ╕αÑçαñ╡ αñàαñòαÑìαñ╖αñ«';
+  String get autoSaveDisabled => 'ऑटो-सेव अक्षम';
 
   @override
-  String get headphoneReminderEnabled =>
-      'αñ╣αÑçαñíαñ½αñ╝αÑïαñ¿ αñàαñ¿αÑüαñ╕αÑìαñ«αñ╛αñ░αñò αñ╕αñòαÑìαñ╖αñ«';
+  String get headphoneReminderEnabled => 'हेडफ़ोन अनुस्मारक सक्षम';
 
   @override
-  String get headphoneReminderDisabled =>
-      'αñ╣αÑçαñíαñ½αñ╝αÑïαñ¿ αñàαñ¿αÑüαñ╕αÑìαñ«αñ╛αñ░αñò αñàαñòαÑìαñ╖αñ«';
+  String get headphoneReminderDisabled => 'हेडफ़ोन अनुस्मारक अक्षम';
 
   @override
-  String get deleteConfirmationEnabled =>
-      'αñ╣αñƒαñ╛αñ¿αÑç αñòαÑÇ αñ¬αÑüαñ╖αÑìαñƒαñ┐ αñ╕αñòαÑìαñ╖αñ«';
+  String get deleteConfirmationEnabled => 'हटाने की पुष्टि सक्षम';
 
   @override
-  String get deleteConfirmationDisabled =>
-      'αñ╣αñƒαñ╛αñ¿αÑç αñòαÑÇ αñ¬αÑüαñ╖αÑìαñƒαñ┐ αñàαñòαÑìαñ╖αñ«';
+  String get deleteConfirmationDisabled => 'हटाने की पुष्टि अक्षम';
 
   @override
-  String get reducedAnimations =>
-      'αñÅαñ¿αñ┐αñ«αÑçαñ╢αñ¿ αñòαñ« αñòαñ┐αñÅ αñùαñÅ';
+  String get reducedAnimations => 'एनिमेशन कम किए गए';
 
   @override
-  String get animationsRestored =>
-      'αñÅαñ¿αñ┐αñ«αÑçαñ╢αñ¿ αñ¼αñ╣αñ╛αñ▓ αñòαñ┐αñÅ αñùαñÅ';
+  String get animationsRestored => 'एनिमेशन बहाल किए गए';
 
   @override
-  String get defaultPracticeMode =>
-      'αñíαñ┐αñ½αñ╝αÑëαñ▓αÑìαñƒ αñàαñ¡αÑìαñ»αñ╛αñ╕ αñ«αÑïαñí';
+  String get defaultPracticeMode => 'डिफ़ॉल्ट अभ्यास मोड';
 
   @override
-  String get simple => 'αñ╕αñ░αñ▓';
+  String get simple => 'सरल';
 
   @override
-  String get detailed => 'αñ╡αñ┐αñ╕αÑìαññαÑâαññ';
+  String get detailed => 'विस्तृत';
 
   @override
   String defaultModeLabel(String mode) {
-    return 'αñíαñ┐αñ½αñ╝αÑëαñ▓αÑìαñƒ αñ«αÑïαñí: $mode';
+    return 'डिफ़ॉल्ट मोड: $mode';
   }
 
   @override
-  String get audioAndVideo => 'αñæαñíαñ┐αñ»αÑï αñöαñ░ αñ╡αÑÇαñíαñ┐αñ»αÑï';
+  String get audioAndVideo => 'ऑडियो और वीडियो';
 
   @override
-  String get defaultRecordingType =>
-      'αñíαñ┐αñ½αñ╝αÑëαñ▓αÑìαñƒ αñ░αñ┐αñòαÑëαñ░αÑìαñíαñ┐αñéαñù αñ¬αÑìαñ░αñòαñ╛αñ░';
+  String get defaultRecordingType => 'डिफ़ॉल्ट रिकॉर्डिंग प्रकार';
 
   @override
-  String get audioQuality => 'αñæαñíαñ┐αñ»αÑï αñùαÑüαñúαñ╡αññαÑìαññαñ╛';
+  String get audioQuality => 'ऑडियो गुणवत्ता';
 
   @override
-  String get recordingBehaviour =>
-      'αñ░αñ┐αñòαÑëαñ░αÑìαñíαñ┐αñéαñù αñ╡αÑìαñ»αñ╡αñ╣αñ╛αñ░';
+  String get recordingBehaviour => 'रिकॉर्डिंग व्यवहार';
 
   @override
-  String get microphoneAccess =>
-      'αñ«αñ╛αñçαñòαÑìαñ░αÑïαñ½αñ╝αÑïαñ¿ αñ¬αñ╣αÑüαñüαñÜ';
+  String get microphoneAccess => 'माइक्रोफ़ोन पहुँच';
 
   @override
-  String get noiseReduction => 'αñ╢αÑïαñ░ αñ«αÑçαñé αñòαñ«αÑÇ';
+  String get noiseReduction => 'शोर में कमी';
 
   @override
-  String get countdownBeforeRecording =>
-      'αñ░αñ┐αñòαÑëαñ░αÑìαñíαñ┐αñéαñù αñ╕αÑç αñ¬αñ╣αñ▓αÑç αñòαñ╛αñëαñéαñƒαñíαñ╛αñëαñ¿';
+  String get countdownBeforeRecording => 'रिकॉर्डिंग से पहले काउंटडाउन';
 
   @override
-  String get autoPlayAfterCapture =>
-      'αñòαÑêαñ¬αÑìαñÜαñ░ αñòαÑç αñ¼αñ╛αñª αñæαñƒαÑï-αñ¬αÑìαñ▓αÑç';
+  String get autoPlayAfterCapture => 'कैप्चर के बाद ऑटो-प्ले';
 
   @override
-  String get showHeadphonesReminder =>
-      'αñ╣αÑçαñíαñ½αñ╝αÑïαñ¿ αñàαñ¿αÑüαñ╕αÑìαñ«αñ╛αñ░αñò αñªαñ┐αñûαñ╛αñÅαñü';
+  String get showHeadphonesReminder => 'हेडफ़ोन अनुस्मारक दिखाएँ';
 
   @override
-  String get noiseReductionEnabled =>
-      'αñ╢αÑïαñ░ αñ«αÑçαñé αñòαñ«αÑÇ αñ╕αñòαÑìαñ╖αñ«';
+  String get noiseReductionEnabled => 'शोर में कमी सक्षम';
 
   @override
-  String get noiseReductionDisabled =>
-      'αñ╢αÑïαñ░ αñ«αÑçαñé αñòαñ«αÑÇ αñàαñòαÑìαñ╖αñ«';
+  String get noiseReductionDisabled => 'शोर में कमी अक्षम';
 
   @override
-  String get countdownEnabled => 'αñòαñ╛αñëαñéαñƒαñíαñ╛αñëαñ¿ αñ╕αñòαÑìαñ╖αñ«';
+  String get countdownEnabled => 'काउंटडाउन सक्षम';
 
   @override
-  String get countdownDisabled => 'αñòαñ╛αñëαñéαñƒαñíαñ╛αñëαñ¿ αñàαñòαÑìαñ╖αñ«';
+  String get countdownDisabled => 'काउंटडाउन अक्षम';
 
   @override
-  String get autoPlayEnabled => 'αñæαñƒαÑï-αñ¬αÑìαñ▓αÑç αñ╕αñòαÑìαñ╖αñ«';
+  String get autoPlayEnabled => 'ऑटो-प्ले सक्षम';
 
   @override
-  String get autoPlayDisabled => 'αñæαñƒαÑï-αñ¬αÑìαñ▓αÑç αñàαñòαÑìαñ╖αñ«';
+  String get autoPlayDisabled => 'ऑटो-प्ले अक्षम';
 
   @override
-  String get headphonesReminderEnabled =>
-      'αñ╣αÑçαñíαñ½αñ╝αÑïαñ¿ αñàαñ¿αÑüαñ╕αÑìαñ«αñ╛αñ░αñò αñ╕αñòαÑìαñ╖αñ«';
+  String get headphonesReminderEnabled => 'हेडफ़ोन अनुस्मारक सक्षम';
 
   @override
-  String get headphonesReminderDisabled =>
-      'αñ╣αÑçαñíαñ½αñ╝αÑïαñ¿ αñàαñ¿αÑüαñ╕αÑìαñ«αñ╛αñ░αñò αñàαñòαÑìαñ╖αñ«';
+  String get headphonesReminderDisabled => 'हेडफ़ोन अनुस्मारक अक्षम';
 
   @override
-  String get granted => 'αñàαñ¿αÑüαñ«αññαñ┐ αñªαÑÇ αñùαñê';
+  String get granted => 'अनुमति दी गई';
 
   @override
   String get notGrantedTapToAllow =>
-      'αñàαñ¿αÑüαñ«αññαñ┐ αñ¿αñ╣αÑÇαñé αñªαÑÇ αñùαñê ΓÇö αñàαñ¿αÑüαñ«αññαñ┐ αñªαÑçαñ¿αÑç αñòαÑç αñ▓αñ┐αñÅ αñƒαÑêαñ¬ αñòαñ░αÑçαñé';
+      'अनुमति नहीं दी गई — अनुमति देने के लिए टैप करें';
 
   @override
   String get couldNotCheckPermission =>
-      'αñ«αñ╛αñçαñòαÑìαñ░αÑïαñ½αñ╝αÑïαñ¿ αñàαñ¿αÑüαñ«αññαñ┐ αñòαÑÇ αñ£αñ╛αñüαñÜ αñ¿αñ╣αÑÇαñé αñòαñ░ αñ╕αñòαñ╛';
+      'माइक्रोफ़ोन अनुमति की जाँच नहीं कर सका';
 
   @override
-  String get microphoneGranted =>
-      'αñ«αñ╛αñçαñòαÑìαñ░αÑïαñ½αñ╝αÑïαñ¿ αñ¬αñ╣αÑüαñüαñÜ αñàαñ¿αÑüαñ«αññ';
+  String get microphoneGranted => 'माइक्रोफ़ोन पहुँच अनुमत';
 
   @override
-  String get microphoneDenied =>
-      'αñ«αñ╛αñçαñòαÑìαñ░αÑïαñ½αñ╝αÑïαñ¿ αñ¬αñ╣αÑüαñüαñÜ αñàαñ╕αÑìαñ╡αÑÇαñòαÑâαññ';
+  String get microphoneDenied => 'माइक्रोफ़ोन पहुँच अस्वीकृत';
 
   @override
   String get couldNotRequestPermission =>
-      'αñ«αñ╛αñçαñòαÑìαñ░αÑïαñ½αñ╝αÑïαñ¿ αñàαñ¿αÑüαñ«αññαñ┐ αñòαñ╛ αñàαñ¿αÑüαñ░αÑïαñº αñ¿αñ╣αÑÇαñé αñòαñ░ αñ╕αñòαñ╛';
+      'माइक्रोफ़ोन अनुमति का अनुरोध नहीं कर सका';
 
   @override
-  String get microphonePermissionDialogTitle =>
-      'αñ«αñ╛αñçαñòαÑìαñ░αÑïαñ½αñ╝αÑïαñ¿ αñàαñ¿αÑüαñ«αññαñ┐';
+  String get microphonePermissionDialogTitle => 'माइक्रोफ़ोन अनुमति';
 
   @override
   String get microphonePermissionDialogContent =>
-      'αñ«αñ╛αñçαñòαÑìαñ░αÑïαñ½αñ╝αÑïαñ¿ αñàαñ¿αÑüαñ«αññαñ┐ αñ╕αÑìαñÑαñ╛αñ»αÑÇ αñ░αÑéαñ¬ αñ╕αÑç αñàαñ╕αÑìαñ╡αÑÇαñòαÑâαññ αñòαñ░ αñªαÑÇ αñùαñê αñ╣αÑêαÑñ αñòαÑâαñ¬αñ»αñ╛ αñçαñ╕αÑç αñàαñ¬αñ¿αÑç αñ╕αñ┐αñ╕αÑìαñƒαñ« αñ╕αÑçαñƒαñ┐αñéαñùαÑìαñ╕ αñ«αÑçαñé αñ╕αñòαÑìαñ╖αñ« αñòαñ░αÑçαñéαÑñ';
+      'माइक्रोफ़ोन अनुमति स्थायी रूप से अस्वीकृत कर दी गई है। कृपया इसे अपने सिस्टम सेटिंग्स में सक्षम करें।';
 
   @override
-  String get openSettings => 'αñ╕αÑçαñƒαñ┐αñéαñùαÑìαñ╕ αñûαÑïαñ▓αÑçαñé';
+  String get openSettings => 'सेटिंग्स खोलें';
 
   @override
-  String get audio => 'αñæαñíαñ┐αñ»αÑï';
+  String get audio => 'ऑडियो';
 
   @override
-  String get video => 'αñ╡αÑÇαñíαñ┐αñ»αÑï';
+  String get video => 'वीडियो';
 
   @override
-  String get standard => 'αñ«αñ╛αñ¿αñò';
+  String get standard => 'मानक';
 
   @override
-  String get high => 'αñëαñÜαÑìαñÜ';
+  String get high => 'उच्च';
 
   @override
   String defaultRecordingTypeLabel(String type) {
-    return 'αñíαñ┐αñ½αñ╝αÑëαñ▓αÑìαñƒ αñ░αñ┐αñòαÑëαñ░αÑìαñíαñ┐αñéαñù αñ¬αÑìαñ░αñòαñ╛αñ░: $type';
+    return 'डिफ़ॉल्ट रिकॉर्डिंग प्रकार: $type';
   }
 
   @override
   String audioQualityLabel(String quality) {
-    return 'αñæαñíαñ┐αñ»αÑï αñùαÑüαñúαñ╡αññαÑìαññαñ╛: $quality';
+    return 'ऑडियो गुणवत्ता: $quality';
   }
 
   @override
-  String get personalInformation =>
-      'αñ╡αÑìαñ»αñòαÑìαññαñ┐αñùαññ αñ£αñ╛αñ¿αñòαñ╛αñ░αÑÇ';
+  String get personalInformation => 'व्यक्तिगत जानकारी';
 
   @override
-  String get emailAddress => 'αñêαñ«αÑçαñ▓ αñ¬αññαñ╛';
+  String get emailAddress => 'ईमेल पता';
 
   @override
-  String get changePassword => 'αñ¬αñ╛αñ╕αñ╡αñ░αÑìαñí αñ¼αñªαñ▓αÑçαñé';
+  String get changePassword => 'पासवर्ड बदलें';
 
   @override
-  String get emailVerification => 'αñêαñ«αÑçαñ▓ αñ╕αññαÑìαñ»αñ╛αñ¬αñ¿';
+  String get emailVerification => 'ईमेल सत्यापन';
 
   @override
-  String get signOut => 'αñ╕αñ╛αñçαñ¿ αñåαñëαñƒ';
+  String get signOut => 'साइन आउट';
 
   @override
-  String get deleteAccount => 'αñûαñ╛αññαñ╛ αñ╣αñƒαñ╛αñÅαñü';
+  String get deleteAccount => 'खाता हटाएँ';
 
   @override
-  String get tunoSinger => 'Tuno αñùαñ╛αñ»αñò';
+  String get tunoSinger => 'Tuno गायक';
 
   @override
-  String get noEmail => 'αñòαÑïαñê αñêαñ«αÑçαñ▓ αñ¿αñ╣αÑÇαñé';
+  String get noEmail => 'कोई ईमेल नहीं';
 
   @override
-  String get emailVerified => 'αñêαñ«αÑçαñ▓ αñ╕αññαÑìαñ»αñ╛αñ¬αñ┐αññ';
+  String get emailVerified => 'ईमेल सत्यापित';
 
   @override
-  String get emailNotVerified =>
-      'αñêαñ«αÑçαñ▓ αñ╕αññαÑìαñ»αñ╛αñ¬αñ┐αññ αñ¿αñ╣αÑÇαñé';
+  String get emailNotVerified => 'ईमेल सत्यापित नहीं';
 
   @override
-  String get verified => 'αñ╕αññαÑìαñ»αñ╛αñ¬αñ┐αññ';
+  String get verified => 'सत्यापित';
 
   @override
-  String get notVerified => 'αñ╕αññαÑìαñ»αñ╛αñ¬αñ┐αññ αñ¿αñ╣αÑÇαñé';
+  String get notVerified => 'सत्यापित नहीं';
 
   @override
   String signInWithProvider(String providers) {
-    return '$providers αñ╕αÑç αñ╕αñ╛αñçαñ¿ αñçαñ¿ αñòαñ░αÑçαñé';
+    return '$providers से साइन इन करें';
   }
 
   @override
-  String get password => 'αñ¬αñ╛αñ╕αñ╡αñ░αÑìαñí';
+  String get password => 'पासवर्ड';
 
   @override
   String get google => 'Google';
@@ -367,1120 +333,1011 @@ class AppLocalizationsHi extends AppLocalizations {
   String get facebook => 'Facebook';
 
   @override
-  String get displayName => 'αñ¬αÑìαñ░αñªαñ░αÑìαñ╢αñ¿ αñ¿αñ╛αñ«';
+  String get displayName => 'प्रदर्शन नाम';
 
   @override
-  String get enterYourName =>
-      'αñàαñ¬αñ¿αñ╛ αñ¿αñ╛αñ« αñªαñ░αÑìαñ£ αñòαñ░αÑçαñé';
+  String get enterYourName => 'अपना नाम दर्ज करें';
 
   @override
-  String get nameCannotBeEmpty =>
-      'αñ¿αñ╛αñ« αñûαñ╛αñ▓αÑÇ αñ¿αñ╣αÑÇαñé αñ╣αÑï αñ╕αñòαññαñ╛';
+  String get nameCannotBeEmpty => 'नाम खाली नहीं हो सकता';
 
   @override
-  String get save => 'αñ╕αñ╣αÑçαñ£αÑçαñé';
+  String get save => 'सहेजें';
 
   @override
-  String get displayNameUpdated =>
-      'αñ¬αÑìαñ░αñªαñ░αÑìαñ╢αñ¿ αñ¿αñ╛αñ« αñàαñ¬αñíαÑçαñƒ αñòαñ┐αñ»αñ╛ αñùαñ»αñ╛αÑñ';
+  String get displayNameUpdated => 'प्रदर्शन नाम अपडेट किया गया।';
 
   @override
-  String get emailAddressDialogTitle => 'αñêαñ«αÑçαñ▓ αñ¬αññαñ╛';
+  String get emailAddressDialogTitle => 'ईमेल पता';
 
   @override
-  String get yourEmailIs =>
-      'αñåαñ¬αñòαñ╛ αñ¬αÑìαñ░αñ«αñ╛αñúαñ┐αññ αñêαñ«αÑçαñ▓ αñ¬αññαñ╛ αñ╣αÑê:';
+  String get yourEmailIs => 'आपका प्रमाणित ईमेल पता है:';
 
   @override
   String get emailChangeNotSupported =>
-      'Tuno αñòαÑç αñçαñ╕ αñ╕αñéαñ╕αÑìαñòαñ░αñú αñ«αÑçαñé αñêαñ«αÑçαñ▓ αñ¼αñªαñ▓αñ¿αñ╛ αñ╕αñ«αñ░αÑìαñÑαñ┐αññ αñ¿αñ╣αÑÇαñé αñ╣αÑêαÑñ αñ¡αñ╡αñ┐αñ╖αÑìαñ» αñòαÑç αñ░αñ┐αñ▓αÑÇαñ£αñ╝ αñ«αÑçαñé αñÅαñò αñ╕αññαÑìαñ»αñ╛αñ¬αñ┐αññ-αñ¬αÑéαñ░αÑìαñ╡-αñàαñ¬αñíαÑçαñƒ αñ¬αÑìαñ░αñ╡αñ╛αñ╣ αñ£αÑïαñíαñ╝αñ╛ αñ£αñ╛αñÅαñùαñ╛αÑñ';
+      'Tuno के इस संस्करण में ईमेल बदलना समर्थित नहीं है। भविष्य के रिलीज़ में एक सत्यापित-पूर्व-अपडेट प्रवाह जोड़ा जाएगा।';
 
   @override
-  String get close => 'αñ¼αñéαñª αñòαñ░αÑçαñé';
+  String get close => 'बंद करें';
 
   @override
-  String get noEmailOnRecord =>
-      'αñòαÑïαñê αñêαñ«αÑçαñ▓ αñ¬αññαñ╛ αñ░αñ┐αñòαÑëαñ░αÑìαñí αñ¬αñ░ αñ¿αñ╣αÑÇαñé αñ╣αÑêαÑñ';
+  String get noEmailOnRecord => 'कोई ईमेल पता रिकॉर्ड पर नहीं है।';
 
   @override
   String passwordResetSent(String email) {
-    return 'αñ¬αñ╛αñ╕αñ╡αñ░αÑìαñí αñ░αÑÇαñ╕αÑçαñƒ αñêαñ«αÑçαñ▓ $email αñ¬αñ░ αñ¡αÑçαñ£αñ╛ αñùαñ»αñ╛αÑñ αñàαñ¬αñ¿αñ╛ αñçαñ¿αñ¼αÑëαñòαÑìαñ╕ αñ£αñ╛αñüαñÜαÑçαñéαÑñ';
+    return 'पासवर्ड रीसेट ईमेल $email पर भेजा गया। अपना इनबॉक्स जाँचें।';
   }
 
   @override
-  String get emailAlreadyVerified =>
-      'αñåαñ¬αñòαñ╛ αñêαñ«αÑçαñ▓ αñ¬αñ╣αñ▓αÑç αñ╕αÑç αñ╕αññαÑìαñ»αñ╛αñ¬αñ┐αññ αñ╣αÑêαÑñ';
+  String get emailAlreadyVerified => 'आपका ईमेल पहले से सत्यापित है।';
 
   @override
   String get verificationEmailSent =>
-      'αñ╕αññαÑìαñ»αñ╛αñ¬αñ¿ αñêαñ«αÑçαñ▓ αñ¡αÑçαñ£αñ╛ αñùαñ»αñ╛αÑñ αñàαñ¬αñ¿αñ╛ αñçαñ¿αñ¼αÑëαñòαÑìαñ╕ αñ£αñ╛αñüαñÜαÑçαñéαÑñ';
+      'सत्यापन ईमेल भेजा गया। अपना इनबॉक्स जाँचें।';
 
   @override
-  String get signOutDialogTitle => 'αñ╕αñ╛αñçαñ¿ αñåαñëαñƒ';
+  String get signOutDialogTitle => 'साइन आउट';
 
   @override
-  String get signOutDialogContent =>
-      'αñòαÑìαñ»αñ╛ αñåαñ¬ αñ╡αñ╛αñòαñê αñ╕αñ╛αñçαñ¿ αñåαñëαñƒ αñòαñ░αñ¿αñ╛ αñÜαñ╛αñ╣αññαÑç αñ╣αÑêαñé?';
+  String get signOutDialogContent => 'क्या आप वाकई साइन आउट करना चाहते हैं?';
 
   @override
-  String get deleteAccountDialogTitle => 'αñûαñ╛αññαñ╛ αñ╣αñƒαñ╛αñÅαñü';
+  String get deleteAccountDialogTitle => 'खाता हटाएँ';
 
   @override
   String get deleteAccountWarning =>
-      'αñ»αñ╣ αñòαñ╛αñ░αÑìαñ░αñ╡αñ╛αñê αñ╕αÑìαñÑαñ╛αñ»αÑÇ αñ╣αÑê αñöαñ░ αñçαñ╕αÑç αñ¬αÑéαñ░αÑìαñ╡αñ╡αññ αñ¿αñ╣αÑÇαñé αñòαñ┐αñ»αñ╛ αñ£αñ╛ αñ╕αñòαññαñ╛αÑñ αñåαñ¬αñòαñ╛ αñ╕αñ¡αÑÇ αñûαñ╛αññαñ╛ αñíαÑçαñƒαñ╛ αñûαÑï αñ£αñ╛αñÅαñùαñ╛αÑñ';
+      'यह कार्रवाई स्थायी है और इसे पूर्ववत नहीं किया जा सकता। आपका सभी खाता डेटा खो जाएगा।';
 
   @override
-  String get typeDeleteToConfirm =>
-      'αñ¬αÑüαñ╖αÑìαñƒαñ┐ αñòαñ░αñ¿αÑç αñòαÑç αñ▓αñ┐αñÅ αñ¿αÑÇαñÜαÑç DELETE αñƒαñ╛αñçαñ¬ αñòαñ░αÑçαñé:';
+  String get typeDeleteToConfirm => 'पुष्टि करने के लिए नीचे DELETE टाइप करें:';
 
   @override
-  String get typeDelete => 'DELETE αñƒαñ╛αñçαñ¬ αñòαñ░αÑçαñé';
+  String get typeDelete => 'DELETE टाइप करें';
 
   @override
   String get deleteFirestoreNote =>
-      'Firestore αñíαÑçαñƒαñ╛ αñ╕αñ½αñ╛αñê αñòαÑç αñ▓αñ┐αñÅ αñàαñ¡αÑÇ αñ¡αÑÇ αñÅαñò αñàαñ▓αñù αñ¼αÑêαñòαñÅαñéαñí αñ¬αÑìαñ░αñòαÑìαñ░αñ┐αñ»αñ╛ αñòαÑÇ αñåαñ╡αñ╢αÑìαñ»αñòαññαñ╛ αñ╣αÑêαÑñ αñåαñ¬αñòαñ╛ αñ¬αÑìαñ░αñ«αñ╛αñúαÑÇαñòαñ░αñú αñûαñ╛αññαñ╛ αñ╣αñƒαñ╛ αñªαñ┐αñ»αñ╛ αñ£αñ╛αñÅαñùαñ╛, αñ▓αÑçαñòαñ┐αñ¿ αñ╕αñéαñùαÑìαñ░αñ╣αÑÇαññ αñªαñ╕αÑìαññαñ╛αñ╡αÑçαñ£αñ╝ αñ░αñ╣ αñ╕αñòαññαÑç αñ╣αÑêαñéαÑñ';
+      'Firestore डेटा सफाई के लिए अभी भी एक अलग बैकएंड प्रक्रिया की आवश्यकता है। आपका प्रमाणीकरण खाता हटा दिया जाएगा, लेकिन संग्रहीत दस्तावेज़ रह सकते हैं।';
 
   @override
-  String get permanentlyDelete =>
-      'αñ╕αÑìαñÑαñ╛αñ»αÑÇ αñ░αÑéαñ¬ αñ╕αÑç αñ╣αñƒαñ╛αñÅαñü';
+  String get permanentlyDelete => 'स्थायी रूप से हटाएँ';
 
   @override
-  String get accountDeleted =>
-      'αñûαñ╛αññαñ╛ αñ╣αñƒαñ╛ αñªαñ┐αñ»αñ╛ αñùαñ»αñ╛αÑñ';
+  String get accountDeleted => 'खाता हटा दिया गया।';
 
   @override
-  String get securityStatus => 'αñ╕αÑüαñ░αñòαÑìαñ╖αñ╛ αñ╕αÑìαñÑαñ┐αññαñ┐';
+  String get securityStatus => 'सुरक्षा स्थिति';
 
   @override
-  String get emailVerificationStatus => 'αñêαñ«αÑçαñ▓ αñ╕αññαÑìαñ»αñ╛αñ¬αñ¿';
+  String get emailVerificationStatus => 'ईमेल सत्यापन';
 
   @override
-  String get authenticationProvider =>
-      'αñ¬αÑìαñ░αñ«αñ╛αñúαÑÇαñòαñ░αñú αñ¬αÑìαñ░αñªαñ╛αññαñ╛';
+  String get authenticationProvider => 'प्रमाणीकरण प्रदाता';
 
   @override
-  String get noProviderData =>
-      'αñòαÑïαñê αñ¬αÑìαñ░αñªαñ╛αññαñ╛ αñíαÑçαñƒαñ╛ αñ¿αñ╣αÑÇαñé';
+  String get noProviderData => 'कोई प्रदाता डेटा नहीं';
 
   @override
-  String get accountCreated => 'αñûαñ╛αññαñ╛ αñ¼αñ¿αñ╛αñ»αñ╛ αñùαñ»αñ╛';
+  String get accountCreated => 'खाता बनाया गया';
 
   @override
-  String get recommendations => 'αñàαñ¿αÑüαñ╢αñéαñ╕αñ╛αñÅαñü';
+  String get recommendations => 'अनुशंसाएँ';
 
   @override
   String get verifyEmailRecommendation =>
-      'αñàαñ¬αñ¿αÑç αñûαñ╛αññαÑç αñòαÑï αñ╕αÑüαñ░αñòαÑìαñ╖αñ┐αññ αñòαñ░αñ¿αÑç αñòαÑç αñ▓αñ┐αñÅ αñàαñ¬αñ¿αñ╛ αñêαñ«αÑçαñ▓ αñ¬αññαñ╛ αñ╕αññαÑìαñ»αñ╛αñ¬αñ┐αññ αñòαñ░αÑçαñéαÑñ';
+      'अपने खाते को सुरक्षित करने के लिए अपना ईमेल पता सत्यापित करें।';
 
   @override
   String get strongPasswordRecommendation =>
-      'αñÅαñò αñ«αñ£αñ¼αÑéαññ, αñàαñªαÑìαñ╡αñ┐αññαÑÇαñ» αñ¬αñ╛αñ╕αñ╡αñ░αÑìαñí αñòαñ╛ αñëαñ¬αñ»αÑïαñù αñòαñ░αÑçαñéαÑñ αñ╕αñ«αñ»-αñ╕αñ«αñ» αñ¬αñ░ αñçαñ╕αÑç αñ¼αñªαñ▓αñ¿αÑç αñ¬αñ░ αñ╡αñ┐αñÜαñ╛αñ░ αñòαñ░αÑçαñéαÑñ';
+      'एक मजबूत, अद्वितीय पासवर्ड का उपयोग करें। समय-समय पर इसे बदलने पर विचार करें।';
 
   @override
   String get keepEmailUpdatedRecommendation =>
-      'αñ╕αÑüαñ░αñòαÑìαñ╖αñ╛ αñ╕αÑéαñÜαñ¿αñ╛αñÅαñü αñ¬αÑìαñ░αñ╛αñ¬αÑìαññ αñòαñ░αñ¿αÑç αñòαÑç αñ▓αñ┐αñÅ αñàαñ¬αñ¿αñ╛ αñêαñ«αÑçαñ▓ αñ¬αññαñ╛ αñàαñ¬αñíαÑçαñƒ αñ░αñûαÑçαñéαÑñ';
+      'सुरक्षा सूचनाएँ प्राप्त करने के लिए अपना ईमेल पता अपडेट रखें।';
 
   @override
-  String get passwordAndAuth =>
-      'αñ¬αñ╛αñ╕αñ╡αñ░αÑìαñí αñöαñ░ αñ¬αÑìαñ░αñ«αñ╛αñúαÑÇαñòαñ░αñú';
+  String get passwordAndAuth => 'पासवर्ड और प्रमाणीकरण';
 
   @override
-  String get sendPasswordResetEmail =>
-      'αñ¬αñ╛αñ╕αñ╡αñ░αÑìαñí αñ░αÑÇαñ╕αÑçαñƒ αñêαñ«αÑçαñ▓ αñ¡αÑçαñ£αÑçαñé';
+  String get sendPasswordResetEmail => 'पासवर्ड रीसेट ईमेल भेजें';
 
   @override
   String get resetPasswordSubtitle =>
-      'αñàαñ¬αñ¿αñ╛ αñ¬αñ╛αñ╕αñ╡αñ░αÑìαñí αñ░αÑÇαñ╕αÑçαñƒ αñòαñ░αñ¿αÑç αñòαñ╛ αñ▓αñ┐αñéαñò αñêαñ«αÑçαñ▓ αñòαÑç αñ«αñ╛αñºαÑìαñ»αñ« αñ╕αÑç αñ¬αÑìαñ░αñ╛αñ¬αÑìαññ αñòαñ░αÑçαñéαÑñ';
+      'अपना पासवर्ड रीसेट करने का लिंक ईमेल के माध्यम से प्राप्त करें।';
 
   @override
   String get directPasswordChangeFuture =>
-      'αñ╕αÑÇαñºαÑç αñÉαñ¬ αñ«αÑçαñé αñ¬αñ╛αñ╕αñ╡αñ░αÑìαñí αñ¼αñªαñ▓αñ¿αñ╛ αñ¡αñ╡αñ┐αñ╖αÑìαñ» αñòαÑç αñàαñ¬αñíαÑçαñƒ αñ«αÑçαñé αñëαñ¬αñ▓αñ¼αÑìαñº αñ╣αÑïαñùαñ╛αÑñ';
+      'सीधे ऐप में पासवर्ड बदलना भविष्य के अपडेट में उपलब्ध होगा।';
 
   @override
   String socialAuthInfo(String providers) {
-    return 'αñåαñ¬αñ¿αÑç $providers αñ╕αÑç αñ╕αñ╛αñçαñ¿ αñçαñ¿ αñòαñ┐αñ»αñ╛ αñ╣αÑêαÑñ αñ¬αñ╛αñ╕αñ╡αñ░αÑìαñí αñ¬αÑìαñ░αñ¼αñéαñºαñ¿ αñåαñ¬αñòαÑç αñ¬αÑìαñ░αñªαñ╛αññαñ╛ αñªαÑìαñ╡αñ╛αñ░αñ╛ αñ╕αñéαñ¡αñ╛αñ▓αñ╛ αñ£αñ╛αññαñ╛ αñ╣αÑêαÑñ';
+    return 'आपने $providers से साइन इन किया है। पासवर्ड प्रबंधन आपके प्रदाता द्वारा संभाला जाता है।';
   }
 
   @override
-  String get appPermissions => 'αñÉαñ¬ αñàαñ¿αÑüαñ«αññαñ┐αñ»αñ╛αñü';
+  String get appPermissions => 'ऐप अनुमतियाँ';
 
   @override
-  String get microphone => 'αñ«αñ╛αñçαñòαÑìαñ░αÑïαñ½αñ╝αÑïαñ¿';
+  String get microphone => 'माइक्रोफ़ोन';
 
   @override
   String get micRequiredDescription =>
-      'αñ╡αÑëαñçαñ╕ αñ░αñ┐αñòαÑëαñ░αÑìαñíαñ┐αñéαñù αñöαñ░ αñàαñ¡αÑìαñ»αñ╛αñ╕ αñ╕αÑüαñ╡αñ┐αñºαñ╛αñôαñé αñòαÑç αñ▓αñ┐αñÅ αñåαñ╡αñ╢αÑìαñ»αñòαÑñ';
+      'वॉइस रिकॉर्डिंग और अभ्यास सुविधाओं के लिए आवश्यक।';
 
   @override
-  String get checking => 'αñ£αñ╛αñüαñÜ αñ░αñ╣αñ╛ αñ╣αÑê...';
+  String get checking => 'जाँच रहा है...';
 
   @override
-  String get unknownStatus => 'αñàαñ£αÑìαñ₧αñ╛αññ';
+  String get unknownStatus => 'अज्ञात';
 
   @override
-  String get denied => 'αñàαñ╕αÑìαñ╡αÑÇαñòαÑâαññ';
+  String get denied => 'अस्वीकृत';
 
   @override
-  String get permanentlyDenied =>
-      'αñ╕αÑìαñÑαñ╛αñ»αÑÇ αñ░αÑéαñ¬ αñ╕αÑç αñàαñ╕αÑìαñ╡αÑÇαñòαÑâαññ';
+  String get permanentlyDenied => 'स्थायी रूप से अस्वीकृत';
 
   @override
-  String get restricted => 'αñ¬αÑìαñ░αññαñ┐αñ¼αñéαñºαñ┐αññ';
+  String get restricted => 'प्रतिबंधित';
 
   @override
-  String get provisional => 'αñàαñ¿αñéαññαñ┐αñ«';
+  String get provisional => 'अनंतिम';
 
   @override
   String openSystemSettingsLabel(String permission) {
-    return '$permission αñòαÑç αñ▓αñ┐αñÅ αñ╕αñ┐αñ╕αÑìαñƒαñ« αñ╕αÑçαñƒαñ┐αñéαñùαÑìαñ╕ αñûαÑïαñ▓αÑçαñé';
+    return '$permission के लिए सिस्टम सेटिंग्स खोलें';
   }
 
   @override
-  String get permissionSettings => 'αñ╕αÑçαñƒαñ┐αñéαñùαÑìαñ╕';
+  String get permissionSettings => 'सेटिंग्स';
 
   @override
-  String get privacyControls =>
-      'αñùαÑïαñ¬αñ¿αÑÇαñ»αññαñ╛ αñ¿αñ┐αñ»αñéαññαÑìαñ░αñú';
+  String get privacyControls => 'गोपनीयता नियंत्रण';
 
   @override
   String get analyticsNotConfigured =>
-      'Tuno αñòαÑç αñ▓αñ┐αñÅ αñ╡αñ┐αñ╢αÑìαñ▓αÑçαñ╖αñú αñ╕αñéαñùαÑìαñ░αñ╣ αñ╡αñ░αÑìαññαñ«αñ╛αñ¿ αñ«αÑçαñé αñòαÑëαñ¿αÑìαñ½αñ╝αñ┐αñùαñ░ αñ¿αñ╣αÑÇαñé αñ╣αÑêαÑñ αñòαÑïαñê αñëαñ¬αñ»αÑïαñù αñíαÑçαñƒαñ╛ αñÅαñòαññαÑìαñ░ αñ¿αñ╣αÑÇαñé αñòαñ┐αñ»αñ╛ αñ£αñ╛ αñ░αñ╣αñ╛ αñ╣αÑêαÑñ';
+      'Tuno के लिए विश्लेषण संग्रह वर्तमान में कॉन्फ़िगर नहीं है। कोई उपयोग डेटा एकत्र नहीं किया जा रहा है।';
 
   @override
   String get crashDiagnosticsNotEnabled =>
-      'αñòαÑìαñ░αÑêαñ╢ αñöαñ░ αññαÑìαñ░αÑüαñƒαñ┐ αñ¿αñ┐αñªαñ╛αñ¿ αñ╡αñ░αÑìαññαñ«αñ╛αñ¿ αñ«αÑçαñé αñ╕αñòαÑìαñ╖αñ« αñ¿αñ╣αÑÇαñé αñ╣αÑêαñéαÑñ αñòαÑìαñ░αÑêαñ╢ αñ░αñ┐αñ¬αÑïαñ░αÑìαñƒαñ┐αñéαñù αñòαÑëαñ¿αÑìαñ½αñ╝αñ┐αñùαñ░ αñ╣αÑïαñ¿αÑç αñ¬αñ░ αñ¿αñ┐αñªαñ╛αñ¿ αñ░αñ┐αñ¬αÑïαñ░αÑìαñƒ αñëαñ¬αñ▓αñ¼αÑìαñº αñ╣αÑïαñéαñùαÑÇαÑñ';
+      'क्रैश और त्रुटि निदान वर्तमान में सक्षम नहीं हैं। क्रैश रिपोर्टिंग कॉन्फ़िगर होने पर निदान रिपोर्ट उपलब्ध होंगी।';
 
   @override
   String get aiProcessingNotAvailable =>
-      'αñ╡αÑìαñ»αñòαÑìαññαñ┐αñùαññ AI αñ¬αÑìαñ░αñ╕αñéαñ╕αÑìαñòαñ░αñú αñ╡αñ░αÑìαññαñ«αñ╛αñ¿ αñ«αÑçαñé αñëαñ¬αñ▓αñ¼αÑìαñº αñ¿αñ╣αÑÇαñé αñ╣αÑêαÑñ AI αñ╕αÑüαñ╡αñ┐αñºαñ╛αñôαñé αñòαÑç αñ▓αñ┐αñÅ αñùαÑïαñ¬αñ¿αÑÇαñ»αññαñ╛ αñ¿αñ┐αñ»αñéαññαÑìαñ░αñú αñ¡αñ╡αñ┐αñ╖αÑìαñ» αñòαÑç αñ░αñ┐αñ▓αÑÇαñ£αñ╝ αñ«αÑçαñé αñ£αÑïαñíαñ╝αÑç αñ£αñ╛αñÅαñéαñùαÑçαÑñ';
+      'व्यक्तिगत AI प्रसंस्करण वर्तमान में उपलब्ध नहीं है। AI सुविधाओं के लिए गोपनीयता नियंत्रण भविष्य के रिलीज़ में जोड़े जाएंगे।';
 
   @override
   String get additionalPrivacyControls =>
-      'αñ£αñ¼ αñ»αÑç αñ╕αÑçαñ╡αñ╛αñÅαñü αñ╕αñòαÑìαñ╖αñ« αñ╣αÑïαñéαñùαÑÇ αññαñ¼ αñàαññαñ┐αñ░αñ┐αñòαÑìαññ αñùαÑïαñ¬αñ¿αÑÇαñ»αññαñ╛ αñ¿αñ┐αñ»αñéαññαÑìαñ░αñú αñëαñ¬αñ▓αñ¼αÑìαñº αñ╣αÑïαñéαñùαÑçαÑñ';
+      'जब ये सेवाएँ सक्षम होंगी तब अतिरिक्त गोपनीयता नियंत्रण उपलब्ध होंगे।';
 
   @override
-  String get dataAndAccount => 'αñíαÑçαñƒαñ╛ αñöαñ░ αñûαñ╛αññαñ╛';
+  String get dataAndAccount => 'डेटा और खाता';
 
   @override
-  String get exportMyData =>
-      'αñ«αÑçαñ░αñ╛ αñíαÑçαñƒαñ╛ αñ¿αñ┐αñ░αÑìαñ»αñ╛αññ αñòαñ░αÑçαñé';
+  String get exportMyData => 'मेरा डेटा निर्यात करें';
 
   @override
-  String get exportDataSubtitle =>
-      'αñàαñ¬αñ¿αÑç Tuno αñíαÑçαñƒαñ╛ αñòαÑÇ αñÅαñò αñ¬αÑìαñ░αññαñ┐ αñíαñ╛αñëαñ¿αñ▓αÑïαñí αñòαñ░αÑçαñéαÑñ';
+  String get exportDataSubtitle => 'अपने Tuno डेटा की एक प्रति डाउनलोड करें।';
 
   @override
-  String get signOutSubtitle =>
-      'αñàαñ¬αñ¿αÑç Tuno αñûαñ╛αññαÑç αñ╕αÑç αñ╕αñ╛αñçαñ¿ αñåαñëαñƒ αñòαñ░αÑçαñéαÑñ';
+  String get signOutSubtitle => 'अपने Tuno खाते से साइन आउट करें।';
 
   @override
   String get deleteAccountSubtitle =>
-      'αñàαñ¬αñ¿αÑç αñûαñ╛αññαÑç αñöαñ░ αñ╕αñ¡αÑÇ αñ╕αñéαñ¼αñéαñºαñ┐αññ αñíαÑçαñƒαñ╛ αñòαÑï αñ╕αÑìαñÑαñ╛αñ»αÑÇ αñ░αÑéαñ¬ αñ╕αÑç αñ╣αñƒαñ╛αñÅαñüαÑñ';
+      'अपने खाते और सभी संबंधित डेटा को स्थायी रूप से हटाएँ।';
 
   @override
-  String get exportDataDialogTitle =>
-      'αñ«αÑçαñ░αñ╛ αñíαÑçαñƒαñ╛ αñ¿αñ┐αñ░αÑìαñ»αñ╛αññ αñòαñ░αÑçαñé';
+  String get exportDataDialogTitle => 'मेरा डेटा निर्यात करें';
 
   @override
   String get exportDataDialogContent =>
-      'αñíαÑçαñƒαñ╛ αñ¿αñ┐αñ░αÑìαñ»αñ╛αññ αñòαÑç αñ▓αñ┐αñÅ αñåαñ¬αñòαÑç αñûαñ╛αññαÑç αñòαÑç αñíαÑçαñƒαñ╛ αñòαÑï αñ╕αÑüαñ░αñòαÑìαñ╖αñ┐αññ αñ░αÑéαñ¬ αñ╕αÑç αñ╕αñéαñòαñ▓αñ┐αññ αñöαñ░ αñ╡αñ┐αññαñ░αñ┐αññ αñòαñ░αñ¿αÑç αñòαÑç αñ▓αñ┐αñÅ αñÅαñò αñ╡αñ┐αñ╢αÑìαñ╡αñ╕αñ¿αÑÇαñ» αñ¼αÑêαñòαñÅαñéαñí αñ¬αÑìαñ░αñòαÑìαñ░αñ┐αñ»αñ╛ αñòαÑÇ αñåαñ╡αñ╢αÑìαñ»αñòαññαñ╛ αñ╣αÑêαÑñ';
+      'डेटा निर्यात के लिए आपके खाते के डेटा को सुरक्षित रूप से संकलित और वितरित करने के लिए एक विश्वसनीय बैकएंड प्रक्रिया की आवश्यकता है।';
 
   @override
   String get exportDataDialogFuture =>
-      'αñ»αñ╣ αñ╕αÑüαñ╡αñ┐αñºαñ╛ αññαñ¼ αñëαñ¬αñ▓αñ¼αÑìαñº αñ╣αÑïαñùαÑÇ αñ£αñ¼ Tuno αñ¼αÑêαñòαñÅαñéαñí αñ╕αñ░αÑìαñ╡αñ░ αñ¬αñ░ αñÅαñò αñ¿αñ┐αñ░αÑìαñ»αñ╛αññ αñÅαñéαñíαñ¬αÑëαñçαñéαñƒ αñòαÑëαñ¿αÑìαñ½αñ╝αñ┐αñùαñ░ αñòαñ┐αñ»αñ╛ αñ£αñ╛αñÅαñùαñ╛αÑñ';
+      'यह सुविधा तब उपलब्ध होगी जब Tuno बैकएंड सर्वर पर एक निर्यात एंडपॉइंट कॉन्फ़िगर किया जाएगा।';
 
   @override
   String get deleteAccountDialogContent =>
-      'αñûαñ╛αññαñ╛ αñ╣αñƒαñ╛αñ¿αÑç αñòαÑç αñ▓αñ┐αñÅ αñÅαñò αñ╕αÑüαñ░αñòαÑìαñ╖αñ┐αññ αñ¼αÑêαñòαñÅαñéαñí αñ¬αÑìαñ░αñòαÑìαñ░αñ┐αñ»αñ╛ αñòαÑÇ αñåαñ╡αñ╢αÑìαñ»αñòαññαñ╛ αñ╣αÑê:';
+      'खाता हटाने के लिए एक सुरक्षित बैकएंड प्रक्रिया की आवश्यकता है:';
 
   @override
-  String get deleteAuthAccount =>
-      'αñàαñ¬αñ¿αñ╛ Auth αñûαñ╛αññαñ╛ αñ╣αñƒαñ╛αñÅαñü';
+  String get deleteAuthAccount => 'अपना Auth खाता हटाएँ';
 
   @override
   String get deleteFirestoreDocs =>
-      'αñ╕αñ¡αÑÇ Firestore αñªαñ╕αÑìαññαñ╛αñ╡αÑçαñ£αñ╝ αñöαñ░ αñëαñ¬-αñ╕αñéαñùαÑìαñ░αñ╣ αñ╣αñƒαñ╛αñÅαñü';
+      'सभी Firestore दस्तावेज़ और उप-संग्रह हटाएँ';
 
   @override
   String get deleteStorageRecordings =>
-      'αñ╕αÑìαñƒαÑïαñ░αÑçαñ£ αñ╕αÑç αñ╕αñ¡αÑÇ αñàαñ¬αñ▓αÑïαñí αñòαÑÇ αñùαñê αñ░αñ┐αñòαÑëαñ░αÑìαñíαñ┐αñéαñù αñ╣αñƒαñ╛αñÅαñü';
+      'स्टोरेज से सभी अपलोड की गई रिकॉर्डिंग हटाएँ';
 
   @override
-  String get deleteMetadata =>
-      'αñòαñ┐αñ╕αÑÇ αñ¡αÑÇ αñ╕αñéαñ¼αñéαñºαñ┐αññ αñ«αÑçαñƒαñ╛αñíαÑçαñƒαñ╛ αñòαÑï αñ╣αñƒαñ╛αñÅαñü';
+  String get deleteMetadata => 'किसी भी संबंधित मेटाडेटा को हटाएँ';
 
   @override
   String get deleteCannotBeDoneFromApp =>
-      'αñ»αñ╣ αñàαñòαÑçαñ▓αÑç αñÉαñ¬ αñ╕αÑç αñ╕αÑüαñ░αñòαÑìαñ╖αñ┐αññ αñ░αÑéαñ¬ αñ╕αÑç αñ¿αñ╣αÑÇαñé αñòαñ┐αñ»αñ╛ αñ£αñ╛ αñ╕αñòαññαñ╛αÑñ αñÅαñò αñ╡αñ┐αñ╢αÑìαñ╡αñ╕αñ¿αÑÇαñ» αñòαÑìαñ▓αñ╛αñëαñí αñ½αñ╝αñéαñòαÑìαñ╢αñ¿ αñ»αñ╛ Admin SDK αñ¼αÑêαñòαñÅαñéαñí αñòαÑÇ αñåαñ╡αñ╢αÑìαñ»αñòαññαñ╛ αñ╣αÑêαÑñ';
+      'यह अकेले ऐप से सुरक्षित रूप से नहीं किया जा सकता। एक विश्वसनीय क्लाउड फ़ंक्शन या Admin SDK बैकएंड की आवश्यकता है।';
 
   @override
   String get contactSupportToDelete =>
-      'αñàαñ¬αñ¿αñ╛ αñûαñ╛αññαñ╛ αñàαñ¡αÑÇ αñ╣αñƒαñ╛αñ¿αÑç αñòαÑç αñ▓αñ┐αñÅ, αñòαÑâαñ¬αñ»αñ╛ Tuno αñ╕αñ«αñ░αÑìαñÑαñ¿ αñ╕αÑç αñ╕αñéαñ¬αñ░αÑìαñò αñòαñ░αÑçαñéαÑñ';
+      'अपना खाता अभी हटाने के लिए, कृपया Tuno समर्थन से संपर्क करें।';
 
   @override
-  String get chooseUpdates =>
-      'αñåαñ¬ αñ£αÑï αñàαñ¬αñíαÑçαñƒ αñ¬αÑìαñ░αñ╛αñ¬αÑìαññ αñòαñ░αñ¿αñ╛ αñÜαñ╛αñ╣αññαÑç αñ╣αÑêαñé αñëαñ¿αÑìαñ╣αÑçαñé αñÜαÑüαñ¿αÑçαñé';
+  String get chooseUpdates => 'आप जो अपडेट प्राप्त करना चाहते हैं उन्हें चुनें';
 
   @override
-  String get allowNotifications =>
-      'αñ╕αÑéαñÜαñ¿αñ╛αñôαñé αñòαÑÇ αñàαñ¿αÑüαñ«αññαñ┐ αñªαÑçαñé';
+  String get allowNotifications => 'सूचनाओं की अनुमति दें';
 
   @override
-  String get practiceReminders =>
-      'αñàαñ¡αÑìαñ»αñ╛αñ╕ αñàαñ¿αÑüαñ╕αÑìαñ«αñ╛αñ░αñò';
+  String get practiceReminders => 'अभ्यास अनुस्मारक';
 
   @override
-  String get aiAnalysisUpdates => 'AI αñ╡αñ┐αñ╢αÑìαñ▓αÑçαñ╖αñú αñàαñ¬αñíαÑçαñƒ';
+  String get aiAnalysisUpdates => 'AI विश्लेषण अपडेट';
 
   @override
-  String get streakReminders =>
-      'αñ╕αÑìαñƒαÑìαñ░αÑÇαñò αñàαñ¿αÑüαñ╕αÑìαñ«αñ╛αñ░αñò';
+  String get streakReminders => 'स्ट्रीक अनुस्मारक';
 
   @override
-  String get coinsAndAchievements =>
-      'αñ╕αñ┐αñòαÑìαñòαÑç αñöαñ░ αñëαñ¬αñ▓αñ¼αÑìαñºαñ┐αñ»αñ╛αñü';
+  String get coinsAndAchievements => 'सिक्के और उपलब्धियाँ';
 
   @override
-  String get weeklyChallenges =>
-      'αñ╕αñ╛αñ¬αÑìαññαñ╛αñ╣αñ┐αñò αñÜαÑüαñ¿αÑîαññαñ┐αñ»αñ╛αñü';
+  String get weeklyChallenges => 'साप्ताहिक चुनौतियाँ';
 
   @override
-  String get productUpdates => 'αñëαññαÑìαñ¬αñ╛αñª αñàαñ¬αñíαÑçαñƒ';
+  String get productUpdates => 'उत्पाद अपडेट';
 
   @override
-  String get reminderTime => 'αñàαñ¿αÑüαñ╕αÑìαñ«αñ╛αñ░αñò αñ╕αñ«αñ»';
+  String get reminderTime => 'अनुस्मारक समय';
 
   @override
-  String get tapToChangeReminderTime =>
-      'αñàαñ¿αÑüαñ╕αÑìαñ«αñ╛αñ░αñò αñ╕αñ«αñ» αñ¼αñªαñ▓αñ¿αÑç αñòαÑç αñ▓αñ┐αñÅ αñƒαÑêαñ¬ αñòαñ░αÑçαñé';
+  String get tapToChangeReminderTime => 'अनुस्मारक समय बदलने के लिए टैप करें';
 
   @override
   String get notificationDeliveryNotImplemented =>
-      'αñ╕αÑéαñÜαñ¿αñ╛ αñ╡αñ┐αññαñ░αñú αñàαñ¡αÑÇ αññαñò αñ▓αñ╛αñùαÑé αñ¿αñ╣αÑÇαñé αñòαñ┐αñ»αñ╛ αñùαñ»αñ╛ αñ╣αÑêαÑñ αñåαñ¬αñòαÑÇ αñ¬αÑìαñ░αñ╛αñÑαñ«αñ┐αñòαññαñ╛αñÅαñü αñ╕αÑìαñÑαñ╛αñ¿αÑÇαñ» αñ░αÑéαñ¬ αñ╕αÑç αñ╕αñ╣αÑçαñ£αÑÇ αñùαñê αñ╣αÑêαñé αñöαñ░ αñ╡αñ┐αññαñ░αñú αñëαñ¬αñ▓αñ¼αÑìαñº αñ╣αÑïαñ¿αÑç αñ¬αñ░ αñëαñ¬αñ»αÑïαñù αñòαÑÇ αñ£αñ╛αñÅαñéαñùαÑÇαÑñ';
+      'सूचना वितरण अभी तक लागू नहीं किया गया है। आपकी प्राथमिकताएँ स्थानीय रूप से सहेजी गई हैं और वितरण उपलब्ध होने पर उपयोग की जाएंगी।';
 
   @override
-  String get dismiss => 'αñûαñ╛αñ░αñ┐αñ£ αñòαñ░αÑçαñé';
+  String get dismiss => 'खारिज करें';
 
   @override
   String get youCanChangeAnytime =>
-      'αñåαñ¬ αñçαñ¿ αñ¬αÑìαñ░αñ╛αñÑαñ«αñ┐αñòαññαñ╛αñôαñé αñòαÑï αñòαñ¡αÑÇ αñ¡αÑÇ αñ¼αñªαñ▓ αñ╕αñòαññαÑç αñ╣αÑêαñéαÑñ';
+      'आप इन प्राथमिकताओं को कभी भी बदल सकते हैं।';
 
   @override
   String labelUnavailable(String label) {
-    return '$label (αñàαñ¿αÑüαñ¬αñ▓αñ¼αÑìαñº)';
+    return '$label (अनुपलब्ध)';
   }
 
   @override
   String enableNotificationsFirst(String label) {
-    return '$label ΓÇô αñ¬αñ╣αñ▓αÑç αñ╕αÑéαñÜαñ¿αñ╛αñÅαñü αñ╕αñòαÑìαñ╖αñ« αñòαñ░αÑçαñé';
+    return '$label – पहले सूचनाएँ सक्षम करें';
   }
 
   @override
-  String get notificationsTitle => 'αñ╕αÑéαñÜαñ¿αñ╛αñÅαñü';
+  String get notificationsTitle => 'सूचनाएँ';
 
   @override
-  String get allCaughtUp =>
-      'αñåαñ¬ αñ¬αÑéαñ░αÑÇ αññαñ░αñ╣ αñ╕αÑç αñàαñ¬αñíαÑçαñƒ αñ╣αÑêαñé';
+  String get allCaughtUp => 'आप पूरी तरह से अपडेट हैं';
 
   @override
   String get emptyNotificationsMessage =>
-      'αñàαñ¡αÑìαñ»αñ╛αñ╕ αñàαñ¬αñíαÑçαñƒ, αñ╡αñ┐αñ╢αÑìαñ▓αÑçαñ╖αñú αñ¬αñ░αñ┐αñúαñ╛αñ« αñöαñ░ αñëαñ¬αñ▓αñ¼αÑìαñºαñ┐αñ»αñ╛αñü αñ»αñ╣αñ╛αñü αñªαñ┐αñûαñ╛αñê αñªαÑçαñéαñùαÑÇαÑñ';
+      'अभ्यास अपडेट, विश्लेषण परिणाम और उपलब्धियाँ यहाँ दिखाई देंगी।';
 
   @override
-  String get markAllAsRead =>
-      'αñ╕αñ¡αÑÇ αñòαÑï αñ¬αñóαñ╝αñ╛ αñ╣αÑüαñå αñÜαñ┐αñ╣αÑìαñ¿αñ┐αññ αñòαñ░αÑçαñé';
+  String get markAllAsRead => 'सभी को पढ़ा हुआ चिह्नित करें';
 
   @override
-  String get justNow => 'αñàαñ¡αÑÇ αñàαñ¡αÑÇ';
+  String get justNow => 'अभी अभी';
 
   @override
   String minutesAgo(int minutes) {
-    return '$minutes αñ«αñ┐. αñ¬αñ╣αñ▓αÑç';
+    return '$minutes मि. पहले';
   }
 
   @override
   String hoursAgo(int hours) {
-    return '$hours αñÿαñé. αñ¬αñ╣αñ▓αÑç';
+    return '$hours घं. पहले';
   }
 
   @override
-  String get yesterday => 'αñòαñ▓';
+  String get yesterday => 'कल';
 
   @override
   String daysAgo(int days) {
-    return '$days αñªαñ┐. αñ¬αñ╣αñ▓αÑç';
+    return '$days दि. पहले';
   }
 
   @override
-  String get markAsUnread =>
-      'αñàαñ¬αñáαñ┐αññ αñÜαñ┐αñ╣αÑìαñ¿αñ┐αññ αñòαñ░αÑçαñé';
+  String get markAsUnread => 'अपठित चिह्नित करें';
 
   @override
-  String get markAsRead =>
-      'αñ¬αñóαñ╝αñ╛ αñ╣αÑüαñå αñÜαñ┐αñ╣αÑìαñ¿αñ┐αññ αñòαñ░αÑçαñé';
+  String get markAsRead => 'पढ़ा हुआ चिह्नित करें';
 
   @override
-  String get delete => 'αñ╣αñƒαñ╛αñÅαñü';
+  String get delete => 'हटाएं';
 
   @override
   String unreadCountSemantic(int count) {
-    return 'αñ╕αÑéαñÜαñ¿αñ╛αñÅαñü, $count αñàαñ¬αñáαñ┐αññ';
+    return 'सूचनाएँ, $count अपठित';
   }
 
   @override
-  String get notifications => 'αñ╕αÑéαñÜαñ¿αñ╛αñÅαñü';
+  String get notifications => 'सूचनाएँ';
 
   @override
   String get tuno => 'Tuno';
 
   @override
   String helloUser(String name) {
-    return 'αñ¿αñ«αñ╕αÑìαññαÑç, $name ≡ƒæï';
+    return 'नमस्ते, $name 👋';
   }
 
   @override
-  String get readyToImprove =>
-      'αñåαñ£ αñàαñ¬αñ¿αÑÇ αñåαñ╡αñ╛αñ£αñ╝ αñ╕αÑüαñºαñ╛αñ░αñ¿αÑç αñòαÑç αñ▓αñ┐αñÅ αññαÑêαñ»αñ╛αñ░ αñ╣αÑêαñé?';
+  String get readyToImprove => 'आज अपनी आवाज़ सुधारने के लिए तैयार हैं?';
 
   @override
-  String get yourProgress => 'αñåαñ¬αñòαÑÇ αñ¬αÑìαñ░αñùαññαñ┐';
+  String get yourProgress => 'आपकी प्रगति';
 
   @override
-  String get startVoicePractice =>
-      'αñ╡αÑëαñçαñ╕ αñàαñ¡αÑìαñ»αñ╛αñ╕ αñ╢αÑüαñ░αÑé αñòαñ░αÑçαñé';
+  String get startVoicePractice => 'वॉइस अभ्यास शुरू करें';
 
   @override
   String get recordAndGetFeedback =>
-      'αñàαñ¬αñ¿αÑÇ αñåαñ╡αñ╛αñ£αñ╝ αñ░αñ┐αñòαÑëαñ░αÑìαñí αñòαñ░αÑçαñé αñöαñ░ αññαÑüαñ░αñéαññ αñ½αÑÇαñíαñ¼αÑêαñò αñ¬αÑìαñ░αñ╛αñ¬αÑìαññ αñòαñ░αÑçαñéαÑñ';
+      'अपनी आवाज़ रिकॉर्ड करें और तुरंत फीडबैक प्राप्त करें।';
 
   @override
-  String get startPractice => 'αñàαñ¡αÑìαñ»αñ╛αñ╕ αñ╢αÑüαñ░αÑé αñòαñ░αÑçαñé';
+  String get startPractice => 'अभ्यास शुरू करें';
 
   @override
-  String get zeroMin => '0 αñ«αñ┐αñ¿αñƒ';
+  String get zeroMin => '0 मिनट';
 
   @override
-  String get practiceLabel => 'αñàαñ¡αÑìαñ»αñ╛αñ╕';
+  String get practiceLabel => 'अभ्यास';
 
   @override
-  String get zeroDays => '0 αñªαñ┐αñ¿';
+  String get zeroDays => '0 दिन';
 
   @override
-  String get streak => 'αñ╕αÑìαñƒαÑìαñ░αÑÇαñò';
+  String get streak => 'स्ट्रीक';
 
   @override
   String featureComingSoonSimple(String feature) {
-    return '$feature αñ£αñ▓αÑìαñª αñå αñ░αñ╣αñ╛ αñ╣αÑê';
+    return '$feature जल्द आ रहा है';
   }
 
   @override
-  String get aiSingingCoach => 'AI αñùαñ╛αñ»αñ¿ αñòαÑïαñÜ';
+  String get aiSingingCoach => 'AI गायन कोच';
 
   @override
-  String get yourPersonalAiCoach =>
-      'αñåαñ¬αñòαñ╛ αñ╡αÑìαñ»αñòαÑìαññαñ┐αñùαññ\nAI αñùαñ╛αñ»αñ¿ αñòαÑïαñÜ';
+  String get yourPersonalAiCoach => 'आपका व्यक्तिगत\nAI गायन कोच';
 
   @override
-  String get practiceImproveAchieve =>
-      'αñàαñ¡αÑìαñ»αñ╛αñ╕ ΓÇó αñ╕αÑüαñºαñ╛αñ░ ΓÇó αñëαñ¬αñ▓αñ¼αÑìαñºαñ┐';
+  String get practiceImproveAchieve => 'अभ्यास • सुधार • उपलब्धि';
 
   @override
-  String get getStarted => 'αñ╢αÑüαñ░αÑé αñòαñ░αÑçαñé';
+  String get getStarted => 'शुरू करें';
 
   @override
-  String get login => 'αñ▓αÑëαñù αñçαñ¿';
+  String get login => 'लॉग इन';
 
   @override
-  String get welcomeBack =>
-      'αñ╡αñ╛αñ¬αñ╕αÑÇ αñ¬αñ░ αñ╕αÑìαñ╡αñ╛αñùαññ αñ╣αÑê! ≡ƒæï';
+  String get welcomeBack => 'वापसी पर स्वागत है! 👋';
 
   @override
-  String get loginToContinue =>
-      'αñ£αñ╛αñ░αÑÇ αñ░αñûαñ¿αÑç αñòαÑç αñ▓αñ┐αñÅ αñ▓αÑëαñù αñçαñ¿ αñòαñ░αÑçαñé';
+  String get loginToContinue => 'जारी रखने के लिए लॉग इन करें';
 
   @override
-  String get emailIsRequired => 'αñêαñ«αÑçαñ▓ αñåαñ╡αñ╢αÑìαñ»αñò αñ╣αÑêαÑñ';
+  String get emailIsRequired => 'ईमेल आवश्यक है।';
 
   @override
-  String get enterValidEmail =>
-      'αñÅαñò αñ«αñ╛αñ¿αÑìαñ» αñêαñ«αÑçαñ▓ αñªαñ░αÑìαñ£ αñòαñ░αÑçαñéαÑñ';
+  String get enterValidEmail => 'एक मान्य ईमेल दर्ज करें।';
 
   @override
-  String get passwordIsRequired =>
-      'αñ¬αñ╛αñ╕αñ╡αñ░αÑìαñí αñåαñ╡αñ╢αÑìαñ»αñò αñ╣αÑêαÑñ';
+  String get passwordIsRequired => 'पासवर्ड आवश्यक है।';
 
   @override
-  String get passwordMinLength =>
-      'αñ¬αñ╛αñ╕αñ╡αñ░αÑìαñí αñòαñ« αñ╕αÑç αñòαñ« 6 αñàαñòαÑìαñ╖αñ░ αñòαñ╛ αñ╣αÑïαñ¿αñ╛ αñÜαñ╛αñ╣αñ┐αñÅαÑñ';
+  String get passwordMinLength => 'पासवर्ड कम से कम 6 अक्षर का होना चाहिए।';
 
   @override
-  String get emailFieldLabel => 'αñêαñ«αÑçαñ▓ αñ¬αññαñ╛';
+  String get emailFieldLabel => 'ईमेल पता';
 
   @override
-  String get emailHint => 'αñàαñ¬αñ¿αñ╛ αñêαñ«αÑçαñ▓ αñªαñ░αÑìαñ£ αñòαñ░αÑçαñé';
+  String get emailHint => 'अपना ईमेल दर्ज करें';
 
   @override
-  String get passwordFieldLabel => 'αñ¬αñ╛αñ╕αñ╡αñ░αÑìαñí';
+  String get passwordFieldLabel => 'पासवर्ड';
 
   @override
-  String get passwordHint =>
-      'αñàαñ¬αñ¿αñ╛ αñ¬αñ╛αñ╕αñ╡αñ░αÑìαñí αñªαñ░αÑìαñ£ αñòαñ░αÑçαñé';
+  String get passwordHint => 'अपना पासवर्ड दर्ज करें';
 
   @override
-  String get showPassword => 'αñ¬αñ╛αñ╕αñ╡αñ░αÑìαñí αñªαñ┐αñûαñ╛αñÅαñü';
+  String get showPassword => 'पासवर्ड दिखाएँ';
 
   @override
-  String get hidePassword => 'αñ¬αñ╛αñ╕αñ╡αñ░αÑìαñí αñ¢αñ┐αñ¬αñ╛αñÅαñü';
+  String get hidePassword => 'पासवर्ड छिपाएँ';
 
   @override
-  String get forgotPassword => 'αñ¬αñ╛αñ╕αñ╡αñ░αÑìαñí αñ¡αÑéαñ▓ αñùαñÅ?';
+  String get forgotPassword => 'पासवर्ड भूल गए?';
 
   @override
-  String get orContinueWith =>
-      'αñ»αñ╛ αñçαñ╕αñòαÑç αñ╕αñ╛αñÑ αñ£αñ╛αñ░αÑÇ αñ░αñûαÑçαñé';
+  String get orContinueWith => 'या इसके साथ जारी रखें';
 
   @override
-  String get loginWithGoogle =>
-      'Google αñ╕αÑç αñ▓αÑëαñù αñçαñ¿ αñòαñ░αÑçαñéαÑñ αñ£αñ▓αÑìαñª αñå αñ░αñ╣αñ╛ αñ╣αÑêαÑñ';
+  String get loginWithGoogle => 'Google से लॉग इन करें। जल्द आ रहा है।';
 
   @override
-  String get loginWithApple =>
-      'Apple αñ╕αÑç αñ▓αÑëαñù αñçαñ¿ αñòαñ░αÑçαñéαÑñ αñ£αñ▓αÑìαñª αñå αñ░αñ╣αñ╛ αñ╣αÑêαÑñ';
+  String get loginWithApple => 'Apple से लॉग इन करें। जल्द आ रहा है।';
 
   @override
-  String get dontHaveAccount => 'αñûαñ╛αññαñ╛ αñ¿αñ╣αÑÇαñé αñ╣αÑê? ';
+  String get dontHaveAccount => 'खाता नहीं है? ';
 
   @override
-  String get signUp => 'αñ╕αñ╛αñçαñ¿ αñàαñ¬';
+  String get signUp => 'साइन अप';
 
   @override
-  String get goToSignUp => 'αñ╕αñ╛αñçαñ¿ αñàαñ¬ αñ¬αñ░ αñ£αñ╛αñÅαñü';
+  String get goToSignUp => 'साइन अप पर जाएँ';
 
   @override
-  String get loginSuccessful => 'αñ▓αÑëαñù αñçαñ¿ αñ╕αñ½αñ▓αÑñ';
+  String get loginSuccessful => 'लॉग इन सफल।';
 
   @override
   String authComingSoon(String provider) {
-    return '$provider αñ¬αÑìαñ░αñ«αñ╛αñúαÑÇαñòαñ░αñú αñ£αñ▓αÑìαñª αñå αñ░αñ╣αñ╛ αñ╣αÑêαÑñ';
+    return '$provider प्रमाणीकरण जल्द आ रहा है।';
   }
 
   @override
-  String get createAccount => 'αñûαñ╛αññαñ╛ αñ¼αñ¿αñ╛αñÅαñü';
+  String get createAccount => 'खाता बनाएँ';
 
   @override
-  String get joinTuno =>
-      'Tuno αñ╕αÑç αñ£αÑüαñíαñ╝αÑçαñé αñöαñ░ αñàαñ¬αñ¿αÑÇ\nαñùαñ╛αñ»αñ¿ αñ»αñ╛αññαÑìαñ░αñ╛ αñ╢αÑüαñ░αÑé αñòαñ░αÑçαñé';
+  String get joinTuno => 'Tuno से जुड़ें और अपनी\nगायन यात्रा शुरू करें';
 
   @override
-  String get fullName => 'αñ¬αÑéαñ░αñ╛ αñ¿αñ╛αñ«';
+  String get fullName => 'पूरा नाम';
 
   @override
-  String get fullNameHint =>
-      'αñàαñ¬αñ¿αñ╛ αñ¬αÑéαñ░αñ╛ αñ¿αñ╛αñ« αñªαñ░αÑìαñ£ αñòαñ░αÑçαñé';
+  String get fullNameHint => 'अपना पूरा नाम दर्ज करें';
 
   @override
   String get emailHintSignup => 'you@example.com';
 
   @override
-  String get passwordHintSignup => 'αñòαñ« αñ╕αÑç αñòαñ« 6 αñàαñòαÑìαñ╖αñ░';
+  String get passwordHintSignup => 'कम से कम 6 अक्षर';
 
   @override
-  String get fullNameRequired =>
-      'αñ¬αÑéαñ░αñ╛ αñ¿αñ╛αñ« αñåαñ╡αñ╢αÑìαñ»αñò αñ╣αÑêαÑñ';
+  String get fullNameRequired => 'पूरा नाम आवश्यक है।';
 
   @override
-  String get nameMinLength =>
-      'αñ¿αñ╛αñ« αñòαñ« αñ╕αÑç αñòαñ« 2 αñàαñòαÑìαñ╖αñ░ αñòαñ╛ αñ╣αÑïαñ¿αñ╛ αñÜαñ╛αñ╣αñ┐αñÅαÑñ';
+  String get nameMinLength => 'नाम कम से कम 2 अक्षर का होना चाहिए।';
 
   @override
-  String get alreadyHaveAccount => 'αñ¬αñ╣αñ▓αÑç αñ╕αÑç αñûαñ╛αññαñ╛ αñ╣αÑê? ';
+  String get alreadyHaveAccount => 'पहले से खाता है? ';
 
   @override
-  String get goToLogin => 'αñ▓αÑëαñù αñçαñ¿ αñ¬αñ░ αñ£αñ╛αñÅαñü';
+  String get goToLogin => 'लॉग इन पर जाएँ';
 
   @override
-  String get signUpWithGoogle =>
-      'Google αñ╕αÑç αñ╕αñ╛αñçαñ¿ αñàαñ¬ αñòαñ░αÑçαñéαÑñ αñ£αñ▓αÑìαñª αñå αñ░αñ╣αñ╛ αñ╣αÑêαÑñ';
+  String get signUpWithGoogle => 'Google से साइन अप करें। जल्द आ रहा है।';
 
   @override
-  String get signUpWithApple =>
-      'Apple αñ╕αÑç αñ╕αñ╛αñçαñ¿ αñàαñ¬ αñòαñ░αÑçαñéαÑñ αñ£αñ▓αÑìαñª αñå αñ░αñ╣αñ╛ αñ╣αÑêαÑñ';
+  String get signUpWithApple => 'Apple से साइन अप करें। जल्द आ रहा है।';
 
   @override
-  String get resetPassword =>
-      'αñ¬αñ╛αñ╕αñ╡αñ░αÑìαñí αñ░αÑÇαñ╕αÑçαñƒ αñòαñ░αÑçαñé';
+  String get resetPassword => 'पासवर्ड रीसेट करें';
 
   @override
   String get enterEmailForReset =>
-      'αñàαñ¬αñ¿αñ╛ αñêαñ«αÑçαñ▓ αñªαñ░αÑìαñ£ αñòαñ░αÑçαñé αñöαñ░ αñ╣αñ« αñåαñ¬αñòαÑï αñÅαñò αñ░αÑÇαñ╕αÑçαñƒ αñ▓αñ┐αñéαñò αñ¡αÑçαñ£αÑçαñéαñùαÑçαÑñ';
+      'अपना ईमेल दर्ज करें और हम आपको एक रीसेट लिंक भेजेंगे।';
 
   @override
-  String get email => 'αñêαñ«αÑçαñ▓';
+  String get email => 'ईमेल';
 
   @override
   String get emailHintReset => 'you@example.com';
 
   @override
-  String get sendResetLink => 'αñ░αÑÇαñ╕αÑçαñƒ αñ▓αñ┐αñéαñò αñ¡αÑçαñ£αÑçαñé';
+  String get sendResetLink => 'रीसेट लिंक भेजें';
 
   @override
-  String get backToLogin => 'αñ▓αÑëαñù αñçαñ¿ αñ¬αñ░ αñ╡αñ╛αñ¬αñ╕ αñ£αñ╛αñÅαñü';
+  String get backToLogin => 'लॉग इन पर वापस जाएँ';
 
   @override
   String get resetLinkSent =>
-      'αñ░αÑÇαñ╕αÑçαñƒ αñ▓αñ┐αñéαñò αñ¡αÑçαñ£ αñªαñ┐αñ»αñ╛ αñùαñ»αñ╛αÑñ αñòαÑâαñ¬αñ»αñ╛ αñàαñ¬αñ¿αñ╛ αñêαñ«αÑçαñ▓ αñ£αñ╛αñüαñÜαÑçαñéαÑñ';
+      'रीसेट लिंक भेज दिया गया। कृपया अपना ईमेल जाँचें।';
 
   @override
-  String get goBack => 'αñ╡αñ╛αñ¬αñ╕ αñ£αñ╛αñÅαñü';
+  String get goBack => 'वापस जाएँ';
 
   @override
-  String get yourEmailIsNotVerified =>
-      'αñåαñ¬αñòαñ╛ αñêαñ«αÑçαñ▓ αñàαñ¡αÑÇ αññαñò αñ╕αññαÑìαñ»αñ╛αñ¬αñ┐αññ αñ¿αñ╣αÑÇαñé αñ╣αÑüαñå αñ╣αÑêαÑñ';
+  String get yourEmailIsNotVerified => 'आपका ईमेल अभी तक सत्यापित नहीं हुआ है।';
 
   @override
-  String get verifyYourEmail =>
-      'αñàαñ¬αñ¿αñ╛ αñêαñ«αÑçαñ▓ αñ╕αññαÑìαñ»αñ╛αñ¬αñ┐αññ αñòαñ░αÑçαñé';
+  String get verifyYourEmail => 'अपना ईमेल सत्यापित करें';
 
   @override
   String signedInAs(String email) {
-    return '$email αñòαÑç αñ░αÑéαñ¬ αñ«αÑçαñé αñ╕αñ╛αñçαñ¿ αñçαñ¿ αñòαñ┐αñ»αñ╛';
+    return '$email के रूप में साइन इन किया';
   }
 
   @override
-  String get signedIn => 'αñ╕αñ╛αñçαñ¿ αñçαñ¿ αñòαñ┐αñ»αñ╛';
+  String get signedIn => 'साइन इन किया';
 
   @override
   String get verificationInstructions =>
-      'αñàαñ¬αñ¿αñ╛ αñêαñ«αÑçαñ▓ αñçαñ¿αñ¼αÑëαñòαÑìαñ╕ αñûαÑïαñ▓αÑçαñé αñöαñ░ αñ╕αñ╛αñçαñ¿ αñàαñ¬ αñ¬αÑéαñ░αñ╛ αñòαñ░αñ¿αÑç αñòαÑç αñ▓αñ┐αñÅ αñ╕αññαÑìαñ»αñ╛αñ¬αñ¿ αñ▓αñ┐αñéαñò αñ¬αñ░ αñòαÑìαñ▓αñ┐αñò αñòαñ░αÑçαñéαÑñ αñ╕αññαÑìαñ»αñ╛αñ¬αñ┐αññ αñòαñ░αñ¿αÑç αñòαÑç αñ¼αñ╛αñª, αñ¿αÑÇαñÜαÑç αñªαñ┐αñÅ αñùαñÅ αñ¼αñƒαñ¿ αñòαÑï αñƒαÑêαñ¬ αñòαñ░αÑçαñéαÑñ';
+      'अपना ईमेल इनबॉक्स खोलें और साइन अप पूरा करने के लिए सत्यापन लिंक पर क्लिक करें। सत्यापित करने के बाद, नीचे दिए गए बटन को टैप करें।';
 
   @override
-  String get iHaveVerified =>
-      'αñ«αÑêαñéαñ¿αÑç αñ╕αññαÑìαñ»αñ╛αñ¬αñ┐αññ αñòαñ░ αñ▓αñ┐αñ»αñ╛';
+  String get iHaveVerified => 'मैंने सत्यापित कर लिया';
 
   @override
-  String get resendEmail => 'αñêαñ«αÑçαñ▓ αñ¬αÑüαñ¿αñâ αñ¡αÑçαñ£αÑçαñé';
+  String get resendEmail => 'ईमेल पुनः भेजें';
 
   @override
-  String get logOut => 'αñ▓αÑëαñù αñåαñëαñƒ';
+  String get logOut => 'लॉग आउट';
 
   @override
-  String get emailVerifiedSuccess => 'αñêαñ«αÑçαñ▓ αñ╕αññαÑìαñ»αñ╛αñ¬αñ┐αññαÑñ';
+  String get emailVerifiedSuccess => 'ईमेल सत्यापित।';
 
   @override
-  String get failedToVerify =>
-      'αñêαñ«αÑçαñ▓ αñ╕αññαÑìαñ»αñ╛αñ¬αñ┐αññ αñòαñ░αñ¿αÑç αñ«αÑçαñé αñ╡αñ┐αñ½αñ▓αÑñ';
+  String get failedToVerify => 'ईमेल सत्यापित करने में विफल।';
 
   @override
-  String get verificationSent =>
-      'αñ╕αññαÑìαñ»αñ╛αñ¬αñ¿ αñêαñ«αÑçαñ▓ αñ¡αÑçαñ£αñ╛ αñùαñ»αñ╛αÑñ';
+  String get verificationSent => 'सत्यापन ईमेल भेजा गया।';
 
   @override
-  String get failedToResend =>
-      'αñ╕αññαÑìαñ»αñ╛αñ¬αñ¿ αñêαñ«αÑçαñ▓ αñ¬αÑüαñ¿αñâ αñ¡αÑçαñ£αñ¿αÑç αñ«αÑçαñé αñ╡αñ┐αñ½αñ▓αÑñ';
+  String get failedToResend => 'सत्यापन ईमेल पुनः भेजने में विफल।';
 
   @override
-  String get yourEmailIsVerified =>
-      'αñåαñ¬αñòαñ╛ αñêαñ«αÑçαñ▓ αñ╕αññαÑìαñ»αñ╛αñ¬αñ┐αññ αñ╣αÑêαÑñ';
+  String get yourEmailIsVerified => 'आपका ईमेल सत्यापित है।';
 
   @override
-  String get setupTunoExperience =>
-      'αñàαñ¬αñ¿αñ╛ Tuno αñàαñ¿αÑüαñ¡αñ╡ αñ╕αÑçαñƒ αñòαñ░αÑçαñé';
+  String get setupTunoExperience => 'अपना Tuno अनुभव सेट करें';
 
   @override
   String stepOf(int current, int total) {
-    return 'αñÜαñ░αñú $current / $total';
+    return 'चरण $current / $total';
   }
 
   @override
-  String get continueAction => 'αñ£αñ╛αñ░αÑÇ αñ░αñûαÑçαñé';
+  String get continueAction => 'जारी रखें';
 
   @override
-  String get chooseCoachingLanguage =>
-      'αñàαñ¬αñ¿αÑÇ αñòαÑïαñÜαñ┐αñéαñù αñ¡αñ╛αñ╖αñ╛ αñÜαÑüαñ¿αÑçαñé';
+  String get chooseCoachingLanguage => 'अपनी कोचिंग भाषा चुनें';
 
   @override
   String get coachingLanguageSubtitle =>
-      'αñòαÑïαñÜαñ┐αñéαñù αñ¿αñ┐αñ░αÑìαñªαÑçαñ╢αÑïαñé αñöαñ░ AI αñ½αÑÇαñíαñ¼αÑêαñò αñòαÑç αñ▓αñ┐αñÅ αñåαñ¬ αñ£αÑï αñ¡αñ╛αñ╖αñ╛ αñ¬αñ╕αñéαñª αñòαñ░αññαÑç αñ╣αÑêαñé αñëαñ╕αÑç αñÜαÑüαñ¿αÑçαñéαÑñ';
+      'कोचिंग निर्देशों और AI फीडबैक के लिए आप जो भाषा पसंद करते हैं उसे चुनें।';
 
   @override
   String languageLabel(String label) {
-    return '$label αñ¡αñ╛αñ╖αñ╛';
+    return '$label भाषा';
   }
 
   @override
-  String get whatIsYourExperience =>
-      'αñåαñ¬αñòαñ╛ αñùαñ╛αñ»αñ¿ αñàαñ¿αÑüαñ¡αñ╡ αñòαÑìαñ»αñ╛ αñ╣αÑê?';
+  String get whatIsYourExperience => 'आपका गायन अनुभव क्या है?';
 
   @override
   String get experienceSubtitle =>
-      'αñ»αñ╣ αñ╣αñ«αÑçαñé αñåαñ¬αñòαÑç αñàαñ¡αÑìαñ»αñ╛αñ╕ αñ╕αññαÑìαñ░αÑïαñé αñòαÑï αñ╡αÑêαñ»αñòαÑìαññαñ┐αñòαÑâαññ αñòαñ░αñ¿αÑç αñ«αÑçαñé αñ«αñªαñª αñòαñ░αññαñ╛ αñ╣αÑêαÑñ';
+      'यह हमें आपके अभ्यास सत्रों को वैयक्तिकृत करने में मदद करता है।';
 
   @override
-  String get beginner => 'αñ╢αÑüαñ░αÑüαñåαññαÑÇ';
+  String get beginner => 'शुरुआती';
 
   @override
-  String get beginnerDescription =>
-      'αñ«αÑêαñé αñàαñ¬αñ¿αÑÇ αñùαñ╛αñ»αñ¿ αñ»αñ╛αññαÑìαñ░αñ╛ αñ╢αÑüαñ░αÑé αñòαñ░ αñ░αñ╣αñ╛ αñ╣αÑéαñüαÑñ';
+  String get beginnerDescription => 'मैं अपनी गायन यात्रा शुरू कर रहा हूँ।';
 
   @override
-  String get intermediate => 'αñ«αñºαÑìαñ»αñ╡αñ░αÑìαññαÑÇ';
+  String get intermediate => 'मध्यवर्ती';
 
   @override
   String get intermediateDescription =>
-      'αñ«αÑüαñ¥αÑç αñ¼αÑüαñ¿αñ┐αñ»αñ╛αñªαÑÇ αñ¬αñ┐αñÜ αñöαñ░ αñ▓αñ» αñ╕αñ«αñ¥ αñ«αÑçαñé αñåαññαÑÇ αñ╣αÑêαÑñ';
+      'मुझे बुनियादी पिच और लय समझ में आती है।';
 
   @override
-  String get advanced => 'αñëαñ¿αÑìαñ¿αññ';
+  String get advanced => 'उन्नत';
 
   @override
   String get advancedDescription =>
-      'αñ«αÑêαñé αñ¿αñ┐αñ»αñ«αñ┐αññ αñ░αÑéαñ¬ αñ╕αÑç αñàαñ¡αÑìαñ»αñ╛αñ╕ αñòαñ░αññαñ╛ αñ╣αÑéαñü αñöαñ░ αñ╡αñ┐αñ╕αÑìαññαÑâαññ αñ╕αÑüαñºαñ╛αñ░ αñÜαñ╛αñ╣αññαñ╛ αñ╣αÑéαñüαÑñ';
+      'मैं नियमित रूप से अभ्यास करता हूँ और विस्तृत सुधार चाहता हूँ।';
 
   @override
-  String get professional => 'αñ¬αÑçαñ╢αÑçαñ╡αñ░';
+  String get professional => 'पेशेवर';
 
   @override
   String get professionalDescription =>
-      'αñ«αÑêαñé αñ¬αÑçαñ╢αÑçαñ╡αñ░ αñ░αÑéαñ¬ αñ╕αÑç αñ¬αÑìαñ░αñªαñ░αÑìαñ╢αñ¿, αñ╕αñ┐αñûαñ╛αññαñ╛ αñ»αñ╛ αñ░αñ┐αñòαÑëαñ░αÑìαñí αñòαñ░αññαñ╛ αñ╣αÑéαñüαÑñ';
+      'मैं पेशेवर रूप से प्रदर्शन, सिखाता या रिकॉर्ड करता हूँ।';
 
   @override
   String experienceLabel(String label) {
-    return '$label αñàαñ¿αÑüαñ¡αñ╡';
+    return '$label अनुभव';
   }
 
   @override
-  String get whatAreYourGoals =>
-      'αñåαñ¬αñòαÑç αñùαñ╛αñ»αñ¿ αñ▓αñòαÑìαñ╖αÑìαñ» αñòαÑìαñ»αñ╛ αñ╣αÑêαñé?';
+  String get whatAreYourGoals => 'आपके गायन लक्ष्य क्या हैं?';
 
   @override
   String get goalsSubtitle =>
-      'αñ╕αñ¡αÑÇ αñ▓αñ╛αñùαÑé αñ╡αñ┐αñòαñ▓αÑìαñ¬ αñÜαÑüαñ¿αÑçαñéαÑñ αñåαñ¬ αñçαñ¿αÑìαñ╣αÑçαñé αñ¼αñ╛αñª αñ«αÑçαñé αñ¼αñªαñ▓ αñ╕αñòαññαÑç αñ╣αÑêαñéαÑñ';
+      'सभी लागू विकल्प चुनें। आप इन्हें बाद में बदल सकते हैं।';
 
   @override
   String goalLabel(String label) {
-    return '$label αñ▓αñòαÑìαñ╖αÑìαñ»';
+    return '$label लक्ष्य';
   }
 
   @override
-  String get yourVoiceStaysInControl =>
-      'αñåαñ¬αñòαÑÇ αñåαñ╡αñ╛αñ£αñ╝ αñåαñ¬αñòαÑç αñ¿αñ┐αñ»αñéαññαÑìαñ░αñú αñ«αÑçαñé αñ░αñ╣αññαÑÇ αñ╣αÑê';
+  String get yourVoiceStaysInControl => 'आपकी आवाज़ आपके नियंत्रण में रहती है';
 
   @override
   String get permissionEducationMessage =>
-      'Tuno αñ«αñ╛αñçαñòαÑìαñ░αÑïαñ½αñ╝αÑïαñ¿ αñ¬αñ╣αÑüαñüαñÜ αñòαñ╛ αñëαñ¬αñ»αÑïαñù αñòαÑçαñ╡αñ▓ αññαñ¼ αñòαñ░αññαñ╛ αñ╣αÑê αñ£αñ¼ αñåαñ¬ αñàαñ¡αÑìαñ»αñ╛αñ╕ αñ╕αññαÑìαñ░ αñ░αñ┐αñòαÑëαñ░αÑìαñí αñòαñ░αñ¿αñ╛ αñÜαÑüαñ¿αññαÑç αñ╣αÑêαñéαÑñ αñåαñ¬ αñçαñ╕ αñàαñ¿αÑüαñ«αññαñ┐ αñòαÑï αñ¼αñ╛αñª αñ«αÑçαñé αñàαñ¬αñ¿αÑç αñíαñ┐αñ╡αñ╛αñçαñ╕ αñ»αñ╛ αñ¼αÑìαñ░αñ╛αñëαñ£αñ╝αñ░ αñ╕αÑçαñƒαñ┐αñéαñùαÑìαñ╕ αñ«αÑçαñé αñ¼αñªαñ▓ αñ╕αñòαññαÑç αñ╣αÑêαñéαÑñ';
+      'Tuno माइक्रोफ़ोन पहुँच का उपयोग केवल तब करता है जब आप अभ्यास सत्र रिकॉर्ड करना चुनते हैं। आप इस अनुमति को बाद में अपने डिवाइस या ब्राउज़र सेटिंग्स में बदल सकते हैं।';
 
   @override
-  String get requiredForRecording =>
-      'αñ╡αÑëαñçαñ╕ αñ░αñ┐αñòαÑëαñ░αÑìαñíαñ┐αñéαñù αñòαÑç αñ▓αñ┐αñÅ αñåαñ╡αñ╢αÑìαñ»αñò';
+  String get requiredForRecording => 'वॉइस रिकॉर्डिंग के लिए आवश्यक';
 
   @override
   String get requiredForRecordingDesc =>
-      'AI αñ½αÑÇαñíαñ¼αÑêαñò αñòαÑç αñ▓αñ┐αñÅ αñåαñ¬αñòαÑç αñùαñ╛αñ»αñ¿ αñòαÑï αñòαÑêαñ¬αÑìαñÜαñ░ αñòαñ░αñ¿αÑç αñ╣αÑçαññαÑü αñ«αñ╛αñçαñòαÑìαñ░αÑïαñ½αñ╝αÑïαñ¿ αñ¬αñ╣αÑüαñüαñÜ αñåαñ╡αñ╢αÑìαñ»αñò αñ╣αÑêαÑñ';
+      'AI फीडबैक के लिए आपके गायन को कैप्चर करने हेतु माइक्रोफ़ोन पहुँच आवश्यक है।';
 
   @override
-  String get noAutoRecord =>
-      'Tuno αñ╕αÑìαñ╡αñÜαñ╛αñ▓αñ┐αññ αñ░αÑéαñ¬ αñ╕αÑç αñ░αñ┐αñòαÑëαñ░αÑìαñí αñ¿αñ╣αÑÇαñé αñòαñ░αÑçαñùαñ╛';
+  String get noAutoRecord => 'Tuno स्वचालित रूप से रिकॉर्ड नहीं करेगा';
 
   @override
   String get noAutoRecordDesc =>
-      'αñ░αñ┐αñòαÑëαñ░αÑìαñíαñ┐αñéαñù αñòαÑçαñ╡αñ▓ αññαñ¼ αñ╣αÑïαññαÑÇ αñ╣αÑê αñ£αñ¼ αñåαñ¬ αñ╕αÑìαñ¬αñ╖αÑìαñƒ αñ░αÑéαñ¬ αñ╕αÑç αñàαñ¡αÑìαñ»αñ╛αñ╕ αñ╕αññαÑìαñ░ αñ╢αÑüαñ░αÑé αñòαñ░αññαÑç αñ╣αÑêαñéαÑñ';
+      'रिकॉर्डिंग केवल तब होती है जब आप स्पष्ट रूप से अभ्यास सत्र शुरू करते हैं।';
 
   @override
-  String get permissionCanBeChanged =>
-      'αñàαñ¿αÑüαñ«αññαñ┐ αñ¼αñ╛αñª αñ«αÑçαñé αñ¼αñªαñ▓αÑÇ αñ£αñ╛ αñ╕αñòαññαÑÇ αñ╣αÑê';
+  String get permissionCanBeChanged => 'अनुमति बाद में बदली जा सकती है';
 
   @override
   String get permissionCanBeChangedDesc =>
-      'αñåαñ¬ αñíαñ┐αñ╡αñ╛αñçαñ╕/αñ¼αÑìαñ░αñ╛αñëαñ£αñ╝αñ░ αñ╕αÑçαñƒαñ┐αñéαñùαÑìαñ╕ αñ«αÑçαñé αñòαñ¡αÑÇ αñ¡αÑÇ αñ«αñ╛αñçαñòαÑìαñ░αÑïαñ½αñ╝αÑïαñ¿ αñ¬αñ╣αÑüαñüαñÜ αñªαÑç αñ»αñ╛ αñ░αñªαÑìαñª αñòαñ░ αñ╕αñòαññαÑç αñ╣αÑêαñéαÑñ';
+      'आप डिवाइस/ब्राउज़र सेटिंग्स में कभी भी माइक्रोफ़ोन पहुँच दे या रद्द कर सकते हैं।';
 
   @override
-  String get requestingPermission =>
-      'αñàαñ¿αÑüαñ░αÑïαñº αñòαñ░ αñ░αñ╣αñ╛ αñ╣αÑê...';
+  String get requestingPermission => 'अनुरोध कर रहा है...';
 
   @override
-  String get enableMicrophone =>
-      'αñ«αñ╛αñçαñòαÑìαñ░αÑïαñ½αñ╝αÑïαñ¿ αñ╕αñòαÑìαñ╖αñ« αñòαñ░αÑçαñé';
+  String get enableMicrophone => 'माइक्रोफ़ोन सक्षम करें';
 
   @override
-  String get openAppSettingsManually =>
-      'αñÉαñ¬ αñ╕αÑçαñƒαñ┐αñéαñùαÑìαñ╕ αñ«αÑêαñ¿αÑìαñ»αÑüαñàαñ▓ αñ░αÑéαñ¬ αñ╕αÑç αñûαÑïαñ▓αÑçαñé';
+  String get openAppSettingsManually => 'ऐप सेटिंग्स मैन्युअल रूप से खोलें';
 
   @override
   String get microphoneGrantedMessage =>
-      'αñ«αñ╛αñçαñòαÑìαñ░αÑïαñ½αñ╝αÑïαñ¿ αñ¬αñ╣αÑüαñüαñÜ αñ╕αÑìαñ╡αÑÇαñòαÑâαññαÑñ αñåαñ¬ αñ░αñ┐αñòαÑëαñ░αÑìαñí αñòαñ░αñ¿αÑç αñòαÑç αñ▓αñ┐αñÅ αññαÑêαñ»αñ╛αñ░ αñ╣αÑêαñé!';
+      'माइक्रोफ़ोन पहुँच स्वीकृत। आप रिकॉर्ड करने के लिए तैयार हैं!';
 
   @override
   String get continueWithoutMic =>
-      'αñåαñ¬ αñ«αñ╛αñçαñòαÑìαñ░αÑïαñ½αñ╝αÑïαñ¿ αñòαÑç αñ¼αñ┐αñ¿αñ╛ αñæαñ¿αñ¼αÑïαñ░αÑìαñíαñ┐αñéαñù αñ£αñ╛αñ░αÑÇ αñ░αñû αñ╕αñòαññαÑç αñ╣αÑêαñéαÑñ αñ£αñ¼ αñåαñ¬ αñàαñ¡αÑìαñ»αñ╛αñ╕ αñ╕αññαÑìαñ░ αñ╢αÑüαñ░αÑé αñòαñ░αÑçαñéαñùαÑç αññαñ¼ αñ░αñ┐αñòαÑëαñ░αÑìαñíαñ┐αñéαñù αñòαÑç αñ▓αñ┐αñÅ αñàαñ¿αÑüαñ«αññαñ┐ αñòαÑÇ αñåαñ╡αñ╢αÑìαñ»αñòαññαñ╛ αñ╣αÑïαñùαÑÇαÑñ';
+      'आप माइक्रोफ़ोन के बिना ऑनबोर्डिंग जारी रख सकते हैं। जब आप अभ्यास सत्र शुरू करेंगे तब रिकॉर्डिंग के लिए अनुमति की आवश्यकता होगी।';
 
   @override
   String get micPermissionGrantedSnackbar =>
-      'αñ«αñ╛αñçαñòαÑìαñ░αÑïαñ½αñ╝αÑïαñ¿ αñ¬αñ╣αÑüαñüαñÜ αñ╕αÑìαñ╡αÑÇαñòαÑâαññαÑñ αñàαñ¼ αñåαñ¬ αñàαñ¬αñ¿αÑÇ αñåαñ╡αñ╛αñ£αñ╝ αñ░αñ┐αñòαÑëαñ░αÑìαñí αñòαñ░ αñ╕αñòαññαÑç αñ╣αÑêαñéαÑñ';
+      'माइक्रोफ़ोन पहुँच स्वीकृत। अब आप अपनी आवाज़ रिकॉर्ड कर सकते हैं।';
 
   @override
   String get micPermissionDeniedSnackbar =>
-      'αñ«αñ╛αñçαñòαÑìαñ░αÑïαñ½αñ╝αÑïαñ¿ αñ¬αñ╣αÑüαñüαñÜ αñàαñ╕αÑìαñ╡αÑÇαñòαÑâαññαÑñ αñåαñ¬ αñçαñ╕αÑç αñ¼αñ╛αñª αñ«αÑçαñé αñ╕αÑçαñƒαñ┐αñéαñùαÑìαñ╕ αñ«αÑçαñé αñ╕αñòαÑìαñ╖αñ« αñòαñ░ αñ╕αñòαññαÑç αñ╣αÑêαñéαÑñ';
+      'माइक्रोफ़ोन पहुँच अस्वीकृत। आप इसे बाद में सेटिंग्स में सक्षम कर सकते हैं।';
 
   @override
   String get micPermissionPermanentlyDeniedSnackbar =>
-      'αñ«αñ╛αñçαñòαÑìαñ░αÑïαñ½αñ╝αÑïαñ¿ αñ¬αñ╣αÑüαñüαñÜ αñ╕αÑìαñÑαñ╛αñ»αÑÇ αñ░αÑéαñ¬ αñ╕αÑç αñàαñ╕αÑìαñ╡αÑÇαñòαÑâαññαÑñ αñòαÑâαñ¬αñ»αñ╛ αñÉαñ¬ αñ╕αÑçαñƒαñ┐αñéαñùαÑìαñ╕ αñ«αÑçαñé αñçαñ╕αÑç αñ╕αñòαÑìαñ╖αñ« αñòαñ░αÑçαñéαÑñ';
+      'माइक्रोफ़ोन पहुँच स्थायी रूप से अस्वीकृत। कृपया ऐप सेटिंग्स में इसे सक्षम करें।';
 
   @override
   String get micPermissionLimitedSnackbar =>
-      'αñ╕αÑÇαñ«αñ┐αññ αñ«αñ╛αñçαñòαÑìαñ░αÑïαñ½αñ╝αÑïαñ¿ αñ¬αñ╣αÑüαñüαñÜ αñ╕αÑìαñ╡αÑÇαñòαÑâαññαÑñ αñåαñ¬ αñ¬αÑìαñ░αññαñ┐αñ¼αñéαñºαÑïαñé αñòαÑç αñ╕αñ╛αñÑ αñ░αñ┐αñòαÑëαñ░αÑìαñí αñòαñ░ αñ╕αñòαññαÑç αñ╣αÑêαñéαÑñ';
+      'सीमित माइक्रोफ़ोन पहुँच स्वीकृत। आप प्रतिबंधों के साथ रिकॉर्ड कर सकते हैं।';
 
   @override
   String permissionStatusLabel(String status) {
-    return 'αñàαñ¿αÑüαñ«αññαñ┐ αñ╕αÑìαñÑαñ┐αññαñ┐: $status';
+    return 'अनुमति स्थिति: $status';
   }
 
   @override
   String get failedToRequestPermission =>
-      'αñàαñ¿αÑüαñ«αññαñ┐ αñòαñ╛ αñàαñ¿αÑüαñ░αÑïαñº αñòαñ░αñ¿αÑç αñ«αÑçαñé αñ╡αñ┐αñ½αñ▓αÑñ αñòαÑâαñ¬αñ»αñ╛ αñ¬αÑüαñ¿αñâ αñ¬αÑìαñ░αñ»αñ╛αñ╕ αñòαñ░αÑçαñéαÑñ';
+      'अनुमति का अनुरोध करने में विफल। कृपया पुनः प्रयास करें।';
 
   @override
-  String get reviewYourSetup =>
-      'αñàαñ¬αñ¿αÑÇ αñ╕αÑçαñƒαñàαñ¬ αñ╕αñ«αÑÇαñòαÑìαñ╖αñ╛ αñòαñ░αÑçαñé';
+  String get reviewYourSetup => 'अपनी सेटअप समीक्षा करें';
 
   @override
   String get reviewSubtitle =>
-      'αñàαñ¬αñ¿αÑç αñÜαñ»αñ¿αÑïαñé αñòαÑÇ αñ£αñ╛αñüαñÜ αñòαñ░αÑçαñé αñöαñ░ αñ»αñªαñ┐ αñåαñ╡αñ╢αÑìαñ»αñò αñ╣αÑï αññαÑï αñ╕αñéαñ¬αñ╛αñªαñ┐αññ αñòαñ░αÑçαñéαÑñ';
+      'अपने चयनों की जाँच करें और यदि आवश्यक हो तो संपादित करें।';
 
   @override
-  String get languageSection => 'αñ¡αñ╛αñ╖αñ╛';
+  String get languageSection => 'भाषा';
 
   @override
-  String get experienceLevel => 'αñàαñ¿αÑüαñ¡αñ╡ αñ╕αÑìαññαñ░';
+  String get experienceLevel => 'अनुभव स्तर';
 
   @override
-  String get singingGoals => 'αñùαñ╛αñ»αñ¿ αñ▓αñòαÑìαñ╖αÑìαñ»';
+  String get singingGoals => 'गायन लक्ष्य';
 
   @override
-  String get noGoalsSelected =>
-      'αñòαÑïαñê αñ▓αñòαÑìαñ╖αÑìαñ» αñÜαñ»αñ¿αñ┐αññ αñ¿αñ╣αÑÇαñé';
+  String get noGoalsSelected => 'कोई लक्ष्य चयनित नहीं';
 
   @override
   String goalsSelected(int count) {
-    return '$count αñ▓αñòαÑìαñ╖αÑìαñ» αñÜαñ»αñ¿αñ┐αññ';
+    return '$count लक्ष्य चयनित';
   }
 
   @override
-  String get micAccess => 'αñ«αñ╛αñçαñòαÑìαñ░αÑïαñ½αñ╝αÑïαñ¿ αñ¬αñ╣αÑüαñüαñÜ';
+  String get micAccess => 'माइक्रोफ़ोन पहुँच';
 
   @override
-  String get checkingPermission =>
-      'αñàαñ¿αÑüαñ«αññαñ┐ αñ£αñ╛αñüαñÜ αñ░αñ╣αñ╛ αñ╣αÑê...';
+  String get checkingPermission => 'अनुमति जाँच रहा है...';
 
   @override
-  String get permissionGranted => 'αñàαñ¿αÑüαñ«αññαñ┐ αñ╕αÑìαñ╡αÑÇαñòαÑâαññ';
+  String get permissionGranted => 'अनुमति स्वीकृत';
 
   @override
   String get permissionNotGranted =>
-      'αñàαñ¿αÑüαñ«αññαñ┐ αñ╕αÑìαñ╡αÑÇαñòαÑâαññ αñ¿αñ╣αÑÇαñé (αñ░αñ┐αñòαÑëαñ░αÑìαñíαñ┐αñéαñù αñòαÑç αñ▓αñ┐αñÅ αñåαñ╡αñ╢αÑìαñ»αñò)';
+      'अनुमति स्वीकृत नहीं (रिकॉर्डिंग के लिए आवश्यक)';
 
   @override
-  String get change => 'αñ¼αñªαñ▓αÑçαñé';
+  String get change => 'बदलें';
 
   @override
-  String get edit => 'αñ╕αñéαñ¬αñ╛αñªαñ┐αññ αñòαñ░αÑçαñé';
+  String get edit => 'संपादित करें';
 
   @override
-  String get completeSetup => 'αñ╕αÑçαñƒαñàαñ¬ αñ¬αÑéαñ░αñ╛ αñòαñ░αÑçαñé';
+  String get completeSetup => 'सेटअप पूरा करें';
 
   @override
   String get pleaseSignInAgain =>
-      'αñòαÑâαñ¬αñ»αñ╛ αñàαñ¬αñ¿αñ╛ αñ╕αÑçαñƒαñàαñ¬ αñ¬αÑéαñ░αñ╛ αñòαñ░αñ¿αÑç αñòαÑç αñ▓αñ┐αñÅ αñ¬αÑüαñ¿αñâ αñ╕αñ╛αñçαñ¿ αñçαñ¿ αñòαñ░αÑçαñéαÑñ';
+      'कृपया अपना सेटअप पूरा करने के लिए पुनः साइन इन करें।';
 
   @override
-  String get notSelected => 'αñÜαñ»αñ¿αñ┐αññ αñ¿αñ╣αÑÇαñé';
+  String get notSelected => 'चयनित नहीं';
 
   @override
   String get setupSaveFailed =>
-      'αñ╣αñ« αñåαñ¬αñòαñ╛ αñ╕αÑçαñƒαñàαñ¬ αñ╕αñ╣αÑçαñ£ αñ¿αñ╣αÑÇαñé αñ╕αñòαÑçαÑñ αñòαÑâαñ¬αñ»αñ╛ αñ¬αÑüαñ¿αñâ αñ¬αÑìαñ░αñ»αñ╛αñ╕ αñòαñ░αÑçαñéαÑñ';
+      'हम आपका सेटअप सहेज नहीं सके। कृपया पुनः प्रयास करें।';
 
   @override
-  String get onboardingLanguageRequired =>
-      'αñ£αñ╛αñ░αÑÇ αñ░αñûαñ¿αÑç αñòαÑç αñ▓αñ┐αñÅ αñ¡αñ╛αñ╖αñ╛ αñÜαÑüαñ¿αÑçαñéαÑñ';
+  String get onboardingLanguageRequired => 'जारी रखने के लिए भाषा चुनें।';
 
   @override
   String get onboardingExperienceRequired =>
-      'αñ£αñ╛αñ░αÑÇ αñ░αñûαñ¿αÑç αñòαÑç αñ▓αñ┐αñÅ αñàαñ¬αñ¿αñ╛ αñàαñ¿αÑüαñ¡αñ╡ αñ╕αÑìαññαñ░ αñÜαÑüαñ¿αÑçαñéαÑñ';
+      'जारी रखने के लिए अपना अनुभव स्तर चुनें।';
 
   @override
   String get onboardingGoalRequired =>
-      'αñ£αñ╛αñ░αÑÇ αñ░αñûαñ¿αÑç αñòαÑç αñ▓αñ┐αñÅ αñòαñ« αñ╕αÑç αñòαñ« αñÅαñò αñ▓αñòαÑìαñ╖αÑìαñ» αñÜαÑüαñ¿αÑçαñéαÑñ';
+      'जारी रखने के लिए कम से कम एक लक्ष्य चुनें।';
 
   @override
-  String get onboardingCheckFailed =>
-      'αñòαÑüαñ¢ αñùαñ▓αññ αñ╣αÑï αñùαñ»αñ╛αÑñ αñòαÑâαñ¬αñ»αñ╛ αñ¬αÑüαñ¿αñâ αñ¬αÑìαñ░αñ»αñ╛αñ╕ αñòαñ░αÑçαñéαÑñ';
+  String get onboardingCheckFailed => 'कुछ गलत हो गया। कृपया पुनः प्रयास करें।';
 
   @override
   String somethingWentWrong(String error) {
-    return 'αñòαÑüαñ¢ αñùαñ▓αññ αñ╣αÑï αñùαñ»αñ╛: $error';
+    return 'कुछ गलत हो गया: $error';
   }
 
   @override
-  String get micPermissionGrantedShort =>
-      'αñ«αñ╛αñçαñòαÑìαñ░αÑïαñ½αñ╝αÑïαñ¿ αñàαñ¿αÑüαñ«αññαñ┐ αñ╕αÑìαñ╡αÑÇαñòαÑâαññαÑñ';
+  String get micPermissionGrantedShort => 'माइक्रोफ़ोन अनुमति स्वीकृत।';
 
   @override
-  String get micPermissionDeniedShort =>
-      'αñ«αñ╛αñçαñòαÑìαñ░αÑïαñ½αñ╝αÑïαñ¿ αñàαñ¿αÑüαñ«αññαñ┐ αñàαñ╕αÑìαñ╡αÑÇαñòαÑâαññαÑñ';
+  String get micPermissionDeniedShort => 'माइक्रोफ़ोन अनुमति अस्वीकृत।';
 
   @override
-  String get couldNotRequestMicPermission =>
-      'αñàαñ¿αÑüαñ«αññαñ┐ αñòαñ╛ αñàαñ¿αÑüαñ░αÑïαñº αñ¿αñ╣αÑÇαñé αñòαñ░ αñ╕αñòαñ╛αÑñ';
+  String get couldNotRequestMicPermission => 'अनुमति का अनुरोध नहीं कर सका।';
 
   @override
-  String get choosePracticeMode =>
-      'αñàαñ¡αÑìαñ»αñ╛αñ╕ αñ«αÑïαñí αñÜαÑüαñ¿αÑçαñé';
+  String get choosePracticeMode => 'अभ्यास मोड चुनें';
 
   @override
-  String get whatWouldYouLikeToDo =>
-      'αñåαñ¬ αñòαÑìαñ»αñ╛ αñòαñ░αñ¿αñ╛ αñÜαñ╛αñ╣αÑçαñéαñùαÑç?';
+  String get whatWouldYouLikeToDo => 'आप क्या करना चाहेंगे?';
 
   @override
-  String get soloPractice => 'αñÅαñòαñ▓ αñàαñ¡αÑìαñ»αñ╛αñ╕';
+  String get soloPractice => 'एकल अभ्यास';
 
   @override
-  String get soloPracticeDesc =>
-      'αñòαÑçαñ╡αñ▓ αñàαñ¬αñ¿αÑÇ αñåαñ╡αñ╛αñ£αñ╝ αñ╕αÑç αñùαñ╛αñÅαñü';
+  String get soloPracticeDesc => 'केवल अपनी आवाज़ से गाएँ';
 
   @override
-  String get tunoExercises => 'Tuno αñàαñ¡αÑìαñ»αñ╛αñ╕';
+  String get tunoExercises => 'Tuno अभ्यास';
 
   @override
-  String get tunoExercisesDesc =>
-      'αñ¿αñ┐αñ░αÑìαñªαÑçαñ╢αñ┐αññ αñàαñ¡αÑìαñ»αñ╛αñ╕αÑïαñé αñòαÑç αñ╕αñ╛αñÑ αñàαñ¡αÑìαñ»αñ╛αñ╕ αñòαñ░αÑçαñé';
+  String get tunoExercisesDesc => 'निर्देशित अभ्यासों के साथ अभ्यास करें';
 
   @override
-  String get uploadSong => 'αñùαñ╛αñ¿αñ╛ αñàαñ¬αñ▓αÑïαñí αñòαñ░αÑçαñé';
+  String get uploadSong => 'गाना अपलोड करें';
 
   @override
-  String get uploadSongDesc =>
-      'αñàαñ¬αñ¿αñ╛ αñ╕αÑìαñ╡αñ»αñé αñòαñ╛ αñƒαÑìαñ░αÑêαñò αñàαñ¬αñ▓αÑïαñí αñòαñ░αÑçαñé';
+  String get uploadSongDesc => 'अपना स्वयं का ट्रैक अपलोड करें';
 
   @override
-  String get backingTrack => 'αñ¼αÑêαñòαñ┐αñéαñù αñƒαÑìαñ░αÑêαñò';
+  String get backingTrack => 'बैकिंग ट्रैक';
 
   @override
-  String get backingTrackDesc =>
-      'αñàαñ¬αñ¿αÑç αñ╕αÑìαñ╡αñ»αñé αñòαÑç αñƒαÑìαñ░αÑêαñò αñòαÑç αñ╕αñ╛αñÑ αñùαñ╛αñÅαñü';
+  String get backingTrackDesc => 'अपने स्वयं के ट्रैक के साथ गाएँ';
 
   @override
   String tapToStart(String title, String description) {
-    return '$title, $description. αñ╢αÑüαñ░αÑé αñòαñ░αñ¿αÑç αñòαÑç αñ▓αñ┐αñÅ αñƒαÑêαñ¬ αñòαñ░αÑçαñéαÑñ';
+    return '$title, $description. शुरू करने के लिए टैप करें।';
   }
 
   @override
   String modeNotAvailable(String title, String description) {
-    return '$title, $description. αñëαñ¬αñ▓αñ¼αÑìαñº αñ¿αñ╣αÑÇαñéαÑñ';
+    return '$title, $description. उपलब्ध नहीं।';
   }
 
   @override
   String modeComingSoon(String title) {
-    return '$title ΓÇö αñ£αñ▓αÑìαñª αñå αñ░αñ╣αñ╛ αñ╣αÑê';
+    return '$title — जल्द आ रहा है';
   }
 
   @override
   String get tunoExercisesComingSoon =>
-      'Tuno αñàαñ¡αÑìαñ»αñ╛αñ╕ αñ¡αñ╡αñ┐αñ╖αÑìαñ» αñòαÑç αñàαñ¬αñíαÑçαñƒ αñ«αÑçαñé αñëαñ¬αñ▓αñ¼αÑìαñº αñ╣αÑïαñéαñùαÑçαÑñ';
+      'Tuno अभ्यास भविष्य के अपडेट में उपलब्ध होंगे।';
 
   @override
   String get backingTracksComingSoon =>
-      'αñ¼αÑêαñòαñ┐αñéαñù αñƒαÑìαñ░αÑêαñò αñ¡αñ╡αñ┐αñ╖αÑìαñ» αñòαÑç αñàαñ¬αñíαÑçαñƒ αñ«αÑçαñé αñëαñ¬αñ▓αñ¼αÑìαñº αñ╣αÑïαñéαñùαÑçαÑñ';
+      'बैकिंग ट्रैक भविष्य के अपडेट में उपलब्ध होंगे।';
 
   @override
-  String get voicePractice => 'αñ╡αÑëαñçαñ╕ αñàαñ¡αÑìαñ»αñ╛αñ╕';
+  String get voicePractice => 'वॉइस अभ्यास';
 
   @override
   String get voicePracticeSubtitle =>
-      'αñàαñ¬αñ¿αñ╛ αñùαñ╛αñ»αñ¿ αñ░αñ┐αñòαÑëαñ░αÑìαñí αñòαñ░αÑçαñé αñöαñ░ αñ¬αñ┐αñÜ, αñ▓αñ» αñöαñ░ αñƒαÑïαñ¿ αñ¬αñ░ AI-αñ╕αñéαñÜαñ╛αñ▓αñ┐αññ αñ½αÑÇαñíαñ¼αÑêαñò αñ¬αÑìαñ░αñ╛αñ¬αÑìαññ αñòαñ░αÑçαñéαÑñ';
+      'अपना गायन रिकॉर्ड करें और पिच, लय और टोन पर AI-संचालित फीडबैक प्राप्त करें।';
 
   @override
   String get requestingMicPermission =>
-      'αñ«αñ╛αñçαñòαÑìαñ░αÑïαñ½αñ╝αÑïαñ¿ αñàαñ¿αÑüαñ«αññαñ┐ αñòαñ╛ αñàαñ¿αÑüαñ░αÑïαñº αñòαñ░ αñ░αñ╣αñ╛ αñ╣αÑê...';
+      'माइक्रोफ़ोन अनुमति का अनुरोध कर रहा है...';
 
   @override
-  String get micPermissionRequired =>
-      'αñ«αñ╛αñçαñòαÑìαñ░αÑïαñ½αñ╝αÑïαñ¿ αñàαñ¿αÑüαñ«αññαñ┐ αñåαñ╡αñ╢αÑìαñ»αñò';
+  String get micPermissionRequired => 'माइक्रोफ़ोन अनुमति आवश्यक';
 
   @override
   String get enableMicInSettings =>
-      'αñàαñ¬αñ¿αÑÇ αñåαñ╡αñ╛αñ£αñ╝ αñ░αñ┐αñòαÑëαñ░αÑìαñí αñòαñ░αñ¿αÑç αñòαÑç αñ▓αñ┐αñÅ αñ╕αÑçαñƒαñ┐αñéαñùαÑìαñ╕ αñ«αÑçαñé αñ«αñ╛αñçαñòαÑìαñ░αÑïαñ½αñ╝αÑïαñ¿ αñ¬αñ╣αÑüαñüαñÜ αñ╕αñòαÑìαñ╖αñ« αñòαñ░αÑçαñéαÑñ';
+      'अपनी आवाज़ रिकॉर्ड करने के लिए सेटिंग्स में माइक्रोफ़ोन पहुँच सक्षम करें।';
 
   @override
-  String get recording => 'αñ░αñ┐αñòαÑëαñ░αÑìαñí αñòαñ░ αñ░αñ╣αñ╛ αñ╣αÑê...';
+  String get recording => 'रिकॉर्ड कर रहा है...';
 
   @override
-  String get recordingSaved =>
-      'αñ░αñ┐αñòαÑëαñ░αÑìαñíαñ┐αñéαñù αñ╕αñ╣αÑçαñ£αÑÇ αñùαñê';
+  String get recordingSaved => 'रिकॉर्डिंग सहेजी गई';
 
   @override
-  String get readyToRecord =>
-      'αñ░αñ┐αñòαÑëαñ░αÑìαñí αñòαñ░αñ¿αÑç αñòαÑç αñ▓αñ┐αñÅ αññαÑêαñ»αñ╛αñ░';
+  String get readyToRecord => 'रिकॉर्ड करने के लिए तैयार';
 
   @override
-  String get startRecording =>
-      'αñ░αñ┐αñòαÑëαñ░αÑìαñíαñ┐αñéαñù αñ╢αÑüαñ░αÑé αñòαñ░αÑçαñé';
+  String get startRecording => 'रिकॉर्डिंग शुरू करें';
 
   @override
-  String get stopRecording =>
-      'αñ░αñ┐αñòαÑëαñ░αÑìαñíαñ┐αñéαñù αñ¼αñéαñª αñòαñ░αÑçαñé';
+  String get stopRecording => 'रिकॉर्डिंग बंद करें';
 
   @override
-  String get deleteAndRecordAgain =>
-      'αñ╣αñƒαñ╛αñÅαñü αñöαñ░ αñ¬αÑüαñ¿αñâ αñ░αñ┐αñòαÑëαñ░αÑìαñí αñòαñ░αÑçαñé';
+  String get deleteAndRecordAgain => 'हटाएँ और पुनः रिकॉर्ड करें';
 
   @override
-  String get reviewRecording =>
-      'αñ░αñ┐αñòαÑëαñ░αÑìαñíαñ┐αñéαñù αñ╕αñ«αÑÇαñòαÑìαñ╖αñ╛ αñòαñ░αÑçαñé';
+  String get reviewRecording => 'रिकॉर्डिंग समीक्षा करें';
 
   @override
-  String get orTapMicAbove =>
-      'αñ»αñ╛ αñèαñ¬αñ░ αñ«αñ╛αñçαñòαÑìαñ░αÑïαñ½αñ╝αÑïαñ¿ αñƒαÑêαñ¬ αñòαñ░αÑçαñé';
+  String get orTapMicAbove => 'या ऊपर माइक्रोफ़ोन टैप करें';
 
   @override
-  String get discardRecordingTitle =>
-      'αñ░αñ┐αñòαÑëαñ░αÑìαñíαñ┐αñéαñù αñ¢αÑïαñíαñ╝αÑçαñé?';
+  String get discardRecordingTitle => 'रिकॉर्डिंग छोड़ें?';
 
   @override
   String get discardRecordingContent =>
-      'αñåαñ¬αñòαÑÇ αñ╡αñ░αÑìαññαñ«αñ╛αñ¿ αñ░αñ┐αñòαÑëαñ░αÑìαñíαñ┐αñéαñù αñ╕αñ╣αÑçαñ£αÑÇ αñ¿αñ╣αÑÇαñé αñ£αñ╛αñÅαñùαÑÇαÑñ';
+      'आपकी वर्तमान रिकॉर्डिंग सहेजी नहीं जाएगी।';
 
   @override
-  String get keepRecording => 'αñ░αñ┐αñòαÑëαñ░αÑìαñíαñ┐αñéαñù αñ░αñûαÑçαñé';
+  String get keepRecording => 'रिकॉर्डिंग रखें';
 
   @override
-  String get discardAndGoBack =>
-      'αñ¢αÑïαñíαñ╝αÑçαñé αñöαñ░ αñ╡αñ╛αñ¬αñ╕ αñ£αñ╛αñÅαñü';
+  String get discardAndGoBack => 'छोड़ें और वापस जाएँ';
 
   @override
   String recordingSavedDuration(String duration) {
-    return 'αñ░αñ┐αñòαÑëαñ░αÑìαñíαñ┐αñéαñù αñ╕αñ╣αÑçαñ£αÑÇ αñùαñê ΓÇö $duration';
+    return 'रिकॉर्डिंग सहेजी गई — $duration';
   }
 
   @override
-  String get anErrorOccurred => 'αñÅαñò αññαÑìαñ░αÑüαñƒαñ┐ αñ╣αÑüαñê';
+  String get anErrorOccurred => 'एक त्रुटि हुई';
 
   @override
   String get failedToDeleteRecording =>
-      'αñ░αñ┐αñòαÑëαñ░αÑìαñíαñ┐αñéαñù αñ╣αñƒαñ╛αñ¿αÑç αñ«αÑçαñé αñ╡αñ┐αñ½αñ▓αÑñ αñòαÑâαñ¬αñ»αñ╛ αñ¬αÑüαñ¿αñâ αñ¬αÑìαñ░αñ»αñ╛αñ╕ αñòαñ░αÑçαñéαÑñ';
+      'रिकॉर्डिंग हटाने में विफल। कृपया पुनः प्रयास करें।';
 
   @override
-  String get startRecordingSemantic =>
-      'αñ░αñ┐αñòαÑëαñ░αÑìαñíαñ┐αñéαñù αñ╢αÑüαñ░αÑé αñòαñ░αÑçαñé';
+  String get startRecordingSemantic => 'रिकॉर्डिंग शुरू करें';
 
   @override
-  String get stopRecordingSemantic =>
-      'αñ░αñ┐αñòαÑëαñ░αÑìαñíαñ┐αñéαñù αñ¼αñéαñª αñòαñ░αÑçαñé';
+  String get stopRecordingSemantic => 'रिकॉर्डिंग बंद करें';
 
   @override
-  String get reviewRecordingTitle =>
-      'αñ░αñ┐αñòαÑëαñ░αÑìαñíαñ┐αñéαñù αñ╕αñ«αÑÇαñòαÑìαñ╖αñ╛';
+  String get reviewRecordingTitle => 'रिकॉर्डिंग समीक्षा';
 
   @override
-  String get play => 'αñÜαñ▓αñ╛αñÅαñü';
+  String get play => 'चलाएँ';
 
   @override
-  String get pause => 'αñ░αÑïαñòαÑçαñé';
+  String get pause => 'रोकें';
 
   @override
-  String get replayFromBeginning =>
-      'αñ╢αÑüαñ░αÑüαñåαññ αñ╕αÑç αñ¬αÑüαñ¿αñâ αñÜαñ▓αñ╛αñÅαñü';
+  String get replayFromBeginning => 'शुरुआत से पुनः चलाएँ';
 
   @override
-  String get forwardTenSeconds =>
-      '10 αñ╕αÑçαñòαñéαñí αñåαñùαÑç αñ¼αñóαñ╝αñ╛αñÅαñü';
+  String get forwardTenSeconds => '10 सेकंड आगे बढ़ाएँ';
 
   @override
-  String get continueToAnalysis =>
-      'αñ╡αñ┐αñ╢αÑìαñ▓αÑçαñ╖αñú αñ£αñ╛αñ░αÑÇ αñ░αñûαÑçαñé';
+  String get continueToAnalysis => 'विश्लेषण जारी रखें';
 
   @override
   String get unableToLoadAudio =>
-      'αñæαñíαñ┐αñ»αÑï αñ½αñ╝αñ╛αñçαñ▓ αñ▓αÑïαñí αñòαñ░αñ¿αÑç αñ«αÑçαñé αñàαñ╕αñ«αñ░αÑìαñÑαÑñ αñ░αñ┐αñòαÑëαñ░αÑìαñíαñ┐αñéαñù αñùαñ╛αñ»αñ¼ αñ»αñ╛ αñªαÑéαñ╖αñ┐αññ αñ╣αÑï αñ╕αñòαññαÑÇ αñ╣αÑêαÑñ';
+      'ऑडियो फ़ाइल लोड करने में असमर्थ। रिकॉर्डिंग गायब या दूषित हो सकती है।';
 
   @override
-  String get analysisPending => 'αñ╡αñ┐αñ╢αÑìαñ▓αÑçαñ╖αñú αñ▓αñéαñ¼αñ┐αññ';
+  String get analysisPending => 'विश्लेषण चल रहा है...';
 
   @override
   String get aiAnalysisComingSoon =>
-      'AI αñ¬αñ┐αñÜ αñ╡αñ┐αñ╢αÑìαñ▓αÑçαñ╖αñú αñàαñùαñ▓αÑç αñÜαñ░αñú αñ«αÑçαñé αñ£αÑïαñíαñ╝αñ╛ αñ£αñ╛αñÅαñùαñ╛αÑñ';
+      'AI पिच विश्लेषण अगले चरण में जोड़ा जाएगा।';
 
   @override
-  String get recordingDetails =>
-      'αñ░αñ┐αñòαÑëαñ░αÑìαñíαñ┐αñéαñù αñ╡αñ┐αñ╡αñ░αñú';
+  String get recordingDetails => 'रिकॉर्डिंग विवरण';
 
   @override
-  String get fileName => 'αñ½αñ╝αñ╛αñçαñ▓ αñ¿αñ╛αñ«';
+  String get fileName => 'फ़ाइल नाम';
 
   @override
-  String get duration => 'αñàαñ╡αñºαñ┐';
+  String get duration => 'अवधि';
 
   @override
-  String get recorded => 'αñ░αñ┐αñòαÑëαñ░αÑìαñí αñòαñ┐αñ»αñ╛ αñùαñ»αñ╛';
+  String get recorded => 'रिकॉर्ड किया गया';
 
   @override
-  String get practiceAgain => 'αñ¬αÑüαñ¿αñâ αñàαñ¡αÑìαñ»αñ╛αñ╕ αñòαñ░αÑçαñé';
+  String get practiceAgain => 'पुनः अभ्यास करें';
 
   @override
-  String get backToReview =>
-      'αñ╕αñ«αÑÇαñòαÑìαñ╖αñ╛ αñ¬αñ░ αñ╡αñ╛αñ¬αñ╕ αñ£αñ╛αñÅαñü';
+  String get backToReview => 'समीक्षा पर वापस जाएँ';
 
   @override
   String get unableToLoadDetails =>
-      'αñ░αñ┐αñòαÑëαñ░αÑìαñíαñ┐αñéαñù αñ╡αñ┐αñ╡αñ░αñú αñ▓αÑïαñí αñòαñ░αñ¿αÑç αñ«αÑçαñé αñàαñ╕αñ«αñ░αÑìαñÑαÑñ αñ¿αÑçαñ╡αñ┐αñùαÑçαñ╢αñ¿ αñíαÑçαñƒαñ╛ αñùαñ╛αñ»αñ¼ αñ»αñ╛ αñàαñ«αñ╛αñ¿αÑìαñ» αñ╣αÑï αñ╕αñòαññαñ╛ αñ╣αÑêαÑñ';
+      'रिकॉर्डिंग विवरण लोड करने में असमर्थ। नेविगेशन डेटा गायब या अमान्य हो सकता है।';
 
   @override
-  String get uploadReferenceSong =>
-      'αñ╕αñéαñªαñ░αÑìαñ¡ αñùαñ╛αñ¿αñ╛ αñàαñ¬αñ▓αÑïαñí αñòαñ░αÑçαñé';
+  String get uploadReferenceSong => 'संदर्भ गाना अपलोड करें';
 
   @override
   String get chooseSongToPractice =>
-      'αñ╡αñ╣ αñùαñ╛αñ¿αñ╛ αñÜαÑüαñ¿αÑçαñé αñ£αñ┐αñ╕αñòαñ╛ αñåαñ¬ αñàαñ¡αÑìαñ»αñ╛αñ╕ αñòαñ░αñ¿αñ╛ αñÜαñ╛αñ╣αññαÑç αñ╣αÑêαñéαÑñ';
+      'वह गाना चुनें जिसका आप अभ्यास करना चाहते हैं।';
 
   @override
-  String get chooseAudioFile =>
-      'αñÅαñò αñæαñíαñ┐αñ»αÑï αñ½αñ╝αñ╛αñçαñ▓ αñÜαÑüαñ¿αÑçαñé';
+  String get chooseAudioFile => 'एक ऑडियो फ़ाइल चुनें';
 
   @override
-  String get audioFileFormats =>
-      'MP3, WAV, M4A αñ»αñ╛ AAC ΓÇö αñàαñºαñ┐αñòαññαñ« 50 MB';
+  String get audioFileFormats => 'MP3, WAV, M4A या AAC — अधिकतम 50 MB';
 
   @override
-  String get selectSong => 'αñùαñ╛αñ¿αñ╛ αñÜαÑüαñ¿αÑçαñé';
+  String get selectSong => 'गाना चुनें';
 
   @override
-  String get selecting => 'αñÜαÑüαñ¿ αñ░αñ╣αñ╛ αñ╣αÑê...';
+  String get selecting => 'चुन रहा है...';
 
   @override
-  String get remove => 'αñ╣αñƒαñ╛αñÅαñü';
+  String get remove => 'हटाएँ';
 
   @override
-  String get replaceSong => 'αñùαñ╛αñ¿αñ╛ αñ¼αñªαñ▓αÑçαñé';
+  String get replaceSong => 'गाना बदलें';
 
   @override
   String get trackSelected =>
-      'αñƒαÑìαñ░αÑêαñò αñÜαñ»αñ¿αñ┐αññαÑñ αñàαñ¡αÑìαñ»αñ╛αñ╕ αñ╕αÑçαñƒαñàαñ¬ αñàαñùαñ▓αÑç αñÜαñ░αñú αñ«αÑçαñé αñ£αÑïαñíαñ╝αñ╛ αñ£αñ╛αñÅαñùαñ╛αÑñ';
+      'ट्रैक चयनित। अभ्यास सेटअप अगले चरण में जोड़ा जाएगा।';
 
   @override
-  String get couldNotSelectFile =>
-      'αñ½αñ╝αñ╛αñçαñ▓ αñÜαÑüαñ¿αñ¿αÑç αñ«αÑçαñé αñàαñ╕αñ«αñ░αÑìαñÑ';
+  String get couldNotSelectFile => 'फ़ाइल चुनने में असमर्थ';
 
   @override
-  String get unexpectedError =>
-      'αñÅαñò αñàαñ¬αÑìαñ░αññαÑìαñ»αñ╛αñ╢αñ┐αññ αññαÑìαñ░αÑüαñƒαñ┐ αñ╣αÑüαñêαÑñ';
+  String get unexpectedError => 'एक अप्रत्याशित त्रुटि हुई।';
 
   @override
-  String get retry => 'αñ¬αÑüαñ¿αñâ αñ¬αÑìαñ░αñ»αñ╛αñ╕ αñòαñ░αÑçαñé';
+  String get retry => 'पुनः प्रयास करें';
 
   @override
   String get privacyNote =>
-      'αñåαñ¬αñòαñ╛ αñ╕αñéαñªαñ░αÑìαñ¡ αñƒαÑìαñ░αÑêαñò αñçαñ╕ αñíαñ┐αñ╡αñ╛αñçαñ╕ αñ¬αñ░ αñ░αñ╣αññαñ╛ αñ╣αÑê αñöαñ░ αñàαñ¬αñ▓αÑïαñí αñ¿αñ╣αÑÇαñé αñòαñ┐αñ»αñ╛ αñ£αñ╛αññαñ╛ αñ╣αÑêαÑñ';
+      'आपका संदर्भ ट्रैक इस डिवाइस पर रहता है और अपलोड नहीं किया जाता है।';
 
   @override
-  String get tunoLogoSemanticLabel => 'Tuno αñ▓αÑïαñùαÑï';
+  String get tunoLogoSemanticLabel => 'Tuno लोगो';
 
   @override
   String get voiceRecordingStartFailed =>
@@ -1543,4 +1400,89 @@ class AppLocalizationsHi extends AppLocalizations {
   @override
   String get couldNotOpenSettingsManualInstructions =>
       'सेटिंग्स खोली नहीं जा सकीं। कृपया माइक्रोफ़ोन एक्सेस को मैन्युअल रूप से सक्षम करें।';
+
+  @override
+  String get recordingLibrary => 'रिकॉर्डिंग लाइब्रेरी';
+
+  @override
+  String get yourSavedPracticeRecordings => 'आपके सहेजे गए अभ्यास रिकॉर्डिंग';
+
+  @override
+  String get searchRecordings => 'रिकॉर्डिंग खोजें';
+
+  @override
+  String get filterAll => 'सभी';
+
+  @override
+  String get filterFavorites => 'पसंदीदा';
+
+  @override
+  String get noRecordingsYet => 'अभी तक कोई रिकॉर्डिंग नहीं';
+
+  @override
+  String get completePracticeToSaveFirst =>
+      'अपना पहला रिकॉर्डिंग सहेजने के लिए एक अभ्यास सत्र पूरा करें।';
+
+  @override
+  String get errorLoadingRecordings => 'रिकॉर्डिंग लोड करने में विफल';
+
+  @override
+  String get recordedOn => 'रिकॉर्ड किया गया';
+
+  @override
+  String get analysisStatus => 'विश्लेषण';
+
+  @override
+  String get analysisNone => 'विश्लेषण नहीं किया गया';
+
+  @override
+  String get analysisCompleted => 'पूर्ण';
+
+  @override
+  String get analysisFailed => 'विफल';
+
+  @override
+  String analysisScore(String score) {
+    return 'स्कोर: $score';
+  }
+
+  @override
+  String referenceTrack(String track) {
+    return 'संदर्भ ट्रैक: $track';
+  }
+
+  @override
+  String get renameRecording => 'रिकॉर्डिंग का नाम बदलें';
+
+  @override
+  String get addToFavorites => 'पसंदीदा में जोड़ें';
+
+  @override
+  String get removeFromFavorites => 'पसंदीदा से हटाएं';
+
+  @override
+  String get deleteRecording => 'रिकॉर्डिंग हटाएं';
+
+  @override
+  String get deleteConfirmation => 'क्या आप इस रिकॉर्डिंग को हटाना चाहते हैं?';
+
+  @override
+  String get deleteConfirmationMessage =>
+      'यह क्रिया पूर्ववत नहीं की जा सकती। रिकॉर्डिंग स्थायी रूप से हटा दी जाएगी।';
+
+  @override
+  String get clearLibrary => 'लाइब्रेरी साफ़ करें';
+
+  @override
+  String get clearLibraryConfirmation => 'पूरी लाइब्रेरी साफ़ करें?';
+
+  @override
+  String get clearLibraryConfirmationMessage =>
+      'यह सभी रिकॉर्डिंग को स्थायी रूप से हटा देगा। यह क्रिया पूर्ववत नहीं की जा सकती।';
+
+  @override
+  String get playRecording => 'रिकॉर्डिंग चलाएं';
+
+  @override
+  String get saving => 'सहेजा जा रहा है...';
 }

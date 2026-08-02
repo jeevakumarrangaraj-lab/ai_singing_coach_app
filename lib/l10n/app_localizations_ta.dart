@@ -1282,7 +1282,7 @@ class AppLocalizationsTa extends AppLocalizations {
       'ஆடியோ கோப்பை ஏற்ற முடியவில்லை. பதிவு காணவில்லை அல்லது சேதமடைந்திருக்கலாம்.';
 
   @override
-  String get analysisPending => 'பகுப்பாய்வு நிலுவையில்';
+  String get analysisPending => 'பகுப்பாய்வு நடந்து கொண்டிருக்கிறது...';
 
   @override
   String get aiAnalysisComingSoon =>
@@ -1295,7 +1295,7 @@ class AppLocalizationsTa extends AppLocalizations {
   String get fileName => 'கோப்பு பெயர்';
 
   @override
-  String get duration => 'கால அளவு';
+  String get duration => 'நீளம்';
 
   @override
   String get recorded => 'பதிவு செய்யப்பட்டது';
@@ -1416,4 +1416,90 @@ class AppLocalizationsTa extends AppLocalizations {
   @override
   String get couldNotOpenSettingsManualInstructions =>
       'அமைப்புகளைத் திற முடியவில்லை. மைக்ரோஃபோன் அணுகலை கைமுறையாக இயக்கவும்.';
+
+  @override
+  String get recordingLibrary => 'பதிவு நூலகம்';
+
+  @override
+  String get yourSavedPracticeRecordings =>
+      'உங்கள் சேமிக்கப்பட்ட பயிற்சி பதிவுகள்';
+
+  @override
+  String get searchRecordings => 'பதிவுகளைத் தேடவும்';
+
+  @override
+  String get filterAll => 'அனைத்து';
+
+  @override
+  String get filterFavorites => 'பிடித்தவை';
+
+  @override
+  String get noRecordingsYet => 'இன்னும் பதிவுகள் இல்லை';
+
+  @override
+  String get completePracticeToSaveFirst =>
+      'உங்கள் முதல் பதிவை சேமிப்பதற்காக ஒரு பயிற்சி அமர்வை முடிக்கவும்.';
+
+  @override
+  String get errorLoadingRecordings => 'பதிவுகள் ஏற்ற முடியவில்லை';
+
+  @override
+  String get recordedOn => 'பதிவு தேதி';
+
+  @override
+  String get analysisStatus => 'பகுப்பாய்வு';
+
+  @override
+  String get analysisNone => 'பகுப்பாய்வு செய்யப்படவில்லை';
+
+  @override
+  String get analysisCompleted => 'முடிக்கப்பட்டது';
+
+  @override
+  String get analysisFailed => 'தேடியாமல்';
+
+  @override
+  String analysisScore(String score) {
+    return 'மதிப்பெண்: $score';
+  }
+
+  @override
+  String referenceTrack(String track) {
+    return 'அடிப்படை இசை: $track';
+  }
+
+  @override
+  String get renameRecording => 'பதிவை மறுபெயரிடு';
+
+  @override
+  String get addToFavorites => 'பிடித்தவைக்குச் சேர்';
+
+  @override
+  String get removeFromFavorites => 'பிடித்தவைகளிலிருந்து அகற்று';
+
+  @override
+  String get deleteRecording => 'பதிவை நீக்கு';
+
+  @override
+  String get deleteConfirmation => 'இந்த பதிவை நீக்குவது உறுதியாகுமா?';
+
+  @override
+  String get deleteConfirmationMessage =>
+      'இந்த செயல் முன் நிலைக்கு வந்து விடாது. பதிவு நிரந்தரமாக நீக்கப்படும்.';
+
+  @override
+  String get clearLibrary => 'நூலகத்தை அழி';
+
+  @override
+  String get clearLibraryConfirmation => 'நூலகத்தை முழுமையாக அழிய அளிப்ப 단순한가?';
+
+  @override
+  String get clearLibraryConfirmationMessage =>
+      'இது அனைத்து பதிவுகளையும் நிரந்தரமாக நீக்கும். இந்த செயல் முன் நிலைக்கு வந்து விடாது.';
+
+  @override
+  String get playRecording => 'பதிவை இயக்கு';
+
+  @override
+  String get saving => 'சேமித்து இருக்கிறது...';
 }

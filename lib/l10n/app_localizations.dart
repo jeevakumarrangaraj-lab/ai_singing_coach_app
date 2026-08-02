@@ -133,13 +133,13 @@ abstract class AppLocalizations {
   /// Option label for Tamil language
   ///
   /// In en, this message translates to:
-  /// **'α«ñα««α«┐α«┤α»ì'**
+  /// **'Tamil'**
   String get tamil;
 
   /// Option label for Hindi language
   ///
   /// In en, this message translates to:
-  /// **'αñ╣αñ┐αñ¿αÑìαñªαÑÇ'**
+  /// **'Hindi'**
   String get hindi;
 
   /// Accessibility label for the back button
@@ -274,7 +274,7 @@ abstract class AppLocalizations {
   /// **'Are you sure you want to log out?'**
   String get logoutConfirmContent;
 
-  /// Button to cancel recording
+  /// Button to cancel an action
   ///
   /// In en, this message translates to:
   /// **'Cancel'**
@@ -535,7 +535,7 @@ abstract class AppLocalizations {
   /// Label for not granted permission status
   ///
   /// In en, this message translates to:
-  /// **'Not granted ΓÇö tap to allow'**
+  /// **'Not granted — tap to allow'**
   String get notGrantedTapToAllow;
 
   /// Error message when unable to check permission
@@ -1207,7 +1207,7 @@ abstract class AppLocalizations {
   /// Tooltip for disabled toggle when notifications are off
   ///
   /// In en, this message translates to:
-  /// **'{label} ΓÇô enable notifications first'**
+  /// **'{label} – enable notifications first'**
   String enableNotificationsFirst(String label);
 
   /// Title for the Notifications screen
@@ -1276,7 +1276,7 @@ abstract class AppLocalizations {
   /// **'Mark as read'**
   String get markAsRead;
 
-  /// Action label to delete notification
+  /// Button to confirm deletion
   ///
   /// In en, this message translates to:
   /// **'Delete'**
@@ -1303,7 +1303,7 @@ abstract class AppLocalizations {
   /// Greeting on home screen with user name
   ///
   /// In en, this message translates to:
-  /// **'Hello, {name} ≡ƒæï'**
+  /// **'Hello, {name} 👋'**
   String helloUser(String name);
 
   /// Subtitle asking user if they are ready to practice
@@ -1330,7 +1330,7 @@ abstract class AppLocalizations {
   /// **'Record your voice and receive instant feedback.'**
   String get recordAndGetFeedback;
 
-  /// Button and tooltip text for start practice
+  /// Button to navigate to practice modes from empty state
   ///
   /// In en, this message translates to:
   /// **'Start Practice'**
@@ -1381,7 +1381,7 @@ abstract class AppLocalizations {
   /// Tagline on welcome screen
   ///
   /// In en, this message translates to:
-  /// **'Practice ΓÇó Improve ΓÇó Achieve'**
+  /// **'Practice • Improve • Achieve'**
   String get practiceImproveAchieve;
 
   /// Button text on welcome screen
@@ -1399,7 +1399,7 @@ abstract class AppLocalizations {
   /// Heading on login screen
   ///
   /// In en, this message translates to:
-  /// **'Welcome Back! ≡ƒæï'**
+  /// **'Welcome Back! 👋'**
   String get welcomeBack;
 
   /// Subtitle on login screen
@@ -2179,7 +2179,7 @@ abstract class AppLocalizations {
   /// Tooltip for unavailable practice mode
   ///
   /// In en, this message translates to:
-  /// **'{title} ΓÇö Coming soon'**
+  /// **'{title} — Coming soon'**
   String modeComingSoon(String title);
 
   /// Snackbar when Tuno Exercises is tapped
@@ -2299,7 +2299,7 @@ abstract class AppLocalizations {
   /// Message showing recording saved with duration
   ///
   /// In en, this message translates to:
-  /// **'Recording saved ΓÇö {duration}'**
+  /// **'Recording saved — {duration}'**
   String recordingSavedDuration(String duration);
 
   /// Fallback error message
@@ -2368,10 +2368,10 @@ abstract class AppLocalizations {
   /// **'Unable to load audio file. The recording may be missing or corrupted.'**
   String get unableToLoadAudio;
 
-  /// Title for analysis result screen
+  /// Analysis status: in progress
   ///
   /// In en, this message translates to:
-  /// **'Analysis Pending'**
+  /// **'Analyzing...'**
   String get analysisPending;
 
   /// Message about AI analysis coming soon
@@ -2392,7 +2392,7 @@ abstract class AppLocalizations {
   /// **'File Name'**
   String get fileName;
 
-  /// Label for duration
+  /// Label for recording duration
   ///
   /// In en, this message translates to:
   /// **'Duration'**
@@ -2443,7 +2443,7 @@ abstract class AppLocalizations {
   /// Supported file formats and size limit
   ///
   /// In en, this message translates to:
-  /// **'MP3, WAV, M4A or AAC ΓÇö maximum 50 MB'**
+  /// **'MP3, WAV, M4A or AAC — maximum 50 MB'**
   String get audioFileFormats;
 
   /// Button to select a song
@@ -2488,7 +2488,7 @@ abstract class AppLocalizations {
   /// **'An unexpected error occurred.'**
   String get unexpectedError;
 
-  /// Button to retry file selection
+  /// Button to retry loading recordings
   ///
   /// In en, this message translates to:
   /// **'Retry'**
@@ -2607,6 +2607,162 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Could not open settings. Please enable microphone access manually.'**
   String get couldNotOpenSettingsManualInstructions;
+
+  /// Title for the Recording Library screen
+  ///
+  /// In en, this message translates to:
+  /// **'Recording Library'**
+  String get recordingLibrary;
+
+  /// Subtitle on the Recording Library screen
+  ///
+  /// In en, this message translates to:
+  /// **'Your saved practice recordings'**
+  String get yourSavedPracticeRecordings;
+
+  /// Placeholder for the search field
+  ///
+  /// In en, this message translates to:
+  /// **'Search recordings'**
+  String get searchRecordings;
+
+  /// Filter option: show all recordings
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get filterAll;
+
+  /// Filter option: show only favorite recordings
+  ///
+  /// In en, this message translates to:
+  /// **'Favorites'**
+  String get filterFavorites;
+
+  /// Empty state title when no recordings exist
+  ///
+  /// In en, this message translates to:
+  /// **'No recordings yet'**
+  String get noRecordingsYet;
+
+  /// Empty state description when no recordings exist
+  ///
+  /// In en, this message translates to:
+  /// **'Complete a practice session to save your first recording.'**
+  String get completePracticeToSaveFirst;
+
+  /// Error state title when loading recordings fails
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to load recordings'**
+  String get errorLoadingRecordings;
+
+  /// Label for recording date
+  ///
+  /// In en, this message translates to:
+  /// **'Recorded on'**
+  String get recordedOn;
+
+  /// Label for analysis status
+  ///
+  /// In en, this message translates to:
+  /// **'Analysis'**
+  String get analysisStatus;
+
+  /// Analysis status: not analyzed
+  ///
+  /// In en, this message translates to:
+  /// **'Not analyzed'**
+  String get analysisNone;
+
+  /// Analysis status: completed
+  ///
+  /// In en, this message translates to:
+  /// **'Completed'**
+  String get analysisCompleted;
+
+  /// Analysis status: failed
+  ///
+  /// In en, this message translates to:
+  /// **'Failed'**
+  String get analysisFailed;
+
+  /// Analysis score display with placeholder
+  ///
+  /// In en, this message translates to:
+  /// **'Score: {score}'**
+  String analysisScore(String score);
+
+  /// Reference track name display with placeholder
+  ///
+  /// In en, this message translates to:
+  /// **'Reference: {track}'**
+  String referenceTrack(String track);
+
+  /// Menu option: rename recording
+  ///
+  /// In en, this message translates to:
+  /// **'Rename recording'**
+  String get renameRecording;
+
+  /// Menu option: add to favorites
+  ///
+  /// In en, this message translates to:
+  /// **'Add to favorites'**
+  String get addToFavorites;
+
+  /// Menu option: remove from favorites
+  ///
+  /// In en, this message translates to:
+  /// **'Remove from favorites'**
+  String get removeFromFavorites;
+
+  /// Menu option: delete recording
+  ///
+  /// In en, this message translates to:
+  /// **'Delete recording'**
+  String get deleteRecording;
+
+  /// Confirmation dialog title for deleting a recording
+  ///
+  /// In en, this message translates to:
+  /// **'Delete this recording?'**
+  String get deleteConfirmation;
+
+  /// Confirmation dialog message for deleting a recording
+  ///
+  /// In en, this message translates to:
+  /// **'This action cannot be undone. The recording will be permanently deleted.'**
+  String get deleteConfirmationMessage;
+
+  /// Overflow menu option: clear the entire library
+  ///
+  /// In en, this message translates to:
+  /// **'Clear Library'**
+  String get clearLibrary;
+
+  /// Confirmation dialog title for clearing the library
+  ///
+  /// In en, this message translates to:
+  /// **'Clear the entire library?'**
+  String get clearLibraryConfirmation;
+
+  /// Confirmation dialog message for clearing the library
+  ///
+  /// In en, this message translates to:
+  /// **'This will permanently delete ALL recordings. This action cannot be undone.'**
+  String get clearLibraryConfirmationMessage;
+
+  /// Menu option: play recording
+  ///
+  /// In en, this message translates to:
+  /// **'Play recording'**
+  String get playRecording;
+
+  /// Status text when saving operation is in progress
+  ///
+  /// In en, this message translates to:
+  /// **'Saving...'**
+  String get saving;
 }
 
 class _AppLocalizationsDelegate

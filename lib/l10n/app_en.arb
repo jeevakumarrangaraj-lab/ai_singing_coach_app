@@ -21,11 +21,11 @@
   "@english": {
     "description": "Option label for English language"
   },
-  "tamil": "α«ñα««α«┐α«┤α»ì",
+  "tamil": "Tamil",
   "@tamil": {
     "description": "Option label for Tamil language"
   },
-  "hindi": "αñ╣αñ┐αñ¿αÑìαñªαÑÇ",
+  "hindi": "Hindi",
   "@hindi": {
     "description": "Option label for Hindi language"
   },
@@ -299,7 +299,7 @@
   "@granted": {
     "description": "Label for granted permission status"
   },
-  "notGrantedTapToAllow": "Not granted ΓÇö tap to allow",
+  "notGrantedTapToAllow": "Not granted — tap to allow",
   "@notGrantedTapToAllow": {
     "description": "Label for not granted permission status"
   },
@@ -782,7 +782,7 @@
       }
     }
   },
-  "enableNotificationsFirst": "{label} ΓÇô enable notifications first",
+  "enableNotificationsFirst": "{label} – enable notifications first",
   "@enableNotificationsFirst": {
     "description": "Tooltip for disabled toggle when notifications are off",
     "placeholders": {
@@ -871,7 +871,7 @@
   "@tuno": {
     "description": "Brand name shown on home screen"
   },
-  "helloUser": "Hello, {name} ≡ƒæï",
+  "helloUser": "Hello, {name} 👋",
   "@helloUser": {
     "description": "Greeting on home screen with user name",
     "placeholders": {
@@ -933,7 +933,7 @@
   "@yourPersonalAiCoach": {
     "description": "Main heading on welcome screen"
   },
-  "practiceImproveAchieve": "Practice ΓÇó Improve ΓÇó Achieve",
+  "practiceImproveAchieve": "Practice • Improve • Achieve",
   "@practiceImproveAchieve": {
     "description": "Tagline on welcome screen"
   },
@@ -945,7 +945,7 @@
   "@login": {
     "description": "Button text for login"
   },
-  "welcomeBack": "Welcome Back! ≡ƒæï",
+  "welcomeBack": "Welcome Back! 👋",
   "@welcomeBack": {
     "description": "Heading on login screen"
   },
@@ -1529,7 +1529,7 @@
       }
     }
   },
-  "modeComingSoon": "{title} ΓÇö Coming soon",
+  "modeComingSoon": "{title} — Coming soon",
   "@modeComingSoon": {
     "description": "Tooltip for unavailable practice mode",
     "placeholders": {
@@ -1614,7 +1614,7 @@
   "@discardAndGoBack": {
     "description": "Button to discard and go back"
   },
-  "recordingSavedDuration": "Recording saved ΓÇö {duration}",
+  "recordingSavedDuration": "Recording saved — {duration}",
   "@recordingSavedDuration": {
     "description": "Message showing recording saved with duration",
     "placeholders": {
@@ -1715,7 +1715,7 @@
   "@chooseAudioFile": {
     "description": "Title in the file selection card"
   },
-  "audioFileFormats": "MP3, WAV, M4A or AAC ΓÇö maximum 50 MB",
+  "audioFileFormats": "MP3, WAV, M4A or AAC — maximum 50 MB",
   "@audioFileFormats": {
     "description": "Supported file formats and size limit"
   },
@@ -1826,5 +1826,143 @@
   "couldNotOpenSettingsManualInstructions": "Could not open settings. Please enable microphone access manually.",
   "@couldNotOpenSettingsManualInstructions": {
     "description": "Error message when settings cannot be opened automatically"
+  },
+  "recordingLibrary": "Recording Library",
+  "@recordingLibrary": {
+    "description": "Title for the Recording Library screen"
+  },
+  "yourSavedPracticeRecordings": "Your saved practice recordings",
+  "@yourSavedPracticeRecordings": {
+    "description": "Subtitle on the Recording Library screen"
+  },
+  "searchRecordings": "Search recordings",
+  "@searchRecordings": {
+    "description": "Placeholder for the search field"
+  },
+  "filterAll": "All",
+  "@filterAll": {
+    "description": "Filter option: show all recordings"
+  },
+  "filterFavorites": "Favorites",
+  "@filterFavorites": {
+    "description": "Filter option: show only favorite recordings"
+  },
+  "noRecordingsYet": "No recordings yet",
+  "@noRecordingsYet": {
+    "description": "Empty state title when no recordings exist"
+  },
+  "completePracticeToSaveFirst": "Complete a practice session to save your first recording.",
+  "@completePracticeToSaveFirst": {
+    "description": "Empty state description when no recordings exist"
+  },
+  "startPractice": "Start Practice",
+  "@startPractice": {
+    "description": "Button to navigate to practice modes from empty state"
+  },
+  "errorLoadingRecordings": "Failed to load recordings",
+  "@errorLoadingRecordings": {
+    "description": "Error state title when loading recordings fails"
+  },
+  "retry": "Retry",
+  "@retry": {
+    "description": "Button to retry loading recordings"
+  },
+  "recordedOn": "Recorded on",
+  "@recordedOn": {
+    "description": "Label for recording date"
+  },
+  "duration": "Duration",
+  "@duration": {
+    "description": "Label for recording duration"
+  },
+  "analysisStatus": "Analysis",
+  "@analysisStatus": {
+    "description": "Label for analysis status"
+  },
+  "analysisNone": "Not analyzed",
+  "@analysisNone": {
+    "description": "Analysis status: not analyzed"
+  },
+  "analysisPending": "Analyzing...",
+  "@analysisPending": {
+    "description": "Analysis status: in progress"
+  },
+  "analysisCompleted": "Completed",
+  "@analysisCompleted": {
+    "description": "Analysis status: completed"
+  },
+  "analysisFailed": "Failed",
+  "@analysisFailed": {
+    "description": "Analysis status: failed"
+  },
+  "analysisScore": "Score: {score}",
+  "@analysisScore": {
+    "description": "Analysis score display with placeholder",
+    "placeholders": {
+      "score": {
+        "type": "String"
+      }
+    }
+  },
+  "referenceTrack": "Reference: {track}",
+  "@referenceTrack": {
+    "description": "Reference track name display with placeholder",
+    "placeholders": {
+      "track": {
+        "type": "String"
+      }
+    }
+  },
+  "renameRecording": "Rename recording",
+  "@renameRecording": {
+    "description": "Menu option: rename recording"
+  },
+  "addToFavorites": "Add to favorites",
+  "@addToFavorites": {
+    "description": "Menu option: add to favorites"
+  },
+  "removeFromFavorites": "Remove from favorites",
+  "@removeFromFavorites": {
+    "description": "Menu option: remove from favorites"
+  },
+  "deleteRecording": "Delete recording",
+  "@deleteRecording": {
+    "description": "Menu option: delete recording"
+  },
+  "deleteConfirmation": "Delete this recording?",
+  "@deleteConfirmation": {
+    "description": "Confirmation dialog title for deleting a recording"
+  },
+  "deleteConfirmationMessage": "This action cannot be undone. The recording will be permanently deleted.",
+  "@deleteConfirmationMessage": {
+    "description": "Confirmation dialog message for deleting a recording"
+  },
+  "cancel": "Cancel",
+  "@cancel": {
+    "description": "Button to cancel an action"
+  },
+  "delete": "Delete",
+  "@delete": {
+    "description": "Button to confirm deletion"
+  },
+  "clearLibrary": "Clear Library",
+  "@clearLibrary": {
+    "description": "Overflow menu option: clear the entire library"
+  },
+  "clearLibraryConfirmation": "Clear the entire library?",
+  "@clearLibraryConfirmation": {
+    "description": "Confirmation dialog title for clearing the library"
+  },
+  "clearLibraryConfirmationMessage": "This will permanently delete ALL recordings. This action cannot be undone.",
+  "@clearLibraryConfirmationMessage": {
+    "description": "Confirmation dialog message for clearing the library"
+  },
+  "playRecording": "Play recording",
+  "@playRecording": {
+    "description": "Menu option: play recording"
+  },
+  "saving": "Saving...",
+  "@saving": {
+    "description": "Status text when saving operation is in progress"
   }
 }

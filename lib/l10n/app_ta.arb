@@ -1826,5 +1826,143 @@
   "couldNotOpenSettingsManualInstructions": "அமைப்புகளைத் திற முடியவில்லை. மைக்ரோஃபோன் அணுகலை கைமுறையாக இயக்கவும்.",
   "@couldNotOpenSettingsManualInstructions": {
     "description": "Error message when settings cannot be opened automatically"
+  },
+  "recordingLibrary": "பதிவு நூலகம்",
+  "@recordingLibrary": {
+    "description": "Title for the Recording Library screen"
+  },
+  "yourSavedPracticeRecordings": "உங்கள் சேமிக்கப்பட்ட பயிற்சி பதிவுகள்",
+  "@yourSavedPracticeRecordings": {
+    "description": "Subtitle on the Recording Library screen"
+  },
+  "searchRecordings": "பதிவுகளைத் தேடவும்",
+  "@searchRecordings": {
+    "description": "Placeholder for the search field"
+  },
+  "filterAll": "அனைத்து",
+  "@filterAll": {
+    "description": "Filter option: show all recordings"
+  },
+  "filterFavorites": "பிடித்தவை",
+  "@filterFavorites": {
+    "description": "Filter option: show only favorite recordings"
+  },
+  "noRecordingsYet": "இன்னும் பதிவுகள் இல்லை",
+  "@noRecordingsYet": {
+    "description": "Empty state title when no recordings exist"
+  },
+  "completePracticeToSaveFirst": "உங்கள் முதல் பதிவை சேமிப்பதற்காக ஒரு பயிற்சி அமர்வை முடிக்கவும்.",
+  "@completePracticeToSaveFirst": {
+    "description": "Empty state description when no recordings exist"
+  },
+  "startPractice": "பயிற்சியைத் தொடங்கு",
+  "@startPractice": {
+    "description": "Button to navigate to practice modes from empty state"
+  },
+  "errorLoadingRecordings": "பதிவுகள் ஏற்ற முடியவில்லை",
+  "@errorLoadingRecordings": {
+    "description": "Error state title when loading recordings fails"
+  },
+  "retry": "மீண்டும் முயற்சிக்கவும்",
+  "@retry": {
+    "description": "Button to retry loading recordings"
+  },
+  "recordedOn": "பதிவு தேதி",
+  "@recordedOn": {
+    "description": "Label for recording date"
+  },
+  "duration": "நீளம்",
+  "@duration": {
+    "description": "Label for recording duration"
+  },
+  "analysisStatus": "பகுப்பாய்வு",
+  "@analysisStatus": {
+    "description": "Label for analysis status"
+  },
+  "analysisNone": "பகுப்பாய்வு செய்யப்படவில்லை",
+  "@analysisNone": {
+    "description": "Analysis status: not analyzed"
+  },
+  "analysisPending": "பகுப்பாய்வு நடந்து கொண்டிருக்கிறது...",
+  "@analysisPending": {
+    "description": "Analysis status: in progress"
+  },
+  "analysisCompleted": "முடிக்கப்பட்டது",
+  "@analysisCompleted": {
+    "description": "Analysis status: completed"
+  },
+  "analysisFailed": "தேடியாமல்",
+  "@analysisFailed": {
+    "description": "Analysis status: failed"
+  },
+  "analysisScore": "மதிப்பெண்: {score}",
+  "@analysisScore": {
+    "description": "Analysis score display with placeholder",
+    "placeholders": {
+      "score": {
+        "type": "String"
+      }
+    }
+  },
+  "referenceTrack": "அடிப்படை இசை: {track}",
+  "@referenceTrack": {
+    "description": "Reference track name display with placeholder",
+    "placeholders": {
+      "track": {
+        "type": "String"
+      }
+    }
+  },
+  "renameRecording": "பதிவை மறுபெயரிடு",
+  "@renameRecording": {
+    "description": "Menu option: rename recording"
+  },
+  "addToFavorites": "பிடித்தவைக்குச் சேர்",
+  "@addToFavorites": {
+    "description": "Menu option: add to favorites"
+  },
+  "removeFromFavorites": "பிடித்தவைகளிலிருந்து அகற்று",
+  "@removeFromFavorites": {
+    "description": "Menu option: remove from favorites"
+  },
+  "deleteRecording": "பதிவை நீக்கு",
+  "@deleteRecording": {
+    "description": "Menu option: delete recording"
+  },
+  "deleteConfirmation": "இந்த பதிவை நீக்குவது உறுதியாகுமா?",
+  "@deleteConfirmation": {
+    "description": "Confirmation dialog title for deleting a recording"
+  },
+  "deleteConfirmationMessage": "இந்த செயல் முன் நிலைக்கு வந்து விடாது. பதிவு நிரந்தரமாக நீக்கப்படும்.",
+  "@deleteConfirmationMessage": {
+    "description": "Confirmation dialog message for deleting a recording"
+  },
+  "cancel": "ரத்துசெய்",
+  "@cancel": {
+    "description": "Button to cancel an action"
+  },
+  "delete": "நீக்கு",
+  "@delete": {
+    "description": "Button to confirm deletion"
+  },
+  "clearLibrary": "நூலகத்தை அழி",
+  "@clearLibrary": {
+    "description": "Overflow menu option: clear the entire library"
+  },
+  "clearLibraryConfirmation": "நூலகத்தை முழுமையாக அழிய அளிப்ப 단순한가?",
+  "@clearLibraryConfirmation": {
+    "description": "Confirmation dialog title for clearing the library"
+  },
+  "clearLibraryConfirmationMessage": "இது அனைத்து பதிவுகளையும் நிரந்தரமாக நீக்கும். இந்த செயல் முன் நிலைக்கு வந்து விடாது.",
+  "@clearLibraryConfirmationMessage": {
+    "description": "Confirmation dialog message for clearing the library"
+  },
+  "playRecording": "பதிவை இயக்கு",
+  "@playRecording": {
+    "description": "Menu option: play recording"
+  },
+  "saving": "சேமித்து இருக்கிறது...",
+  "@saving": {
+    "description": "Status text when saving operation is in progress"
   }
 }

@@ -24,10 +24,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get english => 'English';
 
   @override
-  String get tamil => 'α«ñα««α«┐α«┤α»ì';
+  String get tamil => 'Tamil';
 
   @override
-  String get hindi => 'αñ╣αñ┐αñ¿αÑìαñªαÑÇ';
+  String get hindi => 'Hindi';
 
   @override
   String get back => 'Back';
@@ -230,7 +230,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get granted => 'Granted';
 
   @override
-  String get notGrantedTapToAllow => 'Not granted ΓÇö tap to allow';
+  String get notGrantedTapToAllow => 'Not granted — tap to allow';
 
   @override
   String get couldNotCheckPermission => 'Could not check microphone permission';
@@ -606,7 +606,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String enableNotificationsFirst(String label) {
-    return '$label ΓÇô enable notifications first';
+    return '$label – enable notifications first';
   }
 
   @override
@@ -665,7 +665,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String helloUser(String name) {
-    return 'Hello, $name ≡ƒæï';
+    return 'Hello, $name 👋';
   }
 
   @override
@@ -708,7 +708,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get yourPersonalAiCoach => 'Your Personal\nAI Singing Coach';
 
   @override
-  String get practiceImproveAchieve => 'Practice ΓÇó Improve ΓÇó Achieve';
+  String get practiceImproveAchieve => 'Practice • Improve • Achieve';
 
   @override
   String get getStarted => 'Get Started';
@@ -717,7 +717,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get login => 'Login';
 
   @override
-  String get welcomeBack => 'Welcome Back! ≡ƒæï';
+  String get welcomeBack => 'Welcome Back! 👋';
 
   @override
   String get loginToContinue => 'Login to continue';
@@ -1154,7 +1154,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String modeComingSoon(String title) {
-    return '$title ΓÇö Coming soon';
+    return '$title — Coming soon';
   }
 
   @override
@@ -1221,7 +1221,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String recordingSavedDuration(String duration) {
-    return 'Recording saved ΓÇö $duration';
+    return 'Recording saved — $duration';
   }
 
   @override
@@ -1260,7 +1260,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'Unable to load audio file. The recording may be missing or corrupted.';
 
   @override
-  String get analysisPending => 'Analysis Pending';
+  String get analysisPending => 'Analyzing...';
 
   @override
   String get aiAnalysisComingSoon =>
@@ -1298,7 +1298,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get chooseAudioFile => 'Choose an audio file';
 
   @override
-  String get audioFileFormats => 'MP3, WAV, M4A or AAC ΓÇö maximum 50 MB';
+  String get audioFileFormats => 'MP3, WAV, M4A or AAC — maximum 50 MB';
 
   @override
   String get selectSong => 'Select Song';
@@ -1393,4 +1393,89 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get couldNotOpenSettingsManualInstructions =>
       'Could not open settings. Please enable microphone access manually.';
+
+  @override
+  String get recordingLibrary => 'Recording Library';
+
+  @override
+  String get yourSavedPracticeRecordings => 'Your saved practice recordings';
+
+  @override
+  String get searchRecordings => 'Search recordings';
+
+  @override
+  String get filterAll => 'All';
+
+  @override
+  String get filterFavorites => 'Favorites';
+
+  @override
+  String get noRecordingsYet => 'No recordings yet';
+
+  @override
+  String get completePracticeToSaveFirst =>
+      'Complete a practice session to save your first recording.';
+
+  @override
+  String get errorLoadingRecordings => 'Failed to load recordings';
+
+  @override
+  String get recordedOn => 'Recorded on';
+
+  @override
+  String get analysisStatus => 'Analysis';
+
+  @override
+  String get analysisNone => 'Not analyzed';
+
+  @override
+  String get analysisCompleted => 'Completed';
+
+  @override
+  String get analysisFailed => 'Failed';
+
+  @override
+  String analysisScore(String score) {
+    return 'Score: $score';
+  }
+
+  @override
+  String referenceTrack(String track) {
+    return 'Reference: $track';
+  }
+
+  @override
+  String get renameRecording => 'Rename recording';
+
+  @override
+  String get addToFavorites => 'Add to favorites';
+
+  @override
+  String get removeFromFavorites => 'Remove from favorites';
+
+  @override
+  String get deleteRecording => 'Delete recording';
+
+  @override
+  String get deleteConfirmation => 'Delete this recording?';
+
+  @override
+  String get deleteConfirmationMessage =>
+      'This action cannot be undone. The recording will be permanently deleted.';
+
+  @override
+  String get clearLibrary => 'Clear Library';
+
+  @override
+  String get clearLibraryConfirmation => 'Clear the entire library?';
+
+  @override
+  String get clearLibraryConfirmationMessage =>
+      'This will permanently delete ALL recordings. This action cannot be undone.';
+
+  @override
+  String get playRecording => 'Play recording';
+
+  @override
+  String get saving => 'Saving...';
 }

@@ -1,95 +1,95 @@
 {
   "@@locale": "hi",
   "@@last_modified": "2025-03-27T00:00:00.000000",
-  "languages": "αñ¡αñ╛αñ╖αñ╛αñÅαñü",
+  "languages": "भाषाएँ",
   "@languages": {
     "description": "Title for the Languages screen"
   },
-  "chooseAppLanguage": "Tuno αñ«αÑçαñé αñëαñ¬αñ»αÑïαñù αñòαÑÇ αñ£αñ╛αñ¿αÑç αñ╡αñ╛αñ▓αÑÇ αñ¡αñ╛αñ╖αñ╛ αñÜαÑüαñ¿αÑçαñé",
+  "chooseAppLanguage": "Tuno में उपयोग की जाने वाली भाषा चुनें",
   "@chooseAppLanguage": {
     "description": "Subtitle on the Languages screen"
   },
-  "systemDefault": "αñ╕αñ┐αñ╕αÑìαñƒαñ« αñíαñ┐αñ½αñ╝αÑëαñ▓αÑìαñƒ",
+  "systemDefault": "सिस्टम डिफ़ॉल्ट",
   "@systemDefault": {
     "description": "Option label for using the system default language"
   },
-  "useDeviceLanguage": "αñàαñ¬αñ¿αÑç αñíαñ┐αñ╡αñ╛αñçαñ╕ αñòαÑÇ αñ¡αñ╛αñ╖αñ╛ αñòαñ╛ αñëαñ¬αñ»αÑïαñù αñòαñ░αÑçαñé",
+  "useDeviceLanguage": "अपने डिवाइस की भाषा का उपयोग करें",
   "@useDeviceLanguage": {
     "description": "Supporting text for the system default option"
   },
-  "english": "αñàαñéαñùαÑìαñ░αÑçαñ£αñ╝αÑÇ",
+  "english": "अंग्रेज़ी",
   "@english": {
     "description": "Option label for English language"
   },
-  "tamil": "αññαñ«αñ┐αñ▓",
+  "tamil": "तमिल",
   "@tamil": {
     "description": "Option label for Tamil language"
   },
-  "hindi": "αñ╣αñ┐αñ¿αÑìαñªαÑÇ",
+  "hindi": "हिन्दी",
   "@hindi": {
     "description": "Option label for Hindi language"
   },
-  "back": "αñ╡αñ╛αñ¬αñ╕",
+  "back": "वापस",
   "@back": {
     "description": "Accessibility label for the back button"
   },
-  "languageChanged": "αñ¡αñ╛αñ╖αñ╛ αñ¼αñªαñ▓ αñªαÑÇ αñùαñê",
+  "languageChanged": "भाषा बदल दी गई",
   "@languageChanged": {
     "description": "Snackbar message shown after changing the language"
   },
-  "settings": "αñ╕αÑçαñƒαñ┐αñéαñùαÑìαñ╕",
+  "settings": "सेटिंग्स",
   "@settings": {
     "description": "Title for the Settings screen"
   },
-  "home": "αñ╣αÑïαñ«",
+  "home": "होम",
   "@home": {
     "description": "Bottom navigation label for Home"
   },
-  "practice": "αñàαñ¡αÑìαñ»αñ╛αñ╕",
+  "practice": "अभ्यास",
   "@practice": {
     "description": "Bottom navigation label for Practice"
   },
-  "record": "αñ░αñ┐αñòαÑëαñ░αÑìαñí",
+  "record": "रिकॉर्ड",
   "@record": {
     "description": "Bottom navigation label for Record"
   },
-  "progress": "αñ¬αÑìαñ░αñùαññαñ┐",
+  "progress": "प्रगति",
   "@progress": {
     "description": "Bottom navigation label for Progress"
   },
-  "profile": "αñ¬αÑìαñ░αÑïαñ½αñ╝αñ╛αñçαñ▓",
+  "profile": "प्रोफ़ाइल",
   "@profile": {
     "description": "Bottom navigation label for Profile"
   },
-  "account": "αñûαñ╛αññαñ╛",
+  "account": "खाता",
   "@account": {
     "description": "Settings row label for Account"
   },
-  "practicePreferences": "αñàαñ¡αÑìαñ»αñ╛αñ╕ αñ¬αÑìαñ░αñ╛αñÑαñ«αñ┐αñòαññαñ╛αñÅαñü",
+  "practicePreferences": "अभ्यास प्राथमिकताएँ",
   "@practicePreferences": {
     "description": "Settings row label for Practice Preferences"
   },
-  "audioAndRecording": "αñæαñíαñ┐αñ»αÑï αñöαñ░ αñ░αñ┐αñòαÑëαñ░αÑìαñíαñ┐αñéαñù",
+  "audioAndRecording": "ऑडियो और रिकॉर्डिंग",
   "@audioAndRecording": {
     "description": "Settings row label for Audio and Recording"
   },
-  "notificationPreferences": "αñ╕αÑéαñÜαñ¿αñ╛ αñ¬αÑìαñ░αñ╛αñÑαñ«αñ┐αñòαññαñ╛αñÅαñü",
+  "notificationPreferences": "सूचना प्राथमिकताएँ",
   "@notificationPreferences": {
     "description": "Settings row and screen title for Notification Preferences"
   },
-  "privacyAndSecurity": "αñùαÑïαñ¬αñ¿αÑÇαñ»αññαñ╛ αñöαñ░ αñ╕αÑüαñ░αñòαÑìαñ╖αñ╛",
+  "privacyAndSecurity": "गोपनीयता और सुरक्षा",
   "@privacyAndSecurity": {
     "description": "Settings row and screen title for Privacy and Security"
   },
-  "helpAndSupport": "αñ╕αñ╣αñ╛αñ»αññαñ╛ αñöαñ░ αñ╕αñ«αñ░αÑìαñÑαñ¿",
+  "helpAndSupport": "सहायता और समर्थन",
   "@helpAndSupport": {
     "description": "Settings row label for Help and Support"
   },
-  "aboutTuno": "Tuno αñòαÑç αñ¼αñ╛αñ░αÑç αñ«αÑçαñé",
+  "aboutTuno": "Tuno के बारे में",
   "@aboutTuno": {
     "description": "Settings row label for About Tuno"
   },
-  "featureComingSoon": "{label} αñ£αñ▓αÑìαñª αñ╣αÑÇ αñëαñ¬αñ▓αñ¼αÑìαñº αñ╣αÑïαñùαñ╛αÑñ",
+  "featureComingSoon": "{label} जल्द ही उपलब्ध होगा।",
   "@featureComingSoon": {
     "description": "Snackbar for features not yet implemented",
     "placeholders": {
@@ -98,127 +98,127 @@
       }
     }
   },
-  "appearance": "αñªαñ┐αñûαñ╛αñ╡αñƒ",
+  "appearance": "दिखावट",
   "@appearance": {
     "description": "Title for the Appearance bottom sheet"
   },
-  "light": "αñ▓αñ╛αñçαñƒ",
+  "light": "लाइट",
   "@light": {
     "description": "Theme option label for Light mode"
   },
-  "dark": "αñíαñ╛αñ░αÑìαñò",
+  "dark": "डार्क",
   "@dark": {
     "description": "Theme option label for Dark mode"
   },
-  "logout": "αñ▓αÑëαñù αñåαñëαñƒ",
+  "logout": "लॉग आउट",
   "@logout": {
     "description": "Button text for Logout"
   },
-  "logoutConfirmTitle": "αñ▓αÑëαñù αñåαñëαñƒ",
+  "logoutConfirmTitle": "लॉग आउट",
   "@logoutConfirmTitle": {
     "description": "Title for the logout confirmation dialog"
   },
-  "logoutConfirmContent": "αñòαÑìαñ»αñ╛ αñåαñ¬ αñ╡αñ╛αñòαñê αñ▓αÑëαñù αñåαñëαñƒ αñòαñ░αñ¿αñ╛ αñÜαñ╛αñ╣αññαÑç αñ╣αÑêαñé?",
+  "logoutConfirmContent": "क्या आप वाकई लॉग आउट करना चाहते हैं?",
   "@logoutConfirmContent": {
     "description": "Content for the logout confirmation dialog"
   },
-  "cancel": "αñ░αñªαÑìαñª αñòαñ░αÑçαñé",
+  "cancel": "रद्द करें",
   "@cancel": {
     "description": "Button to cancel"
   },
-  "preferences": "αñ¬αÑìαñ░αñ╛αñÑαñ«αñ┐αñòαññαñ╛αñÅαñü",
+  "preferences": "प्राथमिकताएँ",
   "@preferences": {
     "description": "Title for the Preferences screen"
   },
-  "backToSettings": "αñ╕αÑçαñƒαñ┐αñéαñùαÑìαñ╕ αñ¬αñ░ αñ╡αñ╛αñ¬αñ╕ αñ£αñ╛αñÅαñü",
+  "backToSettings": "सेटिंग्स पर वापस जाएँ",
   "@backToSettings": {
     "description": "Semantic label for back button to settings"
   },
-  "coachingFeedback": "αñòαÑïαñÜαñ┐αñéαñù αñ½αÑÇαñíαñ¼αÑêαñò",
+  "coachingFeedback": "कोचिंग फीडबैक",
   "@coachingFeedback": {
     "description": "Section title for Coaching Feedback"
   },
-  "recordingPreferences": "αñ░αñ┐αñòαÑëαñ░αÑìαñíαñ┐αñéαñù αñ¬αÑìαñ░αñ╛αñÑαñ«αñ┐αñòαññαñ╛αñÅαñü",
+  "recordingPreferences": "रिकॉर्डिंग प्राथमिकताएँ",
   "@recordingPreferences": {
     "description": "Section title for Recording Preferences"
   },
-  "generalBehaviour": "αñ╕αñ╛αñ«αñ╛αñ¿αÑìαñ» αñ╡αÑìαñ»αñ╡αñ╣αñ╛αñ░",
+  "generalBehaviour": "सामान्य व्यवहार",
   "@generalBehaviour": {
     "description": "Section title for General Behaviour"
   },
-  "countInBeforeRecording": "αñ░αñ┐αñòαÑëαñ░αÑìαñíαñ┐αñéαñù αñ╕αÑç αñ¬αñ╣αñ▓αÑç αñòαñ╛αñëαñéαñƒ-αñçαñ¿",
+  "countInBeforeRecording": "रिकॉर्डिंग से पहले काउंट-इन",
   "@countInBeforeRecording": {
     "description": "Toggle label for count-in before recording"
   },
-  "autoSaveCompletedRecordings": "αñ¬αÑéαñ░αÑìαñú αñ░αñ┐αñòαÑëαñ░αÑìαñíαñ┐αñéαñù αñ╕αÑìαñ╡αñÜαñ╛αñ▓αñ┐αññ αñ░αÑéαñ¬ αñ╕αÑç αñ╕αñ╣αÑçαñ£αÑçαñé",
+  "autoSaveCompletedRecordings": "पूर्ण रिकॉर्डिंग स्वचालित रूप से सहेजें",
   "@autoSaveCompletedRecordings": {
     "description": "Toggle label for auto-save completed recordings"
   },
-  "showHeadphoneRecommendation": "αñ╣αÑçαñíαñ½αñ╝αÑïαñ¿ αñàαñ¿αÑüαñ╢αñéαñ╕αñ╛ αñªαñ┐αñûαñ╛αñÅαñü",
+  "showHeadphoneRecommendation": "हेडफ़ोन अनुशंसा दिखाएँ",
   "@showHeadphoneRecommendation": {
     "description": "Toggle label for headphone recommendation"
   },
-  "confirmBeforeDeleting": "αñ╣αñƒαñ╛αñ¿αÑç αñ╕αÑç αñ¬αñ╣αñ▓αÑç αñ¬αÑüαñ╖αÑìαñƒαñ┐ αñòαñ░αÑçαñé",
+  "confirmBeforeDeleting": "हटाने से पहले पुष्टि करें",
   "@confirmBeforeDeleting": {
     "description": "Toggle label for confirm before deleting"
   },
-  "reduceAnimations": "αñÅαñ¿αñ┐αñ«αÑçαñ╢αñ¿ αñòαñ« αñòαñ░αÑçαñé",
+  "reduceAnimations": "एनिमेशन कम करें",
   "@reduceAnimations": {
     "description": "Toggle label for reduce animations"
   },
-  "countInEnabled": "αñòαñ╛αñëαñéαñƒ-αñçαñ¿ αñ╕αñòαÑìαñ╖αñ«",
+  "countInEnabled": "काउंट-इन सक्षम",
   "@countInEnabled": {
     "description": "Snackbar message when count-in is enabled"
   },
-  "countInDisabled": "αñòαñ╛αñëαñéαñƒ-αñçαñ¿ αñàαñòαÑìαñ╖αñ«",
+  "countInDisabled": "काउंट-इन अक्षम",
   "@countInDisabled": {
     "description": "Snackbar message when count-in is disabled"
   },
-  "autoSaveEnabled": "αñæαñƒαÑï-αñ╕αÑçαñ╡ αñ╕αñòαÑìαñ╖αñ«",
+  "autoSaveEnabled": "ऑटो-सेव सक्षम",
   "@autoSaveEnabled": {
     "description": "Snackbar message when auto-save is enabled"
   },
-  "autoSaveDisabled": "αñæαñƒαÑï-αñ╕αÑçαñ╡ αñàαñòαÑìαñ╖αñ«",
+  "autoSaveDisabled": "ऑटो-सेव अक्षम",
   "@autoSaveDisabled": {
     "description": "Snackbar message when auto-save is disabled"
   },
-  "headphoneReminderEnabled": "αñ╣αÑçαñíαñ½αñ╝αÑïαñ¿ αñàαñ¿αÑüαñ╕αÑìαñ«αñ╛αñ░αñò αñ╕αñòαÑìαñ╖αñ«",
+  "headphoneReminderEnabled": "हेडफ़ोन अनुस्मारक सक्षम",
   "@headphoneReminderEnabled": {
     "description": "Snackbar message when headphone reminder is enabled"
   },
-  "headphoneReminderDisabled": "αñ╣αÑçαñíαñ½αñ╝αÑïαñ¿ αñàαñ¿αÑüαñ╕αÑìαñ«αñ╛αñ░αñò αñàαñòαÑìαñ╖αñ«",
+  "headphoneReminderDisabled": "हेडफ़ोन अनुस्मारक अक्षम",
   "@headphoneReminderDisabled": {
     "description": "Snackbar message when headphone reminder is disabled"
   },
-  "deleteConfirmationEnabled": "αñ╣αñƒαñ╛αñ¿αÑç αñòαÑÇ αñ¬αÑüαñ╖αÑìαñƒαñ┐ αñ╕αñòαÑìαñ╖αñ«",
+  "deleteConfirmationEnabled": "हटाने की पुष्टि सक्षम",
   "@deleteConfirmationEnabled": {
     "description": "Snackbar message when delete confirmation is enabled"
   },
-  "deleteConfirmationDisabled": "αñ╣αñƒαñ╛αñ¿αÑç αñòαÑÇ αñ¬αÑüαñ╖αÑìαñƒαñ┐ αñàαñòαÑìαñ╖αñ«",
+  "deleteConfirmationDisabled": "हटाने की पुष्टि अक्षम",
   "@deleteConfirmationDisabled": {
     "description": "Snackbar message when delete confirmation is disabled"
   },
-  "reducedAnimations": "αñÅαñ¿αñ┐αñ«αÑçαñ╢αñ¿ αñòαñ« αñòαñ┐αñÅ αñùαñÅ",
+  "reducedAnimations": "एनिमेशन कम किए गए",
   "@reducedAnimations": {
     "description": "Snackbar message when reduce animations is enabled"
   },
-  "animationsRestored": "αñÅαñ¿αñ┐αñ«αÑçαñ╢αñ¿ αñ¼αñ╣αñ╛αñ▓ αñòαñ┐αñÅ αñùαñÅ",
+  "animationsRestored": "एनिमेशन बहाल किए गए",
   "@animationsRestored": {
     "description": "Snackbar message when reduce animations is disabled"
   },
-  "defaultPracticeMode": "αñíαñ┐αñ½αñ╝αÑëαñ▓αÑìαñƒ αñàαñ¡αÑìαñ»αñ╛αñ╕ αñ«αÑïαñí",
+  "defaultPracticeMode": "डिफ़ॉल्ट अभ्यास मोड",
   "@defaultPracticeMode": {
     "description": "Label for the default practice mode selector"
   },
-  "simple": "αñ╕αñ░αñ▓",
+  "simple": "सरल",
   "@simple": {
     "description": "Feedback detail option: simple"
   },
-  "detailed": "αñ╡αñ┐αñ╕αÑìαññαÑâαññ",
+  "detailed": "विस्तृत",
   "@detailed": {
     "description": "Feedback detail option: detailed"
   },
-  "defaultModeLabel": "αñíαñ┐αñ½αñ╝αÑëαñ▓αÑìαñƒ αñ«αÑïαñí: {mode}",
+  "defaultModeLabel": "डिफ़ॉल्ट मोड: {mode}",
   "@defaultModeLabel": {
     "description": "Snackbar when default practice mode changes",
     "placeholders": {
@@ -227,127 +227,127 @@
       }
     }
   },
-  "audioAndVideo": "αñæαñíαñ┐αñ»αÑï αñöαñ░ αñ╡αÑÇαñíαñ┐αñ»αÑï",
+  "audioAndVideo": "ऑडियो और वीडियो",
   "@audioAndVideo": {
     "description": "Title for the Audio and Video settings screen"
   },
-  "defaultRecordingType": "αñíαñ┐αñ½αñ╝αÑëαñ▓αÑìαñƒ αñ░αñ┐αñòαÑëαñ░αÑìαñíαñ┐αñéαñù αñ¬αÑìαñ░αñòαñ╛αñ░",
+  "defaultRecordingType": "डिफ़ॉल्ट रिकॉर्डिंग प्रकार",
   "@defaultRecordingType": {
     "description": "Section title for default recording type"
   },
-  "audioQuality": "αñæαñíαñ┐αñ»αÑï αñùαÑüαñúαñ╡αññαÑìαññαñ╛",
+  "audioQuality": "ऑडियो गुणवत्ता",
   "@audioQuality": {
     "description": "Section title for audio quality"
   },
-  "recordingBehaviour": "αñ░αñ┐αñòαÑëαñ░αÑìαñíαñ┐αñéαñù αñ╡αÑìαñ»αñ╡αñ╣αñ╛αñ░",
+  "recordingBehaviour": "रिकॉर्डिंग व्यवहार",
   "@recordingBehaviour": {
     "description": "Section title for recording behaviour"
   },
-  "microphoneAccess": "αñ«αñ╛αñçαñòαÑìαñ░αÑïαñ½αñ╝αÑïαñ¿ αñ¬αñ╣αÑüαñüαñÜ",
+  "microphoneAccess": "माइक्रोफ़ोन पहुँच",
   "@microphoneAccess": {
     "description": "Section title for microphone access"
   },
-  "noiseReduction": "αñ╢αÑïαñ░ αñ«αÑçαñé αñòαñ«αÑÇ",
+  "noiseReduction": "शोर में कमी",
   "@noiseReduction": {
     "description": "Toggle label for noise reduction"
   },
-  "countdownBeforeRecording": "αñ░αñ┐αñòαÑëαñ░αÑìαñíαñ┐αñéαñù αñ╕αÑç αñ¬αñ╣αñ▓αÑç αñòαñ╛αñëαñéαñƒαñíαñ╛αñëαñ¿",
+  "countdownBeforeRecording": "रिकॉर्डिंग से पहले काउंटडाउन",
   "@countdownBeforeRecording": {
     "description": "Toggle label for countdown before recording"
   },
-  "autoPlayAfterCapture": "αñòαÑêαñ¬αÑìαñÜαñ░ αñòαÑç αñ¼αñ╛αñª αñæαñƒαÑï-αñ¬αÑìαñ▓αÑç",
+  "autoPlayAfterCapture": "कैप्चर के बाद ऑटो-प्ले",
   "@autoPlayAfterCapture": {
     "description": "Toggle label for auto-play after capture"
   },
-  "showHeadphonesReminder": "αñ╣αÑçαñíαñ½αñ╝αÑïαñ¿ αñàαñ¿αÑüαñ╕αÑìαñ«αñ╛αñ░αñò αñªαñ┐αñûαñ╛αñÅαñü",
+  "showHeadphonesReminder": "हेडफ़ोन अनुस्मारक दिखाएँ",
   "@showHeadphonesReminder": {
     "description": "Toggle label for headphones reminder"
   },
-  "noiseReductionEnabled": "αñ╢αÑïαñ░ αñ«αÑçαñé αñòαñ«αÑÇ αñ╕αñòαÑìαñ╖αñ«",
+  "noiseReductionEnabled": "शोर में कमी सक्षम",
   "@noiseReductionEnabled": {
     "description": "Snackbar message when noise reduction is enabled"
   },
-  "noiseReductionDisabled": "αñ╢αÑïαñ░ αñ«αÑçαñé αñòαñ«αÑÇ αñàαñòαÑìαñ╖αñ«",
+  "noiseReductionDisabled": "शोर में कमी अक्षम",
   "@noiseReductionDisabled": {
     "description": "Snackbar message when noise reduction is disabled"
   },
-  "countdownEnabled": "αñòαñ╛αñëαñéαñƒαñíαñ╛αñëαñ¿ αñ╕αñòαÑìαñ╖αñ«",
+  "countdownEnabled": "काउंटडाउन सक्षम",
   "@countdownEnabled": {
     "description": "Snackbar message when countdown is enabled"
   },
-  "countdownDisabled": "αñòαñ╛αñëαñéαñƒαñíαñ╛αñëαñ¿ αñàαñòαÑìαñ╖αñ«",
+  "countdownDisabled": "काउंटडाउन अक्षम",
   "@countdownDisabled": {
     "description": "Snackbar message when countdown is disabled"
   },
-  "autoPlayEnabled": "αñæαñƒαÑï-αñ¬αÑìαñ▓αÑç αñ╕αñòαÑìαñ╖αñ«",
+  "autoPlayEnabled": "ऑटो-प्ले सक्षम",
   "@autoPlayEnabled": {
     "description": "Snackbar message when auto-play is enabled"
   },
-  "autoPlayDisabled": "αñæαñƒαÑï-αñ¬αÑìαñ▓αÑç αñàαñòαÑìαñ╖αñ«",
+  "autoPlayDisabled": "ऑटो-प्ले अक्षम",
   "@autoPlayDisabled": {
     "description": "Snackbar message when auto-play is disabled"
   },
-  "headphonesReminderEnabled": "αñ╣αÑçαñíαñ½αñ╝αÑïαñ¿ αñàαñ¿αÑüαñ╕αÑìαñ«αñ╛αñ░αñò αñ╕αñòαÑìαñ╖αñ«",
+  "headphonesReminderEnabled": "हेडफ़ोन अनुस्मारक सक्षम",
   "@headphonesReminderEnabled": {
     "description": "Snackbar message for headphones reminder enabled"
   },
-  "headphonesReminderDisabled": "αñ╣αÑçαñíαñ½αñ╝αÑïαñ¿ αñàαñ¿αÑüαñ╕αÑìαñ«αñ╛αñ░αñò αñàαñòαÑìαñ╖αñ«",
+  "headphonesReminderDisabled": "हेडफ़ोन अनुस्मारक अक्षम",
   "@headphonesReminderDisabled": {
     "description": "Snackbar message for headphones reminder disabled"
   },
-  "granted": "αñàαñ¿αÑüαñ«αññαñ┐ αñªαÑÇ αñùαñê",
+  "granted": "अनुमति दी गई",
   "@granted": {
     "description": "Label for granted permission status"
   },
-  "notGrantedTapToAllow": "αñàαñ¿αÑüαñ«αññαñ┐ αñ¿αñ╣αÑÇαñé αñªαÑÇ αñùαñê ΓÇö αñàαñ¿αÑüαñ«αññαñ┐ αñªαÑçαñ¿αÑç αñòαÑç αñ▓αñ┐αñÅ αñƒαÑêαñ¬ αñòαñ░αÑçαñé",
+  "notGrantedTapToAllow": "अनुमति नहीं दी गई — अनुमति देने के लिए टैप करें",
   "@notGrantedTapToAllow": {
     "description": "Label for not granted permission status"
   },
-  "couldNotCheckPermission": "αñ«αñ╛αñçαñòαÑìαñ░αÑïαñ½αñ╝αÑïαñ¿ αñàαñ¿αÑüαñ«αññαñ┐ αñòαÑÇ αñ£αñ╛αñüαñÜ αñ¿αñ╣αÑÇαñé αñòαñ░ αñ╕αñòαñ╛",
+  "couldNotCheckPermission": "माइक्रोफ़ोन अनुमति की जाँच नहीं कर सका",
   "@couldNotCheckPermission": {
     "description": "Error message when unable to check permission"
   },
-  "microphoneGranted": "αñ«αñ╛αñçαñòαÑìαñ░αÑïαñ½αñ╝αÑïαñ¿ αñ¬αñ╣αÑüαñüαñÜ αñàαñ¿αÑüαñ«αññ",
+  "microphoneGranted": "माइक्रोफ़ोन पहुँच अनुमत",
   "@microphoneGranted": {
     "description": "Snackbar message for microphone granted"
   },
-  "microphoneDenied": "αñ«αñ╛αñçαñòαÑìαñ░αÑïαñ½αñ╝αÑïαñ¿ αñ¬αñ╣αÑüαñüαñÜ αñàαñ╕αÑìαñ╡αÑÇαñòαÑâαññ",
+  "microphoneDenied": "माइक्रोफ़ोन पहुँच अस्वीकृत",
   "@microphoneDenied": {
     "description": "Snackbar message for microphone denied"
   },
-  "couldNotRequestPermission": "αñ«αñ╛αñçαñòαÑìαñ░αÑïαñ½αñ╝αÑïαñ¿ αñàαñ¿αÑüαñ«αññαñ┐ αñòαñ╛ αñàαñ¿αÑüαñ░αÑïαñº αñ¿αñ╣αÑÇαñé αñòαñ░ αñ╕αñòαñ╛",
+  "couldNotRequestPermission": "माइक्रोफ़ोन अनुमति का अनुरोध नहीं कर सका",
   "@couldNotRequestPermission": {
     "description": "Error message when unable to request permission"
   },
-  "microphonePermissionDialogTitle": "αñ«αñ╛αñçαñòαÑìαñ░αÑïαñ½αñ╝αÑïαñ¿ αñàαñ¿αÑüαñ«αññαñ┐",
+  "microphonePermissionDialogTitle": "माइक्रोफ़ोन अनुमति",
   "@microphonePermissionDialogTitle": {
     "description": "Title for microphone permission dialog"
   },
-  "microphonePermissionDialogContent": "αñ«αñ╛αñçαñòαÑìαñ░αÑïαñ½αñ╝αÑïαñ¿ αñàαñ¿αÑüαñ«αññαñ┐ αñ╕αÑìαñÑαñ╛αñ»αÑÇ αñ░αÑéαñ¬ αñ╕αÑç αñàαñ╕αÑìαñ╡αÑÇαñòαÑâαññ αñòαñ░ αñªαÑÇ αñùαñê αñ╣αÑêαÑñ αñòαÑâαñ¬αñ»αñ╛ αñçαñ╕αÑç αñàαñ¬αñ¿αÑç αñ╕αñ┐αñ╕αÑìαñƒαñ« αñ╕αÑçαñƒαñ┐αñéαñùαÑìαñ╕ αñ«αÑçαñé αñ╕αñòαÑìαñ╖αñ« αñòαñ░αÑçαñéαÑñ",
+  "microphonePermissionDialogContent": "माइक्रोफ़ोन अनुमति स्थायी रूप से अस्वीकृत कर दी गई है। कृपया इसे अपने सिस्टम सेटिंग्स में सक्षम करें।",
   "@microphonePermissionDialogContent": {
     "description": "Content for microphone permission permanently denied dialog"
   },
-  "openSettings": "αñ╕αÑçαñƒαñ┐αñéαñùαÑìαñ╕ αñûαÑïαñ▓αÑçαñé",
+  "openSettings": "सेटिंग्स खोलें",
   "@openSettings": {
     "description": "Button text to open settings"
   },
-  "audio": "αñæαñíαñ┐αñ»αÑï",
+  "audio": "ऑडियो",
   "@audio": {
     "description": "Recording type option: Audio"
   },
-  "video": "αñ╡αÑÇαñíαñ┐αñ»αÑï",
+  "video": "वीडियो",
   "@video": {
     "description": "Recording type option: Video"
   },
-  "standard": "αñ«αñ╛αñ¿αñò",
+  "standard": "मानक",
   "@standard": {
     "description": "Audio quality option: Standard"
   },
-  "high": "αñëαñÜαÑìαñÜ",
+  "high": "उच्च",
   "@high": {
     "description": "Audio quality option: High"
   },
-  "defaultRecordingTypeLabel": "αñíαñ┐αñ½αñ╝αÑëαñ▓αÑìαñƒ αñ░αñ┐αñòαÑëαñ░αÑìαñíαñ┐αñéαñù αñ¬αÑìαñ░αñòαñ╛αñ░: {type}",
+  "defaultRecordingTypeLabel": "डिफ़ॉल्ट रिकॉर्डिंग प्रकार: {type}",
   "@defaultRecordingTypeLabel": {
     "description": "Snackbar when recording type changes",
     "placeholders": {
@@ -356,7 +356,7 @@
       }
     }
   },
-  "audioQualityLabel": "αñæαñíαñ┐αñ»αÑï αñùαÑüαñúαñ╡αññαÑìαññαñ╛: {quality}",
+  "audioQualityLabel": "ऑडियो गुणवत्ता: {quality}",
   "@audioQualityLabel": {
     "description": "Snackbar when audio quality changes",
     "placeholders": {
@@ -365,55 +365,55 @@
       }
     }
   },
-  "personalInformation": "αñ╡αÑìαñ»αñòαÑìαññαñ┐αñùαññ αñ£αñ╛αñ¿αñòαñ╛αñ░αÑÇ",
+  "personalInformation": "व्यक्तिगत जानकारी",
   "@personalInformation": {
     "description": "Label for personal information settings"
   },
-  "emailAddress": "αñêαñ«αÑçαñ▓ αñ¬αññαñ╛",
+  "emailAddress": "ईमेल पता",
   "@emailAddress": {
     "description": "Label for email address"
   },
-  "changePassword": "αñ¬αñ╛αñ╕αñ╡αñ░αÑìαñí αñ¼αñªαñ▓αÑçαñé",
+  "changePassword": "पासवर्ड बदलें",
   "@changePassword": {
     "description": "Label for change password action"
   },
-  "emailVerification": "αñêαñ«αÑçαñ▓ αñ╕αññαÑìαñ»αñ╛αñ¬αñ¿",
+  "emailVerification": "ईमेल सत्यापन",
   "@emailVerification": {
     "description": "Label for email verification"
   },
-  "signOut": "αñ╕αñ╛αñçαñ¿ αñåαñëαñƒ",
+  "signOut": "साइन आउट",
   "@signOut": {
     "description": "Label for sign out action"
   },
-  "deleteAccount": "αñûαñ╛αññαñ╛ αñ╣αñƒαñ╛αñÅαñü",
+  "deleteAccount": "खाता हटाएँ",
   "@deleteAccount": {
     "description": "Label for delete account action"
   },
-  "tunoSinger": "Tuno αñùαñ╛αñ»αñò",
+  "tunoSinger": "Tuno गायक",
   "@tunoSinger": {
     "description": "Default display name when user has no name set"
   },
-  "noEmail": "αñòαÑïαñê αñêαñ«αÑçαñ▓ αñ¿αñ╣αÑÇαñé",
+  "noEmail": "कोई ईमेल नहीं",
   "@noEmail": {
     "description": "Text shown when user has no email"
   },
-  "emailVerified": "αñêαñ«αÑçαñ▓ αñ╕αññαÑìαñ»αñ╛αñ¬αñ┐αññ",
+  "emailVerified": "ईमेल सत्यापित",
   "@emailVerified": {
     "description": "Label for verified email status"
   },
-  "emailNotVerified": "αñêαñ«αÑçαñ▓ αñ╕αññαÑìαñ»αñ╛αñ¬αñ┐αññ αñ¿αñ╣αÑÇαñé",
+  "emailNotVerified": "ईमेल सत्यापित नहीं",
   "@emailNotVerified": {
     "description": "Label for not verified email status"
   },
-  "verified": "αñ╕αññαÑìαñ»αñ╛αñ¬αñ┐αññ",
+  "verified": "सत्यापित",
   "@verified": {
     "description": "Short label for verified status"
   },
-  "notVerified": "αñ╕αññαÑìαñ»αñ╛αñ¬αñ┐αññ αñ¿αñ╣αÑÇαñé",
+  "notVerified": "सत्यापित नहीं",
   "@notVerified": {
     "description": "Short label for not verified status"
   },
-  "signInWithProvider": "{providers} αñ╕αÑç αñ╕αñ╛αñçαñ¿ αñçαñ¿ αñòαñ░αÑçαñé",
+  "signInWithProvider": "{providers} से साइन इन करें",
   "@signInWithProvider": {
     "description": "Label showing sign-in provider(s)",
     "placeholders": {
@@ -422,7 +422,7 @@
       }
     }
   },
-  "password": "αñ¬αñ╛αñ╕αñ╡αñ░αÑìαñí",
+  "password": "पासवर्ड",
   "@password": {
     "description": "Provider name for password-based authentication"
   },
@@ -438,47 +438,47 @@
   "@facebook": {
     "description": "Provider name for Facebook authentication"
   },
-  "displayName": "αñ¬αÑìαñ░αñªαñ░αÑìαñ╢αñ¿ αñ¿αñ╛αñ«",
+  "displayName": "प्रदर्शन नाम",
   "@displayName": {
     "description": "Label for display name text field"
   },
-  "enterYourName": "αñàαñ¬αñ¿αñ╛ αñ¿αñ╛αñ« αñªαñ░αÑìαñ£ αñòαñ░αÑçαñé",
+  "enterYourName": "अपना नाम दर्ज करें",
   "@enterYourName": {
     "description": "Hint text for display name field"
   },
-  "nameCannotBeEmpty": "αñ¿αñ╛αñ« αñûαñ╛αñ▓αÑÇ αñ¿αñ╣αÑÇαñé αñ╣αÑï αñ╕αñòαññαñ╛",
+  "nameCannotBeEmpty": "नाम खाली नहीं हो सकता",
   "@nameCannotBeEmpty": {
     "description": "Validation message for empty name"
   },
-  "save": "αñ╕αñ╣αÑçαñ£αÑçαñé",
+  "save": "सहेजें",
   "@save": {
     "description": "Button text for Save"
   },
-  "displayNameUpdated": "αñ¬αÑìαñ░αñªαñ░αÑìαñ╢αñ¿ αñ¿αñ╛αñ« αñàαñ¬αñíαÑçαñƒ αñòαñ┐αñ»αñ╛ αñùαñ»αñ╛αÑñ",
+  "displayNameUpdated": "प्रदर्शन नाम अपडेट किया गया।",
   "@displayNameUpdated": {
     "description": "Snackbar message when display name is updated"
   },
-  "emailAddressDialogTitle": "αñêαñ«αÑçαñ▓ αñ¬αññαñ╛",
+  "emailAddressDialogTitle": "ईमेल पता",
   "@emailAddressDialogTitle": {
     "description": "Title for the email address dialog"
   },
-  "yourEmailIs": "αñåαñ¬αñòαñ╛ αñ¬αÑìαñ░αñ«αñ╛αñúαñ┐αññ αñêαñ«αÑçαñ▓ αñ¬αññαñ╛ αñ╣αÑê:",
+  "yourEmailIs": "आपका प्रमाणित ईमेल पता है:",
   "@yourEmailIs": {
     "description": "Label before showing the user's email"
   },
-  "emailChangeNotSupported": "Tuno αñòαÑç αñçαñ╕ αñ╕αñéαñ╕αÑìαñòαñ░αñú αñ«αÑçαñé αñêαñ«αÑçαñ▓ αñ¼αñªαñ▓αñ¿αñ╛ αñ╕αñ«αñ░αÑìαñÑαñ┐αññ αñ¿αñ╣αÑÇαñé αñ╣αÑêαÑñ αñ¡αñ╡αñ┐αñ╖αÑìαñ» αñòαÑç αñ░αñ┐αñ▓αÑÇαñ£αñ╝ αñ«αÑçαñé αñÅαñò αñ╕αññαÑìαñ»αñ╛αñ¬αñ┐αññ-αñ¬αÑéαñ░αÑìαñ╡-αñàαñ¬αñíαÑçαñƒ αñ¬αÑìαñ░αñ╡αñ╛αñ╣ αñ£αÑïαñíαñ╝αñ╛ αñ£αñ╛αñÅαñùαñ╛αÑñ",
+  "emailChangeNotSupported": "Tuno के इस संस्करण में ईमेल बदलना समर्थित नहीं है। भविष्य के रिलीज़ में एक सत्यापित-पूर्व-अपडेट प्रवाह जोड़ा जाएगा।",
   "@emailChangeNotSupported": {
     "description": "Message about email change not being supported"
   },
-  "close": "αñ¼αñéαñª αñòαñ░αÑçαñé",
+  "close": "बंद करें",
   "@close": {
     "description": "Button text for Close"
   },
-  "noEmailOnRecord": "αñòαÑïαñê αñêαñ«αÑçαñ▓ αñ¬αññαñ╛ αñ░αñ┐αñòαÑëαñ░αÑìαñí αñ¬αñ░ αñ¿αñ╣αÑÇαñé αñ╣αÑêαÑñ",
+  "noEmailOnRecord": "कोई ईमेल पता रिकॉर्ड पर नहीं है।",
   "@noEmailOnRecord": {
     "description": "Snackbar message when no email is on record"
   },
-  "passwordResetSent": "αñ¬αñ╛αñ╕αñ╡αñ░αÑìαñí αñ░αÑÇαñ╕αÑçαñƒ αñêαñ«αÑçαñ▓ {email} αñ¬αñ░ αñ¡αÑçαñ£αñ╛ αñùαñ»αñ╛αÑñ αñàαñ¬αñ¿αñ╛ αñçαñ¿αñ¼αÑëαñòαÑìαñ╕ αñ£αñ╛αñüαñÜαÑçαñéαÑñ",
+  "passwordResetSent": "पासवर्ड रीसेट ईमेल {email} पर भेजा गया। अपना इनबॉक्स जाँचें।",
   "@passwordResetSent": {
     "description": "Snackbar when password reset email is sent",
     "placeholders": {
@@ -487,103 +487,103 @@
       }
     }
   },
-  "emailAlreadyVerified": "αñåαñ¬αñòαñ╛ αñêαñ«αÑçαñ▓ αñ¬αñ╣αñ▓αÑç αñ╕αÑç αñ╕αññαÑìαñ»αñ╛αñ¬αñ┐αññ αñ╣αÑêαÑñ",
+  "emailAlreadyVerified": "आपका ईमेल पहले से सत्यापित है।",
   "@emailAlreadyVerified": {
     "description": "Snackbar when email is already verified"
   },
-  "verificationEmailSent": "αñ╕αññαÑìαñ»αñ╛αñ¬αñ¿ αñêαñ«αÑçαñ▓ αñ¡αÑçαñ£αñ╛ αñùαñ»αñ╛αÑñ αñàαñ¬αñ¿αñ╛ αñçαñ¿αñ¼αÑëαñòαÑìαñ╕ αñ£αñ╛αñüαñÜαÑçαñéαÑñ",
+  "verificationEmailSent": "सत्यापन ईमेल भेजा गया। अपना इनबॉक्स जाँचें।",
   "@verificationEmailSent": {
     "description": "Snackbar when verification email is sent"
   },
-  "signOutDialogTitle": "αñ╕αñ╛αñçαñ¿ αñåαñëαñƒ",
+  "signOutDialogTitle": "साइन आउट",
   "@signOutDialogTitle": {
     "description": "Title for sign out confirmation dialog"
   },
-  "signOutDialogContent": "αñòαÑìαñ»αñ╛ αñåαñ¬ αñ╡αñ╛αñòαñê αñ╕αñ╛αñçαñ¿ αñåαñëαñƒ αñòαñ░αñ¿αñ╛ αñÜαñ╛αñ╣αññαÑç αñ╣αÑêαñé?",
+  "signOutDialogContent": "क्या आप वाकई साइन आउट करना चाहते हैं?",
   "@signOutDialogContent": {
     "description": "Content for sign out confirmation dialog"
   },
-  "deleteAccountDialogTitle": "αñûαñ╛αññαñ╛ αñ╣αñƒαñ╛αñÅαñü",
+  "deleteAccountDialogTitle": "खाता हटाएँ",
   "@deleteAccountDialogTitle": {
     "description": "Title for delete account dialog"
   },
-  "deleteAccountWarning": "αñ»αñ╣ αñòαñ╛αñ░αÑìαñ░αñ╡αñ╛αñê αñ╕αÑìαñÑαñ╛αñ»αÑÇ αñ╣αÑê αñöαñ░ αñçαñ╕αÑç αñ¬αÑéαñ░αÑìαñ╡αñ╡αññ αñ¿αñ╣αÑÇαñé αñòαñ┐αñ»αñ╛ αñ£αñ╛ αñ╕αñòαññαñ╛αÑñ αñåαñ¬αñòαñ╛ αñ╕αñ¡αÑÇ αñûαñ╛αññαñ╛ αñíαÑçαñƒαñ╛ αñûαÑï αñ£αñ╛αñÅαñùαñ╛αÑñ",
+  "deleteAccountWarning": "यह कार्रवाई स्थायी है और इसे पूर्ववत नहीं किया जा सकता। आपका सभी खाता डेटा खो जाएगा।",
   "@deleteAccountWarning": {
     "description": "Warning message in delete account dialog"
   },
-  "typeDeleteToConfirm": "αñ¬αÑüαñ╖αÑìαñƒαñ┐ αñòαñ░αñ¿αÑç αñòαÑç αñ▓αñ┐αñÅ αñ¿αÑÇαñÜαÑç DELETE αñƒαñ╛αñçαñ¬ αñòαñ░αÑçαñé:",
+  "typeDeleteToConfirm": "पुष्टि करने के लिए नीचे DELETE टाइप करें:",
   "@typeDeleteToConfirm": {
     "description": "Instruction text for delete confirmation"
   },
-  "typeDelete": "DELETE αñƒαñ╛αñçαñ¬ αñòαñ░αÑçαñé",
+  "typeDelete": "DELETE टाइप करें",
   "@typeDelete": {
     "description": "Hint text for the delete confirmation field"
   },
-  "deleteFirestoreNote": "Firestore αñíαÑçαñƒαñ╛ αñ╕αñ½αñ╛αñê αñòαÑç αñ▓αñ┐αñÅ αñàαñ¡αÑÇ αñ¡αÑÇ αñÅαñò αñàαñ▓αñù αñ¼αÑêαñòαñÅαñéαñí αñ¬αÑìαñ░αñòαÑìαñ░αñ┐αñ»αñ╛ αñòαÑÇ αñåαñ╡αñ╢αÑìαñ»αñòαññαñ╛ αñ╣αÑêαÑñ αñåαñ¬αñòαñ╛ αñ¬αÑìαñ░αñ«αñ╛αñúαÑÇαñòαñ░αñú αñûαñ╛αññαñ╛ αñ╣αñƒαñ╛ αñªαñ┐αñ»αñ╛ αñ£αñ╛αñÅαñùαñ╛, αñ▓αÑçαñòαñ┐αñ¿ αñ╕αñéαñùαÑìαñ░αñ╣αÑÇαññ αñªαñ╕αÑìαññαñ╛αñ╡αÑçαñ£αñ╝ αñ░αñ╣ αñ╕αñòαññαÑç αñ╣αÑêαñéαÑñ",
+  "deleteFirestoreNote": "Firestore डेटा सफाई के लिए अभी भी एक अलग बैकएंड प्रक्रिया की आवश्यकता है। आपका प्रमाणीकरण खाता हटा दिया जाएगा, लेकिन संग्रहीत दस्तावेज़ रह सकते हैं।",
   "@deleteFirestoreNote": {
     "description": "Note about Firestore data cleanup in delete dialog"
   },
-  "permanentlyDelete": "αñ╕αÑìαñÑαñ╛αñ»αÑÇ αñ░αÑéαñ¬ αñ╕αÑç αñ╣αñƒαñ╛αñÅαñü",
+  "permanentlyDelete": "स्थायी रूप से हटाएँ",
   "@permanentlyDelete": {
     "description": "Button text for permanent deletion"
   },
-  "accountDeleted": "αñûαñ╛αññαñ╛ αñ╣αñƒαñ╛ αñªαñ┐αñ»αñ╛ αñùαñ»αñ╛αÑñ",
+  "accountDeleted": "खाता हटा दिया गया।",
   "@accountDeleted": {
     "description": "Snackbar when account is deleted"
   },
-  "securityStatus": "αñ╕αÑüαñ░αñòαÑìαñ╖αñ╛ αñ╕αÑìαñÑαñ┐αññαñ┐",
+  "securityStatus": "सुरक्षा स्थिति",
   "@securityStatus": {
     "description": "Section title for security status"
   },
-  "emailVerificationStatus": "αñêαñ«αÑçαñ▓ αñ╕αññαÑìαñ»αñ╛αñ¬αñ¿",
+  "emailVerificationStatus": "ईमेल सत्यापन",
   "@emailVerificationStatus": {
     "description": "Label for email verification status"
   },
-  "authenticationProvider": "αñ¬αÑìαñ░αñ«αñ╛αñúαÑÇαñòαñ░αñú αñ¬αÑìαñ░αñªαñ╛αññαñ╛",
+  "authenticationProvider": "प्रमाणीकरण प्रदाता",
   "@authenticationProvider": {
     "description": "Label for authentication provider"
   },
-  "noProviderData": "αñòαÑïαñê αñ¬αÑìαñ░αñªαñ╛αññαñ╛ αñíαÑçαñƒαñ╛ αñ¿αñ╣αÑÇαñé",
+  "noProviderData": "कोई प्रदाता डेटा नहीं",
   "@noProviderData": {
     "description": "Text when no provider data is available"
   },
-  "accountCreated": "αñûαñ╛αññαñ╛ αñ¼αñ¿αñ╛αñ»αñ╛ αñùαñ»αñ╛",
+  "accountCreated": "खाता बनाया गया",
   "@accountCreated": {
     "description": "Label for account creation date"
   },
-  "recommendations": "αñàαñ¿αÑüαñ╢αñéαñ╕αñ╛αñÅαñü",
+  "recommendations": "अनुशंसाएँ",
   "@recommendations": {
     "description": "Section label for security recommendations"
   },
-  "verifyEmailRecommendation": "αñàαñ¬αñ¿αÑç αñûαñ╛αññαÑç αñòαÑï αñ╕αÑüαñ░αñòαÑìαñ╖αñ┐αññ αñòαñ░αñ¿αÑç αñòαÑç αñ▓αñ┐αñÅ αñàαñ¬αñ¿αñ╛ αñêαñ«αÑçαñ▓ αñ¬αññαñ╛ αñ╕αññαÑìαñ»αñ╛αñ¬αñ┐αññ αñòαñ░αÑçαñéαÑñ",
+  "verifyEmailRecommendation": "अपने खाते को सुरक्षित करने के लिए अपना ईमेल पता सत्यापित करें।",
   "@verifyEmailRecommendation": {
     "description": "Security recommendation to verify email"
   },
-  "strongPasswordRecommendation": "αñÅαñò αñ«αñ£αñ¼αÑéαññ, αñàαñªαÑìαñ╡αñ┐αññαÑÇαñ» αñ¬αñ╛αñ╕αñ╡αñ░αÑìαñí αñòαñ╛ αñëαñ¬αñ»αÑïαñù αñòαñ░αÑçαñéαÑñ αñ╕αñ«αñ»-αñ╕αñ«αñ» αñ¬αñ░ αñçαñ╕αÑç αñ¼αñªαñ▓αñ¿αÑç αñ¬αñ░ αñ╡αñ┐αñÜαñ╛αñ░ αñòαñ░αÑçαñéαÑñ",
+  "strongPasswordRecommendation": "एक मजबूत, अद्वितीय पासवर्ड का उपयोग करें। समय-समय पर इसे बदलने पर विचार करें।",
   "@strongPasswordRecommendation": {
     "description": "Security recommendation for strong password"
   },
-  "keepEmailUpdatedRecommendation": "αñ╕αÑüαñ░αñòαÑìαñ╖αñ╛ αñ╕αÑéαñÜαñ¿αñ╛αñÅαñü αñ¬αÑìαñ░αñ╛αñ¬αÑìαññ αñòαñ░αñ¿αÑç αñòαÑç αñ▓αñ┐αñÅ αñàαñ¬αñ¿αñ╛ αñêαñ«αÑçαñ▓ αñ¬αññαñ╛ αñàαñ¬αñíαÑçαñƒ αñ░αñûαÑçαñéαÑñ",
+  "keepEmailUpdatedRecommendation": "सुरक्षा सूचनाएँ प्राप्त करने के लिए अपना ईमेल पता अपडेट रखें।",
   "@keepEmailUpdatedRecommendation": {
     "description": "Security recommendation to keep email updated"
   },
-  "passwordAndAuth": "αñ¬αñ╛αñ╕αñ╡αñ░αÑìαñí αñöαñ░ αñ¬αÑìαñ░αñ«αñ╛αñúαÑÇαñòαñ░αñú",
+  "passwordAndAuth": "पासवर्ड और प्रमाणीकरण",
   "@passwordAndAuth": {
     "description": "Section title for Password and Authentication"
   },
-  "sendPasswordResetEmail": "αñ¬αñ╛αñ╕αñ╡αñ░αÑìαñí αñ░αÑÇαñ╕αÑçαñƒ αñêαñ«αÑçαñ▓ αñ¡αÑçαñ£αÑçαñé",
+  "sendPasswordResetEmail": "पासवर्ड रीसेट ईमेल भेजें",
   "@sendPasswordResetEmail": {
     "description": "Label for send password reset email action"
   },
-  "resetPasswordSubtitle": "αñàαñ¬αñ¿αñ╛ αñ¬αñ╛αñ╕αñ╡αñ░αÑìαñí αñ░αÑÇαñ╕αÑçαñƒ αñòαñ░αñ¿αÑç αñòαñ╛ αñ▓αñ┐αñéαñò αñêαñ«αÑçαñ▓ αñòαÑç αñ«αñ╛αñºαÑìαñ»αñ« αñ╕αÑç αñ¬αÑìαñ░αñ╛αñ¬αÑìαññ αñòαñ░αÑçαñéαÑñ",
+  "resetPasswordSubtitle": "अपना पासवर्ड रीसेट करने का लिंक ईमेल के माध्यम से प्राप्त करें।",
   "@resetPasswordSubtitle": {
     "description": "Subtitle for password reset action"
   },
-  "directPasswordChangeFuture": "αñ╕αÑÇαñºαÑç αñÉαñ¬ αñ«αÑçαñé αñ¬αñ╛αñ╕αñ╡αñ░αÑìαñí αñ¼αñªαñ▓αñ¿αñ╛ αñ¡αñ╡αñ┐αñ╖αÑìαñ» αñòαÑç αñàαñ¬αñíαÑçαñƒ αñ«αÑçαñé αñëαñ¬αñ▓αñ¼αÑìαñº αñ╣αÑïαñùαñ╛αÑñ",
+  "directPasswordChangeFuture": "सीधे ऐप में पासवर्ड बदलना भविष्य के अपडेट में उपलब्ध होगा।",
   "@directPasswordChangeFuture": {
     "description": "Info message about direct password change feature"
   },
-  "socialAuthInfo": "αñåαñ¬αñ¿αÑç {providers} αñ╕αÑç αñ╕αñ╛αñçαñ¿ αñçαñ¿ αñòαñ┐αñ»αñ╛ αñ╣αÑêαÑñ αñ¬αñ╛αñ╕αñ╡αñ░αÑìαñí αñ¬αÑìαñ░αñ¼αñéαñºαñ¿ αñåαñ¬αñòαÑç αñ¬αÑìαñ░αñªαñ╛αññαñ╛ αñªαÑìαñ╡αñ╛αñ░αñ╛ αñ╕αñéαñ¡αñ╛αñ▓αñ╛ αñ£αñ╛αññαñ╛ αñ╣αÑêαÑñ",
+  "socialAuthInfo": "आपने {providers} से साइन इन किया है। पासवर्ड प्रबंधन आपके प्रदाता द्वारा संभाला जाता है।",
   "@socialAuthInfo": {
     "description": "Info message for social auth users",
     "placeholders": {
@@ -592,43 +592,43 @@
       }
     }
   },
-  "appPermissions": "αñÉαñ¬ αñàαñ¿αÑüαñ«αññαñ┐αñ»αñ╛αñü",
+  "appPermissions": "ऐप अनुमतियाँ",
   "@appPermissions": {
     "description": "Section title for app permissions"
   },
-  "microphone": "αñ«αñ╛αñçαñòαÑìαñ░αÑïαñ½αñ╝αÑïαñ¿",
+  "microphone": "माइक्रोफ़ोन",
   "@microphone": {
     "description": "Label for microphone permission"
   },
-  "micRequiredDescription": "αñ╡αÑëαñçαñ╕ αñ░αñ┐αñòαÑëαñ░αÑìαñíαñ┐αñéαñù αñöαñ░ αñàαñ¡αÑìαñ»αñ╛αñ╕ αñ╕αÑüαñ╡αñ┐αñºαñ╛αñôαñé αñòαÑç αñ▓αñ┐αñÅ αñåαñ╡αñ╢αÑìαñ»αñòαÑñ",
+  "micRequiredDescription": "वॉइस रिकॉर्डिंग और अभ्यास सुविधाओं के लिए आवश्यक।",
   "@micRequiredDescription": {
     "description": "Description for microphone permission requirement"
   },
-  "checking": "αñ£αñ╛αñüαñÜ αñ░αñ╣αñ╛ αñ╣αÑê...",
+  "checking": "जाँच रहा है...",
   "@checking": {
     "description": "Label when checking permission status"
   },
-  "unknownStatus": "αñàαñ£αÑìαñ₧αñ╛αññ",
+  "unknownStatus": "अज्ञात",
   "@unknownStatus": {
     "description": "Label for unknown permission status"
   },
-  "denied": "αñàαñ╕αÑìαñ╡αÑÇαñòαÑâαññ",
+  "denied": "अस्वीकृत",
   "@denied": {
     "description": "Label for denied permission status"
   },
-  "permanentlyDenied": "αñ╕αÑìαñÑαñ╛αñ»αÑÇ αñ░αÑéαñ¬ αñ╕αÑç αñàαñ╕αÑìαñ╡αÑÇαñòαÑâαññ",
+  "permanentlyDenied": "स्थायी रूप से अस्वीकृत",
   "@permanentlyDenied": {
     "description": "Label for permanently denied permission status"
   },
-  "restricted": "αñ¬αÑìαñ░αññαñ┐αñ¼αñéαñºαñ┐αññ",
+  "restricted": "प्रतिबंधित",
   "@restricted": {
     "description": "Label for restricted permission status"
   },
-  "provisional": "αñàαñ¿αñéαññαñ┐αñ«",
+  "provisional": "अनंतिम",
   "@provisional": {
     "description": "Label for provisional permission status"
   },
-  "openSystemSettingsLabel": "{permission} αñòαÑç αñ▓αñ┐αñÅ αñ╕αñ┐αñ╕αÑìαñƒαñ« αñ╕αÑçαñƒαñ┐αñéαñùαÑìαñ╕ αñûαÑïαñ▓αÑçαñé",
+  "openSystemSettingsLabel": "{permission} के लिए सिस्टम सेटिंग्स खोलें",
   "@openSystemSettingsLabel": {
     "description": "Semantic label for opening system settings for a permission",
     "placeholders": {
@@ -637,143 +637,143 @@
       }
     }
   },
-  "permissionSettings": "αñ╕αÑçαñƒαñ┐αñéαñùαÑìαñ╕",
+  "permissionSettings": "सेटिंग्स",
   "@permissionSettings": {
     "description": "Button text to open settings for a permission"
   },
-  "privacyControls": "αñùαÑïαñ¬αñ¿αÑÇαñ»αññαñ╛ αñ¿αñ┐αñ»αñéαññαÑìαñ░αñú",
+  "privacyControls": "गोपनीयता नियंत्रण",
   "@privacyControls": {
     "description": "Section title for privacy controls"
   },
-  "analyticsNotConfigured": "Tuno αñòαÑç αñ▓αñ┐αñÅ αñ╡αñ┐αñ╢αÑìαñ▓αÑçαñ╖αñú αñ╕αñéαñùαÑìαñ░αñ╣ αñ╡αñ░αÑìαññαñ«αñ╛αñ¿ αñ«αÑçαñé αñòαÑëαñ¿αÑìαñ½αñ╝αñ┐αñùαñ░ αñ¿αñ╣αÑÇαñé αñ╣αÑêαÑñ αñòαÑïαñê αñëαñ¬αñ»αÑïαñù αñíαÑçαñƒαñ╛ αñÅαñòαññαÑìαñ░ αñ¿αñ╣αÑÇαñé αñòαñ┐αñ»αñ╛ αñ£αñ╛ αñ░αñ╣αñ╛ αñ╣αÑêαÑñ",
+  "analyticsNotConfigured": "Tuno के लिए विश्लेषण संग्रह वर्तमान में कॉन्फ़िगर नहीं है। कोई उपयोग डेटा एकत्र नहीं किया जा रहा है।",
   "@analyticsNotConfigured": {
     "description": "Info message about analytics not being configured"
   },
-  "crashDiagnosticsNotEnabled": "αñòαÑìαñ░αÑêαñ╢ αñöαñ░ αññαÑìαñ░αÑüαñƒαñ┐ αñ¿αñ┐αñªαñ╛αñ¿ αñ╡αñ░αÑìαññαñ«αñ╛αñ¿ αñ«αÑçαñé αñ╕αñòαÑìαñ╖αñ« αñ¿αñ╣αÑÇαñé αñ╣αÑêαñéαÑñ αñòαÑìαñ░αÑêαñ╢ αñ░αñ┐αñ¬αÑïαñ░αÑìαñƒαñ┐αñéαñù αñòαÑëαñ¿αÑìαñ½αñ╝αñ┐αñùαñ░ αñ╣αÑïαñ¿αÑç αñ¬αñ░ αñ¿αñ┐αñªαñ╛αñ¿ αñ░αñ┐αñ¬αÑïαñ░αÑìαñƒ αñëαñ¬αñ▓αñ¼αÑìαñº αñ╣αÑïαñéαñùαÑÇαÑñ",
+  "crashDiagnosticsNotEnabled": "क्रैश और त्रुटि निदान वर्तमान में सक्षम नहीं हैं। क्रैश रिपोर्टिंग कॉन्फ़िगर होने पर निदान रिपोर्ट उपलब्ध होंगी।",
   "@crashDiagnosticsNotEnabled": {
     "description": "Info message about crash diagnostics not being enabled"
   },
-  "aiProcessingNotAvailable": "αñ╡αÑìαñ»αñòαÑìαññαñ┐αñùαññ AI αñ¬αÑìαñ░αñ╕αñéαñ╕αÑìαñòαñ░αñú αñ╡αñ░αÑìαññαñ«αñ╛αñ¿ αñ«αÑçαñé αñëαñ¬αñ▓αñ¼αÑìαñº αñ¿αñ╣αÑÇαñé αñ╣αÑêαÑñ AI αñ╕αÑüαñ╡αñ┐αñºαñ╛αñôαñé αñòαÑç αñ▓αñ┐αñÅ αñùαÑïαñ¬αñ¿αÑÇαñ»αññαñ╛ αñ¿αñ┐αñ»αñéαññαÑìαñ░αñú αñ¡αñ╡αñ┐αñ╖αÑìαñ» αñòαÑç αñ░αñ┐αñ▓αÑÇαñ£αñ╝ αñ«αÑçαñé αñ£αÑïαñíαñ╝αÑç αñ£αñ╛αñÅαñéαñùαÑçαÑñ",
+  "aiProcessingNotAvailable": "व्यक्तिगत AI प्रसंस्करण वर्तमान में उपलब्ध नहीं है। AI सुविधाओं के लिए गोपनीयता नियंत्रण भविष्य के रिलीज़ में जोड़े जाएंगे।",
   "@aiProcessingNotAvailable": {
     "description": "Info message about AI processing not being available"
   },
-  "additionalPrivacyControls": "αñ£αñ¼ αñ»αÑç αñ╕αÑçαñ╡αñ╛αñÅαñü αñ╕αñòαÑìαñ╖αñ« αñ╣αÑïαñéαñùαÑÇ αññαñ¼ αñàαññαñ┐αñ░αñ┐αñòαÑìαññ αñùαÑïαñ¬αñ¿αÑÇαñ»αññαñ╛ αñ¿αñ┐αñ»αñéαññαÑìαñ░αñú αñëαñ¬αñ▓αñ¼αÑìαñº αñ╣αÑïαñéαñùαÑçαÑñ",
+  "additionalPrivacyControls": "जब ये सेवाएँ सक्षम होंगी तब अतिरिक्त गोपनीयता नियंत्रण उपलब्ध होंगे।",
   "@additionalPrivacyControls": {
     "description": "Note about additional privacy controls"
   },
-  "dataAndAccount": "αñíαÑçαñƒαñ╛ αñöαñ░ αñûαñ╛αññαñ╛",
+  "dataAndAccount": "डेटा और खाता",
   "@dataAndAccount": {
     "description": "Section title for Data and Account"
   },
-  "exportMyData": "αñ«αÑçαñ░αñ╛ αñíαÑçαñƒαñ╛ αñ¿αñ┐αñ░αÑìαñ»αñ╛αññ αñòαñ░αÑçαñé",
+  "exportMyData": "मेरा डेटा निर्यात करें",
   "@exportMyData": {
     "description": "Label for export my data action"
   },
-  "exportDataSubtitle": "αñàαñ¬αñ¿αÑç Tuno αñíαÑçαñƒαñ╛ αñòαÑÇ αñÅαñò αñ¬αÑìαñ░αññαñ┐ αñíαñ╛αñëαñ¿αñ▓αÑïαñí αñòαñ░αÑçαñéαÑñ",
+  "exportDataSubtitle": "अपने Tuno डेटा की एक प्रति डाउनलोड करें।",
   "@exportDataSubtitle": {
     "description": "Subtitle for export data action"
   },
-  "signOutSubtitle": "αñàαñ¬αñ¿αÑç Tuno αñûαñ╛αññαÑç αñ╕αÑç αñ╕αñ╛αñçαñ¿ αñåαñëαñƒ αñòαñ░αÑçαñéαÑñ",
+  "signOutSubtitle": "अपने Tuno खाते से साइन आउट करें।",
   "@signOutSubtitle": {
     "description": "Subtitle for sign out action"
   },
-  "deleteAccountSubtitle": "αñàαñ¬αñ¿αÑç αñûαñ╛αññαÑç αñöαñ░ αñ╕αñ¡αÑÇ αñ╕αñéαñ¼αñéαñºαñ┐αññ αñíαÑçαñƒαñ╛ αñòαÑï αñ╕αÑìαñÑαñ╛αñ»αÑÇ αñ░αÑéαñ¬ αñ╕αÑç αñ╣αñƒαñ╛αñÅαñüαÑñ",
+  "deleteAccountSubtitle": "अपने खाते और सभी संबंधित डेटा को स्थायी रूप से हटाएँ।",
   "@deleteAccountSubtitle": {
     "description": "Subtitle for delete account action"
   },
-  "exportDataDialogTitle": "αñ«αÑçαñ░αñ╛ αñíαÑçαñƒαñ╛ αñ¿αñ┐αñ░αÑìαñ»αñ╛αññ αñòαñ░αÑçαñé",
+  "exportDataDialogTitle": "मेरा डेटा निर्यात करें",
   "@exportDataDialogTitle": {
     "description": "Title for export data dialog"
   },
-  "exportDataDialogContent": "αñíαÑçαñƒαñ╛ αñ¿αñ┐αñ░αÑìαñ»αñ╛αññ αñòαÑç αñ▓αñ┐αñÅ αñåαñ¬αñòαÑç αñûαñ╛αññαÑç αñòαÑç αñíαÑçαñƒαñ╛ αñòαÑï αñ╕αÑüαñ░αñòαÑìαñ╖αñ┐αññ αñ░αÑéαñ¬ αñ╕αÑç αñ╕αñéαñòαñ▓αñ┐αññ αñöαñ░ αñ╡αñ┐αññαñ░αñ┐αññ αñòαñ░αñ¿αÑç αñòαÑç αñ▓αñ┐αñÅ αñÅαñò αñ╡αñ┐αñ╢αÑìαñ╡αñ╕αñ¿αÑÇαñ» αñ¼αÑêαñòαñÅαñéαñí αñ¬αÑìαñ░αñòαÑìαñ░αñ┐αñ»αñ╛ αñòαÑÇ αñåαñ╡αñ╢αÑìαñ»αñòαññαñ╛ αñ╣αÑêαÑñ",
+  "exportDataDialogContent": "डेटा निर्यात के लिए आपके खाते के डेटा को सुरक्षित रूप से संकलित और वितरित करने के लिए एक विश्वसनीय बैकएंड प्रक्रिया की आवश्यकता है।",
   "@exportDataDialogContent": {
     "description": "Content for export data dialog"
   },
-  "exportDataDialogFuture": "αñ»αñ╣ αñ╕αÑüαñ╡αñ┐αñºαñ╛ αññαñ¼ αñëαñ¬αñ▓αñ¼αÑìαñº αñ╣αÑïαñùαÑÇ αñ£αñ¼ Tuno αñ¼αÑêαñòαñÅαñéαñí αñ╕αñ░αÑìαñ╡αñ░ αñ¬αñ░ αñÅαñò αñ¿αñ┐αñ░αÑìαñ»αñ╛αññ αñÅαñéαñíαñ¬αÑëαñçαñéαñƒ αñòαÑëαñ¿αÑìαñ½αñ╝αñ┐αñùαñ░ αñòαñ┐αñ»αñ╛ αñ£αñ╛αñÅαñùαñ╛αÑñ",
+  "exportDataDialogFuture": "यह सुविधा तब उपलब्ध होगी जब Tuno बैकएंड सर्वर पर एक निर्यात एंडपॉइंट कॉन्फ़िगर किया जाएगा।",
   "@exportDataDialogFuture": {
     "description": "Future availability note in export data dialog"
   },
-  "deleteAccountDialogContent": "αñûαñ╛αññαñ╛ αñ╣αñƒαñ╛αñ¿αÑç αñòαÑç αñ▓αñ┐αñÅ αñÅαñò αñ╕αÑüαñ░αñòαÑìαñ╖αñ┐αññ αñ¼αÑêαñòαñÅαñéαñí αñ¬αÑìαñ░αñòαÑìαñ░αñ┐αñ»αñ╛ αñòαÑÇ αñåαñ╡αñ╢αÑìαñ»αñòαññαñ╛ αñ╣αÑê:",
+  "deleteAccountDialogContent": "खाता हटाने के लिए एक सुरक्षित बैकएंड प्रक्रिया की आवश्यकता है:",
   "@deleteAccountDialogContent": {
     "description": "Content introduction for delete account dialog"
   },
-  "deleteAuthAccount": "αñàαñ¬αñ¿αñ╛ Auth αñûαñ╛αññαñ╛ αñ╣αñƒαñ╛αñÅαñü",
+  "deleteAuthAccount": "अपना Auth खाता हटाएँ",
   "@deleteAuthAccount": {
     "description": "Bullet point: delete auth account"
   },
-  "deleteFirestoreDocs": "αñ╕αñ¡αÑÇ Firestore αñªαñ╕αÑìαññαñ╛αñ╡αÑçαñ£αñ╝ αñöαñ░ αñëαñ¬-αñ╕αñéαñùαÑìαñ░αñ╣ αñ╣αñƒαñ╛αñÅαñü",
+  "deleteFirestoreDocs": "सभी Firestore दस्तावेज़ और उप-संग्रह हटाएँ",
   "@deleteFirestoreDocs": {
     "description": "Bullet point: delete Firestore docs"
   },
-  "deleteStorageRecordings": "αñ╕αÑìαñƒαÑïαñ░αÑçαñ£ αñ╕αÑç αñ╕αñ¡αÑÇ αñàαñ¬αñ▓αÑïαñí αñòαÑÇ αñùαñê αñ░αñ┐αñòαÑëαñ░αÑìαñíαñ┐αñéαñù αñ╣αñƒαñ╛αñÅαñü",
+  "deleteStorageRecordings": "स्टोरेज से सभी अपलोड की गई रिकॉर्डिंग हटाएँ",
   "@deleteStorageRecordings": {
     "description": "Bullet point: delete storage recordings"
   },
-  "deleteMetadata": "αñòαñ┐αñ╕αÑÇ αñ¡αÑÇ αñ╕αñéαñ¼αñéαñºαñ┐αññ αñ«αÑçαñƒαñ╛αñíαÑçαñƒαñ╛ αñòαÑï αñ╣αñƒαñ╛αñÅαñü",
+  "deleteMetadata": "किसी भी संबंधित मेटाडेटा को हटाएँ",
   "@deleteMetadata": {
     "description": "Bullet point: delete metadata"
   },
-  "deleteCannotBeDoneFromApp": "αñ»αñ╣ αñàαñòαÑçαñ▓αÑç αñÉαñ¬ αñ╕αÑç αñ╕αÑüαñ░αñòαÑìαñ╖αñ┐αññ αñ░αÑéαñ¬ αñ╕αÑç αñ¿αñ╣αÑÇαñé αñòαñ┐αñ»αñ╛ αñ£αñ╛ αñ╕αñòαññαñ╛αÑñ αñÅαñò αñ╡αñ┐αñ╢αÑìαñ╡αñ╕αñ¿αÑÇαñ» αñòαÑìαñ▓αñ╛αñëαñí αñ½αñ╝αñéαñòαÑìαñ╢αñ¿ αñ»αñ╛ Admin SDK αñ¼αÑêαñòαñÅαñéαñí αñòαÑÇ αñåαñ╡αñ╢αÑìαñ»αñòαññαñ╛ αñ╣αÑêαÑñ",
+  "deleteCannotBeDoneFromApp": "यह अकेले ऐप से सुरक्षित रूप से नहीं किया जा सकता। एक विश्वसनीय क्लाउड फ़ंक्शन या Admin SDK बैकएंड की आवश्यकता है।",
   "@deleteCannotBeDoneFromApp": {
     "description": "Info about deletion requiring backend"
   },
-  "contactSupportToDelete": "αñàαñ¬αñ¿αñ╛ αñûαñ╛αññαñ╛ αñàαñ¡αÑÇ αñ╣αñƒαñ╛αñ¿αÑç αñòαÑç αñ▓αñ┐αñÅ, αñòαÑâαñ¬αñ»αñ╛ Tuno αñ╕αñ«αñ░αÑìαñÑαñ¿ αñ╕αÑç αñ╕αñéαñ¬αñ░αÑìαñò αñòαñ░αÑçαñéαÑñ",
+  "contactSupportToDelete": "अपना खाता अभी हटाने के लिए, कृपया Tuno समर्थन से संपर्क करें।",
   "@contactSupportToDelete": {
     "description": "Instruction to contact support for deletion"
   },
-  "chooseUpdates": "αñåαñ¬ αñ£αÑï αñàαñ¬αñíαÑçαñƒ αñ¬αÑìαñ░αñ╛αñ¬αÑìαññ αñòαñ░αñ¿αñ╛ αñÜαñ╛αñ╣αññαÑç αñ╣αÑêαñé αñëαñ¿αÑìαñ╣αÑçαñé αñÜαÑüαñ¿αÑçαñé",
+  "chooseUpdates": "आप जो अपडेट प्राप्त करना चाहते हैं उन्हें चुनें",
   "@chooseUpdates": {
     "description": "Subtitle for notification preferences"
   },
-  "allowNotifications": "αñ╕αÑéαñÜαñ¿αñ╛αñôαñé αñòαÑÇ αñàαñ¿αÑüαñ«αññαñ┐ αñªαÑçαñé",
+  "allowNotifications": "सूचनाओं की अनुमति दें",
   "@allowNotifications": {
     "description": "Master toggle label for allowing notifications"
   },
-  "practiceReminders": "αñàαñ¡αÑìαñ»αñ╛αñ╕ αñàαñ¿αÑüαñ╕αÑìαñ«αñ╛αñ░αñò",
+  "practiceReminders": "अभ्यास अनुस्मारक",
   "@practiceReminders": {
     "description": "Toggle label for practice reminders"
   },
-  "aiAnalysisUpdates": "AI αñ╡αñ┐αñ╢αÑìαñ▓αÑçαñ╖αñú αñàαñ¬αñíαÑçαñƒ",
+  "aiAnalysisUpdates": "AI विश्लेषण अपडेट",
   "@aiAnalysisUpdates": {
     "description": "Toggle label for AI analysis updates"
   },
-  "streakReminders": "αñ╕αÑìαñƒαÑìαñ░αÑÇαñò αñàαñ¿αÑüαñ╕αÑìαñ«αñ╛αñ░αñò",
+  "streakReminders": "स्ट्रीक अनुस्मारक",
   "@streakReminders": {
     "description": "Toggle label for streak reminders"
   },
-  "coinsAndAchievements": "αñ╕αñ┐αñòαÑìαñòαÑç αñöαñ░ αñëαñ¬αñ▓αñ¼αÑìαñºαñ┐αñ»αñ╛αñü",
+  "coinsAndAchievements": "सिक्के और उपलब्धियाँ",
   "@coinsAndAchievements": {
     "description": "Toggle label for coins and achievements notifications"
   },
-  "weeklyChallenges": "αñ╕αñ╛αñ¬αÑìαññαñ╛αñ╣αñ┐αñò αñÜαÑüαñ¿αÑîαññαñ┐αñ»αñ╛αñü",
+  "weeklyChallenges": "साप्ताहिक चुनौतियाँ",
   "@weeklyChallenges": {
     "description": "Toggle label for weekly challenges notifications"
   },
-  "productUpdates": "αñëαññαÑìαñ¬αñ╛αñª αñàαñ¬αñíαÑçαñƒ",
+  "productUpdates": "उत्पाद अपडेट",
   "@productUpdates": {
     "description": "Toggle label for product updates notifications"
   },
-  "reminderTime": "αñàαñ¿αÑüαñ╕αÑìαñ«αñ╛αñ░αñò αñ╕αñ«αñ»",
+  "reminderTime": "अनुस्मारक समय",
   "@reminderTime": {
     "description": "Label for reminder time selector"
   },
-  "tapToChangeReminderTime": "αñàαñ¿αÑüαñ╕αÑìαñ«αñ╛αñ░αñò αñ╕αñ«αñ» αñ¼αñªαñ▓αñ¿αÑç αñòαÑç αñ▓αñ┐αñÅ αñƒαÑêαñ¬ αñòαñ░αÑçαñé",
+  "tapToChangeReminderTime": "अनुस्मारक समय बदलने के लिए टैप करें",
   "@tapToChangeReminderTime": {
     "description": "Tooltip for reminder time selector"
   },
-  "notificationDeliveryNotImplemented": "αñ╕αÑéαñÜαñ¿αñ╛ αñ╡αñ┐αññαñ░αñú αñàαñ¡αÑÇ αññαñò αñ▓αñ╛αñùαÑé αñ¿αñ╣αÑÇαñé αñòαñ┐αñ»αñ╛ αñùαñ»αñ╛ αñ╣αÑêαÑñ αñåαñ¬αñòαÑÇ αñ¬αÑìαñ░αñ╛αñÑαñ«αñ┐αñòαññαñ╛αñÅαñü αñ╕αÑìαñÑαñ╛αñ¿αÑÇαñ» αñ░αÑéαñ¬ αñ╕αÑç αñ╕αñ╣αÑçαñ£αÑÇ αñùαñê αñ╣αÑêαñé αñöαñ░ αñ╡αñ┐αññαñ░αñú αñëαñ¬αñ▓αñ¼αÑìαñº αñ╣αÑïαñ¿αÑç αñ¬αñ░ αñëαñ¬αñ»αÑïαñù αñòαÑÇ αñ£αñ╛αñÅαñéαñùαÑÇαÑñ",
+  "notificationDeliveryNotImplemented": "सूचना वितरण अभी तक लागू नहीं किया गया है। आपकी प्राथमिकताएँ स्थानीय रूप से सहेजी गई हैं और वितरण उपलब्ध होने पर उपयोग की जाएंगी।",
   "@notificationDeliveryNotImplemented": {
     "description": "Info banner content about notification delivery not implemented"
   },
-  "dismiss": "αñûαñ╛αñ░αñ┐αñ£ αñòαñ░αÑçαñé",
+  "dismiss": "खारिज करें",
   "@dismiss": {
     "description": "Button label for dismiss"
   },
-  "youCanChangeAnytime": "αñåαñ¬ αñçαñ¿ αñ¬αÑìαñ░αñ╛αñÑαñ«αñ┐αñòαññαñ╛αñôαñé αñòαÑï αñòαñ¡αÑÇ αñ¡αÑÇ αñ¼αñªαñ▓ αñ╕αñòαññαÑç αñ╣αÑêαñéαÑñ",
+  "youCanChangeAnytime": "आप इन प्राथमिकताओं को कभी भी बदल सकते हैं।",
   "@youCanChangeAnytime": {
     "description": "Note at bottom of notification preferences"
   },
-  "labelUnavailable": "{label} (αñàαñ¿αÑüαñ¬αñ▓αñ¼αÑìαñº)",
+  "labelUnavailable": "{label} (अनुपलब्ध)",
   "@labelUnavailable": {
     "description": "Label suffix for disabled toggle",
     "placeholders": {
@@ -782,7 +782,7 @@
       }
     }
   },
-  "enableNotificationsFirst": "{label} ΓÇô αñ¬αñ╣αñ▓αÑç αñ╕αÑéαñÜαñ¿αñ╛αñÅαñü αñ╕αñòαÑìαñ╖αñ« αñòαñ░αÑçαñé",
+  "enableNotificationsFirst": "{label} – पहले सूचनाएँ सक्षम करें",
   "@enableNotificationsFirst": {
     "description": "Tooltip for disabled toggle when notifications are off",
     "placeholders": {
@@ -791,27 +791,27 @@
       }
     }
   },
-  "notificationsTitle": "αñ╕αÑéαñÜαñ¿αñ╛αñÅαñü",
+  "notificationsTitle": "सूचनाएँ",
   "@notificationsTitle": {
     "description": "Title for the Notifications screen"
   },
-  "allCaughtUp": "αñåαñ¬ αñ¬αÑéαñ░αÑÇ αññαñ░αñ╣ αñ╕αÑç αñàαñ¬αñíαÑçαñƒ αñ╣αÑêαñé",
+  "allCaughtUp": "आप पूरी तरह से अपडेट हैं",
   "@allCaughtUp": {
     "description": "Empty state title when no notifications"
   },
-  "emptyNotificationsMessage": "αñàαñ¡αÑìαñ»αñ╛αñ╕ αñàαñ¬αñíαÑçαñƒ, αñ╡αñ┐αñ╢αÑìαñ▓αÑçαñ╖αñú αñ¬αñ░αñ┐αñúαñ╛αñ« αñöαñ░ αñëαñ¬αñ▓αñ¼αÑìαñºαñ┐αñ»αñ╛αñü αñ»αñ╣αñ╛αñü αñªαñ┐αñûαñ╛αñê αñªαÑçαñéαñùαÑÇαÑñ",
+  "emptyNotificationsMessage": "अभ्यास अपडेट, विश्लेषण परिणाम और उपलब्धियाँ यहाँ दिखाई देंगी।",
   "@emptyNotificationsMessage": {
     "description": "Empty state description when no notifications"
   },
-  "markAllAsRead": "αñ╕αñ¡αÑÇ αñòαÑï αñ¬αñóαñ╝αñ╛ αñ╣αÑüαñå αñÜαñ┐αñ╣αÑìαñ¿αñ┐αññ αñòαñ░αÑçαñé",
+  "markAllAsRead": "सभी को पढ़ा हुआ चिह्नित करें",
   "@markAllAsRead": {
     "description": "Button to mark all notifications as read"
   },
-  "justNow": "αñàαñ¡αÑÇ αñàαñ¡αÑÇ",
+  "justNow": "अभी अभी",
   "@justNow": {
     "description": "Relative time label for just now"
   },
-  "minutesAgo": "{minutes} αñ«αñ┐. αñ¬αñ╣αñ▓αÑç",
+  "minutesAgo": "{minutes} मि. पहले",
   "@minutesAgo": {
     "description": "Relative time label for minutes ago",
     "placeholders": {
@@ -820,7 +820,7 @@
       }
     }
   },
-  "hoursAgo": "{hours} αñÿαñé. αñ¬αñ╣αñ▓αÑç",
+  "hoursAgo": "{hours} घं. पहले",
   "@hoursAgo": {
     "description": "Relative time label for hours ago",
     "placeholders": {
@@ -829,11 +829,11 @@
       }
     }
   },
-  "yesterday": "αñòαñ▓",
+  "yesterday": "कल",
   "@yesterday": {
     "description": "Relative time label for yesterday"
   },
-  "daysAgo": "{days} αñªαñ┐. αñ¬αñ╣αñ▓αÑç",
+  "daysAgo": "{days} दि. पहले",
   "@daysAgo": {
     "description": "Relative time label for days ago",
     "placeholders": {
@@ -842,19 +842,19 @@
       }
     }
   },
-  "markAsUnread": "αñàαñ¬αñáαñ┐αññ αñÜαñ┐αñ╣αÑìαñ¿αñ┐αññ αñòαñ░αÑçαñé",
+  "markAsUnread": "अपठित चिह्नित करें",
   "@markAsUnread": {
     "description": "Action label to mark notification as unread"
   },
-  "markAsRead": "αñ¬αñóαñ╝αñ╛ αñ╣αÑüαñå αñÜαñ┐αñ╣αÑìαñ¿αñ┐αññ αñòαñ░αÑçαñé",
+  "markAsRead": "पढ़ा हुआ चिह्नित करें",
   "@markAsRead": {
     "description": "Action label to mark notification as read"
   },
-  "delete": "αñ╣αñƒαñ╛αñÅαñü",
+  "delete": "हटाएँ",
   "@delete": {
     "description": "Action label to delete notification"
   },
-  "unreadCountSemantic": "αñ╕αÑéαñÜαñ¿αñ╛αñÅαñü, {count} αñàαñ¬αñáαñ┐αññ",
+  "unreadCountSemantic": "सूचनाएँ, {count} अपठित",
   "@unreadCountSemantic": {
     "description": "Semantic label for notification bell with unread count",
     "placeholders": {
@@ -863,7 +863,7 @@
       }
     }
   },
-  "notifications": "αñ╕αÑéαñÜαñ¿αñ╛αñÅαñü",
+  "notifications": "सूचनाएँ",
   "@notifications": {
     "description": "Tooltip for notification bell button"
   },
@@ -871,7 +871,7 @@
   "@tuno": {
     "description": "Brand name shown on home screen"
   },
-  "helloUser": "αñ¿αñ«αñ╕αÑìαññαÑç, {name} ≡ƒæï",
+  "helloUser": "नमस्ते, {name} 👋",
   "@helloUser": {
     "description": "Greeting on home screen with user name",
     "placeholders": {
@@ -880,43 +880,43 @@
       }
     }
   },
-  "readyToImprove": "αñåαñ£ αñàαñ¬αñ¿αÑÇ αñåαñ╡αñ╛αñ£αñ╝ αñ╕αÑüαñºαñ╛αñ░αñ¿αÑç αñòαÑç αñ▓αñ┐αñÅ αññαÑêαñ»αñ╛αñ░ αñ╣αÑêαñé?",
+  "readyToImprove": "आज अपनी आवाज़ सुधारने के लिए तैयार हैं?",
   "@readyToImprove": {
     "description": "Subtitle asking user if they are ready to practice"
   },
-  "yourProgress": "αñåαñ¬αñòαÑÇ αñ¬αÑìαñ░αñùαññαñ┐",
+  "yourProgress": "आपकी प्रगति",
   "@yourProgress": {
     "description": "Section heading for progress on home screen"
   },
-  "startVoicePractice": "αñ╡αÑëαñçαñ╕ αñàαñ¡αÑìαñ»αñ╛αñ╕ αñ╢αÑüαñ░αÑé αñòαñ░αÑçαñé",
+  "startVoicePractice": "वॉइस अभ्यास शुरू करें",
   "@startVoicePractice": {
     "description": "Heading on the main practice card"
   },
-  "recordAndGetFeedback": "αñàαñ¬αñ¿αÑÇ αñåαñ╡αñ╛αñ£αñ╝ αñ░αñ┐αñòαÑëαñ░αÑìαñí αñòαñ░αÑçαñé αñöαñ░ αññαÑüαñ░αñéαññ αñ½αÑÇαñíαñ¼αÑêαñò αñ¬αÑìαñ░αñ╛αñ¬αÑìαññ αñòαñ░αÑçαñéαÑñ",
+  "recordAndGetFeedback": "अपनी आवाज़ रिकॉर्ड करें और तुरंत फीडबैक प्राप्त करें।",
   "@recordAndGetFeedback": {
     "description": "Description on the practice card"
   },
-  "startPractice": "αñàαñ¡αÑìαñ»αñ╛αñ╕ αñ╢αÑüαñ░αÑé αñòαñ░αÑçαñé",
+  "startPractice": "अभ्यास शुरू करें",
   "@startPractice": {
     "description": "Button and tooltip text for start practice"
   },
-  "zeroMin": "0 αñ«αñ┐αñ¿αñƒ",
+  "zeroMin": "0 मिनट",
   "@zeroMin": {
     "description": "Placeholder practice duration"
   },
-  "practiceLabel": "αñàαñ¡αÑìαñ»αñ╛αñ╕",
+  "practiceLabel": "अभ्यास",
   "@practiceLabel": {
     "description": "Label under practice duration on home card"
   },
-  "zeroDays": "0 αñªαñ┐αñ¿",
+  "zeroDays": "0 दिन",
   "@zeroDays": {
     "description": "Placeholder streak days"
   },
-  "streak": "αñ╕αÑìαñƒαÑìαñ░αÑÇαñò",
+  "streak": "स्ट्रीक",
   "@streak": {
     "description": "Label under streak on home card"
   },
-  "featureComingSoonSimple": "{feature} αñ£αñ▓αÑìαñª αñå αñ░αñ╣αñ╛ αñ╣αÑê",
+  "featureComingSoonSimple": "{feature} जल्द आ रहा है",
   "@featureComingSoonSimple": {
     "description": "Simple snackbar for feature coming soon",
     "placeholders": {
@@ -925,107 +925,107 @@
       }
     }
   },
-  "aiSingingCoach": "AI αñùαñ╛αñ»αñ¿ αñòαÑïαñÜ",
+  "aiSingingCoach": "AI गायन कोच",
   "@aiSingingCoach": {
     "description": "Subtitle brand text on welcome screen"
   },
-  "yourPersonalAiCoach": "αñåαñ¬αñòαñ╛ αñ╡αÑìαñ»αñòαÑìαññαñ┐αñùαññ\nAI αñùαñ╛αñ»αñ¿ αñòαÑïαñÜ",
+  "yourPersonalAiCoach": "आपका व्यक्तिगत\nAI गायन कोच",
   "@yourPersonalAiCoach": {
     "description": "Main heading on welcome screen"
   },
-  "practiceImproveAchieve": "αñàαñ¡αÑìαñ»αñ╛αñ╕ ΓÇó αñ╕αÑüαñºαñ╛αñ░ ΓÇó αñëαñ¬αñ▓αñ¼αÑìαñºαñ┐",
+  "practiceImproveAchieve": "अभ्यास • सुधार • उपलब्धि",
   "@practiceImproveAchieve": {
     "description": "Tagline on welcome screen"
   },
-  "getStarted": "αñ╢αÑüαñ░αÑé αñòαñ░αÑçαñé",
+  "getStarted": "शुरू करें",
   "@getStarted": {
     "description": "Button text on welcome screen"
   },
-  "login": "αñ▓αÑëαñù αñçαñ¿",
+  "login": "लॉग इन",
   "@login": {
     "description": "Button text for login"
   },
-  "welcomeBack": "αñ╡αñ╛αñ¬αñ╕αÑÇ αñ¬αñ░ αñ╕αÑìαñ╡αñ╛αñùαññ αñ╣αÑê! ≡ƒæï",
+  "welcomeBack": "वापसी पर स्वागत है! 👋",
   "@welcomeBack": {
     "description": "Heading on login screen"
   },
-  "loginToContinue": "αñ£αñ╛αñ░αÑÇ αñ░αñûαñ¿αÑç αñòαÑç αñ▓αñ┐αñÅ αñ▓αÑëαñù αñçαñ¿ αñòαñ░αÑçαñé",
+  "loginToContinue": "जारी रखने के लिए लॉग इन करें",
   "@loginToContinue": {
     "description": "Subtitle on login screen"
   },
-  "emailIsRequired": "αñêαñ«αÑçαñ▓ αñåαñ╡αñ╢αÑìαñ»αñò αñ╣αÑêαÑñ",
+  "emailIsRequired": "ईमेल आवश्यक है।",
   "@emailIsRequired": {
     "description": "Validation message for empty email"
   },
-  "enterValidEmail": "αñÅαñò αñ«αñ╛αñ¿αÑìαñ» αñêαñ«αÑçαñ▓ αñªαñ░αÑìαñ£ αñòαñ░αÑçαñéαÑñ",
+  "enterValidEmail": "एक मान्य ईमेल दर्ज करें।",
   "@enterValidEmail": {
     "description": "Validation message for invalid email"
   },
-  "passwordIsRequired": "αñ¬αñ╛αñ╕αñ╡αñ░αÑìαñí αñåαñ╡αñ╢αÑìαñ»αñò αñ╣αÑêαÑñ",
+  "passwordIsRequired": "पासवर्ड आवश्यक है।",
   "@passwordIsRequired": {
     "description": "Validation message for empty password"
   },
-  "passwordMinLength": "αñ¬αñ╛αñ╕αñ╡αñ░αÑìαñí αñòαñ« αñ╕αÑç αñòαñ« 6 αñàαñòαÑìαñ╖αñ░ αñòαñ╛ αñ╣αÑïαñ¿αñ╛ αñÜαñ╛αñ╣αñ┐αñÅαÑñ",
+  "passwordMinLength": "पासवर्ड कम से कम 6 अक्षर का होना चाहिए।",
   "@passwordMinLength": {
     "description": "Validation message for short password"
   },
-  "emailFieldLabel": "αñêαñ«αÑçαñ▓ αñ¬αññαñ╛",
+  "emailFieldLabel": "ईमेल पता",
   "@emailFieldLabel": {
     "description": "Label for email input field"
   },
-  "emailHint": "αñàαñ¬αñ¿αñ╛ αñêαñ«αÑçαñ▓ αñªαñ░αÑìαñ£ αñòαñ░αÑçαñé",
+  "emailHint": "अपना ईमेल दर्ज करें",
   "@emailHint": {
     "description": "Hint text for email input"
   },
-  "passwordFieldLabel": "αñ¬αñ╛αñ╕αñ╡αñ░αÑìαñí",
+  "passwordFieldLabel": "पासवर्ड",
   "@passwordFieldLabel": {
     "description": "Label for password input field"
   },
-  "passwordHint": "αñàαñ¬αñ¿αñ╛ αñ¬αñ╛αñ╕αñ╡αñ░αÑìαñí αñªαñ░αÑìαñ£ αñòαñ░αÑçαñé",
+  "passwordHint": "अपना पासवर्ड दर्ज करें",
   "@passwordHint": {
     "description": "Hint text for password input"
   },
-  "showPassword": "αñ¬αñ╛αñ╕αñ╡αñ░αÑìαñí αñªαñ┐αñûαñ╛αñÅαñü",
+  "showPassword": "पासवर्ड दिखाएँ",
   "@showPassword": {
     "description": "Semantic label for show password button"
   },
-  "hidePassword": "αñ¬αñ╛αñ╕αñ╡αñ░αÑìαñí αñ¢αñ┐αñ¬αñ╛αñÅαñü",
+  "hidePassword": "पासवर्ड छिपाएँ",
   "@hidePassword": {
     "description": "Semantic label for hide password button"
   },
-  "forgotPassword": "αñ¬αñ╛αñ╕αñ╡αñ░αÑìαñí αñ¡αÑéαñ▓ αñùαñÅ?",
+  "forgotPassword": "पासवर्ड भूल गए?",
   "@forgotPassword": {
     "description": "Link text for forgot password"
   },
-  "orContinueWith": "αñ»αñ╛ αñçαñ╕αñòαÑç αñ╕αñ╛αñÑ αñ£αñ╛αñ░αÑÇ αñ░αñûαÑçαñé",
+  "orContinueWith": "या इसके साथ जारी रखें",
   "@orContinueWith": {
     "description": "Divider label between login methods"
   },
-  "loginWithGoogle": "Google αñ╕αÑç αñ▓αÑëαñù αñçαñ¿ αñòαñ░αÑçαñéαÑñ αñ£αñ▓αÑìαñª αñå αñ░αñ╣αñ╛ αñ╣αÑêαÑñ",
+  "loginWithGoogle": "Google से लॉग इन करें। जल्द आ रहा है।",
   "@loginWithGoogle": {
     "description": "Semantic label for Google login button"
   },
-  "loginWithApple": "Apple αñ╕αÑç αñ▓αÑëαñù αñçαñ¿ αñòαñ░αÑçαñéαÑñ αñ£αñ▓αÑìαñª αñå αñ░αñ╣αñ╛ αñ╣αÑêαÑñ",
+  "loginWithApple": "Apple से लॉग इन करें। जल्द आ रहा है।",
   "@loginWithApple": {
     "description": "Semantic label for Apple login button"
   },
-  "dontHaveAccount": "αñûαñ╛αññαñ╛ αñ¿αñ╣αÑÇαñé αñ╣αÑê? ",
+  "dontHaveAccount": "खाता नहीं है? ",
   "@dontHaveAccount": {
     "description": "Prefix text for sign up navigation"
   },
-  "signUp": "αñ╕αñ╛αñçαñ¿ αñàαñ¬",
+  "signUp": "साइन अप",
   "@signUp": {
     "description": "Action text for sign up navigation"
   },
-  "goToSignUp": "αñ╕αñ╛αñçαñ¿ αñàαñ¬ αñ¬αñ░ αñ£αñ╛αñÅαñü",
+  "goToSignUp": "साइन अप पर जाएँ",
   "@goToSignUp": {
     "description": "Semantic label for sign up link"
   },
-  "loginSuccessful": "αñ▓αÑëαñù αñçαñ¿ αñ╕αñ½αñ▓αÑñ",
+  "loginSuccessful": "लॉग इन सफल।",
   "@loginSuccessful": {
     "description": "Snackbar message for successful login"
   },
-  "authComingSoon": "{provider} αñ¬αÑìαñ░αñ«αñ╛αñúαÑÇαñòαñ░αñú αñ£αñ▓αÑìαñª αñå αñ░αñ╣αñ╛ αñ╣αÑêαÑñ",
+  "authComingSoon": "{provider} प्रमाणीकरण जल्द आ रहा है।",
   "@authComingSoon": {
     "description": "Snackbar for auth providers coming soon",
     "placeholders": {
@@ -1034,19 +1034,19 @@
       }
     }
   },
-  "createAccount": "αñûαñ╛αññαñ╛ αñ¼αñ¿αñ╛αñÅαñü",
+  "createAccount": "खाता बनाएँ",
   "@createAccount": {
     "description": "Heading on sign up screen"
   },
-  "joinTuno": "Tuno αñ╕αÑç αñ£αÑüαñíαñ╝αÑçαñé αñöαñ░ αñàαñ¬αñ¿αÑÇ\nαñùαñ╛αñ»αñ¿ αñ»αñ╛αññαÑìαñ░αñ╛ αñ╢αÑüαñ░αÑé αñòαñ░αÑçαñé",
+  "joinTuno": "Tuno से जुड़ें और अपनी\nगायन यात्रा शुरू करें",
   "@joinTuno": {
     "description": "Subtitle on sign up screen"
   },
-  "fullName": "αñ¬αÑéαñ░αñ╛ αñ¿αñ╛αñ«",
+  "fullName": "पूरा नाम",
   "@fullName": {
     "description": "Label for full name input"
   },
-  "fullNameHint": "αñàαñ¬αñ¿αñ╛ αñ¬αÑéαñ░αñ╛ αñ¿αñ╛αñ« αñªαñ░αÑìαñ£ αñòαñ░αÑçαñé",
+  "fullNameHint": "अपना पूरा नाम दर्ज करें",
   "@fullNameHint": {
     "description": "Hint for full name input"
   },
@@ -1054,43 +1054,43 @@
   "@emailHintSignup": {
     "description": "Hint text for email on signup"
   },
-  "passwordHintSignup": "αñòαñ« αñ╕αÑç αñòαñ« 6 αñàαñòαÑìαñ╖αñ░",
+  "passwordHintSignup": "कम से कम 6 अक्षर",
   "@passwordHintSignup": {
     "description": "Hint text for password on signup"
   },
-  "fullNameRequired": "αñ¬αÑéαñ░αñ╛ αñ¿αñ╛αñ« αñåαñ╡αñ╢αÑìαñ»αñò αñ╣αÑêαÑñ",
+  "fullNameRequired": "पूरा नाम आवश्यक है।",
   "@fullNameRequired": {
     "description": "Validation message for empty full name"
   },
-  "nameMinLength": "αñ¿αñ╛αñ« αñòαñ« αñ╕αÑç αñòαñ« 2 αñàαñòαÑìαñ╖αñ░ αñòαñ╛ αñ╣αÑïαñ¿αñ╛ αñÜαñ╛αñ╣αñ┐αñÅαÑñ",
+  "nameMinLength": "नाम कम से कम 2 अक्षर का होना चाहिए।",
   "@nameMinLength": {
     "description": "Validation message for short name"
   },
-  "alreadyHaveAccount": "αñ¬αñ╣αñ▓αÑç αñ╕αÑç αñûαñ╛αññαñ╛ αñ╣αÑê? ",
+  "alreadyHaveAccount": "पहले से खाता है? ",
   "@alreadyHaveAccount": {
     "description": "Prefix text for login navigation"
   },
-  "goToLogin": "αñ▓αÑëαñù αñçαñ¿ αñ¬αñ░ αñ£αñ╛αñÅαñü",
+  "goToLogin": "लॉग इन पर जाएँ",
   "@goToLogin": {
     "description": "Semantic label for login link"
   },
-  "signUpWithGoogle": "Google αñ╕αÑç αñ╕αñ╛αñçαñ¿ αñàαñ¬ αñòαñ░αÑçαñéαÑñ αñ£αñ▓αÑìαñª αñå αñ░αñ╣αñ╛ αñ╣αÑêαÑñ",
+  "signUpWithGoogle": "Google से साइन अप करें। जल्द आ रहा है।",
   "@signUpWithGoogle": {
     "description": "Semantic label for Google sign up button"
   },
-  "signUpWithApple": "Apple αñ╕αÑç αñ╕αñ╛αñçαñ¿ αñàαñ¬ αñòαñ░αÑçαñéαÑñ αñ£αñ▓αÑìαñª αñå αñ░αñ╣αñ╛ αñ╣αÑêαÑñ",
+  "signUpWithApple": "Apple से साइन अप करें। जल्द आ रहा है।",
   "@signUpWithApple": {
     "description": "Semantic label for Apple sign up button"
   },
-  "resetPassword": "αñ¬αñ╛αñ╕αñ╡αñ░αÑìαñí αñ░αÑÇαñ╕αÑçαñƒ αñòαñ░αÑçαñé",
+  "resetPassword": "पासवर्ड रीसेट करें",
   "@resetPassword": {
     "description": "Heading on forgot password screen"
   },
-  "enterEmailForReset": "αñàαñ¬αñ¿αñ╛ αñêαñ«αÑçαñ▓ αñªαñ░αÑìαñ£ αñòαñ░αÑçαñé αñöαñ░ αñ╣αñ« αñåαñ¬αñòαÑï αñÅαñò αñ░αÑÇαñ╕αÑçαñƒ αñ▓αñ┐αñéαñò αñ¡αÑçαñ£αÑçαñéαñùαÑçαÑñ",
+  "enterEmailForReset": "अपना ईमेल दर्ज करें और हम आपको एक रीसेट लिंक भेजेंगे।",
   "@enterEmailForReset": {
     "description": "Instructions on forgot password screen"
   },
-  "email": "αñêαñ«αÑçαñ▓",
+  "email": "ईमेल",
   "@email": {
     "description": "Label for email field on forgot password screen"
   },
@@ -1098,31 +1098,31 @@
   "@emailHintReset": {
     "description": "Hint for email on forgot password screen"
   },
-  "sendResetLink": "αñ░αÑÇαñ╕αÑçαñƒ αñ▓αñ┐αñéαñò αñ¡αÑçαñ£αÑçαñé",
+  "sendResetLink": "रीसेट लिंक भेजें",
   "@sendResetLink": {
     "description": "Button text for send reset link"
   },
-  "backToLogin": "αñ▓αÑëαñù αñçαñ¿ αñ¬αñ░ αñ╡αñ╛αñ¬αñ╕ αñ£αñ╛αñÅαñü",
+  "backToLogin": "लॉग इन पर वापस जाएँ",
   "@backToLogin": {
     "description": "Link text to go back to login"
   },
-  "resetLinkSent": "αñ░αÑÇαñ╕αÑçαñƒ αñ▓αñ┐αñéαñò αñ¡αÑçαñ£ αñªαñ┐αñ»αñ╛ αñùαñ»αñ╛αÑñ αñòαÑâαñ¬αñ»αñ╛ αñàαñ¬αñ¿αñ╛ αñêαñ«αÑçαñ▓ αñ£αñ╛αñüαñÜαÑçαñéαÑñ",
+  "resetLinkSent": "रीसेट लिंक भेज दिया गया। कृपया अपना ईमेल जाँचें।",
   "@resetLinkSent": {
     "description": "Snackbar when reset link is sent"
   },
-  "goBack": "αñ╡αñ╛αñ¬αñ╕ αñ£αñ╛αñÅαñü",
+  "goBack": "वापस जाएँ",
   "@goBack": {
     "description": "Semantic label for back button on login screen"
   },
-  "yourEmailIsNotVerified": "αñåαñ¬αñòαñ╛ αñêαñ«αÑçαñ▓ αñàαñ¡αÑÇ αññαñò αñ╕αññαÑìαñ»αñ╛αñ¬αñ┐αññ αñ¿αñ╣αÑÇαñé αñ╣αÑüαñå αñ╣αÑêαÑñ",
+  "yourEmailIsNotVerified": "आपका ईमेल अभी तक सत्यापित नहीं हुआ है।",
   "@yourEmailIsNotVerified": {
     "description": "Message shown when email verification check fails"
   },
-  "verifyYourEmail": "αñàαñ¬αñ¿αñ╛ αñêαñ«αÑçαñ▓ αñ╕αññαÑìαñ»αñ╛αñ¬αñ┐αññ αñòαñ░αÑçαñé",
+  "verifyYourEmail": "अपना ईमेल सत्यापित करें",
   "@verifyYourEmail": {
     "description": "Heading on email verification screen"
   },
-  "signedInAs": "{email} αñòαÑç αñ░αÑéαñ¬ αñ«αÑçαñé αñ╕αñ╛αñçαñ¿ αñçαñ¿ αñòαñ┐αñ»αñ╛",
+  "signedInAs": "{email} के रूप में साइन इन किया",
   "@signedInAs": {
     "description": "Shows the signed-in email",
     "placeholders": {
@@ -1131,51 +1131,51 @@
       }
     }
   },
-  "signedIn": "αñ╕αñ╛αñçαñ¿ αñçαñ¿ αñòαñ┐αñ»αñ╛",
+  "signedIn": "साइन इन किया",
   "@signedIn": {
     "description": "Fallback when no email is shown"
   },
-  "verificationInstructions": "αñàαñ¬αñ¿αñ╛ αñêαñ«αÑçαñ▓ αñçαñ¿αñ¼αÑëαñòαÑìαñ╕ αñûαÑïαñ▓αÑçαñé αñöαñ░ αñ╕αñ╛αñçαñ¿ αñàαñ¬ αñ¬αÑéαñ░αñ╛ αñòαñ░αñ¿αÑç αñòαÑç αñ▓αñ┐αñÅ αñ╕αññαÑìαñ»αñ╛αñ¬αñ¿ αñ▓αñ┐αñéαñò αñ¬αñ░ αñòαÑìαñ▓αñ┐αñò αñòαñ░αÑçαñéαÑñ αñ╕αññαÑìαñ»αñ╛αñ¬αñ┐αññ αñòαñ░αñ¿αÑç αñòαÑç αñ¼αñ╛αñª, αñ¿αÑÇαñÜαÑç αñªαñ┐αñÅ αñùαñÅ αñ¼αñƒαñ¿ αñòαÑï αñƒαÑêαñ¬ αñòαñ░αÑçαñéαÑñ",
+  "verificationInstructions": "अपना ईमेल इनबॉक्स खोलें और साइन अप पूरा करने के लिए सत्यापन लिंक पर क्लिक करें। सत्यापित करने के बाद, नीचे दिए गए बटन को टैप करें।",
   "@verificationInstructions": {
     "description": "Instructions on email verification screen"
   },
-  "iHaveVerified": "αñ«αÑêαñéαñ¿αÑç αñ╕αññαÑìαñ»αñ╛αñ¬αñ┐αññ αñòαñ░ αñ▓αñ┐αñ»αñ╛",
+  "iHaveVerified": "मैंने सत्यापित कर लिया",
   "@iHaveVerified": {
     "description": "Button to confirm email verification"
   },
-  "resendEmail": "αñêαñ«αÑçαñ▓ αñ¬αÑüαñ¿αñâ αñ¡αÑçαñ£αÑçαñé",
+  "resendEmail": "ईमेल पुनः भेजें",
   "@resendEmail": {
     "description": "Button to resend verification email"
   },
-  "logOut": "αñ▓αÑëαñù αñåαñëαñƒ",
+  "logOut": "लॉग आउट",
   "@logOut": {
     "description": "Button to log out from verification screen"
   },
-  "emailVerifiedSuccess": "αñêαñ«αÑçαñ▓ αñ╕αññαÑìαñ»αñ╛αñ¬αñ┐αññαÑñ",
+  "emailVerifiedSuccess": "ईमेल सत्यापित।",
   "@emailVerifiedSuccess": {
     "description": "Snackbar when email is verified"
   },
-  "failedToVerify": "αñêαñ«αÑçαñ▓ αñ╕αññαÑìαñ»αñ╛αñ¬αñ┐αññ αñòαñ░αñ¿αÑç αñ«αÑçαñé αñ╡αñ┐αñ½αñ▓αÑñ",
+  "failedToVerify": "ईमेल सत्यापित करने में विफल।",
   "@failedToVerify": {
     "description": "Error message when verification fails"
   },
-  "verificationSent": "αñ╕αññαÑìαñ»αñ╛αñ¬αñ¿ αñêαñ«αÑçαñ▓ αñ¡αÑçαñ£αñ╛ αñùαñ»αñ╛αÑñ",
+  "verificationSent": "सत्यापन ईमेल भेजा गया।",
   "@verificationSent": {
     "description": "Snackbar when verification email is sent"
   },
-  "failedToResend": "αñ╕αññαÑìαñ»αñ╛αñ¬αñ¿ αñêαñ«αÑçαñ▓ αñ¬αÑüαñ¿αñâ αñ¡αÑçαñ£αñ¿αÑç αñ«αÑçαñé αñ╡αñ┐αñ½αñ▓αÑñ",
+  "failedToResend": "सत्यापन ईमेल पुनः भेजने में विफल।",
   "@failedToResend": {
     "description": "Error message when resend fails"
   },
-  "yourEmailIsVerified": "αñåαñ¬αñòαñ╛ αñêαñ«αÑçαñ▓ αñ╕αññαÑìαñ»αñ╛αñ¬αñ┐αññ αñ╣αÑêαÑñ",
+  "yourEmailIsVerified": "आपका ईमेल सत्यापित है।",
   "@yourEmailIsVerified": {
     "description": "Message shown when email is already verified"
   },
-  "setupTunoExperience": "αñàαñ¬αñ¿αñ╛ Tuno αñàαñ¿αÑüαñ¡αñ╡ αñ╕αÑçαñƒ αñòαñ░αÑçαñé",
+  "setupTunoExperience": "अपना Tuno अनुभव सेट करें",
   "@setupTunoExperience": {
     "description": "Heading on onboarding screen"
   },
-  "stepOf": "αñÜαñ░αñú {current} / {total}",
+  "stepOf": "चरण {current} / {total}",
   "@stepOf": {
     "description": "Step indicator text",
     "placeholders": {
@@ -1187,19 +1187,19 @@
       }
     }
   },
-  "continueAction": "αñ£αñ╛αñ░αÑÇ αñ░αñûαÑçαñé",
+  "continueAction": "जारी रखें",
   "@continueAction": {
     "description": "Button text for continue"
   },
-  "chooseCoachingLanguage": "αñàαñ¬αñ¿αÑÇ αñòαÑïαñÜαñ┐αñéαñù αñ¡αñ╛αñ╖αñ╛ αñÜαÑüαñ¿αÑçαñé",
+  "chooseCoachingLanguage": "अपनी कोचिंग भाषा चुनें",
   "@chooseCoachingLanguage": {
     "description": "Heading for language selection on onboarding"
   },
-  "coachingLanguageSubtitle": "αñòαÑïαñÜαñ┐αñéαñù αñ¿αñ┐αñ░αÑìαñªαÑçαñ╢αÑïαñé αñöαñ░ AI αñ½αÑÇαñíαñ¼αÑêαñò αñòαÑç αñ▓αñ┐αñÅ αñåαñ¬ αñ£αÑï αñ¡αñ╛αñ╖αñ╛ αñ¬αñ╕αñéαñª αñòαñ░αññαÑç αñ╣αÑêαñé αñëαñ╕αÑç αñÜαÑüαñ¿αÑçαñéαÑñ",
+  "coachingLanguageSubtitle": "कोचिंग निर्देशों और AI फीडबैक के लिए आप जो भाषा पसंद करते हैं उसे चुनें।",
   "@coachingLanguageSubtitle": {
     "description": "Subtitle for language selection"
   },
-  "languageLabel": "{label} αñ¡αñ╛αñ╖αñ╛",
+  "languageLabel": "{label} भाषा",
   "@languageLabel": {
     "description": "Semantic label for language card",
     "placeholders": {
@@ -1208,47 +1208,47 @@
       }
     }
   },
-  "whatIsYourExperience": "αñåαñ¬αñòαñ╛ αñùαñ╛αñ»αñ¿ αñàαñ¿αÑüαñ¡αñ╡ αñòαÑìαñ»αñ╛ αñ╣αÑê?",
+  "whatIsYourExperience": "आपका गायन अनुभव क्या है?",
   "@whatIsYourExperience": {
     "description": "Heading for experience step"
   },
-  "experienceSubtitle": "αñ»αñ╣ αñ╣αñ«αÑçαñé αñåαñ¬αñòαÑç αñàαñ¡αÑìαñ»αñ╛αñ╕ αñ╕αññαÑìαñ░αÑïαñé αñòαÑï αñ╡αÑêαñ»αñòαÑìαññαñ┐αñòαÑâαññ αñòαñ░αñ¿αÑç αñ«αÑçαñé αñ«αñªαñª αñòαñ░αññαñ╛ αñ╣αÑêαÑñ",
+  "experienceSubtitle": "यह हमें आपके अभ्यास सत्रों को वैयक्तिकृत करने में मदद करता है।",
   "@experienceSubtitle": {
     "description": "Subtitle for experience step"
   },
-  "beginner": "αñ╢αÑüαñ░αÑüαñåαññαÑÇ",
+  "beginner": "शुरुआती",
   "@beginner": {
     "description": "Experience level label: Beginner"
   },
-  "beginnerDescription": "αñ«αÑêαñé αñàαñ¬αñ¿αÑÇ αñùαñ╛αñ»αñ¿ αñ»αñ╛αññαÑìαñ░αñ╛ αñ╢αÑüαñ░αÑé αñòαñ░ αñ░αñ╣αñ╛ αñ╣αÑéαñüαÑñ",
+  "beginnerDescription": "मैं अपनी गायन यात्रा शुरू कर रहा हूँ।",
   "@beginnerDescription": {
     "description": "Description for beginner level"
   },
-  "intermediate": "αñ«αñºαÑìαñ»αñ╡αñ░αÑìαññαÑÇ",
+  "intermediate": "मध्यवर्ती",
   "@intermediate": {
     "description": "Experience level label: Intermediate"
   },
-  "intermediateDescription": "αñ«αÑüαñ¥αÑç αñ¼αÑüαñ¿αñ┐αñ»αñ╛αñªαÑÇ αñ¬αñ┐αñÜ αñöαñ░ αñ▓αñ» αñ╕αñ«αñ¥ αñ«αÑçαñé αñåαññαÑÇ αñ╣αÑêαÑñ",
+  "intermediateDescription": "मुझे बुनियादी पिच और लय समझ में आती है।",
   "@intermediateDescription": {
     "description": "Description for intermediate level"
   },
-  "advanced": "αñëαñ¿αÑìαñ¿αññ",
+  "advanced": "उन्नत",
   "@advanced": {
     "description": "Experience level label: Advanced"
   },
-  "advancedDescription": "αñ«αÑêαñé αñ¿αñ┐αñ»αñ«αñ┐αññ αñ░αÑéαñ¬ αñ╕αÑç αñàαñ¡αÑìαñ»αñ╛αñ╕ αñòαñ░αññαñ╛ αñ╣αÑéαñü αñöαñ░ αñ╡αñ┐αñ╕αÑìαññαÑâαññ αñ╕αÑüαñºαñ╛αñ░ αñÜαñ╛αñ╣αññαñ╛ αñ╣αÑéαñüαÑñ",
+  "advancedDescription": "मैं नियमित रूप से अभ्यास करता हूँ और विस्तृत सुधार चाहता हूँ।",
   "@advancedDescription": {
     "description": "Description for advanced level"
   },
-  "professional": "αñ¬αÑçαñ╢αÑçαñ╡αñ░",
+  "professional": "पेशेवर",
   "@professional": {
     "description": "Experience level label: Professional"
   },
-  "professionalDescription": "αñ«αÑêαñé αñ¬αÑçαñ╢αÑçαñ╡αñ░ αñ░αÑéαñ¬ αñ╕αÑç αñ¬αÑìαñ░αñªαñ░αÑìαñ╢αñ¿, αñ╕αñ┐αñûαñ╛αññαñ╛ αñ»αñ╛ αñ░αñ┐αñòαÑëαñ░αÑìαñí αñòαñ░αññαñ╛ αñ╣αÑéαñüαÑñ",
+  "professionalDescription": "मैं पेशेवर रूप से प्रदर्शन, सिखाता या रिकॉर्ड करता हूँ।",
   "@professionalDescription": {
     "description": "Description for professional level"
   },
-  "experienceLabel": "{label} αñàαñ¿αÑüαñ¡αñ╡",
+  "experienceLabel": "{label} अनुभव",
   "@experienceLabel": {
     "description": "Semantic label for experience card",
     "placeholders": {
@@ -1257,15 +1257,15 @@
       }
     }
   },
-  "whatAreYourGoals": "αñåαñ¬αñòαÑç αñùαñ╛αñ»αñ¿ αñ▓αñòαÑìαñ╖αÑìαñ» αñòαÑìαñ»αñ╛ αñ╣αÑêαñé?",
+  "whatAreYourGoals": "आपके गायन लक्ष्य क्या हैं?",
   "@whatAreYourGoals": {
     "description": "Heading for goals step"
   },
-  "goalsSubtitle": "αñ╕αñ¡αÑÇ αñ▓αñ╛αñùαÑé αñ╡αñ┐αñòαñ▓αÑìαñ¬ αñÜαÑüαñ¿αÑçαñéαÑñ αñåαñ¬ αñçαñ¿αÑìαñ╣αÑçαñé αñ¼αñ╛αñª αñ«αÑçαñé αñ¼αñªαñ▓ αñ╕αñòαññαÑç αñ╣αÑêαñéαÑñ",
+  "goalsSubtitle": "सभी लागू विकल्प चुनें। आप इन्हें बाद में बदल सकते हैं।",
   "@goalsSubtitle": {
     "description": "Subtitle for goals step"
   },
-  "goalLabel": "{label} αñ▓αñòαÑìαñ╖αÑìαñ»",
+  "goalLabel": "{label} लक्ष्य",
   "@goalLabel": {
     "description": "Semantic label for goal card",
     "placeholders": {
@@ -1274,75 +1274,75 @@
       }
     }
   },
-  "yourVoiceStaysInControl": "αñåαñ¬αñòαÑÇ αñåαñ╡αñ╛αñ£αñ╝ αñåαñ¬αñòαÑç αñ¿αñ┐αñ»αñéαññαÑìαñ░αñú αñ«αÑçαñé αñ░αñ╣αññαÑÇ αñ╣αÑê",
+  "yourVoiceStaysInControl": "आपकी आवाज़ आपके नियंत्रण में रहती है",
   "@yourVoiceStaysInControl": {
     "description": "Heading for permission education step"
   },
-  "permissionEducationMessage": "Tuno αñ«αñ╛αñçαñòαÑìαñ░αÑïαñ½αñ╝αÑïαñ¿ αñ¬αñ╣αÑüαñüαñÜ αñòαñ╛ αñëαñ¬αñ»αÑïαñù αñòαÑçαñ╡αñ▓ αññαñ¼ αñòαñ░αññαñ╛ αñ╣αÑê αñ£αñ¼ αñåαñ¬ αñàαñ¡αÑìαñ»αñ╛αñ╕ αñ╕αññαÑìαñ░ αñ░αñ┐αñòαÑëαñ░αÑìαñí αñòαñ░αñ¿αñ╛ αñÜαÑüαñ¿αññαÑç αñ╣αÑêαñéαÑñ αñåαñ¬ αñçαñ╕ αñàαñ¿αÑüαñ«αññαñ┐ αñòαÑï αñ¼αñ╛αñª αñ«αÑçαñé αñàαñ¬αñ¿αÑç αñíαñ┐αñ╡αñ╛αñçαñ╕ αñ»αñ╛ αñ¼αÑìαñ░αñ╛αñëαñ£αñ╝αñ░ αñ╕αÑçαñƒαñ┐αñéαñùαÑìαñ╕ αñ«αÑçαñé αñ¼αñªαñ▓ αñ╕αñòαññαÑç αñ╣αÑêαñéαÑñ",
+  "permissionEducationMessage": "Tuno माइक्रोफ़ोन पहुँच का उपयोग केवल तब करता है जब आप अभ्यास सत्र रिकॉर्ड करना चुनते हैं। आप इस अनुमति को बाद में अपने डिवाइस या ब्राउज़र सेटिंग्स में बदल सकते हैं।",
   "@permissionEducationMessage": {
     "description": "Message explaining microphone usage"
   },
-  "requiredForRecording": "αñ╡αÑëαñçαñ╕ αñ░αñ┐αñòαÑëαñ░αÑìαñíαñ┐αñéαñù αñòαÑç αñ▓αñ┐αñÅ αñåαñ╡αñ╢αÑìαñ»αñò",
+  "requiredForRecording": "वॉइस रिकॉर्डिंग के लिए आवश्यक",
   "@requiredForRecording": {
     "description": "Info point title: required for recording"
   },
-  "requiredForRecordingDesc": "AI αñ½αÑÇαñíαñ¼αÑêαñò αñòαÑç αñ▓αñ┐αñÅ αñåαñ¬αñòαÑç αñùαñ╛αñ»αñ¿ αñòαÑï αñòαÑêαñ¬αÑìαñÜαñ░ αñòαñ░αñ¿αÑç αñ╣αÑçαññαÑü αñ«αñ╛αñçαñòαÑìαñ░αÑïαñ½αñ╝αÑïαñ¿ αñ¬αñ╣αÑüαñüαñÜ αñåαñ╡αñ╢αÑìαñ»αñò αñ╣αÑêαÑñ",
+  "requiredForRecordingDesc": "AI फीडबैक के लिए आपके गायन को कैप्चर करने हेतु माइक्रोफ़ोन पहुँच आवश्यक है।",
   "@requiredForRecordingDesc": {
     "description": "Info point description: required for recording"
   },
-  "noAutoRecord": "Tuno αñ╕αÑìαñ╡αñÜαñ╛αñ▓αñ┐αññ αñ░αÑéαñ¬ αñ╕αÑç αñ░αñ┐αñòαÑëαñ░αÑìαñí αñ¿αñ╣αÑÇαñé αñòαñ░αÑçαñùαñ╛",
+  "noAutoRecord": "Tuno स्वचालित रूप से रिकॉर्ड नहीं करेगा",
   "@noAutoRecord": {
     "description": "Info point title: no auto recording"
   },
-  "noAutoRecordDesc": "αñ░αñ┐αñòαÑëαñ░αÑìαñíαñ┐αñéαñù αñòαÑçαñ╡αñ▓ αññαñ¼ αñ╣αÑïαññαÑÇ αñ╣αÑê αñ£αñ¼ αñåαñ¬ αñ╕αÑìαñ¬αñ╖αÑìαñƒ αñ░αÑéαñ¬ αñ╕αÑç αñàαñ¡αÑìαñ»αñ╛αñ╕ αñ╕αññαÑìαñ░ αñ╢αÑüαñ░αÑé αñòαñ░αññαÑç αñ╣αÑêαñéαÑñ",
+  "noAutoRecordDesc": "रिकॉर्डिंग केवल तब होती है जब आप स्पष्ट रूप से अभ्यास सत्र शुरू करते हैं।",
   "@noAutoRecordDesc": {
     "description": "Info point description: no auto recording"
   },
-  "permissionCanBeChanged": "αñàαñ¿αÑüαñ«αññαñ┐ αñ¼αñ╛αñª αñ«αÑçαñé αñ¼αñªαñ▓αÑÇ αñ£αñ╛ αñ╕αñòαññαÑÇ αñ╣αÑê",
+  "permissionCanBeChanged": "अनुमति बाद में बदली जा सकती है",
   "@permissionCanBeChanged": {
     "description": "Info point title: permission can be changed"
   },
-  "permissionCanBeChangedDesc": "αñåαñ¬ αñíαñ┐αñ╡αñ╛αñçαñ╕/αñ¼αÑìαñ░αñ╛αñëαñ£αñ╝αñ░ αñ╕αÑçαñƒαñ┐αñéαñùαÑìαñ╕ αñ«αÑçαñé αñòαñ¡αÑÇ αñ¡αÑÇ αñ«αñ╛αñçαñòαÑìαñ░αÑïαñ½αñ╝αÑïαñ¿ αñ¬αñ╣αÑüαñüαñÜ αñªαÑç αñ»αñ╛ αñ░αñªαÑìαñª αñòαñ░ αñ╕αñòαññαÑç αñ╣αÑêαñéαÑñ",
+  "permissionCanBeChangedDesc": "आप डिवाइस/ब्राउज़र सेटिंग्स में कभी भी माइक्रोफ़ोन पहुँच दे या रद्द कर सकते हैं।",
   "@permissionCanBeChangedDesc": {
     "description": "Info point description: permission can be changed"
   },
-  "requestingPermission": "αñàαñ¿αÑüαñ░αÑïαñº αñòαñ░ αñ░αñ╣αñ╛ αñ╣αÑê...",
+  "requestingPermission": "अनुरोध कर रहा है...",
   "@requestingPermission": {
     "description": "Label while requesting microphone permission"
   },
-  "enableMicrophone": "αñ«αñ╛αñçαñòαÑìαñ░αÑïαñ½αñ╝αÑïαñ¿ αñ╕αñòαÑìαñ╖αñ« αñòαñ░αÑçαñé",
+  "enableMicrophone": "माइक्रोफ़ोन सक्षम करें",
   "@enableMicrophone": {
     "description": "Button to enable microphone permission"
   },
-  "openAppSettingsManually": "αñÉαñ¬ αñ╕αÑçαñƒαñ┐αñéαñùαÑìαñ╕ αñ«αÑêαñ¿αÑìαñ»αÑüαñàαñ▓ αñ░αÑéαñ¬ αñ╕αÑç αñûαÑïαñ▓αÑçαñé",
+  "openAppSettingsManually": "ऐप सेटिंग्स मैन्युअल रूप से खोलें",
   "@openAppSettingsManually": {
     "description": "Button to open app settings manually"
   },
-  "microphoneGrantedMessage": "αñ«αñ╛αñçαñòαÑìαñ░αÑïαñ½αñ╝αÑïαñ¿ αñ¬αñ╣αÑüαñüαñÜ αñ╕αÑìαñ╡αÑÇαñòαÑâαññαÑñ αñåαñ¬ αñ░αñ┐αñòαÑëαñ░αÑìαñí αñòαñ░αñ¿αÑç αñòαÑç αñ▓αñ┐αñÅ αññαÑêαñ»αñ╛αñ░ αñ╣αÑêαñé!",
+  "microphoneGrantedMessage": "माइक्रोफ़ोन पहुँच स्वीकृत। आप रिकॉर्ड करने के लिए तैयार हैं!",
   "@microphoneGrantedMessage": {
     "description": "Message when microphone is granted"
   },
-  "continueWithoutMic": "αñåαñ¬ αñ«αñ╛αñçαñòαÑìαñ░αÑïαñ½αñ╝αÑïαñ¿ αñòαÑç αñ¼αñ┐αñ¿αñ╛ αñæαñ¿αñ¼αÑïαñ░αÑìαñíαñ┐αñéαñù αñ£αñ╛αñ░αÑÇ αñ░αñû αñ╕αñòαññαÑç αñ╣αÑêαñéαÑñ αñ£αñ¼ αñåαñ¬ αñàαñ¡αÑìαñ»αñ╛αñ╕ αñ╕αññαÑìαñ░ αñ╢αÑüαñ░αÑé αñòαñ░αÑçαñéαñùαÑç αññαñ¼ αñ░αñ┐αñòαÑëαñ░αÑìαñíαñ┐αñéαñù αñòαÑç αñ▓αñ┐αñÅ αñàαñ¿αÑüαñ«αññαñ┐ αñòαÑÇ αñåαñ╡αñ╢αÑìαñ»αñòαññαñ╛ αñ╣αÑïαñùαÑÇαÑñ",
+  "continueWithoutMic": "आप माइक्रोफ़ोन के बिना ऑनबोर्डिंग जारी रख सकते हैं। जब आप अभ्यास सत्र शुरू करेंगे तब रिकॉर्डिंग के लिए अनुमति की आवश्यकता होगी।",
   "@continueWithoutMic": {
     "description": "Info about continuing without microphone"
   },
-  "micPermissionGrantedSnackbar": "αñ«αñ╛αñçαñòαÑìαñ░αÑïαñ½αñ╝αÑïαñ¿ αñ¬αñ╣αÑüαñüαñÜ αñ╕αÑìαñ╡αÑÇαñòαÑâαññαÑñ αñàαñ¼ αñåαñ¬ αñàαñ¬αñ¿αÑÇ αñåαñ╡αñ╛αñ£αñ╝ αñ░αñ┐αñòαÑëαñ░αÑìαñí αñòαñ░ αñ╕αñòαññαÑç αñ╣αÑêαñéαÑñ",
+  "micPermissionGrantedSnackbar": "माइक्रोफ़ोन पहुँच स्वीकृत। अब आप अपनी आवाज़ रिकॉर्ड कर सकते हैं।",
   "@micPermissionGrantedSnackbar": {
     "description": "Snackbar when microphone is granted"
   },
-  "micPermissionDeniedSnackbar": "αñ«αñ╛αñçαñòαÑìαñ░αÑïαñ½αñ╝αÑïαñ¿ αñ¬αñ╣αÑüαñüαñÜ αñàαñ╕αÑìαñ╡αÑÇαñòαÑâαññαÑñ αñåαñ¬ αñçαñ╕αÑç αñ¼αñ╛αñª αñ«αÑçαñé αñ╕αÑçαñƒαñ┐αñéαñùαÑìαñ╕ αñ«αÑçαñé αñ╕αñòαÑìαñ╖αñ« αñòαñ░ αñ╕αñòαññαÑç αñ╣αÑêαñéαÑñ",
+  "micPermissionDeniedSnackbar": "माइक्रोफ़ोन पहुँच अस्वीकृत। आप इसे बाद में सेटिंग्स में सक्षम कर सकते हैं।",
   "@micPermissionDeniedSnackbar": {
     "description": "Snackbar when microphone is denied"
   },
-  "micPermissionPermanentlyDeniedSnackbar": "αñ«αñ╛αñçαñòαÑìαñ░αÑïαñ½αñ╝αÑïαñ¿ αñ¬αñ╣αÑüαñüαñÜ αñ╕αÑìαñÑαñ╛αñ»αÑÇ αñ░αÑéαñ¬ αñ╕αÑç αñàαñ╕αÑìαñ╡αÑÇαñòαÑâαññαÑñ αñòαÑâαñ¬αñ»αñ╛ αñÉαñ¬ αñ╕αÑçαñƒαñ┐αñéαñùαÑìαñ╕ αñ«αÑçαñé αñçαñ╕αÑç αñ╕αñòαÑìαñ╖αñ« αñòαñ░αÑçαñéαÑñ",
+  "micPermissionPermanentlyDeniedSnackbar": "माइक्रोफ़ोन पहुँच स्थायी रूप से अस्वीकृत। कृपया ऐप सेटिंग्स में इसे सक्षम करें।",
   "@micPermissionPermanentlyDeniedSnackbar": {
     "description": "Snackbar when microphone is permanently denied"
   },
-  "micPermissionLimitedSnackbar": "αñ╕αÑÇαñ«αñ┐αññ αñ«αñ╛αñçαñòαÑìαñ░αÑïαñ½αñ╝αÑïαñ¿ αñ¬αñ╣αÑüαñüαñÜ αñ╕αÑìαñ╡αÑÇαñòαÑâαññαÑñ αñåαñ¬ αñ¬αÑìαñ░αññαñ┐αñ¼αñéαñºαÑïαñé αñòαÑç αñ╕αñ╛αñÑ αñ░αñ┐αñòαÑëαñ░αÑìαñí αñòαñ░ αñ╕αñòαññαÑç αñ╣αÑêαñéαÑñ",
+  "micPermissionLimitedSnackbar": "सीमित माइक्रोफ़ोन पहुँच स्वीकृत। आप प्रतिबंधों के साथ रिकॉर्ड कर सकते हैं।",
   "@micPermissionLimitedSnackbar": {
     "description": "Snackbar for limited microphone permission"
   },
-  "permissionStatusLabel": "αñàαñ¿αÑüαñ«αññαñ┐ αñ╕αÑìαñÑαñ┐αññαñ┐: {status}",
+  "permissionStatusLabel": "अनुमति स्थिति: {status}",
   "@permissionStatusLabel": {
     "description": "Fallback label for unknown permission status",
     "placeholders": {
@@ -1351,35 +1351,35 @@
       }
     }
   },
-  "failedToRequestPermission": "αñàαñ¿αÑüαñ«αññαñ┐ αñòαñ╛ αñàαñ¿αÑüαñ░αÑïαñº αñòαñ░αñ¿αÑç αñ«αÑçαñé αñ╡αñ┐αñ½αñ▓αÑñ αñòαÑâαñ¬αñ»αñ╛ αñ¬αÑüαñ¿αñâ αñ¬αÑìαñ░αñ»αñ╛αñ╕ αñòαñ░αÑçαñéαÑñ",
+  "failedToRequestPermission": "अनुमति का अनुरोध करने में विफल। कृपया पुनः प्रयास करें।",
   "@failedToRequestPermission": {
     "description": "Error message when permission request fails"
   },
-  "reviewYourSetup": "αñàαñ¬αñ¿αÑÇ αñ╕αÑçαñƒαñàαñ¬ αñ╕αñ«αÑÇαñòαÑìαñ╖αñ╛ αñòαñ░αÑçαñé",
+  "reviewYourSetup": "अपनी सेटअप समीक्षा करें",
   "@reviewYourSetup": {
     "description": "Heading for review step"
   },
-  "reviewSubtitle": "αñàαñ¬αñ¿αÑç αñÜαñ»αñ¿αÑïαñé αñòαÑÇ αñ£αñ╛αñüαñÜ αñòαñ░αÑçαñé αñöαñ░ αñ»αñªαñ┐ αñåαñ╡αñ╢αÑìαñ»αñò αñ╣αÑï αññαÑï αñ╕αñéαñ¬αñ╛αñªαñ┐αññ αñòαñ░αÑçαñéαÑñ",
+  "reviewSubtitle": "अपने चयनों की जाँच करें और यदि आवश्यक हो तो संपादित करें।",
   "@reviewSubtitle": {
     "description": "Subtitle for review step"
   },
-  "languageSection": "αñ¡αñ╛αñ╖αñ╛",
+  "languageSection": "भाषा",
   "@languageSection": {
     "description": "Section label for language review"
   },
-  "experienceLevel": "αñàαñ¿αÑüαñ¡αñ╡ αñ╕αÑìαññαñ░",
+  "experienceLevel": "अनुभव स्तर",
   "@experienceLevel": {
     "description": "Section label for experience review"
   },
-  "singingGoals": "αñùαñ╛αñ»αñ¿ αñ▓αñòαÑìαñ╖αÑìαñ»",
+  "singingGoals": "गायन लक्ष्य",
   "@singingGoals": {
     "description": "Section label for goals review"
   },
-  "noGoalsSelected": "αñòαÑïαñê αñ▓αñòαÑìαñ╖αÑìαñ» αñÜαñ»αñ¿αñ┐αññ αñ¿αñ╣αÑÇαñé",
+  "noGoalsSelected": "कोई लक्ष्य चयनित नहीं",
   "@noGoalsSelected": {
     "description": "Text when no goals are selected"
   },
-  "goalsSelected": "{count} αñ▓αñòαÑìαñ╖αÑìαñ» αñÜαñ»αñ¿αñ┐αññ",
+  "goalsSelected": "{count} लक्ष्य चयनित",
   "@goalsSelected": {
     "description": "Text showing number of selected goals",
     "placeholders": {
@@ -1388,63 +1388,63 @@
       }
     }
   },
-  "micAccess": "αñ«αñ╛αñçαñòαÑìαñ░αÑïαñ½αñ╝αÑïαñ¿ αñ¬αñ╣αÑüαñüαñÜ",
+  "micAccess": "माइक्रोफ़ोन पहुँच",
   "@micAccess": {
     "description": "Section label for microphone review"
   },
-  "checkingPermission": "αñàαñ¿αÑüαñ«αññαñ┐ αñ£αñ╛αñüαñÜ αñ░αñ╣αñ╛ αñ╣αÑê...",
+  "checkingPermission": "अनुमति जाँच रहा है...",
   "@checkingPermission": {
     "description": "Text while checking permission status"
   },
-  "permissionGranted": "αñàαñ¿αÑüαñ«αññαñ┐ αñ╕αÑìαñ╡αÑÇαñòαÑâαññ",
+  "permissionGranted": "अनुमति स्वीकृत",
   "@permissionGranted": {
     "description": "Text when permission is granted"
   },
-  "permissionNotGranted": "αñàαñ¿αÑüαñ«αññαñ┐ αñ╕αÑìαñ╡αÑÇαñòαÑâαññ αñ¿αñ╣αÑÇαñé (αñ░αñ┐αñòαÑëαñ░αÑìαñíαñ┐αñéαñù αñòαÑç αñ▓αñ┐αñÅ αñåαñ╡αñ╢αÑìαñ»αñò)",
+  "permissionNotGranted": "अनुमति स्वीकृत नहीं (रिकॉर्डिंग के लिए आवश्यक)",
   "@permissionNotGranted": {
     "description": "Text when permission is not granted"
   },
-  "change": "αñ¼αñªαñ▓αÑçαñé",
+  "change": "बदलें",
   "@change": {
     "description": "Button text for change action"
   },
-  "edit": "αñ╕αñéαñ¬αñ╛αñªαñ┐αññ αñòαñ░αÑçαñé",
+  "edit": "संपादित करें",
   "@edit": {
     "description": "Button text for edit action"
   },
-  "completeSetup": "αñ╕αÑçαñƒαñàαñ¬ αñ¬αÑéαñ░αñ╛ αñòαñ░αÑçαñé",
+  "completeSetup": "सेटअप पूरा करें",
   "@completeSetup": {
     "description": "Button text for completing setup"
   },
-  "pleaseSignInAgain": "αñòαÑâαñ¬αñ»αñ╛ αñàαñ¬αñ¿αñ╛ αñ╕αÑçαñƒαñàαñ¬ αñ¬αÑéαñ░αñ╛ αñòαñ░αñ¿αÑç αñòαÑç αñ▓αñ┐αñÅ αñ¬αÑüαñ¿αñâ αñ╕αñ╛αñçαñ¿ αñçαñ¿ αñòαñ░αÑçαñéαÑñ",
+  "pleaseSignInAgain": "कृपया अपना सेटअप पूरा करने के लिए पुनः साइन इन करें।",
   "@pleaseSignInAgain": {
     "description": "Snackbar when user needs to sign in again"
   },
-  "notSelected": "αñÜαñ»αñ¿αñ┐αññ αñ¿αñ╣αÑÇαñé",
+  "notSelected": "चयनित नहीं",
   "@notSelected": {
     "description": "Text when nothing is selected"
   },
-  "setupSaveFailed": "αñ╣αñ« αñåαñ¬αñòαñ╛ αñ╕αÑçαñƒαñàαñ¬ αñ╕αñ╣αÑçαñ£ αñ¿αñ╣αÑÇαñé αñ╕αñòαÑçαÑñ αñòαÑâαñ¬αñ»αñ╛ αñ¬αÑüαñ¿αñâ αñ¬αÑìαñ░αñ»αñ╛αñ╕ αñòαñ░αÑçαñéαÑñ",
+  "setupSaveFailed": "हम आपका सेटअप सहेज नहीं सके। कृपया पुनः प्रयास करें।",
   "@setupSaveFailed": {
     "description": "Error message when setup save fails"
   },
-  "onboardingLanguageRequired": "αñ£αñ╛αñ░αÑÇ αñ░αñûαñ¿αÑç αñòαÑç αñ▓αñ┐αñÅ αñ¡αñ╛αñ╖αñ╛ αñÜαÑüαñ¿αÑçαñéαÑñ",
+  "onboardingLanguageRequired": "जारी रखने के लिए भाषा चुनें।",
   "@onboardingLanguageRequired": {
     "description": "Validation error when no language is selected during onboarding"
   },
-  "onboardingExperienceRequired": "αñ£αñ╛αñ░αÑÇ αñ░αñûαñ¿αÑç αñòαÑç αñ▓αñ┐αñÅ αñàαñ¬αñ¿αñ╛ αñàαñ¿αÑüαñ¡αñ╡ αñ╕αÑìαññαñ░ αñÜαÑüαñ¿αÑçαñéαÑñ",
+  "onboardingExperienceRequired": "जारी रखने के लिए अपना अनुभव स्तर चुनें।",
   "@onboardingExperienceRequired": {
     "description": "Validation error when no experience level is selected during onboarding"
   },
-  "onboardingGoalRequired": "αñ£αñ╛αñ░αÑÇ αñ░αñûαñ¿αÑç αñòαÑç αñ▓αñ┐αñÅ αñòαñ« αñ╕αÑç αñòαñ« αñÅαñò αñ▓αñòαÑìαñ╖αÑìαñ» αñÜαÑüαñ¿αÑçαñéαÑñ",
+  "onboardingGoalRequired": "जारी रखने के लिए कम से कम एक लक्ष्य चुनें।",
   "@onboardingGoalRequired": {
     "description": "Validation error when no goals are selected during onboarding"
   },
-  "onboardingCheckFailed": "αñòαÑüαñ¢ αñùαñ▓αññ αñ╣αÑï αñùαñ»αñ╛αÑñ αñòαÑâαñ¬αñ»αñ╛ αñ¬αÑüαñ¿αñâ αñ¬αÑìαñ░αñ»αñ╛αñ╕ αñòαñ░αÑçαñéαÑñ",
+  "onboardingCheckFailed": "कुछ गलत हो गया। कृपया पुनः प्रयास करें।",
   "@onboardingCheckFailed": {
     "description": "Error message when onboarding completion check fails"
   },
-  "somethingWentWrong": "αñòαÑüαñ¢ αñùαñ▓αññ αñ╣αÑï αñùαñ»αñ╛: {error}",
+  "somethingWentWrong": "कुछ गलत हो गया: {error}",
   "@somethingWentWrong": {
     "description": "Generic error message",
     "placeholders": {
@@ -1453,59 +1453,59 @@
       }
     }
   },
-  "micPermissionGrantedShort": "αñ«αñ╛αñçαñòαÑìαñ░αÑïαñ½αñ╝αÑïαñ¿ αñàαñ¿αÑüαñ«αññαñ┐ αñ╕αÑìαñ╡αÑÇαñòαÑâαññαÑñ",
+  "micPermissionGrantedShort": "माइक्रोफ़ोन अनुमति स्वीकृत।",
   "@micPermissionGrantedShort": {
     "description": "Snackbar when microphone is granted from review step"
   },
-  "micPermissionDeniedShort": "αñ«αñ╛αñçαñòαÑìαñ░αÑïαñ½αñ╝αÑïαñ¿ αñàαñ¿αÑüαñ«αññαñ┐ αñàαñ╕αÑìαñ╡αÑÇαñòαÑâαññαÑñ",
+  "micPermissionDeniedShort": "माइक्रोफ़ोन अनुमति अस्वीकृत।",
   "@micPermissionDeniedShort": {
     "description": "Snackbar when microphone is denied from review step"
   },
-  "couldNotRequestMicPermission": "αñàαñ¿αÑüαñ«αññαñ┐ αñòαñ╛ αñàαñ¿αÑüαñ░αÑïαñº αñ¿αñ╣αÑÇαñé αñòαñ░ αñ╕αñòαñ╛αÑñ",
+  "couldNotRequestMicPermission": "अनुमति का अनुरोध नहीं कर सका।",
   "@couldNotRequestMicPermission": {
     "description": "Error when permission request fails"
   },
-  "choosePracticeMode": "αñàαñ¡αÑìαñ»αñ╛αñ╕ αñ«αÑïαñí αñÜαÑüαñ¿αÑçαñé",
+  "choosePracticeMode": "अभ्यास मोड चुनें",
   "@choosePracticeMode": {
     "description": "Title for practice mode screen"
   },
-  "whatWouldYouLikeToDo": "αñåαñ¬ αñòαÑìαñ»αñ╛ αñòαñ░αñ¿αñ╛ αñÜαñ╛αñ╣αÑçαñéαñùαÑç?",
+  "whatWouldYouLikeToDo": "आप क्या करना चाहेंगे?",
   "@whatWouldYouLikeToDo": {
     "description": "Subtitle for practice mode screen"
   },
-  "soloPractice": "αñÅαñòαñ▓ αñàαñ¡αÑìαñ»αñ╛αñ╕",
+  "soloPractice": "एकल अभ्यास",
   "@soloPractice": {
     "description": "Practice mode: Solo Practice"
   },
-  "soloPracticeDesc": "αñòαÑçαñ╡αñ▓ αñàαñ¬αñ¿αÑÇ αñåαñ╡αñ╛αñ£αñ╝ αñ╕αÑç αñùαñ╛αñÅαñü",
+  "soloPracticeDesc": "केवल अपनी आवाज़ से गाएँ",
   "@soloPracticeDesc": {
     "description": "Description for Solo Practice mode"
   },
-  "tunoExercises": "Tuno αñàαñ¡αÑìαñ»αñ╛αñ╕",
+  "tunoExercises": "Tuno अभ्यास",
   "@tunoExercises": {
     "description": "Practice mode: Tuno Exercises"
   },
-  "tunoExercisesDesc": "αñ¿αñ┐αñ░αÑìαñªαÑçαñ╢αñ┐αññ αñàαñ¡αÑìαñ»αñ╛αñ╕αÑïαñé αñòαÑç αñ╕αñ╛αñÑ αñàαñ¡αÑìαñ»αñ╛αñ╕ αñòαñ░αÑçαñé",
+  "tunoExercisesDesc": "निर्देशित अभ्यासों के साथ अभ्यास करें",
   "@tunoExercisesDesc": {
     "description": "Description for Tuno Exercises mode"
   },
-  "uploadSong": "αñùαñ╛αñ¿αñ╛ αñàαñ¬αñ▓αÑïαñí αñòαñ░αÑçαñé",
+  "uploadSong": "गाना अपलोड करें",
   "@uploadSong": {
     "description": "Practice mode: Upload Song"
   },
-  "uploadSongDesc": "αñàαñ¬αñ¿αñ╛ αñ╕αÑìαñ╡αñ»αñé αñòαñ╛ αñƒαÑìαñ░αÑêαñò αñàαñ¬αñ▓αÑïαñí αñòαñ░αÑçαñé",
+  "uploadSongDesc": "अपना स्वयं का ट्रैक अपलोड करें",
   "@uploadSongDesc": {
     "description": "Description for Upload Song mode"
   },
-  "backingTrack": "αñ¼αÑêαñòαñ┐αñéαñù αñƒαÑìαñ░αÑêαñò",
+  "backingTrack": "बैकिंग ट्रैक",
   "@backingTrack": {
     "description": "Practice mode: Backing Track"
   },
-  "backingTrackDesc": "αñàαñ¬αñ¿αÑç αñ╕αÑìαñ╡αñ»αñé αñòαÑç αñƒαÑìαñ░αÑêαñò αñòαÑç αñ╕αñ╛αñÑ αñùαñ╛αñÅαñü",
+  "backingTrackDesc": "अपने स्वयं के ट्रैक के साथ गाएँ",
   "@backingTrackDesc": {
     "description": "Description for Backing Track mode"
   },
-  "tapToStart": "{title}, {description}. αñ╢αÑüαñ░αÑé αñòαñ░αñ¿αÑç αñòαÑç αñ▓αñ┐αñÅ αñƒαÑêαñ¬ αñòαñ░αÑçαñéαÑñ",
+  "tapToStart": "{title}, {description}. शुरू करने के लिए टैप करें।",
   "@tapToStart": {
     "description": "Semantic label for available mode card",
     "placeholders": {
@@ -1517,7 +1517,7 @@
       }
     }
   },
-  "modeNotAvailable": "{title}, {description}. αñëαñ¬αñ▓αñ¼αÑìαñº αñ¿αñ╣αÑÇαñéαÑñ",
+  "modeNotAvailable": "{title}, {description}. उपलब्ध नहीं।",
   "@modeNotAvailable": {
     "description": "Semantic label for unavailable mode card",
     "placeholders": {
@@ -1529,7 +1529,7 @@
       }
     }
   },
-  "modeComingSoon": "{title} ΓÇö αñ£αñ▓αÑìαñª αñå αñ░αñ╣αñ╛ αñ╣αÑê",
+  "modeComingSoon": "{title} — जल्द आ रहा है",
   "@modeComingSoon": {
     "description": "Tooltip for unavailable practice mode",
     "placeholders": {
@@ -1538,83 +1538,83 @@
       }
     }
   },
-  "tunoExercisesComingSoon": "Tuno αñàαñ¡αÑìαñ»αñ╛αñ╕ αñ¡αñ╡αñ┐αñ╖αÑìαñ» αñòαÑç αñàαñ¬αñíαÑçαñƒ αñ«αÑçαñé αñëαñ¬αñ▓αñ¼αÑìαñº αñ╣αÑïαñéαñùαÑçαÑñ",
+  "tunoExercisesComingSoon": "Tuno अभ्यास भविष्य के अपडेट में उपलब्ध होंगे।",
   "@tunoExercisesComingSoon": {
     "description": "Snackbar when Tuno Exercises is tapped"
   },
-  "backingTracksComingSoon": "αñ¼αÑêαñòαñ┐αñéαñù αñƒαÑìαñ░αÑêαñò αñ¡αñ╡αñ┐αñ╖αÑìαñ» αñòαÑç αñàαñ¬αñíαÑçαñƒ αñ«αÑçαñé αñëαñ¬αñ▓αñ¼αÑìαñº αñ╣αÑïαñéαñùαÑçαÑñ",
+  "backingTracksComingSoon": "बैकिंग ट्रैक भविष्य के अपडेट में उपलब्ध होंगे।",
   "@backingTracksComingSoon": {
     "description": "Snackbar when Backing Track is tapped"
   },
-  "voicePractice": "αñ╡αÑëαñçαñ╕ αñàαñ¡αÑìαñ»αñ╛αñ╕",
+  "voicePractice": "वॉइस अभ्यास",
   "@voicePractice": {
     "description": "Title for voice practice screen"
   },
-  "voicePracticeSubtitle": "αñàαñ¬αñ¿αñ╛ αñùαñ╛αñ»αñ¿ αñ░αñ┐αñòαÑëαñ░αÑìαñí αñòαñ░αÑçαñé αñöαñ░ αñ¬αñ┐αñÜ, αñ▓αñ» αñöαñ░ αñƒαÑïαñ¿ αñ¬αñ░ AI-αñ╕αñéαñÜαñ╛αñ▓αñ┐αññ αñ½αÑÇαñíαñ¼αÑêαñò αñ¬αÑìαñ░αñ╛αñ¬αÑìαññ αñòαñ░αÑçαñéαÑñ",
+  "voicePracticeSubtitle": "अपना गायन रिकॉर्ड करें और पिच, लय और टोन पर AI-संचालित फीडबैक प्राप्त करें।",
   "@voicePracticeSubtitle": {
     "description": "Subtitle for voice practice screen"
   },
-  "requestingMicPermission": "αñ«αñ╛αñçαñòαÑìαñ░αÑïαñ½αñ╝αÑïαñ¿ αñàαñ¿αÑüαñ«αññαñ┐ αñòαñ╛ αñàαñ¿αÑüαñ░αÑïαñº αñòαñ░ αñ░αñ╣αñ╛ αñ╣αÑê...",
+  "requestingMicPermission": "माइक्रोफ़ोन अनुमति का अनुरोध कर रहा है...",
   "@requestingMicPermission": {
     "description": "Message while requesting microphone permission"
   },
-  "micPermissionRequired": "αñ«αñ╛αñçαñòαÑìαñ░αÑïαñ½αñ╝αÑïαñ¿ αñàαñ¿αÑüαñ«αññαñ┐ αñåαñ╡αñ╢αÑìαñ»αñò",
+  "micPermissionRequired": "माइक्रोफ़ोन अनुमति आवश्यक",
   "@micPermissionRequired": {
     "description": "Title when microphone permission is denied"
   },
-  "enableMicInSettings": "αñàαñ¬αñ¿αÑÇ αñåαñ╡αñ╛αñ£αñ╝ αñ░αñ┐αñòαÑëαñ░αÑìαñí αñòαñ░αñ¿αÑç αñòαÑç αñ▓αñ┐αñÅ αñ╕αÑçαñƒαñ┐αñéαñùαÑìαñ╕ αñ«αÑçαñé αñ«αñ╛αñçαñòαÑìαñ░αÑïαñ½αñ╝αÑïαñ¿ αñ¬αñ╣αÑüαñüαñÜ αñ╕αñòαÑìαñ╖αñ« αñòαñ░αÑçαñéαÑñ",
+  "enableMicInSettings": "अपनी आवाज़ रिकॉर्ड करने के लिए सेटिंग्स में माइक्रोफ़ोन पहुँच सक्षम करें।",
   "@enableMicInSettings": {
     "description": "Message to enable microphone"
   },
-  "recording": "αñ░αñ┐αñòαÑëαñ░αÑìαñí αñòαñ░ αñ░αñ╣αñ╛ αñ╣αÑê...",
+  "recording": "रिकॉर्ड कर रहा है...",
   "@recording": {
     "description": "Status label when recording"
   },
-  "recordingSaved": "αñ░αñ┐αñòαÑëαñ░αÑìαñíαñ┐αñéαñù αñ╕αñ╣αÑçαñ£αÑÇ αñùαñê",
+  "recordingSaved": "रिकॉर्डिंग सहेजी गई",
   "@recordingSaved": {
     "description": "Status label when recording is saved"
   },
-  "readyToRecord": "αñ░αñ┐αñòαÑëαñ░αÑìαñí αñòαñ░αñ¿αÑç αñòαÑç αñ▓αñ┐αñÅ αññαÑêαñ»αñ╛αñ░",
+  "readyToRecord": "रिकॉर्ड करने के लिए तैयार",
   "@readyToRecord": {
     "description": "Status label when ready to record"
   },
-  "startRecording": "αñ░αñ┐αñòαÑëαñ░αÑìαñíαñ┐αñéαñù αñ╢αÑüαñ░αÑé αñòαñ░αÑçαñé",
+  "startRecording": "रिकॉर्डिंग शुरू करें",
   "@startRecording": {
     "description": "Button to start recording"
   },
-  "stopRecording": "αñ░αñ┐αñòαÑëαñ░αÑìαñíαñ┐αñéαñù αñ¼αñéαñª αñòαñ░αÑçαñé",
+  "stopRecording": "रिकॉर्डिंग बंद करें",
   "@stopRecording": {
     "description": "Button to stop recording"
   },
-  "deleteAndRecordAgain": "αñ╣αñƒαñ╛αñÅαñü αñöαñ░ αñ¬αÑüαñ¿αñâ αñ░αñ┐αñòαÑëαñ░αÑìαñí αñòαñ░αÑçαñé",
+  "deleteAndRecordAgain": "हटाएँ और पुनः रिकॉर्ड करें",
   "@deleteAndRecordAgain": {
     "description": "Button to delete and record again"
   },
-  "reviewRecording": "αñ░αñ┐αñòαÑëαñ░αÑìαñíαñ┐αñéαñù αñ╕αñ«αÑÇαñòαÑìαñ╖αñ╛ αñòαñ░αÑçαñé",
+  "reviewRecording": "रिकॉर्डिंग समीक्षा करें",
   "@reviewRecording": {
     "description": "Button to review recording"
   },
-  "orTapMicAbove": "αñ»αñ╛ αñèαñ¬αñ░ αñ«αñ╛αñçαñòαÑìαñ░αÑïαñ½αñ╝αÑïαñ¿ αñƒαÑêαñ¬ αñòαñ░αÑçαñé",
+  "orTapMicAbove": "या ऊपर माइक्रोफ़ोन टैप करें",
   "@orTapMicAbove": {
     "description": "Instruction text below recording panel"
   },
-  "discardRecordingTitle": "αñ░αñ┐αñòαÑëαñ░αÑìαñíαñ┐αñéαñù αñ¢αÑïαñíαñ╝αÑçαñé?",
+  "discardRecordingTitle": "रिकॉर्डिंग छोड़ें?",
   "@discardRecordingTitle": {
     "description": "Dialog title for discarding recording"
   },
-  "discardRecordingContent": "αñåαñ¬αñòαÑÇ αñ╡αñ░αÑìαññαñ«αñ╛αñ¿ αñ░αñ┐αñòαÑëαñ░αÑìαñíαñ┐αñéαñù αñ╕αñ╣αÑçαñ£αÑÇ αñ¿αñ╣αÑÇαñé αñ£αñ╛αñÅαñùαÑÇαÑñ",
+  "discardRecordingContent": "आपकी वर्तमान रिकॉर्डिंग सहेजी नहीं जाएगी।",
   "@discardRecordingContent": {
     "description": "Dialog content for discarding recording"
   },
-  "keepRecording": "αñ░αñ┐αñòαÑëαñ░αÑìαñíαñ┐αñéαñù αñ░αñûαÑçαñé",
+  "keepRecording": "रिकॉर्डिंग रखें",
   "@keepRecording": {
     "description": "Button to keep recording"
   },
-  "discardAndGoBack": "αñ¢αÑïαñíαñ╝αÑçαñé αñöαñ░ αñ╡αñ╛αñ¬αñ╕ αñ£αñ╛αñÅαñü",
+  "discardAndGoBack": "छोड़ें और वापस जाएँ",
   "@discardAndGoBack": {
     "description": "Button to discard and go back"
   },
-  "recordingSavedDuration": "αñ░αñ┐αñòαÑëαñ░αÑìαñíαñ┐αñéαñù αñ╕αñ╣αÑçαñ£αÑÇ αñùαñê ΓÇö {duration}",
+  "recordingSavedDuration": "रिकॉर्डिंग सहेजी गई — {duration}",
   "@recordingSavedDuration": {
     "description": "Message showing recording saved with duration",
     "placeholders": {
@@ -1623,139 +1623,139 @@
       }
     }
   },
-  "anErrorOccurred": "αñÅαñò αññαÑìαñ░αÑüαñƒαñ┐ αñ╣αÑüαñê",
+  "anErrorOccurred": "एक त्रुटि हुई",
   "@anErrorOccurred": {
     "description": "Fallback error message"
   },
-  "failedToDeleteRecording": "αñ░αñ┐αñòαÑëαñ░αÑìαñíαñ┐αñéαñù αñ╣αñƒαñ╛αñ¿αÑç αñ«αÑçαñé αñ╡αñ┐αñ½αñ▓αÑñ αñòαÑâαñ¬αñ»αñ╛ αñ¬αÑüαñ¿αñâ αñ¬αÑìαñ░αñ»αñ╛αñ╕ αñòαñ░αÑçαñéαÑñ",
+  "failedToDeleteRecording": "रिकॉर्डिंग हटाने में विफल। कृपया पुनः प्रयास करें।",
   "@failedToDeleteRecording": {
     "description": "Error message when delete fails"
   },
-  "startRecordingSemantic": "αñ░αñ┐αñòαÑëαñ░αÑìαñíαñ┐αñéαñù αñ╢αÑüαñ░αÑé αñòαñ░αÑçαñé",
+  "startRecordingSemantic": "रिकॉर्डिंग शुरू करें",
   "@startRecordingSemantic": {
     "description": "Semantic label for start recording button"
   },
-  "stopRecordingSemantic": "αñ░αñ┐αñòαÑëαñ░αÑìαñíαñ┐αñéαñù αñ¼αñéαñª αñòαñ░αÑçαñé",
+  "stopRecordingSemantic": "रिकॉर्डिंग बंद करें",
   "@stopRecordingSemantic": {
     "description": "Semantic label for stop recording button"
   },
-  "reviewRecordingTitle": "αñ░αñ┐αñòαÑëαñ░αÑìαñíαñ┐αñéαñù αñ╕αñ«αÑÇαñòαÑìαñ╖αñ╛",
+  "reviewRecordingTitle": "रिकॉर्डिंग समीक्षा",
   "@reviewRecordingTitle": {
     "description": "Title for recording review screen"
   },
-  "play": "αñÜαñ▓αñ╛αñÅαñü",
+  "play": "चलाएँ",
   "@play": {
     "description": "Tooltip and semantics for play button"
   },
-  "pause": "αñ░αÑïαñòαÑçαñé",
+  "pause": "रोकें",
   "@pause": {
     "description": "Tooltip and semantics for pause button"
   },
-  "replayFromBeginning": "αñ╢αÑüαñ░αÑüαñåαññ αñ╕αÑç αñ¬αÑüαñ¿αñâ αñÜαñ▓αñ╛αñÅαñü",
+  "replayFromBeginning": "शुरुआत से पुनः चलाएँ",
   "@replayFromBeginning": {
     "description": "Tooltip and semantics for replay button"
   },
-  "forwardTenSeconds": "10 αñ╕αÑçαñòαñéαñí αñåαñùαÑç αñ¼αñóαñ╝αñ╛αñÅαñü",
+  "forwardTenSeconds": "10 सेकंड आगे बढ़ाएँ",
   "@forwardTenSeconds": {
     "description": "Tooltip and semantics for forward button"
   },
-  "continueToAnalysis": "αñ╡αñ┐αñ╢αÑìαñ▓αÑçαñ╖αñú αñ£αñ╛αñ░αÑÇ αñ░αñûαÑçαñé",
+  "continueToAnalysis": "विश्लेषण जारी रखें",
   "@continueToAnalysis": {
     "description": "Button to continue to analysis"
   },
-  "unableToLoadAudio": "αñæαñíαñ┐αñ»αÑï αñ½αñ╝αñ╛αñçαñ▓ αñ▓αÑïαñí αñòαñ░αñ¿αÑç αñ«αÑçαñé αñàαñ╕αñ«αñ░αÑìαñÑαÑñ αñ░αñ┐αñòαÑëαñ░αÑìαñíαñ┐αñéαñù αñùαñ╛αñ»αñ¼ αñ»αñ╛ αñªαÑéαñ╖αñ┐αññ αñ╣αÑï αñ╕αñòαññαÑÇ αñ╣αÑêαÑñ",
+  "unableToLoadAudio": "ऑडियो फ़ाइल लोड करने में असमर्थ। रिकॉर्डिंग गायब या दूषित हो सकती है।",
   "@unableToLoadAudio": {
     "description": "Error message when audio fails to load"
   },
-  "analysisPending": "αñ╡αñ┐αñ╢αÑìαñ▓αÑçαñ╖αñú αñ▓αñéαñ¼αñ┐αññ",
+  "analysisPending": "विश्लेषण लंबित",
   "@analysisPending": {
     "description": "Title for analysis result screen"
   },
-  "aiAnalysisComingSoon": "AI αñ¬αñ┐αñÜ αñ╡αñ┐αñ╢αÑìαñ▓αÑçαñ╖αñú αñàαñùαñ▓αÑç αñÜαñ░αñú αñ«αÑçαñé αñ£αÑïαñíαñ╝αñ╛ αñ£αñ╛αñÅαñùαñ╛αÑñ",
+  "aiAnalysisComingSoon": "AI पिच विश्लेषण अगले चरण में जोड़ा जाएगा।",
   "@aiAnalysisComingSoon": {
     "description": "Message about AI analysis coming soon"
   },
-  "recordingDetails": "αñ░αñ┐αñòαÑëαñ░αÑìαñíαñ┐αñéαñù αñ╡αñ┐αñ╡αñ░αñú",
+  "recordingDetails": "रिकॉर्डिंग विवरण",
   "@recordingDetails": {
     "description": "Section title for recording details"
   },
-  "fileName": "αñ½αñ╝αñ╛αñçαñ▓ αñ¿αñ╛αñ«",
+  "fileName": "फ़ाइल नाम",
   "@fileName": {
     "description": "Label for file name"
   },
-  "duration": "αñàαñ╡αñºαñ┐",
+  "duration": "अवधि",
   "@duration": {
     "description": "Label for duration"
   },
-  "recorded": "αñ░αñ┐αñòαÑëαñ░αÑìαñí αñòαñ┐αñ»αñ╛ αñùαñ»αñ╛",
+  "recorded": "रिकॉर्ड किया गया",
   "@recorded": {
     "description": "Label for recorded date/time"
   },
-  "practiceAgain": "αñ¬αÑüαñ¿αñâ αñàαñ¡αÑìαñ»αñ╛αñ╕ αñòαñ░αÑçαñé",
+  "practiceAgain": "पुनः अभ्यास करें",
   "@practiceAgain": {
     "description": "Button text for practice again"
   },
-  "backToReview": "αñ╕αñ«αÑÇαñòαÑìαñ╖αñ╛ αñ¬αñ░ αñ╡αñ╛αñ¬αñ╕ αñ£αñ╛αñÅαñü",
+  "backToReview": "समीक्षा पर वापस जाएँ",
   "@backToReview": {
     "description": "Button text for back to review"
   },
-  "unableToLoadDetails": "αñ░αñ┐αñòαÑëαñ░αÑìαñíαñ┐αñéαñù αñ╡αñ┐αñ╡αñ░αñú αñ▓αÑïαñí αñòαñ░αñ¿αÑç αñ«αÑçαñé αñàαñ╕αñ«αñ░αÑìαñÑαÑñ αñ¿αÑçαñ╡αñ┐αñùαÑçαñ╢αñ¿ αñíαÑçαñƒαñ╛ αñùαñ╛αñ»αñ¼ αñ»αñ╛ αñàαñ«αñ╛αñ¿αÑìαñ» αñ╣αÑï αñ╕αñòαññαñ╛ αñ╣αÑêαÑñ",
+  "unableToLoadDetails": "रिकॉर्डिंग विवरण लोड करने में असमर्थ। नेविगेशन डेटा गायब या अमान्य हो सकता है।",
   "@unableToLoadDetails": {
     "description": "Error message when recording details cannot be loaded"
   },
-  "uploadReferenceSong": "αñ╕αñéαñªαñ░αÑìαñ¡ αñùαñ╛αñ¿αñ╛ αñàαñ¬αñ▓αÑïαñí αñòαñ░αÑçαñé",
+  "uploadReferenceSong": "संदर्भ गाना अपलोड करें",
   "@uploadReferenceSong": {
     "description": "Title for reference track screen"
   },
-  "chooseSongToPractice": "αñ╡αñ╣ αñùαñ╛αñ¿αñ╛ αñÜαÑüαñ¿αÑçαñé αñ£αñ┐αñ╕αñòαñ╛ αñåαñ¬ αñàαñ¡αÑìαñ»αñ╛αñ╕ αñòαñ░αñ¿αñ╛ αñÜαñ╛αñ╣αññαÑç αñ╣αÑêαñéαÑñ",
+  "chooseSongToPractice": "वह गाना चुनें जिसका आप अभ्यास करना चाहते हैं।",
   "@chooseSongToPractice": {
     "description": "Subtitle for reference track screen"
   },
-  "chooseAudioFile": "αñÅαñò αñæαñíαñ┐αñ»αÑï αñ½αñ╝αñ╛αñçαñ▓ αñÜαÑüαñ¿αÑçαñé",
+  "chooseAudioFile": "एक ऑडियो फ़ाइल चुनें",
   "@chooseAudioFile": {
     "description": "Title in the file selection card"
   },
-  "audioFileFormats": "MP3, WAV, M4A αñ»αñ╛ AAC ΓÇö αñàαñºαñ┐αñòαññαñ« 50 MB",
+  "audioFileFormats": "MP3, WAV, M4A या AAC — अधिकतम 50 MB",
   "@audioFileFormats": {
     "description": "Supported file formats and size limit"
   },
-  "selectSong": "αñùαñ╛αñ¿αñ╛ αñÜαÑüαñ¿αÑçαñé",
+  "selectSong": "गाना चुनें",
   "@selectSong": {
     "description": "Button to select a song"
   },
-  "selecting": "αñÜαÑüαñ¿ αñ░αñ╣αñ╛ αñ╣αÑê...",
+  "selecting": "चुन रहा है...",
   "@selecting": {
     "description": "Label while selecting a file"
   },
-  "remove": "αñ╣αñƒαñ╛αñÅαñü",
+  "remove": "हटाएँ",
   "@remove": {
     "description": "Button to remove selected track"
   },
-  "replaceSong": "αñùαñ╛αñ¿αñ╛ αñ¼αñªαñ▓αÑçαñé",
+  "replaceSong": "गाना बदलें",
   "@replaceSong": {
     "description": "Button to replace selected track"
   },
-  "trackSelected": "αñƒαÑìαñ░αÑêαñò αñÜαñ»αñ¿αñ┐αññαÑñ αñàαñ¡αÑìαñ»αñ╛αñ╕ αñ╕αÑçαñƒαñàαñ¬ αñàαñùαñ▓αÑç αñÜαñ░αñú αñ«αÑçαñé αñ£αÑïαñíαñ╝αñ╛ αñ£αñ╛αñÅαñùαñ╛αÑñ",
+  "trackSelected": "ट्रैक चयनित। अभ्यास सेटअप अगले चरण में जोड़ा जाएगा।",
   "@trackSelected": {
     "description": "Message when track is selected"
   },
-  "couldNotSelectFile": "αñ½αñ╝αñ╛αñçαñ▓ αñÜαÑüαñ¿αñ¿αÑç αñ«αÑçαñé αñàαñ╕αñ«αñ░αÑìαñÑ",
+  "couldNotSelectFile": "फ़ाइल चुनने में असमर्थ",
   "@couldNotSelectFile": {
     "description": "Error title when file selection fails"
   },
-  "unexpectedError": "αñÅαñò αñàαñ¬αÑìαñ░αññαÑìαñ»αñ╛αñ╢αñ┐αññ αññαÑìαñ░αÑüαñƒαñ┐ αñ╣αÑüαñêαÑñ",
+  "unexpectedError": "एक अप्रत्याशित त्रुटि हुई।",
   "@unexpectedError": {
     "description": "Fallback error message"
   },
-  "retry": "αñ¬αÑüαñ¿αñâ αñ¬αÑìαñ░αñ»αñ╛αñ╕ αñòαñ░αÑçαñé",
+  "retry": "पुनः प्रयास करें",
   "@retry": {
     "description": "Button to retry file selection"
   },
-  "privacyNote": "αñåαñ¬αñòαñ╛ αñ╕αñéαñªαñ░αÑìαñ¡ αñƒαÑìαñ░αÑêαñò αñçαñ╕ αñíαñ┐αñ╡αñ╛αñçαñ╕ αñ¬αñ░ αñ░αñ╣αññαñ╛ αñ╣αÑê αñöαñ░ αñàαñ¬αñ▓αÑïαñí αñ¿αñ╣αÑÇαñé αñòαñ┐αñ»αñ╛ αñ£αñ╛αññαñ╛ αñ╣αÑêαÑñ",
+  "privacyNote": "आपका संदर्भ ट्रैक इस डिवाइस पर रहता है और अपलोड नहीं किया जाता है।",
   "@privacyNote": {
     "description": "Privacy note about reference track staying on device"
   },
-  "tunoLogoSemanticLabel": "Tuno αñ▓αÑïαñùαÑï",
+  "tunoLogoSemanticLabel": "Tuno लोगो",
   "@tunoLogoSemanticLabel": {
     "description": "Semantic label for the Tuno logo on the splash screen"
   },
@@ -1826,5 +1826,143 @@
   "couldNotOpenSettingsManualInstructions": "सेटिंग्स खोली नहीं जा सकीं। कृपया माइक्रोफ़ोन एक्सेस को मैन्युअल रूप से सक्षम करें।",
   "@couldNotOpenSettingsManualInstructions": {
     "description": "Error message when settings cannot be opened automatically"
+  },
+  "recordingLibrary": "रिकॉर्डिंग लाइब्रेरी",
+  "@recordingLibrary": {
+    "description": "Title for the Recording Library screen"
+  },
+  "yourSavedPracticeRecordings": "आपके सहेजे गए अभ्यास रिकॉर्डिंग",
+  "@yourSavedPracticeRecordings": {
+    "description": "Subtitle on the Recording Library screen"
+  },
+  "searchRecordings": "रिकॉर्डिंग खोजें",
+  "@searchRecordings": {
+    "description": "Placeholder for the search field"
+  },
+  "filterAll": "सभी",
+  "@filterAll": {
+    "description": "Filter option: show all recordings"
+  },
+  "filterFavorites": "पसंदीदा",
+  "@filterFavorites": {
+    "description": "Filter option: show only favorite recordings"
+  },
+  "noRecordingsYet": "अभी तक कोई रिकॉर्डिंग नहीं",
+  "@noRecordingsYet": {
+    "description": "Empty state title when no recordings exist"
+  },
+  "completePracticeToSaveFirst": "अपना पहला रिकॉर्डिंग सहेजने के लिए एक अभ्यास सत्र पूरा करें।",
+  "@completePracticeToSaveFirst": {
+    "description": "Empty state description when no recordings exist"
+  },
+  "startPractice": "अभ्यास शुरू करें",
+  "@startPractice": {
+    "description": "Button to navigate to practice modes from empty state"
+  },
+  "errorLoadingRecordings": "रिकॉर्डिंग लोड करने में विफल",
+  "@errorLoadingRecordings": {
+    "description": "Error state title when loading recordings fails"
+  },
+  "retry": "पुनः प्रयास करें",
+  "@retry": {
+    "description": "Button to retry loading recordings"
+  },
+  "recordedOn": "रिकॉर्ड किया गया",
+  "@recordedOn": {
+    "description": "Label for recording date"
+  },
+  "duration": "अवधि",
+  "@duration": {
+    "description": "Label for recording duration"
+  },
+  "analysisStatus": "विश्लेषण",
+  "@analysisStatus": {
+    "description": "Label for analysis status"
+  },
+  "analysisNone": "विश्लेषण नहीं किया गया",
+  "@analysisNone": {
+    "description": "Analysis status: not analyzed"
+  },
+  "analysisPending": "विश्लेषण चल रहा है...",
+  "@analysisPending": {
+    "description": "Analysis status: in progress"
+  },
+  "analysisCompleted": "पूर्ण",
+  "@analysisCompleted": {
+    "description": "Analysis status: completed"
+  },
+  "analysisFailed": "विफल",
+  "@analysisFailed": {
+    "description": "Analysis status: failed"
+  },
+  "analysisScore": "स्कोर: {score}",
+  "@analysisScore": {
+    "description": "Analysis score display with placeholder",
+    "placeholders": {
+      "score": {
+        "type": "String"
+      }
+    }
+  },
+  "referenceTrack": "संदर्भ ट्रैक: {track}",
+  "@referenceTrack": {
+    "description": "Reference track name display with placeholder",
+    "placeholders": {
+      "track": {
+        "type": "String"
+      }
+    }
+  },
+  "renameRecording": "रिकॉर्डिंग का नाम बदलें",
+  "@renameRecording": {
+    "description": "Menu option: rename recording"
+  },
+  "addToFavorites": "पसंदीदा में जोड़ें",
+  "@addToFavorites": {
+    "description": "Menu option: add to favorites"
+  },
+  "removeFromFavorites": "पसंदीदा से हटाएं",
+  "@removeFromFavorites": {
+    "description": "Menu option: remove from favorites"
+  },
+  "deleteRecording": "रिकॉर्डिंग हटाएं",
+  "@deleteRecording": {
+    "description": "Menu option: delete recording"
+  },
+  "deleteConfirmation": "क्या आप इस रिकॉर्डिंग को हटाना चाहते हैं?",
+  "@deleteConfirmation": {
+    "description": "Confirmation dialog title for deleting a recording"
+  },
+  "deleteConfirmationMessage": "यह क्रिया पूर्ववत नहीं की जा सकती। रिकॉर्डिंग स्थायी रूप से हटा दी जाएगी।",
+  "@deleteConfirmationMessage": {
+    "description": "Confirmation dialog message for deleting a recording"
+  },
+  "cancel": "रद्द करें",
+  "@cancel": {
+    "description": "Button to cancel an action"
+  },
+  "delete": "हटाएं",
+  "@delete": {
+    "description": "Button to confirm deletion"
+  },
+  "clearLibrary": "लाइब्रेरी साफ़ करें",
+  "@clearLibrary": {
+    "description": "Overflow menu option: clear the entire library"
+  },
+  "clearLibraryConfirmation": "पूरी लाइब्रेरी साफ़ करें?",
+  "@clearLibraryConfirmation": {
+    "description": "Confirmation dialog title for clearing the library"
+  },
+  "clearLibraryConfirmationMessage": "यह सभी रिकॉर्डिंग को स्थायी रूप से हटा देगा। यह क्रिया पूर्ववत नहीं की जा सकती।",
+  "@clearLibraryConfirmationMessage": {
+    "description": "Confirmation dialog message for clearing the library"
+  },
+  "playRecording": "रिकॉर्डिंग चलाएं",
+  "@playRecording": {
+    "description": "Menu option: play recording"
+  },
+  "saving": "सहेजा जा रहा है...",
+  "@saving": {
+    "description": "Status text when saving operation is in progress"
   }
 }
