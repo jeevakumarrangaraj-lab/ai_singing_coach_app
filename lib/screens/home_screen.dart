@@ -220,6 +220,14 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                 );
                               },
                             ),
+                            const SizedBox(height: 32),
+
+                            // ── Recording Library Card ──
+                            _RecordingLibraryCard(
+                              onTap: () => context.push('/recording-library'),
+                              l10n: l10n,
+                              isDark: isDark,
+                            ),
                           ],
                         ),
                       ),
@@ -767,6 +775,121 @@ class _StreakProgressCard extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
               ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+/// Recording Library card with library/music-folder icon.
+/// Navigates to /recording-library.
+class _RecordingLibraryCard extends StatelessWidget {
+  const _RecordingLibraryCard({
+    required this.onTap,
+    required this.l10n,
+    required this.isDark,
+  });
+
+  final VoidCallback onTap;
+  final AppLocalizations l10n;
+  final bool isDark;
+
+  static const _ctaGradient = LinearGradient(
+    colors: [Color(0xFF008BA6), Color(0xFF006D98), Color(0xFF014B75)],
+    begin: Alignment.centerLeft,
+    end: Alignment.centerRight,
+    stops: [0.0, 0.52, 1.0],
+  );
+
+  static const _goldBorderGradient = LinearGradient(
+    colors: [
+      Color(0xFFFFF2A6),
+      Color(0xFFE3B94F),
+      Color(0xFFA86D16),
+      Color(0xFFF4D675),
+    ],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+  );
+
+  @override
+  Widget build(BuildContext context) {
+    final cs = Theme.of(context).colorScheme;
+    final textTheme = Theme.of(context).textTheme;
+
+    return MetallicGoldBorder(
+      borderRadius: BorderRadius.circular(19),
+      padding: 1.0,
+      gradientOpacity: 0.6,
+      boxShadow: const [
+        BoxShadow(color: Color(0x1AD9A62E), blurRadius: 5, spreadRadius: 0),
+      ],
+      child: Card(
+        color: isDark ? const Color(0xFF061E31) : const Color(0xFFF3FAFF),
+        surfaceTintColor: Colors.transparent,
+        shadowColor: Colors.transparent,
+        elevation: 0,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+        child: Semantics(
+          button: true,
+          label: l10n.recordingLibrary,
+          child: MouseRegion(
+            cursor: SystemMouseCursors.click,
+            child: _GradientCTAButton(
+              gradient: _ctaGradient,
+              goldBorderGradient: _goldBorderGradient,
+              onPressed: onTap,
+              child: Padding(
+                padding: const EdgeInsets.all(24),
+                child: Row(
+                  children: [
+                    Container(
+                      width: 56,
+                      height: 56,
+                      decoration: BoxDecoration(
+                        color: cs.primaryContainer,
+                        borderRadius: BorderRadius.circular(14),
+                      ),
+                      child: Icon(
+                        Icons.library_music_rounded,
+                        size: 28,
+                        color: cs.onPrimaryContainer,
+                      ),
+                    ),
+                    const SizedBox(width: 20),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            l10n.recordingLibrary,
+                            style: textTheme.titleLarge?.copyWith(
+                              fontSize: 20,
+                              fontWeight: FontWeight.w700,
+                              color: cs.onSurface,
+                            ),
+                          ),
+                          const SizedBox(height: 4),
+                          Text(
+                            l10n.yourSavedPracticeRecordings,
+                            style: textTheme.bodyMedium?.copyWith(
+                              color: cs.onSurfaceVariant,
+                              height: 1.4,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Icon(
+                      Icons.chevron_right_rounded,
+                      size: 28,
+                      color: cs.onSurfaceVariant,
+                    ),
+                  ],
+                ),
+              ),
             ),
           ),
         ),

@@ -318,6 +318,11 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.0.0"
+  flutter_localizations:
+    dependency: "direct main"
+    description: flutter
+    source: sdk
+    version: "0.0.0"
   flutter_plugin_android_lifecycle:
     dependency: transitive
     description:
@@ -392,6 +397,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.1.2"
+  idb_shim:
+    dependency: "direct main"
+    description:
+      name: idb_shim
+      sha256: "3448298f244bc76a14aca71461eeab6add2b8a877930521c42c2e8b71b644590"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.9.6+2"
   image:
     dependency: "direct main"
     description:
@@ -404,10 +417,10 @@ packages:
     dependency: "direct main"
     description:
       name: intl
-      sha256: "1ca20c894b1717686a2319b8548763d812bc0aabdac580420a44c5178c57a867"
+      sha256: "3df61194eb431efc39c4ceba583b95633a403f46c9fd341e550ce0bfa50e9aa5"
       url: "https://pub.dev"
     source: hosted
-    version: "0.20.3"
+    version: "0.20.2"
   jni:
     dependency: transitive
     description:
@@ -512,6 +525,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.18.0"
+  mocktail:
+    dependency: "direct dev"
+    description:
+      name: mocktail
+      sha256: "5e1bf53cc7baa8062a33b84424deb61513858ea05c601b8509e683815b5914aa"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.5"
   objective_c:
     dependency: transitive
     description:
@@ -768,6 +789,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.28.0"
+  sembast:
+    dependency: transitive
+    description:
+      name: sembast
+      sha256: a58b26925e23071cf0f4754d8449aabe829e9a9930a872fb18e6ae4c2c88e025
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.8.9+1"
   shared_preferences:
     dependency: "direct main"
     description:

@@ -4,12 +4,17 @@ import 'package:go_router/go_router.dart';
 
 import '../../features/auth/presentation/auth_controller.dart';
 import '../../features/auth/presentation/auth_router.dart';
+import '../../features/notifications/presentation/screens/notification_preferences_screen.dart';
 import '../../features/notifications/presentation/screens/notifications_screen.dart';
 import '../../features/onboarding/presentation/onboarding_completion_provider.dart';
 import '../../features/onboarding/presentation/screens/onboarding_screen.dart';
 import '../../features/practice/presentation/practice_router.dart';
+import '../../features/recording_library/presentation/screens/recording_library_screen.dart';
 import '../../features/settings/presentation/screens/account_settings_screen.dart';
+import '../../features/settings/presentation/screens/audio_video_settings_screen.dart';
 import '../../features/settings/presentation/screens/preferences_screen.dart';
+import '../../features/settings/presentation/screens/languages_screen.dart';
+import '../../features/settings/presentation/screens/privacy_security_screen.dart';
 import '../../screens/home_screen.dart';
 import '../../screens/settings_screen.dart';
 import '../../screens/welcome_screen.dart';
@@ -73,9 +78,34 @@ GoRouter _buildRouter(Ref ref) {
         builder: (context, state) => const PreferencesScreen(),
       ),
       GoRoute(
+        path: '/settings/audio-video',
+        name: 'audioVideoSettings',
+        builder: (context, state) => const AudioVideoSettingsScreen(),
+      ),
+      GoRoute(
+        path: '/settings/notifications',
+        name: 'notificationPreferences',
+        builder: (context, state) => const NotificationPreferencesScreen(),
+      ),
+      GoRoute(
+        path: '/settings/privacy-security',
+        name: 'privacySecurity',
+        builder: (context, state) => const PrivacySecurityScreen(),
+      ),
+      GoRoute(
+        path: '/settings/languages',
+        name: 'languages',
+        builder: (context, state) => const LanguagesScreen(),
+      ),
+      GoRoute(
         path: '/notifications',
         name: 'notifications',
         builder: (context, state) => const NotificationsScreen(),
+      ),
+      GoRoute(
+        path: '/recording-library',
+        name: 'recordingLibrary',
+        builder: (context, state) => const RecordingLibraryScreen(),
       ),
       ...PracticeRoutes().routes,
       ...const AuthRoutes().routes,
