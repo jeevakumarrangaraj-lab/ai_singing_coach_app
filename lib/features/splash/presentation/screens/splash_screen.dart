@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../l10n/app_localizations.dart';
 import '../../data/splash_repository.dart';
 
 /// Splash screen shown only on cold start / browser refresh.
@@ -58,7 +59,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
     _hardTimeout = Timer(_hardTimeoutDuration, () {
       if (!_hasNavigated && mounted) {
         _hasNavigated = true;
-        _navigateBasedOnAuth(ref.read(splashRepositoryProvider));
+        unawaited(_navigateBasedOnAuth(ref.read(splashRepositoryProvider)));
       }
     });
 
@@ -94,11 +95,11 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
 
     if (!_hasNavigated && mounted) {
       _hasNavigated = true;
-      _navigateBasedOnAuth(repo);
+      await _navigateBasedOnAuth(repo);
     }
   }
 
-  void _navigateBasedOnAuth(SplashRepository repo) {
+  Future<void> _navigateBasedOnAuth(SplashRepository repo) async {
     if (!mounted) return;
 
     final user = repo.currentUser;
@@ -108,12 +109,13 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
       destination = '/welcome';
     } else if (!user.emailVerified) {
       destination = '/verify-email';
-    } else if (!repo.isOnboardingCompleted) {
-      destination = '/onboarding';
     } else {
-      destination = '/home';
+      final completed = await repo.isOnboardingCompleted(user.uid);
+      if (!mounted) return;
+      destination = completed ? '/home' : '/onboarding';
     }
 
+    if (!mounted) return;
     context.go(destination);
   }
 
@@ -135,7 +137,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
       backgroundColor: Colors.black,
       body: Center(
         child: Semantics(
-          label: 'Tuno logo',
+          label: AppLocalizations.of(context)!.tunoLogoSemanticLabel,
           image: true,
           child: FadeTransition(
             opacity: _fadeAnimation,

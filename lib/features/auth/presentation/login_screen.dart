@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../l10n/app_localizations.dart';
 import '../presentation/auth_controller.dart';
 import 'widgets/auth_navigation_link.dart';
 import '../../../../core/theme/app_colors.dart';
@@ -9,11 +10,11 @@ import '../../../../core/widgets/tuno_gradient_button.dart';
 import '../../../../core/widgets/tuno_microphone_emblem.dart';
 import '../../../../core/widgets/tuno_music_background.dart';
 
-String? _validateEmail(String? value) {
+String? _validateEmail(String? value, AppLocalizations l10n) {
   final email = value?.trim() ?? '';
 
   if (email.isEmpty) {
-    return 'Email is required.';
+    return l10n.emailIsRequired;
   }
 
   final emailRegex = RegExp(
@@ -21,21 +22,21 @@ String? _validateEmail(String? value) {
   );
 
   if (!emailRegex.hasMatch(email)) {
-    return 'Enter a valid email.';
+    return l10n.enterValidEmail;
   }
 
   return null;
 }
 
-String? _validatePassword(String? value) {
+String? _validatePassword(String? value, AppLocalizations l10n) {
   final password = value ?? '';
 
   if (password.isEmpty) {
-    return 'Password is required.';
+    return l10n.passwordIsRequired;
   }
 
   if (password.length < 6) {
-    return 'Password must be at least 6 characters.';
+    return l10n.passwordMinLength;
   }
 
   return null;
@@ -114,11 +115,12 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 
   void _showComingSoon(String provider) {
     if (!mounted) return;
+    final l10n = AppLocalizations.of(context)!;
     ScaffoldMessenger.of(context)
       ..hideCurrentSnackBar()
       ..showSnackBar(
         SnackBar(
-          content: Text('$provider authentication coming soon.'),
+          content: Text(l10n.authComingSoon(provider)),
           backgroundColor: const Color(0xFF2A2A2A),
           margin: const EdgeInsets.all(16),
           duration: const Duration(seconds: 2),
@@ -163,7 +165,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
       return;
     }
 
-    _showSuccess(message: 'Login successful.');
+    final l10n = AppLocalizations.of(context)!;
+    _showSuccess(message: l10n.loginSuccessful);
   }
 
   @override
@@ -175,6 +178,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
     final textTheme = theme.textTheme;
@@ -227,16 +231,16 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             // ── 3. Back Button ──
-                            _buildBackButton(colorScheme),
+                            _buildBackButton(colorScheme, l10n),
                             const SizedBox(height: 20),
 
                             // ── 4. Tuno Brand Area ──
-                            _buildBrandRow(colorScheme, isDark),
+                            _buildBrandRow(colorScheme, isDark, l10n),
                             const SizedBox(height: 28),
 
                             // ── 5. Heading ──
                             Text(
-                              'Welcome Back! \u{1F44B}',
+                              l10n.welcomeBack,
                               style: textTheme.headlineMedium?.copyWith(
                                 fontSize: 32,
                                 fontWeight: FontWeight.w800,
@@ -247,7 +251,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                             ),
                             const SizedBox(height: 6),
                             Text(
-                              'Login to continue',
+                              l10n.loginToContinue,
                               style: textTheme.bodyMedium?.copyWith(
                                 fontSize: 15,
                                 color: isDark
@@ -294,11 +298,15 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                                 crossAxisAlignment: CrossAxisAlignment.stretch,
                                 children: [
                                   // ── 7. Email Field ──
-                                  _buildEmailField(colorScheme, isDark),
+                                  _buildEmailField(colorScheme, isDark, l10n),
                                   const SizedBox(height: 16),
 
                                   // ── 8. Password Field ──
-                                  _buildPasswordField(colorScheme, isDark),
+                                  _buildPasswordField(
+                                    colorScheme,
+                                    isDark,
+                                    l10n,
+                                  ),
                                   const SizedBox(height: 4),
 
                                   // ── Error text ──
@@ -321,19 +329,24 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                                   _buildForgotPassword(
                                     colorScheme,
                                     isLoginLoading,
+                                    l10n,
                                   ),
                                   const SizedBox(height: 20),
 
                                   // ── 10. Login Button ──
-                                  _buildLoginButton(isLoginLoading),
+                                  _buildLoginButton(isLoginLoading, l10n),
                                   const SizedBox(height: 22),
 
                                   // ── 11. Divider ──
-                                  _buildDividerWithLabel(colorScheme, isDark),
+                                  _buildDividerWithLabel(
+                                    colorScheme,
+                                    isDark,
+                                    l10n,
+                                  ),
                                   const SizedBox(height: 22),
 
                                   // ── 12. Google & Apple Buttons ──
-                                  _buildSocialButtons(isDark),
+                                  _buildSocialButtons(isDark, l10n),
                                 ],
                               ),
                             ),
@@ -341,7 +354,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                             const SizedBox(height: 24),
 
                             // ── 13. Sign-up Footer ──
-                            _buildSignupFooter(isLoginLoading),
+                            _buildSignupFooter(isLoginLoading, l10n),
                             const SizedBox(height: 16),
                           ],
                         ),
@@ -361,11 +374,11 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   // 3. BACK BUTTON
   // ─────────────────────────────────────────────────────────────
 
-  Widget _buildBackButton(ColorScheme colorScheme) {
+  Widget _buildBackButton(ColorScheme colorScheme, AppLocalizations l10n) {
     return Semantics(
-      label: 'Go back',
+      label: l10n.goBack,
       child: Tooltip(
-        message: 'Back',
+        message: l10n.back,
         child: MouseRegion(
           cursor: SystemMouseCursors.click,
           child: GestureDetector(
@@ -429,7 +442,11 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   // 4. TUNO BRAND AREA
   // ─────────────────────────────────────────────────────────────
 
-  Widget _buildBrandRow(ColorScheme colorScheme, bool isDark) {
+  Widget _buildBrandRow(
+    ColorScheme colorScheme,
+    bool isDark,
+    AppLocalizations l10n,
+  ) {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -446,7 +463,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              'Tuno',
+              l10n.tuno,
               style: TextStyle(
                 fontSize: 28,
                 fontWeight: FontWeight.w800,
@@ -458,7 +475,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
             ),
             const SizedBox(height: 2),
             Text(
-              'AI SINGING COACH',
+              l10n.aiSingingCoach,
               style: TextStyle(
                 fontSize: 11,
                 fontWeight: FontWeight.w600,
@@ -478,7 +495,11 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   // 7. EMAIL FIELD
   // ─────────────────────────────────────────────────────────────
 
-  Widget _buildEmailField(ColorScheme colorScheme, bool isDark) {
+  Widget _buildEmailField(
+    ColorScheme colorScheme,
+    bool isDark,
+    AppLocalizations l10n,
+  ) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
@@ -486,7 +507,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
         Padding(
           padding: const EdgeInsets.only(left: 4, bottom: 6),
           child: Text(
-            'Email Address',
+            l10n.emailFieldLabel,
             style: TextStyle(
               fontSize: 13,
               fontWeight: FontWeight.w600,
@@ -500,12 +521,12 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
           controller: _emailController,
           keyboardType: TextInputType.emailAddress,
           textInputAction: TextInputAction.next,
-          validator: _validateEmail,
+          validator: (v) => _validateEmail(v, l10n),
           onChanged: (_) => _clearLoginError(),
           autofillHints: const [AutofillHints.email],
           style: TextStyle(color: colorScheme.onSurface, fontSize: 15),
           decoration: InputDecoration(
-            hintText: 'Enter your email',
+            hintText: l10n.emailHint,
             prefixIcon: Icon(
               Icons.email_outlined,
               color: colorScheme.primary,
@@ -565,7 +586,11 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   // 8. PASSWORD FIELD
   // ─────────────────────────────────────────────────────────────
 
-  Widget _buildPasswordField(ColorScheme colorScheme, bool isDark) {
+  Widget _buildPasswordField(
+    ColorScheme colorScheme,
+    bool isDark,
+    AppLocalizations l10n,
+  ) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
@@ -573,7 +598,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
         Padding(
           padding: const EdgeInsets.only(left: 4, bottom: 6),
           child: Text(
-            'Password',
+            l10n.passwordFieldLabel,
             style: TextStyle(
               fontSize: 13,
               fontWeight: FontWeight.w600,
@@ -589,22 +614,24 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
           obscureText: _obscurePassword,
           textInputAction: TextInputAction.done,
           onFieldSubmitted: (_) => _handleLogin(),
-          validator: _validatePassword,
+          validator: (v) => _validatePassword(v, l10n),
           onChanged: (_) => _clearLoginError(),
           autofillHints: const [AutofillHints.password],
           style: TextStyle(color: colorScheme.onSurface, fontSize: 15),
           decoration: InputDecoration(
-            hintText: 'Enter your password',
+            hintText: l10n.passwordHint,
             prefixIcon: Icon(
               Icons.lock_outlined,
               color: colorScheme.primary,
               size: 22,
             ),
             suffixIcon: Semantics(
-              label: _obscurePassword ? 'Show password' : 'Hide password',
+              label: _obscurePassword ? l10n.showPassword : l10n.hidePassword,
               button: true,
               child: Tooltip(
-                message: _obscurePassword ? 'Show password' : 'Hide password',
+                message: _obscurePassword
+                    ? l10n.showPassword
+                    : l10n.hidePassword,
                 child: MouseRegion(
                   cursor: SystemMouseCursors.click,
                   child: IconButton(
@@ -681,11 +708,15 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   // 9. FORGOT PASSWORD
   // ─────────────────────────────────────────────────────────────
 
-  Widget _buildForgotPassword(ColorScheme colorScheme, bool isLoading) {
+  Widget _buildForgotPassword(
+    ColorScheme colorScheme,
+    bool isLoading,
+    AppLocalizations l10n,
+  ) {
     return Align(
       alignment: Alignment.centerRight,
       child: Semantics(
-        label: 'Reset password',
+        label: l10n.resetPassword,
         button: true,
         child: MouseRegion(
           cursor: SystemMouseCursors.click,
@@ -701,7 +732,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                 alignment: Alignment.centerRight,
                 padding: const EdgeInsets.symmetric(horizontal: 4),
                 child: Text(
-                  'Forgot Password?',
+                  l10n.forgotPassword,
                   style: TextStyle(
                     color: AppColors.tunoBackArrow,
                     fontSize: 14,
@@ -720,13 +751,13 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   // 10. LOGIN BUTTON
   // ─────────────────────────────────────────────────────────────
 
-  Widget _buildLoginButton(bool isLoading) {
+  Widget _buildLoginButton(bool isLoading, AppLocalizations l10n) {
     final enabled = !isLoading;
 
     return Semantics(
       button: true,
       enabled: enabled,
-      label: 'Login',
+      label: l10n.login,
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(56),
@@ -736,7 +767,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
         child: ClipRRect(
           borderRadius: BorderRadius.circular(54.5),
           child: TunoGradientButton(
-            label: 'Login',
+            label: l10n.login,
             onPressed: enabled ? _handleLogin : null,
             isLoading: isLoading,
             fullWidth: true,
@@ -755,7 +786,11 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   // 11. DIVIDER
   // ─────────────────────────────────────────────────────────────
 
-  Widget _buildDividerWithLabel(ColorScheme colorScheme, bool isDark) {
+  Widget _buildDividerWithLabel(
+    ColorScheme colorScheme,
+    bool isDark,
+    AppLocalizations l10n,
+  ) {
     return Row(
       children: [
         Expanded(
@@ -767,7 +802,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Text(
-            'or continue with',
+            l10n.orContinueWith,
             style: TextStyle(
               color: isDark
                   ? AppColors.tunoDarkSecondaryText
@@ -791,7 +826,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   // 12. GOOGLE & APPLE BUTTONS
   // ─────────────────────────────────────────────────────────────
 
-  Widget _buildSocialButtons(bool isDark) {
+  Widget _buildSocialButtons(bool isDark, AppLocalizations l10n) {
     // On narrow screens (<360px available card width), stack vertically.
     // On wider screens, show side by side.
     return LayoutBuilder(
@@ -801,25 +836,25 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
         if (canFitSideBySide) {
           return Row(
             children: [
-              Expanded(child: _buildGoogleButton(isDark)),
+              Expanded(child: _buildGoogleButton(isDark, l10n)),
               const SizedBox(width: 12),
-              Expanded(child: _buildAppleButton(isDark)),
+              Expanded(child: _buildAppleButton(isDark, l10n)),
             ],
           );
         }
 
         return Column(
           children: [
-            _buildGoogleButton(isDark),
+            _buildGoogleButton(isDark, l10n),
             const SizedBox(height: 10),
-            _buildAppleButton(isDark),
+            _buildAppleButton(isDark, l10n),
           ],
         );
       },
     );
   }
 
-  Widget _buildGoogleButton(bool isDark) {
+  Widget _buildGoogleButton(bool isDark, AppLocalizations l10n) {
     final borderColor = isDark
         ? const Color(0xFF41647D)
         : const Color(0xFFBCD3E2);
@@ -832,7 +867,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 
     return Semantics(
       button: true,
-      label: 'Login with Google. Coming soon.',
+      label: l10n.loginWithGoogle,
       child: Container(
         height: 52,
         decoration: BoxDecoration(
@@ -909,7 +944,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     );
   }
 
-  Widget _buildAppleButton(bool isDark) {
+  Widget _buildAppleButton(bool isDark, AppLocalizations l10n) {
     final borderColor = isDark
         ? const Color(0xFF41647D)
         : const Color(0xFFBCD3E2);
@@ -922,7 +957,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 
     return Semantics(
       button: true,
-      label: 'Login with Apple. Coming soon.',
+      label: l10n.loginWithApple,
       child: Container(
         height: 52,
         decoration: BoxDecoration(
@@ -981,12 +1016,12 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   // 13. SIGN-UP FOOTER
   // ─────────────────────────────────────────────────────────────
 
-  Widget _buildSignupFooter(bool isLoading) {
+  Widget _buildSignupFooter(bool isLoading, AppLocalizations l10n) {
     return Center(
       child: AuthNavigationLink(
-        prefixText: "Don't have an account? ",
-        actionText: 'Sign Up',
-        semanticLabel: 'Go to sign up',
+        prefixText: l10n.dontHaveAccount,
+        actionText: l10n.signUp,
+        semanticLabel: l10n.goToSignUp,
         isDisabled: isLoading,
         onPressed: () => context.go('/signup'),
       ),

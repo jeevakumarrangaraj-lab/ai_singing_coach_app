@@ -1964,5 +1964,62 @@
   "saving": "சேமித்து இருக்கிறது...",
   "@saving": {
     "description": "Status text when saving operation is in progress"
+  },
+  "referenceTrackLibraryTitle": "உங்கள் நூலகம்",
+  "@referenceTrackLibraryTitle": {
+    "description": "Title for the Reference Track Library screen"
+  },
+  "referenceTrackLibrarySubtitle": "உங்கள் பயிற்சிக்கு ஒரு ட்ராக் தேர்ந்தெடுக்கவும்",
+  "@referenceTrackLibrarySubtitle": {
+    "description": "Subtitle on the Reference Track Library screen"
+  },
+  "referenceTrackLibraryAddTrack": "ட்ராக் சேர்",
+  "@referenceTrackLibraryAddTrack": {
+    "description": "Button to add a new track to the library"
+  },
+  "referenceTrackLibraryEmptyTitle": "உங்கள் நூலகம் காலியாக உள்ளது",
+  "@referenceTrackLibraryEmptyTitle": {
+    "description": "Empty state title when no tracks exist"
+  },
+  "referenceTrackLibraryEmptySubtitle": "பயிற்சி தொடங்க ஒலி ட்ராக் சேர்க்கவும்",
+  "@referenceTrackLibraryEmptySubtitle": {
+    "description": "Empty state description when no tracks exist"
+  },
+  "referenceTrackLibraryViewLibrary": "நூலகத்தை பார்க்கவும்",
+  "@referenceTrackLibraryViewLibrary": {
+    "description": "Button to view the track library"
+  },
+  "referenceTrackLibraryTrackSelected": "ட்ராக் தேர்ந்தெடுக்கப்பட்டது: {name}",
+  "@referenceTrackLibraryTrackSelected": {
+    "description": "Accessibility label when a track is selected",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "referenceTrackLibraryRemove": "ட்ராக் நீக்கு",
+  "@referenceTrackLibraryRemove": {
+    "description": "Tooltip for remove track button"
+  },
+"referenceTrackLibrarySaving": "நூலகம் சேமிக்கப்படுகிறது...",
+  "@referenceTrackLibrarySaving": {
+    "description": "Status text when saving library operation is in progress"
+  },
+  "loadingLibrary": "நூலகம் ஏற்றப்படுகிறது...",
+  "@loadingLibrary": {
+    "description": "Loading state text when fetching the reference track library"
+  },
+  "referenceTrackLabel": "அடிப்படை இசை",
+  "@referenceTrackLabel": {
+    "description": "Label for reference track display"
+  },
+  "referenceTrackChange": "ட்ராக் மாற்று",
+  "@referenceTrackChange": {
+    "description": "Button to change the reference track"
+  },
+  "referenceTrackClear": "தேர்வை நீக்கு",
+  "@referenceTrackClear": {
+    "description": "Button to clear the reference track selection"
   }
 }

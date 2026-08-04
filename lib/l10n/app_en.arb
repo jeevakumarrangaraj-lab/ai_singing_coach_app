@@ -1964,5 +1964,62 @@
   "saving": "Saving...",
   "@saving": {
     "description": "Status text when saving operation is in progress"
+  },
+  "referenceTrackLibraryTitle": "Your Library",
+  "@referenceTrackLibraryTitle": {
+    "description": "Title for the Reference Track Library screen"
+  },
+  "referenceTrackLibrarySubtitle": "Choose a track for your practice",
+  "@referenceTrackLibrarySubtitle": {
+    "description": "Subtitle on the Reference Track Library screen"
+  },
+  "referenceTrackLibraryAddTrack": "Add Track",
+  "@referenceTrackLibraryAddTrack": {
+    "description": "Button to add a new track to the library"
+  },
+  "referenceTrackLibraryEmptyTitle": "Your library is empty",
+  "@referenceTrackLibraryEmptyTitle": {
+    "description": "Empty state title when no tracks exist"
+  },
+  "referenceTrackLibraryEmptySubtitle": "Add an audio track to start practising",
+  "@referenceTrackLibraryEmptySubtitle": {
+    "description": "Empty state description when no tracks exist"
+  },
+  "referenceTrackLibraryViewLibrary": "View Library",
+  "@referenceTrackLibraryViewLibrary": {
+    "description": "Button to view the track library"
+  },
+  "referenceTrackLibraryTrackSelected": "Track selected: {name}",
+  "@referenceTrackLibraryTrackSelected": {
+    "description": "Accessibility label when a track is selected",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "referenceTrackLibraryRemove": "Remove track",
+  "@referenceTrackLibraryRemove": {
+    "description": "Tooltip for remove track button"
+  },
+  "referenceTrackLibrarySaving": "Saving library...",
+  "@referenceTrackLibrarySaving": {
+    "description": "Status text when saving library operation is in progress"
+  },
+  "loadingLibrary": "Loading library...",
+  "@loadingLibrary": {
+    "description": "Loading state text when fetching the reference track library"
+  },
+  "referenceTrackLabel": "Reference Track",
+  "@referenceTrackLabel": {
+    "description": "Label for reference track display"
+  },
+  "referenceTrackChange": "Change Track",
+  "@referenceTrackChange": {
+    "description": "Button to change the reference track"
+  },
+  "referenceTrackClear": "Clear Selection",
+  "@referenceTrackClear": {
+    "description": "Button to clear the reference track selection"
   }
 }

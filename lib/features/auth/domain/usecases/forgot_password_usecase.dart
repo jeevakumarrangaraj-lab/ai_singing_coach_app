@@ -2,8 +2,7 @@ import '../errors/auth_failure.dart';
 import '../repositories/auth_repository.dart';
 
 class ForgotPasswordUseCase {
-  ForgotPasswordUseCase({required AuthRepository repository})
-    : _repository = repository;
+  ForgotPasswordUseCase({required this._repository});
 
   final AuthRepository _repository;
 

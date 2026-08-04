@@ -31,6 +31,7 @@ class _AccountSettingsScreenState extends ConsumerState<AccountSettingsScreen> {
   bool _isSendingVerification = false;
   bool _isSigningOut = false;
   bool _isDeleting = false;
+  bool _isUpdatingDisplayName = false;
 
   // ── Delete-account state ──
   bool _deleteConfirmed = false;
@@ -477,7 +478,7 @@ class _AccountSettingsScreenState extends ConsumerState<AccountSettingsScreen> {
     final l10n = AppLocalizations.of(context)!;
     final controller = TextEditingController(text: user?.displayName ?? '');
     final formKey = GlobalKey<FormState>();
-    bool isUpdating = false;
+    _isUpdatingDisplayName = false;
 
     showModalBottomSheet(
       context: context,
@@ -536,7 +537,7 @@ class _AccountSettingsScreenState extends ConsumerState<AccountSettingsScreen> {
                         }
                         return null;
                       },
-                      onFieldSubmitted: isUpdating
+                      onFieldSubmitted: _isUpdatingDisplayName
                           ? null
                           : (_) => _updateDisplayName(
                               ctx,
@@ -550,7 +551,7 @@ class _AccountSettingsScreenState extends ConsumerState<AccountSettingsScreen> {
                       width: double.infinity,
                       height: 52,
                       child: FilledButton(
-                        onPressed: isUpdating
+                        onPressed: _isUpdatingDisplayName
                             ? null
                             : () => _updateDisplayName(
                                 ctx,
@@ -558,7 +559,7 @@ class _AccountSettingsScreenState extends ConsumerState<AccountSettingsScreen> {
                                 controller,
                                 formKey,
                               ),
-                        child: isUpdating
+                        child: _isUpdatingDisplayName
                             ? const SizedBox(
                                 width: 22,
                                 height: 22,
@@ -589,14 +590,18 @@ class _AccountSettingsScreenState extends ConsumerState<AccountSettingsScreen> {
     final l10n = AppLocalizations.of(context)!;
     if (!formKey.currentState!.validate()) return;
 
-    setSheetState(() => true); // isUpdating = true
+    setSheetState(() {
+      _isUpdatingDisplayName = true;
+    });
 
     final repo = ref.read(authRepositoryProvider);
     final failure = await repo.updateDisplayName(controller.text.trim());
 
     if (!ctx.mounted) return;
 
-    setSheetState(() => false); // isUpdating = false
+    setSheetState(() {
+      _isUpdatingDisplayName = false;
+    });
 
     if (failure != null) {
       if (!mounted) return;

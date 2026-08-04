@@ -5,30 +5,31 @@ import 'package:go_router/go_router.dart';
 import '../../../../common/widgets/app_back_button.dart';
 import '../../../../core/widgets/tuno_gradient_button.dart';
 import '../../../../core/widgets/tuno_music_background.dart';
+import '../../../../l10n/app_localizations.dart';
 import '../presentation/auth_controller.dart';
 import 'widgets/auth_navigation_link.dart';
 
-String? _validateEmail(String? value) {
+String? _validateEmail(String? value, AppLocalizations l10n) {
   final email = value?.trim() ?? '';
-  if (email.isEmpty) return 'Email is required.';
+  if (email.isEmpty) return l10n.emailIsRequired;
   final emailRegex = RegExp(
     r'^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$',
   );
-  if (!emailRegex.hasMatch(email)) return 'Enter a valid email.';
+  if (!emailRegex.hasMatch(email)) return l10n.enterValidEmail;
   return null;
 }
 
-String? _validatePassword(String? value) {
+String? _validatePassword(String? value, AppLocalizations l10n) {
   final password = value ?? '';
-  if (password.isEmpty) return 'Password is required.';
-  if (password.length < 6) return 'Password must be at least 6 characters.';
+  if (password.isEmpty) return l10n.passwordIsRequired;
+  if (password.length < 6) return l10n.passwordMinLength;
   return null;
 }
 
-String? _validateName(String? value) {
+String? _validateName(String? value, AppLocalizations l10n) {
   final name = value?.trim() ?? '';
-  if (name.isEmpty) return 'Full name is required.';
-  if (name.length < 2) return 'Name must be at least 2 characters.';
+  if (name.isEmpty) return l10n.fullNameRequired;
+  if (name.length < 2) return l10n.nameMinLength;
   return null;
 }
 
@@ -74,13 +75,13 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
       );
   }
 
-  void _showComingSoon(String provider) {
+  void _showComingSoon(String provider, AppLocalizations l10n) {
     if (!mounted) return;
     ScaffoldMessenger.of(context)
       ..hideCurrentSnackBar()
       ..showSnackBar(
         SnackBar(
-          content: Text('$provider authentication coming soon.'),
+          content: Text(l10n.authComingSoon(provider)),
           backgroundColor: const Color(0xFF2A2A2A),
           margin: const EdgeInsets.all(16),
           duration: const Duration(seconds: 2),
@@ -99,12 +100,13 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
     final message = await ref
         .read(authControllerProvider.notifier)
         .signup(email: email, password: password);
-    if (!context.mounted) return;
+    if (!mounted) return;
     if (message != null) {
       setState(() => _signupError = message);
       _showError(message);
       return;
     }
+    if (!context.mounted) return;
     context.go('/verify-email');
   }
 
@@ -128,6 +130,7 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
     final textTheme = theme.textTheme;
@@ -194,7 +197,7 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                               ),
                               const SizedBox(height: 24),
                               Text(
-                                'Create Account',
+                                l10n.createAccount,
                                 style: textTheme.headlineMedium?.copyWith(
                                   fontSize: 34,
                                   fontWeight: FontWeight.w800,
@@ -203,7 +206,7 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                               ),
                               const SizedBox(height: 8),
                               Text(
-                                'Join Tuno and start your\nsinging journey',
+                                l10n.joinTuno,
                                 style: textTheme.bodyMedium?.copyWith(
                                   fontSize: 16,
                                   color: colorScheme.onSurfaceVariant,
@@ -233,7 +236,7 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                                       controller: _fullNameController,
                                       keyboardType: TextInputType.name,
                                       textInputAction: TextInputAction.next,
-                                      validator: _validateName,
+                                      validator: (v) => _validateName(v, l10n),
                                       onChanged: (_) => _clearSignupError(),
                                       autofillHints: const [AutofillHints.name],
                                       style: TextStyle(
@@ -241,8 +244,8 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                                         fontSize: 15,
                                       ),
                                       decoration: _inputDecoration(
-                                        label: 'Full Name',
-                                        hint: 'Enter your full name',
+                                        label: l10n.fullName,
+                                        hint: l10n.fullNameHint,
                                         prefixIcon: Icons.person_outline,
                                         colorScheme: colorScheme,
                                         isDark: isDark,
@@ -253,7 +256,7 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                                       controller: _emailController,
                                       keyboardType: TextInputType.emailAddress,
                                       textInputAction: TextInputAction.next,
-                                      validator: _validateEmail,
+                                      validator: (v) => _validateEmail(v, l10n),
                                       onChanged: (_) => _clearSignupError(),
                                       autofillHints: const [
                                         AutofillHints.email,
@@ -263,8 +266,8 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                                         fontSize: 15,
                                       ),
                                       decoration: _inputDecoration(
-                                        label: 'Email Address',
-                                        hint: 'you@example.com',
+                                        label: l10n.emailFieldLabel,
+                                        hint: l10n.emailHintSignup,
                                         prefixIcon: Icons.email_outlined,
                                         colorScheme: colorScheme,
                                         isDark: isDark,
@@ -278,7 +281,8 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                                       obscureText: _obscurePassword,
                                       textInputAction: TextInputAction.done,
                                       onFieldSubmitted: (_) => _handleSignup(),
-                                      validator: _validatePassword,
+                                      validator: (v) =>
+                                          _validatePassword(v, l10n),
                                       onChanged: (_) => _clearSignupError(),
                                       autofillHints: const [
                                         AutofillHints.newPassword,
@@ -288,8 +292,8 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                                         fontSize: 15,
                                       ),
                                       decoration: _inputDecoration(
-                                        label: 'Password',
-                                        hint: 'At least 6 characters',
+                                        label: l10n.passwordFieldLabel,
+                                        hint: l10n.passwordHintSignup,
                                         prefixIcon: Icons.lock_outlined,
                                         colorScheme: colorScheme,
                                         isDark: isDark,
@@ -325,18 +329,18 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                                       ),
                                     ],
                                     const SizedBox(height: 24),
-                                    _buildSignupButton(isSignupLoading),
+                                    _buildSignupButton(isSignupLoading, l10n),
                                     const SizedBox(height: 20),
-                                    _buildDividerWithLabel(),
+                                    _buildDividerWithLabel(l10n),
                                     const SizedBox(height: 20),
-                                    _buildGoogleButton(),
+                                    _buildGoogleButton(l10n),
                                     const SizedBox(height: 12),
-                                    _buildAppleButton(),
+                                    _buildAppleButton(l10n),
                                   ],
                                 ),
                               ),
                               const SizedBox(height: 24),
-                              _buildLoginFooter(),
+                              _buildLoginFooter(l10n),
                               const SizedBox(height: 16),
                             ],
                           ),
@@ -353,12 +357,12 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
     );
   }
 
-  Widget _buildSignupButton(bool isLoading) {
+  Widget _buildSignupButton(bool isLoading, AppLocalizations l10n) {
     final enabled = !isLoading;
     return Semantics(
       button: true,
       enabled: enabled,
-      label: 'Sign Up',
+      label: l10n.signUp,
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(56),
@@ -368,7 +372,7 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
         child: ClipRRect(
           borderRadius: BorderRadius.circular(54.2),
           child: TunoGradientButton(
-            label: 'Sign Up',
+            label: l10n.signUp,
             onPressed: enabled ? _handleSignup : null,
             isLoading: isLoading,
             fullWidth: true,
@@ -383,7 +387,7 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
     );
   }
 
-  Widget _buildDividerWithLabel() {
+  Widget _buildDividerWithLabel(AppLocalizations l10n) {
     return Row(
       children: [
         Expanded(
@@ -395,7 +399,7 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Text(
-            'or continue with',
+            l10n.orContinueWith,
             style: TextStyle(
               color: Theme.of(context).colorScheme.onSurfaceVariant,
               fontSize: 13,
@@ -413,7 +417,7 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
     );
   }
 
-  Widget _buildGoogleButton() {
+  Widget _buildGoogleButton(AppLocalizations l10n) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
     // Theme-specific border color
@@ -433,7 +437,7 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
 
     return Semantics(
       button: true,
-      label: 'Sign up with Google. Coming soon.',
+      label: l10n.signUpWithGoogle,
       child: Container(
         height: 52,
         decoration: BoxDecoration(
@@ -453,7 +457,7 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
             borderRadius: BorderRadius.circular(25),
             clipBehavior: Clip.antiAlias,
             child: InkWell(
-              onTap: () => _showComingSoon('Google'),
+              onTap: () => _showComingSoon('Google', l10n),
               borderRadius: BorderRadius.circular(25),
               hoverColor: isDark
                   ? borderColor.withValues(alpha: 0.15)
@@ -510,7 +514,7 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
     );
   }
 
-  Widget _buildAppleButton() {
+  Widget _buildAppleButton(AppLocalizations l10n) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
     // Theme-specific border color
@@ -530,7 +534,7 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
 
     return Semantics(
       button: true,
-      label: 'Sign up with Apple. Coming soon.',
+      label: l10n.signUpWithApple,
       child: Container(
         height: 52,
         decoration: BoxDecoration(
@@ -550,7 +554,7 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
             borderRadius: BorderRadius.circular(25),
             clipBehavior: Clip.antiAlias,
             child: InkWell(
-              onTap: () => _showComingSoon('Apple'),
+              onTap: () => _showComingSoon('Apple', l10n),
               borderRadius: BorderRadius.circular(25),
               hoverColor: isDark
                   ? borderColor.withValues(alpha: 0.15)
@@ -585,15 +589,15 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
     );
   }
 
-  Widget _buildLoginFooter() {
+  Widget _buildLoginFooter(AppLocalizations l10n) {
     final authState = ref.watch(authControllerProvider);
     final isNavigating =
         authState.isLoading && authState.action == AuthAction.signup;
 
     return AuthNavigationLink(
-      prefixText: 'Already have an account? ',
-      actionText: 'Login',
-      semanticLabel: 'Go to login',
+      prefixText: l10n.alreadyHaveAccount,
+      actionText: l10n.login,
+      semanticLabel: l10n.goToLogin,
       isDisabled: isNavigating,
       onPressed: () => context.go('/login'),
     );

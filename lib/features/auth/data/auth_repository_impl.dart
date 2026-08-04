@@ -5,8 +5,7 @@ import '../domain/errors/auth_failure.dart';
 import '../domain/repositories/auth_repository.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
-  AuthRepositoryImpl({required AuthService authService})
-    : _authService = authService;
+  AuthRepositoryImpl({required this._authService});
 
   final AuthService _authService;
 

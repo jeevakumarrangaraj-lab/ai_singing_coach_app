@@ -51,9 +51,7 @@ class AuthState {
 }
 
 class AuthController extends StateNotifier<AuthState> {
-  AuthController({required AuthRepository repository})
-    : _repository = repository,
-      super(AuthState.initial()) {
+  AuthController({required this._repository}) : super(AuthState.initial()) {
     _authSubscription = _repository.authStateChanges().listen((user) {
       state = AuthState(
         user: user,
@@ -197,11 +195,13 @@ class AuthController extends StateNotifier<AuthState> {
     );
 
     // Return null ONLY when the refreshed user is verified.
+    // The screen should display its own localized message.
     if (refreshedUser?.emailVerified == true) {
       return null;
     }
 
-    return 'Your email is not verified yet.';
+    // Non-null return indicates not verified — screen uses localized string.
+    return '';
   }
 
   Future<void> signOut() async {

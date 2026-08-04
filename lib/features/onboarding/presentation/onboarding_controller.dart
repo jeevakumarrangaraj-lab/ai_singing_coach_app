@@ -7,9 +7,8 @@ import '../data/onboarding_providers.dart';
 import 'onboarding_state.dart' show OnboardingErrorCode, OnboardingState;
 
 class OnboardingController extends StateNotifier<OnboardingState> {
-  OnboardingController({required OnboardingRepository repository})
-    : _repository = repository,
-      super(const OnboardingState());
+  OnboardingController({required this._repository})
+    : super(const OnboardingState());
 
   final OnboardingRepository _repository;
 

@@ -47,11 +47,20 @@ class LibraryStorageIO implements LibraryStorage {
       if (content.trim().isEmpty) return [];
 
       final List<dynamic> jsonList = jsonDecode(content);
-      return jsonList
-          .whereType<Map<String, dynamic>>()
-          .map(RecordingLibraryEntry.fromJson)
-          .toList()
-        ..sort((a, b) => b.createdAt.compareTo(a.createdAt));
+      final entries = <RecordingLibraryEntry>[];
+      for (final item in jsonList) {
+        if (item is! Map<String, dynamic>) continue;
+        try {
+          entries.add(RecordingLibraryEntry.fromJson(item));
+        } catch (e) {
+          debugPrint(
+            'LibraryStorageIO.loadIndex: skipping corrupted entry: $e',
+          );
+          // Skip corrupted entries gracefully
+        }
+      }
+      entries.sort((a, b) => b.createdAt.compareTo(a.createdAt));
+      return entries;
     } catch (e) {
       debugPrint('LibraryStorageIO.loadIndex error: $e');
       // Corrupted index - return empty and let caller decide
@@ -91,6 +100,20 @@ class LibraryStorageIO implements LibraryStorage {
         RecordingLibraryErrorCode.invalidData,
         'Invalid save request for current platform',
       );
+    }
+
+    // Duplicate protection: the same source audio must not be stored twice.
+    final sourceKey =
+        request.sourceKey ??
+        request.temporaryPath; // fallback: use the temp path as identity
+    if (sourceKey != null && sourceKey.isNotEmpty) {
+      final existing = await loadIndex();
+      for (final e in existing) {
+        if (e.sourceKey != null && e.sourceKey == sourceKey) {
+          // Already stored — return the existing entry instead of duplicating.
+          return e;
+        }
+      }
     }
 
     final id = _generateId();
@@ -141,6 +164,7 @@ class LibraryStorageIO implements LibraryStorage {
       localPath: destPath,
       webStorageKey: null,
       metadataKey: metadataKey,
+      sourceKey: sourceKey,
       referenceTrackName: request.referenceTrackName,
     );
 

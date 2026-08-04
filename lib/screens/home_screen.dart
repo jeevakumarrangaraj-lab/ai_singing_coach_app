@@ -504,12 +504,14 @@ class _GradientCTAButton extends StatefulWidget {
     required this.goldBorderGradient,
     required this.onPressed,
     required this.child,
+    this.height = 56,
   });
 
   final LinearGradient gradient;
   final LinearGradient goldBorderGradient;
   final VoidCallback onPressed;
   final Widget child;
+  final double? height;
 
   @override
   State<_GradientCTAButton> createState() => _GradientCTAButtonState();
@@ -531,7 +533,7 @@ class _GradientCTAButtonState extends State<_GradientCTAButton> {
         onEnter: (_) => setState(() => _hovered = true),
         onExit: (_) => setState(() => _hovered = false),
         child: Container(
-          height: 56,
+          height: widget.height,
           width: double.infinity,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
@@ -841,8 +843,12 @@ class _RecordingLibraryCard extends StatelessWidget {
               gradient: _ctaGradient,
               goldBorderGradient: _goldBorderGradient,
               onPressed: onTap,
+              height: null,
               child: Padding(
-                padding: const EdgeInsets.all(24),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 24,
+                ),
                 child: Row(
                   children: [
                     Container(
@@ -861,6 +867,7 @@ class _RecordingLibraryCard extends StatelessWidget {
                     const SizedBox(width: 20),
                     Expanded(
                       child: Column(
+                        mainAxisSize: MainAxisSize.min,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
@@ -874,6 +881,8 @@ class _RecordingLibraryCard extends StatelessWidget {
                           const SizedBox(height: 4),
                           Text(
                             l10n.yourSavedPracticeRecordings,
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
                             style: textTheme.bodyMedium?.copyWith(
                               color: cs.onSurfaceVariant,
                               height: 1.4,

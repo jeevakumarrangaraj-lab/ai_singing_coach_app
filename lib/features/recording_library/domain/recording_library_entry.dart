@@ -51,6 +51,14 @@ class RecordingLibraryEntry {
   /// Key used in the metadata index (both platforms).
   final String metadataKey;
 
+  /// Stable identity of the source audio used for duplicate protection.
+  ///
+  /// - Native: the temporary filesystem path the recording was captured to.
+  /// - Web: a deterministic hash of the recorded audio bytes.
+  ///
+  /// Two save attempts that reference the same source produce a single entry.
+  final String? sourceKey;
+
   /// Whether the user has marked this as a favorite.
   final bool isFavorite;
 
@@ -73,6 +81,7 @@ class RecordingLibraryEntry {
     this.localPath,
     this.webStorageKey,
     required this.metadataKey,
+    this.sourceKey,
     this.isFavorite = false,
     this.analysisStatus = AnalysisStatus.none,
     this.analysisScore,
@@ -90,6 +99,7 @@ class RecordingLibraryEntry {
     String? Function()? localPath,
     String? Function()? webStorageKey,
     String? metadataKey,
+    String? Function()? sourceKey,
     bool? isFavorite,
     AnalysisStatus? analysisStatus,
     double? Function()? analysisScore,
@@ -107,6 +117,7 @@ class RecordingLibraryEntry {
           ? webStorageKey()
           : this.webStorageKey,
       metadataKey: metadataKey ?? this.metadataKey,
+      sourceKey: sourceKey != null ? sourceKey() : this.sourceKey,
       isFavorite: isFavorite ?? this.isFavorite,
       analysisStatus: analysisStatus ?? this.analysisStatus,
       analysisScore: analysisScore != null
@@ -130,6 +141,7 @@ class RecordingLibraryEntry {
       'localPath': localPath,
       'webStorageKey': webStorageKey,
       'metadataKey': metadataKey,
+      'sourceKey': sourceKey,
       'isFavorite': isFavorite,
       'analysisStatus': analysisStatus.index,
       'analysisScore': analysisScore,
@@ -149,6 +161,7 @@ class RecordingLibraryEntry {
       localPath: json['localPath'] as String?,
       webStorageKey: json['webStorageKey'] as String?,
       metadataKey: json['metadataKey'] as String,
+      sourceKey: json['sourceKey'] as String?,
       isFavorite: json['isFavorite'] as bool? ?? false,
       analysisStatus:
           AnalysisStatus.values[json['analysisStatus'] as int? ?? 0],
@@ -171,6 +184,7 @@ class RecordingLibraryEntry {
           localPath == other.localPath &&
           webStorageKey == other.webStorageKey &&
           metadataKey == other.metadataKey &&
+          sourceKey == other.sourceKey &&
           isFavorite == other.isFavorite &&
           analysisStatus == other.analysisStatus &&
           analysisScore == other.analysisScore &&
@@ -187,6 +201,7 @@ class RecordingLibraryEntry {
     localPath,
     webStorageKey,
     metadataKey,
+    sourceKey,
     isFavorite,
     analysisStatus,
     analysisScore,
@@ -228,6 +243,12 @@ class RecordingLibrarySaveRequest {
   /// Optional reference track name used during practice.
   final String? referenceTrackName;
 
+  /// Stable identity of the source audio used for duplicate protection.
+  ///
+  /// - Native: the temporary filesystem path the recording was captured to.
+  /// - Web: a deterministic hash of the recorded audio bytes.
+  final String? sourceKey;
+
   const RecordingLibrarySaveRequest({
     this.temporaryPath,
     this.audioBytes,
@@ -236,6 +257,7 @@ class RecordingLibrarySaveRequest {
     required this.sizeBytes,
     required this.extension,
     this.referenceTrackName,
+    this.sourceKey,
   });
 
   /// Validates that the request has the required data for the current platform.

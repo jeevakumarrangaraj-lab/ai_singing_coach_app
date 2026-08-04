@@ -6,28 +6,72 @@ import '../common/widgets/app_back_button.dart';
 import '../core/theme/theme_controller.dart';
 import '../core/widgets/dashboard_music_decorations.dart';
 import '../features/auth/presentation/auth_controller.dart';
+import '../l10n/app_localizations.dart';
+
+/// Identifier used internally for routing, not displayed to the user.
+enum _SettingsRowId {
+  account,
+  practicePreferences,
+  audioAndRecording,
+  notificationPreferences,
+  privacyAndSecurity,
+  languages,
+  helpAndSupport,
+  aboutTuno,
+}
 
 /// Data model for a settings row.
 class _SettingsRow {
+  final _SettingsRowId id;
   final IconData icon;
-  final String label;
 
-  const _SettingsRow({required this.icon, required this.label});
+  const _SettingsRow({required this.id, required this.icon});
 }
 
 const _settingsRows = <_SettingsRow>[
-  _SettingsRow(icon: Icons.person_rounded, label: 'Account'),
-  _SettingsRow(icon: Icons.tune_rounded, label: 'Practice Preferences'),
-  _SettingsRow(icon: Icons.mic_rounded, label: 'Audio & Recording'),
+  _SettingsRow(id: _SettingsRowId.account, icon: Icons.person_rounded),
   _SettingsRow(
-    icon: Icons.notifications_rounded,
-    label: 'Notification Preferences',
+    id: _SettingsRowId.practicePreferences,
+    icon: Icons.tune_rounded,
   ),
-  _SettingsRow(icon: Icons.shield_rounded, label: 'Privacy & Security'),
-  _SettingsRow(icon: Icons.language_rounded, label: 'Languages'),
-  _SettingsRow(icon: Icons.headset_mic_rounded, label: 'Help & Support'),
-  _SettingsRow(icon: Icons.info_outline_rounded, label: 'About Tuno'),
+  _SettingsRow(id: _SettingsRowId.audioAndRecording, icon: Icons.mic_rounded),
+  _SettingsRow(
+    id: _SettingsRowId.notificationPreferences,
+    icon: Icons.notifications_rounded,
+  ),
+  _SettingsRow(
+    id: _SettingsRowId.privacyAndSecurity,
+    icon: Icons.shield_rounded,
+  ),
+  _SettingsRow(id: _SettingsRowId.languages, icon: Icons.language_rounded),
+  _SettingsRow(
+    id: _SettingsRowId.helpAndSupport,
+    icon: Icons.headset_mic_rounded,
+  ),
+  _SettingsRow(id: _SettingsRowId.aboutTuno, icon: Icons.info_outline_rounded),
 ];
+
+/// Resolve the localized label for a settings row.
+String _settingsRowLabel(_SettingsRowId id, AppLocalizations l10n) {
+  switch (id) {
+    case _SettingsRowId.account:
+      return l10n.account;
+    case _SettingsRowId.practicePreferences:
+      return l10n.practicePreferences;
+    case _SettingsRowId.audioAndRecording:
+      return l10n.audioAndRecording;
+    case _SettingsRowId.notificationPreferences:
+      return l10n.notificationPreferences;
+    case _SettingsRowId.privacyAndSecurity:
+      return l10n.privacyAndSecurity;
+    case _SettingsRowId.languages:
+      return l10n.languages;
+    case _SettingsRowId.helpAndSupport:
+      return l10n.helpAndSupport;
+    case _SettingsRowId.aboutTuno:
+      return l10n.aboutTuno;
+  }
+}
 
 class SettingsScreen extends ConsumerStatefulWidget {
   const SettingsScreen({super.key});
@@ -40,10 +84,11 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   bool _isLoggingOut = false;
 
   void _showComingSoon(String label) {
+    final l10n = AppLocalizations.of(context)!;
     ScaffoldMessenger.of(context).clearSnackBars();
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text('$label will be available soon.'),
+        content: Text(l10n.featureComingSoon(label)),
         behavior: SnackBarBehavior.floating,
         duration: const Duration(seconds: 3),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
@@ -54,20 +99,22 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   Future<void> _handleLogout() async {
     if (_isLoggingOut) return;
 
+    final l10n = AppLocalizations.of(context)!;
+
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (ctx) => AlertDialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(22)),
-        title: const Text('Logout'),
-        content: const Text('Are you sure you want to log out?'),
+        title: Text(l10n.logoutConfirmTitle),
+        content: Text(l10n.logoutConfirmContent),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(ctx).pop(false),
-            child: const Text('Cancel'),
+            child: Text(l10n.cancel),
           ),
           FilledButton(
             onPressed: () => Navigator.of(ctx).pop(true),
-            child: const Text('Logout'),
+            child: Text(l10n.logout),
           ),
         ],
       ),
@@ -87,6 +134,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   }
 
   void _showAppearanceSheet() {
+    final l10n = AppLocalizations.of(context)!;
     final currentMode = ref.read(themeModeProvider);
 
     showModalBottomSheet(
@@ -95,6 +143,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
         borderRadius: BorderRadius.vertical(top: Radius.circular(22)),
       ),
       builder: (ctx) {
+        final cs = Theme.of(ctx).colorScheme;
         return SafeArea(
           child: Padding(
             padding: const EdgeInsets.fromLTRB(24, 16, 24, 24),
@@ -107,16 +156,14 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                     width: 40,
                     height: 4,
                     decoration: BoxDecoration(
-                      color: Theme.of(
-                        ctx,
-                      ).colorScheme.onSurfaceVariant.withValues(alpha: 0.3),
+                      color: cs.onSurfaceVariant.withValues(alpha: 0.3),
                       borderRadius: BorderRadius.circular(2),
                     ),
                   ),
                 ),
                 const SizedBox(height: 20),
                 Text(
-                  'Appearance',
+                  l10n.appearance,
                   style: Theme.of(
                     ctx,
                   ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w700),
@@ -124,7 +171,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                 const SizedBox(height: 16),
                 _ThemeOption(
                   icon: Icons.settings_suggest_rounded,
-                  label: 'System Default',
+                  label: l10n.systemDefault,
                   selected: currentMode == ThemeMode.system,
                   onTap: () {
                     ref
@@ -136,7 +183,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                 const SizedBox(height: 4),
                 _ThemeOption(
                   icon: Icons.light_mode_rounded,
-                  label: 'Light',
+                  label: l10n.light,
                   selected: currentMode == ThemeMode.light,
                   onTap: () {
                     ref
@@ -148,7 +195,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                 const SizedBox(height: 4),
                 _ThemeOption(
                   icon: Icons.dark_mode_rounded,
-                  label: 'Dark',
+                  label: l10n.dark,
                   selected: currentMode == ThemeMode.dark,
                   onTap: () {
                     ref
@@ -167,18 +214,20 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   }
 
   String _themeModeLabel(ThemeMode mode) {
+    final l10n = AppLocalizations.of(context)!;
     switch (mode) {
       case ThemeMode.system:
-        return 'System Default';
+        return l10n.systemDefault;
       case ThemeMode.light:
-        return 'Light';
+        return l10n.light;
       case ThemeMode.dark:
-        return 'Dark';
+        return l10n.dark;
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final cs = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
     final isDark = Theme.of(context).brightness == Brightness.dark;
@@ -204,7 +253,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
           Positioned.fill(
             child: const IgnorePointer(
               ignoring: true,
-              child: DashboardMusicDecorations(),
+              child: DashboardMusicDecorations(animate: true),
             ),
           ),
           // ── Scrollable content ──
@@ -228,10 +277,10 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                               const SizedBox(height: 8),
                               // ── Back button ──
                               Tooltip(
-                                message: 'Back',
+                                message: l10n.back,
                                 child: Semantics(
                                   button: true,
-                                  label: 'Back',
+                                  label: l10n.back,
                                   child: AppBackButton(
                                     onPressed: () {
                                       if (context.canPop()) {
@@ -248,7 +297,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                               // ── Title ──
                               Center(
                                 child: Text(
-                                  'Settings',
+                                  l10n.settings,
                                   style: textTheme.headlineMedium?.copyWith(
                                     fontSize: 28,
                                     fontWeight: FontWeight.bold,
@@ -270,7 +319,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                                 ),
                                 child: Column(
                                   children: _buildSettingsRows(
-                                    context,
+                                    l10n: l10n,
+                                    context: context,
                                     iconColor: iconColor,
                                     dividerColor: dividerColor,
                                   ),
@@ -281,6 +331,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                               // ── Appearance Card ──
                               _buildAppearanceCard(
                                 context,
+                                l10n: l10n,
                                 cardColor: cardColor,
                                 borderColor: borderColor,
                                 accentColor: accentColor,
@@ -292,6 +343,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                               // ── Logout button ──
                               _buildLogoutButton(
                                 context,
+                                l10n: l10n,
                                 accentColor: accentColor,
                               ),
                             ],
@@ -309,26 +361,45 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     );
   }
 
-  List<Widget> _buildSettingsRows(
-    BuildContext context, {
+  List<Widget> _buildSettingsRows({
+    required AppLocalizations l10n,
+    required BuildContext context,
     required Color iconColor,
     required Color dividerColor,
   }) {
     final rows = <Widget>[];
     for (int i = 0; i < _settingsRows.length; i++) {
       final row = _settingsRows[i];
+      final label = _settingsRowLabel(row.id, l10n);
       rows.add(
         _SettingsRowWidget(
           icon: row.icon,
-          label: row.label,
+          label: label,
           iconColor: iconColor,
           onTap: () {
-            if (row.label == 'Account') {
-              context.push('/settings/account');
-            } else if (row.label == 'Practice Preferences') {
-              context.push('/settings/preferences');
-            } else {
-              _showComingSoon(row.label);
+            switch (row.id) {
+              case _SettingsRowId.account:
+                context.push('/settings/account');
+                break;
+              case _SettingsRowId.practicePreferences:
+                context.push('/settings/preferences');
+                break;
+              case _SettingsRowId.audioAndRecording:
+                context.push('/settings/audio-video');
+                break;
+              case _SettingsRowId.notificationPreferences:
+                context.push('/settings/notifications');
+                break;
+              case _SettingsRowId.privacyAndSecurity:
+                context.push('/settings/privacy-security');
+                break;
+              case _SettingsRowId.languages:
+                context.push('/settings/languages');
+                break;
+              case _SettingsRowId.helpAndSupport:
+              case _SettingsRowId.aboutTuno:
+                _showComingSoon(label);
+                break;
             }
           },
         ),
@@ -344,6 +415,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
 
   Widget _buildAppearanceCard(
     BuildContext context, {
+    required AppLocalizations l10n,
     required Color cardColor,
     required Color borderColor,
     required Color accentColor,
@@ -360,7 +432,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
       ),
       child: _SettingsRowWidget(
         icon: Icons.light_mode_rounded,
-        label: 'Appearance',
+        label: l10n.appearance,
         iconColor: iconColor,
         trailing: Text(
           currentModeLabel,
@@ -377,6 +449,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
 
   Widget _buildLogoutButton(
     BuildContext context, {
+    required AppLocalizations l10n,
     required Color accentColor,
   }) {
     final textTheme = Theme.of(context).textTheme;
@@ -386,7 +459,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
       height: 56,
       child: Semantics(
         button: true,
-        label: 'Logout',
+        label: l10n.logout,
         child: MouseRegion(
           cursor: SystemMouseCursors.click,
           child: OutlinedButton(
@@ -411,7 +484,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                       color: accentColor,
                     ),
                   )
-                : const Text('Logout'),
+                : Text(l10n.logout),
           ),
         ),
       ),

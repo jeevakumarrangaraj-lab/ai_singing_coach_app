@@ -2763,6 +2763,84 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Saving...'**
   String get saving;
+
+  /// Title for the Reference Track Library screen
+  ///
+  /// In en, this message translates to:
+  /// **'Your Library'**
+  String get referenceTrackLibraryTitle;
+
+  /// Subtitle on the Reference Track Library screen
+  ///
+  /// In en, this message translates to:
+  /// **'Choose a track for your practice'**
+  String get referenceTrackLibrarySubtitle;
+
+  /// Button to add a new track to the library
+  ///
+  /// In en, this message translates to:
+  /// **'Add Track'**
+  String get referenceTrackLibraryAddTrack;
+
+  /// Empty state title when no tracks exist
+  ///
+  /// In en, this message translates to:
+  /// **'Your library is empty'**
+  String get referenceTrackLibraryEmptyTitle;
+
+  /// Empty state description when no tracks exist
+  ///
+  /// In en, this message translates to:
+  /// **'Add an audio track to start practising'**
+  String get referenceTrackLibraryEmptySubtitle;
+
+  /// Button to view the track library
+  ///
+  /// In en, this message translates to:
+  /// **'View Library'**
+  String get referenceTrackLibraryViewLibrary;
+
+  /// Accessibility label when a track is selected
+  ///
+  /// In en, this message translates to:
+  /// **'Track selected: {name}'**
+  String referenceTrackLibraryTrackSelected(String name);
+
+  /// Tooltip for remove track button
+  ///
+  /// In en, this message translates to:
+  /// **'Remove track'**
+  String get referenceTrackLibraryRemove;
+
+  /// Status text when saving library operation is in progress
+  ///
+  /// In en, this message translates to:
+  /// **'Saving library...'**
+  String get referenceTrackLibrarySaving;
+
+  /// Loading state text when fetching the reference track library
+  ///
+  /// In en, this message translates to:
+  /// **'Loading library...'**
+  String get loadingLibrary;
+
+  /// Label for reference track display
+  ///
+  /// In en, this message translates to:
+  /// **'Reference Track'**
+  String get referenceTrackLabel;
+
+  /// Button to change the reference track
+  ///
+  /// In en, this message translates to:
+  /// **'Change Track'**
+  String get referenceTrackChange;
+
+  /// Button to clear the reference track selection
+  ///
+  /// In en, this message translates to:
+  /// **'Clear Selection'**
+  String get referenceTrackClear;
 }
 
 class _AppLocalizationsDelegate

@@ -84,11 +84,18 @@ class LibraryStorageWeb implements LibraryStorage {
       final allRecords = await store.getAll();
       for (final record in allRecords) {
         if (record is Map) {
-          entries.add(
-            RecordingLibraryEntry.fromJson(
-              record.map((k, v) => MapEntry(k.toString(), v)),
-            ),
-          );
+          try {
+            entries.add(
+              RecordingLibraryEntry.fromJson(
+                record.map((k, v) => MapEntry(k.toString(), v)),
+              ),
+            );
+          } catch (e) {
+            debugPrint(
+              'LibraryStorageWeb.loadIndex: skipping corrupted entry: $e',
+            );
+            // Skip corrupted entries gracefully
+          }
         }
       }
 
@@ -117,6 +124,18 @@ class LibraryStorageWeb implements LibraryStorage {
         RecordingLibraryErrorCode.invalidData,
         'Invalid save request for Web: missing audio bytes',
       );
+    }
+
+    // Duplicate protection: the same source audio must not be stored twice.
+    final sourceKey = request.sourceKey ?? _hashBytes(request.audioBytes!);
+    if (sourceKey.isNotEmpty) {
+      final existing = await loadIndex();
+      for (final e in existing) {
+        if (e.sourceKey != null && e.sourceKey == sourceKey) {
+          // Already stored — return the existing entry instead of duplicating.
+          return e;
+        }
+      }
     }
 
     final id = _generateId();
@@ -157,6 +176,7 @@ class LibraryStorageWeb implements LibraryStorage {
       localPath: null,
       webStorageKey: audioKey,
       metadataKey: metadataKey,
+      sourceKey: sourceKey,
       referenceTrackName: request.referenceTrackName,
     );
 
@@ -358,6 +378,19 @@ class LibraryStorageWeb implements LibraryStorage {
     return errorString.contains('quota') ||
         errorString.contains('quotaexceedederror') ||
         (errorString.contains('storage') && errorString.contains('exceed'));
+  }
+
+  /// Computes a stable, content-derived identity for the audio bytes.
+  ///
+  /// Used for duplicate protection. This is NOT a security hash; it is only
+  /// a cheap deterministic fingerprint (FNV-1a 64-bit) of the recorded blob.
+  String _hashBytes(Uint8List bytes) {
+    var hash = 0xcbf29ce484222325;
+    for (final b in bytes) {
+      hash ^= b;
+      hash *= 0x100000001b3;
+    }
+    return 'fnv1a_${hash.toUnsigned(64).toRadixString(16)}';
   }
 
   String _generateId() {

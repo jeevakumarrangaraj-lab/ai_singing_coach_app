@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ai_singing_coach/l10n/app_localizations.dart';
 
 import '../theme/app_colors.dart';
 import 'metallic_gold_border.dart';
@@ -38,6 +39,15 @@ class TunoBottomNavigation extends StatelessWidget {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final width = MediaQuery.of(context).size.width;
     final isTablet = width >= 600;
+    final l10n = AppLocalizations.of(context)!;
+
+    final navLabels = [
+      l10n.home,
+      l10n.practice,
+      l10n.record,
+      l10n.progress,
+      l10n.profile,
+    ];
 
     return MetallicGoldBorder(
       borderRadius: BorderRadius.circular(22),
@@ -84,11 +94,12 @@ class TunoBottomNavigation extends StatelessWidget {
                       selected: currentIndex == i,
                       onTap: () => onDestinationSelected(i),
                       isTablet: isTablet,
+                      label: navLabels[i],
                     )
                   else
                     _NavItem(
                       icon: _navIcons[i],
-                      label: _navLabels[i],
+                      label: navLabels[i],
                       selected: currentIndex == i,
                       onTap: () => onDestinationSelected(i),
                       isTablet: isTablet,
@@ -101,8 +112,6 @@ class TunoBottomNavigation extends StatelessWidget {
     );
   }
 }
-
-const _navLabels = ['Home', 'Practice', 'Record', 'Progress', 'Profile'];
 
 const _navIcons = [
   Icons.home_rounded,
@@ -187,11 +196,13 @@ class _RecordButton extends StatelessWidget {
     required this.selected,
     required this.onTap,
     required this.isTablet,
+    required this.label,
   });
 
   final bool selected;
   final VoidCallback onTap;
   final bool isTablet;
+  final String label;
 
   @override
   Widget build(BuildContext context) {
@@ -212,11 +223,11 @@ class _RecordButton extends StatelessWidget {
     );
 
     return Tooltip(
-      message: 'Record',
+      message: label,
       child: Semantics(
         button: true,
         selected: selected,
-        label: 'Record',
+        label: label,
         child: InkWell(
           onTap: onTap,
           borderRadius: BorderRadius.circular(size / 2),

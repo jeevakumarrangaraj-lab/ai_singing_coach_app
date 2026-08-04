@@ -106,7 +106,12 @@ class RecordingLibraryController extends StateNotifier<RecordingLibraryState> {
       state = RecordingLibraryLoaded(updatedRecordings);
       return entry;
     } on RecordingLibraryException catch (e) {
-      if (_isDisposed) throw RecordingLibraryException(RecordingLibraryErrorCode.disposed, 'Controller has been disposed');
+      if (_isDisposed) {
+        throw RecordingLibraryException(
+          RecordingLibraryErrorCode.disposed,
+          'Controller has been disposed',
+        );
+      }
       state = RecordingLibraryError(
         code: e.code,
         currentRecordings: currentRecordings,
@@ -114,7 +119,12 @@ class RecordingLibraryController extends StateNotifier<RecordingLibraryState> {
       );
       rethrow;
     } catch (e, stackTrace) {
-      if (_isDisposed) throw RecordingLibraryException(RecordingLibraryErrorCode.disposed, 'Controller has been disposed');
+      if (_isDisposed) {
+        throw RecordingLibraryException(
+          RecordingLibraryErrorCode.disposed,
+          'Controller has been disposed',
+        );
+      }
       debugPrint('RecordingLibraryController.saveRecording error: $e');
       debugPrintStack(stackTrace: stackTrace);
       state = RecordingLibraryError(

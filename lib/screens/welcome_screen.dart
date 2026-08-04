@@ -7,6 +7,7 @@ import '../core/theme/app_colors.dart';
 import '../core/widgets/tuno_gradient_button.dart';
 import '../core/widgets/tuno_microphone_emblem.dart';
 import '../core/widgets/tuno_music_background.dart';
+import '../l10n/app_localizations.dart';
 
 /// Welcome / landing screen shown to unauthenticated users.
 ///
@@ -57,6 +58,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
     final cs = theme.colorScheme;
     final isDark = theme.brightness == Brightness.dark;
     final disableAnimations = MediaQuery.of(context).disableAnimations;
+    final l10n = AppLocalizations.of(context)!;
 
     // ── Foreground content (all existing widgets, unchanged) ──
     final Widget foregroundStack = SizedBox(
@@ -102,7 +104,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
             top: 105,
             width: _canvasWidth,
             child: Text(
-              'Tuno',
+              l10n.tuno,
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 104,
@@ -119,7 +121,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
             top: 218,
             width: _canvasWidth,
             child: Text(
-              'AI SINGING COACH',
+              l10n.aiSingingCoach,
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 27,
@@ -134,7 +136,10 @@ class _WelcomeScreenState extends State<WelcomeScreen>
           Positioned(
             left: 332,
             top: 334,
-            child: TunoMicrophoneEmblem(diameter: 360),
+            child: Semantics(
+              label: l10n.tunoLogoSemanticLabel,
+              child: TunoMicrophoneEmblem(diameter: 360),
+            ),
           ),
 
           // ── Main heading ──
@@ -143,7 +148,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
             top: 758,
             width: 784,
             child: Text(
-              'Your Personal\nAI Singing Coach',
+              l10n.yourPersonalAiCoach,
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 75,
@@ -159,29 +164,30 @@ class _WelcomeScreenState extends State<WelcomeScreen>
             left: 0,
             top: 972,
             width: _canvasWidth,
-            child: Text.rich(
-              TextSpan(
-                style: TextStyle(
-                  fontSize: 33,
-                  fontWeight: FontWeight.w400,
-                  color: cs.onSurfaceVariant,
+            child: (() {
+              const bullet = '\u2022';
+              final parts = l10n.practiceImproveAchieve.split(' $bullet ');
+              return Text.rich(
+                TextSpan(
+                  style: TextStyle(
+                    fontSize: 33,
+                    fontWeight: FontWeight.w400,
+                    color: cs.onSurfaceVariant,
+                  ),
+                  children: [
+                    for (int i = 0; i < parts.length; i++) ...[
+                      TextSpan(text: parts[i]),
+                      if (i < parts.length - 1)
+                        TextSpan(
+                          text: ' $bullet ',
+                          style: TextStyle(color: AppColors.tunoGold),
+                        ),
+                    ],
+                  ],
                 ),
-                children: [
-                  const TextSpan(text: 'Practice'),
-                  const TextSpan(
-                    text: ' • ',
-                    style: TextStyle(color: AppColors.tunoGold),
-                  ),
-                  const TextSpan(text: 'Improve'),
-                  const TextSpan(
-                    text: ' • ',
-                    style: TextStyle(color: AppColors.tunoGold),
-                  ),
-                  const TextSpan(text: 'Achieve'),
-                ],
-              ),
-              textAlign: TextAlign.center,
-            ),
+                textAlign: TextAlign.center,
+              );
+            }()),
           ),
 
           // ── "Get Started" button (reference dimensions + gradient) ──
@@ -191,7 +197,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
             width: 734,
             height: 122,
             child: TunoGradientButton(
-              label: 'Get Started',
+              label: l10n.getStarted,
               trailingIcon: Icons.arrow_forward_rounded,
               trailingIconColor: AppColors.tunoGoldPrimary,
               trailingIconSize: 42,
@@ -202,7 +208,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
               fullWidth: true,
               height: 122,
               borderRadius: 61,
-              semanticLabel: 'Get Started',
+              semanticLabel: l10n.getStarted,
               labelFontSize: 42,
               labelFontWeight: FontWeight.w700,
               gradient: const LinearGradient(
@@ -248,7 +254,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                       : AppColors.tunoWelcomeSurfaceLight,
                 ),
                 child: Text(
-                  'Login',
+                  l10n.login,
                   style: TextStyle(
                     fontSize: 40,
                     fontWeight: FontWeight.w600,

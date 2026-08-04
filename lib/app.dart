@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:ai_singing_coach/l10n/app_localizations.dart';
 
+import 'core/localization/locale_controller.dart';
 import 'core/routes/app_router.dart';
 import 'core/theme/app_theme.dart';
 import 'core/theme/theme_controller.dart';
@@ -17,6 +19,7 @@ class SingingCoachApp extends ConsumerWidget {
     final router = ref.watch(appRouterProvider);
 
     final themeMode = ref.watch(themeModeProvider);
+    final appLanguage = ref.watch(localeProvider);
 
     // Listen for auth state changes to refresh the router.
     ref.listen<AuthState>(authControllerProvider, (previous, next) {
@@ -35,6 +38,10 @@ class SingingCoachApp extends ConsumerWidget {
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       title: 'Tuno',
+
+      locale: appLanguage.locale,
+      supportedLocales: AppLocalizations.supportedLocales,
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
 
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,

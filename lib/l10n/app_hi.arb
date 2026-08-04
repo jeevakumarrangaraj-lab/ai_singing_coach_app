@@ -1964,5 +1964,62 @@
   "saving": "सहेजा जा रहा है...",
   "@saving": {
     "description": "Status text when saving operation is in progress"
+  },
+  "referenceTrackLibraryTitle": "आपकी लाइब्रेरी",
+  "@referenceTrackLibraryTitle": {
+    "description": "Title for the Reference Track Library screen"
+  },
+  "referenceTrackLibrarySubtitle": "अभ्यास के लिए एक ट्रैक चुनें",
+  "@referenceTrackLibrarySubtitle": {
+    "description": "Subtitle on the Reference Track Library screen"
+  },
+  "referenceTrackLibraryAddTrack": "ट्रैक जोड़ें",
+  "@referenceTrackLibraryAddTrack": {
+    "description": "Button to add a new track to the library"
+  },
+  "referenceTrackLibraryEmptyTitle": "आपकी लाइब्रेरी खाली है",
+  "@referenceTrackLibraryEmptyTitle": {
+    "description": "Empty state title when no tracks exist"
+  },
+  "referenceTrackLibraryEmptySubtitle": "अभ्यास शुरू करने के लिए एक ऑडियो ट्रैक जोड़ें",
+  "@referenceTrackLibraryEmptySubtitle": {
+    "description": "Empty state description when no tracks exist"
+  },
+  "referenceTrackLibraryViewLibrary": "लाइब्रेरी देखें",
+  "@referenceTrackLibraryViewLibrary": {
+    "description": "Button to view the track library"
+  },
+  "referenceTrackLibraryTrackSelected": "ट्रैक चुना गया: {name}",
+  "@referenceTrackLibraryTrackSelected": {
+    "description": "Accessibility label when a track is selected",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "referenceTrackLibraryRemove": "ट्रैक हटाएं",
+  "@referenceTrackLibraryRemove": {
+    "description": "Tooltip for remove track button"
+  },
+"referenceTrackLibrarySaving": "लाइब्रेरी सहेजी जा रही है...",
+  "@referenceTrackLibrarySaving": {
+    "description": "Status text when saving library operation is in progress"
+  },
+  "loadingLibrary": "लाइब्रेरी लोड हो रही है...",
+  "@loadingLibrary": {
+    "description": "Loading state text when fetching the reference track library"
+  },
+  "referenceTrackLabel": "संदर्भ ट्रैक",
+  "@referenceTrackLabel": {
+    "description": "Label for reference track display"
+  },
+  "referenceTrackChange": "ट्रैक बदलें",
+  "@referenceTrackChange": {
+    "description": "Button to change the reference track"
+  },
+  "referenceTrackClear": "चयन साफ़ करें",
+  "@referenceTrackClear": {
+    "description": "Button to clear the reference track selection"
   }
 }

@@ -16,6 +16,8 @@ import 'dashboard_music_decorations.dart';
 /// - Scales uniformly with BoxFit.contain logic (built into [DashboardMusicDecorations])
 /// - Centered on large screens, clipped safely
 ///
+/// When [animate] is true, decorative elements float gently.
+///
 /// Usage:
 /// ```dart
 /// TunoDashboardBackground(
@@ -23,9 +25,14 @@ import 'dashboard_music_decorations.dart';
 /// )
 /// ```
 class TunoDashboardBackground extends StatelessWidget {
-  const TunoDashboardBackground({super.key, required this.child});
+  const TunoDashboardBackground({
+    super.key,
+    required this.child,
+    this.animate = false,
+  });
 
   final Widget child;
+  final bool animate;
 
   @override
   Widget build(BuildContext context) {
@@ -36,9 +43,9 @@ class TunoDashboardBackground extends StatelessWidget {
         // Reproduces the Dashboard background exactly.
         // IgnorePointer ensures taps pass through to the content.
         Positioned.fill(
-          child: const IgnorePointer(
+          child: IgnorePointer(
             ignoring: true,
-            child: DashboardMusicDecorations(),
+            child: DashboardMusicDecorations(animate: animate),
           ),
         ),
         // ── Foreground content (fully interactive) ──

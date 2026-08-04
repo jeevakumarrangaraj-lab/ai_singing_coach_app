@@ -156,6 +156,13 @@ class ReferenceTrackController extends StateNotifier<ReferenceTrackState> {
     }
   }
 
+  /// Selects a [ReferenceTrack] directly (e.g. from the library screen).
+  void selectTrack(ReferenceTrack track) {
+    if (_isDisposed) return;
+    _previousTrack = null;
+    state = ReferenceTrackSelected(track);
+  }
+
   /// Clears the current selection and releases the in‑memory byte buffer.
   void clearSelection() {
     if (_isDisposed) return;

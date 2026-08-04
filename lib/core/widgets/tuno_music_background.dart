@@ -217,7 +217,7 @@ class _TunoMusicPainter extends CustomPainter {
       ..strokeCap = StrokeCap.round
       ..strokeWidth = 1.6;
 
-    final waveAlpha = isDark ? 0.32 : 0.20;
+    final waveAlpha = isDark ? 0.32 : 0.22;
     final baseColor = _welcomeWaveColor();
 
     const waveCount = 7;
@@ -248,8 +248,15 @@ class _TunoMusicPainter extends CustomPainter {
       (845, 525, 105, 125, -0.12),
     ];
 
-    // Use note gradient: dark cyan/blue
-    final noteGradientColors = [AppColors.tunoNoteStart, AppColors.tunoNoteEnd];
+    // Use note gradient: dark cyan/blue.
+    // Light theme bakes a subtle premium opacity directly into the gradient
+    // stops so the notes remain clearly visible without competing with content.
+    final noteGradientColors = isDark
+        ? [AppColors.tunoNoteStart, AppColors.tunoNoteEnd]
+        : [
+            AppColors.tunoNoteStart.withValues(alpha: 0.38),
+            AppColors.tunoNoteEnd.withValues(alpha: 0.38),
+          ];
 
     for (final (cx, cy, w, h, rotation) in noteData) {
       final noteFill = Paint()
@@ -277,7 +284,8 @@ class _TunoMusicPainter extends CustomPainter {
         h,
         noteFill,
         noteOutline,
-        isDark ? 0.80 : 0.65,
+        isDark ? 1.0 : 0.38,
+        isDark ? 0.80 : 0.50,
       );
       canvas.restore();
     }
@@ -291,7 +299,8 @@ class _TunoMusicPainter extends CustomPainter {
     double height,
     Paint fillPaint,
     Paint outlinePaint,
-    double alpha,
+    double fillAlpha,
+    double outlineAlpha,
   ) {
     // Scale factors based on bounding box
     final headWidth = width * 0.50;
@@ -301,9 +310,18 @@ class _TunoMusicPainter extends CustomPainter {
     final flagWidth = width * 0.40;
     final flagHeight = height * 0.25;
 
-    // Adjust paint alpha
-    fillPaint = Paint()..shader = fillPaint.shader;
-    outlinePaint.color = outlinePaint.color.withValues(alpha: alpha);
+    // Adjust paint alpha.  Dark theme keeps the original rendering exactly;
+    // light theme draws the note colour at a subtle premium opacity.  When the
+    // fill is a gradient (welcome variant) the alpha is baked into its stops by
+    // the caller, so here we simply preserve the supplied shader.
+    if (isDark) {
+      fillPaint = Paint()..shader = fillPaint.shader;
+    } else {
+      fillPaint = Paint()
+        ..shader = fillPaint.shader
+        ..color = fillPaint.color.withValues(alpha: fillAlpha);
+    }
+    outlinePaint.color = outlinePaint.color.withValues(alpha: outlineAlpha);
 
     // Note head (ellipse) - positioned slightly left and down
     final headRect = Rect.fromCenter(
@@ -372,7 +390,7 @@ class _TunoMusicPainter extends CustomPainter {
     final glowPaint = Paint()
       ..style = PaintingStyle.fill
       ..color = AppColors.tunoGoldGlow.withValues(
-        alpha: (isDark ? 0.20 : 0.12) * opacity,
+        alpha: (isDark ? 0.20 : 0.16) * opacity,
       );
     canvas.drawCircle(center, halfSize * 0.6, glowPaint);
 
@@ -411,7 +429,7 @@ class _TunoMusicPainter extends CustomPainter {
     final centerPaint = Paint()
       ..style = PaintingStyle.fill
       ..color = AppColors.tunoGoldChampagne.withValues(
-        alpha: (isDark ? 0.85 : 0.65) * opacity,
+        alpha: (isDark ? 0.85 : 0.60) * opacity,
       );
     canvas.drawCircle(center, innerRadius * 0.5, centerPaint);
   }
@@ -431,9 +449,9 @@ class _TunoMusicPainter extends CustomPainter {
           alpha: (0.06 + i * 0.03) * opacity,
         );
       } else {
-        paint.color = AppColors.tunoCyan.withValues(
-          alpha: (0.04 + i * 0.03) * opacity,
-        );
+        paint.color = const Color(
+          0xFF0B7185,
+        ).withValues(alpha: (0.10 + i * 0.03) * opacity);
       }
 
       final yOffset = i * 50.0;
@@ -474,7 +492,7 @@ class _TunoMusicPainter extends CustomPainter {
     const spacing = 15.0;
 
     for (int i = 0; i < waveCount; i++) {
-      final alpha = isDark ? (0.10 + i * 0.028) : (0.05 + i * 0.014);
+      final alpha = isDark ? (0.10 + i * 0.028) : (0.14 + i * 0.012);
       final paint = Paint()
         ..style = PaintingStyle.stroke
         ..strokeCap = StrokeCap.round
@@ -504,8 +522,8 @@ class _TunoMusicPainter extends CustomPainter {
     final noteColor = _signupNoteColor();
 
     // Note 1: upper-right area above the wave cluster (waves start at y=90)
-    final noteAlpha = isDark ? 0.20 * opacity : 0.10 * opacity;
-    final noteStrokeAlpha = isDark ? 0.45 * opacity : 0.25 * opacity;
+    final noteAlpha = isDark ? 0.20 * opacity : 0.32 * opacity;
+    final noteStrokeAlpha = isDark ? 0.45 * opacity : 0.50 * opacity;
 
     final note1Fill = Paint()
       ..color = noteColor.withValues(alpha: noteAlpha)
@@ -528,7 +546,8 @@ class _TunoMusicPainter extends CustomPainter {
       64,
       note1Fill,
       note1Outline,
-      isDark ? 0.80 : 0.65,
+      isDark ? 1.0 : 0.36,
+      isDark ? 0.80 : 0.50,
     );
     canvas.restore();
 
@@ -553,7 +572,8 @@ class _TunoMusicPainter extends CustomPainter {
       58,
       note2Fill,
       note2Outline,
-      isDark ? 0.75 : 0.60,
+      isDark ? 1.0 : 0.32,
+      isDark ? 0.75 : 0.45,
     );
     canvas.restore();
   }
@@ -573,7 +593,7 @@ class _TunoMusicPainter extends CustomPainter {
     for (int i = 0; i < curveCount; i++) {
       final alpha = isDark
           ? (0.10 - i * 0.010).clamp(0.01, 0.35)
-          : (0.05 - i * 0.005).clamp(0.01, 0.20);
+          : (0.16 - i * 0.008).clamp(0.10, 0.22);
       final paint = Paint()
         ..style = PaintingStyle.stroke
         ..strokeCap = StrokeCap.round
@@ -605,7 +625,7 @@ class _TunoMusicPainter extends CustomPainter {
     if (isDark) {
       return AppColors.tunoTeal; // muted teal
     } else {
-      return AppColors.tunoCyan.withValues(alpha: 0.6); // pale cyan
+      return const Color(0xFF0B7185); // deeper teal for light theme
     }
   }
 
@@ -614,7 +634,7 @@ class _TunoMusicPainter extends CustomPainter {
     if (isDark) {
       return AppColors.tunoTeal; // muted teal/cyan
     } else {
-      return AppColors.tunoCyan; // pale cyan
+      return const Color(0xFF0B7185); // deeper teal for light theme
     }
   }
 
@@ -623,7 +643,7 @@ class _TunoMusicPainter extends CustomPainter {
     if (isDark) {
       return AppColors.tunoTeal; // muted teal/cyan
     } else {
-      return AppColors.tunoCyan; // pale cyan/teal
+      return const Color(0xFF168FA0); // deeper cyan for light theme
     }
   }
 
@@ -647,7 +667,7 @@ class _TunoMusicPainter extends CustomPainter {
     for (int i = 0; i < waveCount; i++) {
       final alpha = isDark
           ? (0.28 - i * 0.025).clamp(0.04, 0.35)
-          : (0.16 - i * 0.014).clamp(0.02, 0.22);
+          : (0.22 - i * 0.010).clamp(0.14, 0.22);
 
       final paint = Paint()
         ..style = PaintingStyle.stroke
@@ -679,8 +699,8 @@ class _TunoMusicPainter extends CustomPainter {
 
     final noteColor = _loginNoteColor();
 
-    final noteAlpha = isDark ? 0.22 * opacity : 0.12 * opacity;
-    final noteStrokeAlpha = isDark ? 0.50 * opacity : 0.28 * opacity;
+    final noteAlpha = isDark ? 0.22 * opacity : 0.34 * opacity;
+    final noteStrokeAlpha = isDark ? 0.50 * opacity : 0.52 * opacity;
 
     // Note 1: upper-right, nestled among/above the waves
     final note1Fill = Paint()
@@ -703,7 +723,8 @@ class _TunoMusicPainter extends CustomPainter {
       68,
       note1Fill,
       note1Outline,
-      isDark ? 0.80 : 0.65,
+      isDark ? 1.0 : 0.36,
+      isDark ? 0.80 : 0.50,
     );
     canvas.restore();
 
@@ -728,7 +749,8 @@ class _TunoMusicPainter extends CustomPainter {
       56,
       note2Fill,
       note2Outline,
-      isDark ? 0.75 : 0.60,
+      isDark ? 1.0 : 0.32,
+      isDark ? 0.75 : 0.45,
     );
     canvas.restore();
   }
@@ -738,7 +760,7 @@ class _TunoMusicPainter extends CustomPainter {
     if (isDark) {
       return AppColors.tunoTeal; // muted teal/cyan
     }
-    return AppColors.tunoCyan; // pale cyan
+    return const Color(0xFF0B7185); // deeper teal for light theme
   }
 
   /// Note colour for the login variant – theme-aware.
@@ -746,7 +768,7 @@ class _TunoMusicPainter extends CustomPainter {
     if (isDark) {
       return AppColors.tunoTeal; // muted teal/cyan
     }
-    return AppColors.tunoCyan; // pale cyan/teal
+    return const Color(0xFF168FA0); // deeper cyan for light theme
   }
 
   // ─────────────────────────────────────────────────────────────
@@ -757,7 +779,7 @@ class _TunoMusicPainter extends CustomPainter {
     if (isDark) {
       return AppColors.tunoCyan.withValues(alpha: 0.08 * opacity);
     } else {
-      return AppColors.tunoDeepBlue.withValues(alpha: 0.06 * opacity);
+      return const Color(0xFF0B7185).withValues(alpha: 0.12 * opacity);
     }
   }
 
@@ -765,7 +787,7 @@ class _TunoMusicPainter extends CustomPainter {
     if (isDark) {
       return AppColors.tunoTeal.withValues(alpha: 0.12 * opacity);
     } else {
-      return AppColors.tunoCyan.withValues(alpha: 0.08 * opacity);
+      return const Color(0xFF0B7185).withValues(alpha: 0.18 * opacity);
     }
   }
 
@@ -773,7 +795,7 @@ class _TunoMusicPainter extends CustomPainter {
     if (isDark) {
       return AppColors.tunoCyan.withValues(alpha: 0.25 * opacity);
     } else {
-      return AppColors.tunoDeepBlue.withValues(alpha: 0.18 * opacity);
+      return const Color(0xFF168FA0).withValues(alpha: 0.32 * opacity);
     }
   }
 
@@ -781,7 +803,7 @@ class _TunoMusicPainter extends CustomPainter {
     if (isDark) {
       return AppColors.tunoTeal.withValues(alpha: 0.4 * opacity);
     } else {
-      return AppColors.tunoDeepBlue.withValues(alpha: 0.35 * opacity);
+      return const Color(0xFF0B7185).withValues(alpha: 0.42 * opacity);
     }
   }
 
@@ -968,23 +990,23 @@ class HomeMusicBackgroundPainter extends CustomPainter {
 
   Color get _noteColorStart => isDark
       ? const Color(0xFF087D91)
-      : const Color(0xFF087D91).withValues(alpha: 0.50);
+      : const Color(0xFF168FA0).withValues(alpha: 0.50);
 
   Color get _noteColorEnd => isDark
       ? const Color(0xFF07506C)
-      : const Color(0xFF07506C).withValues(alpha: 0.35);
+      : const Color(0xFF0B7185).withValues(alpha: 0.40);
 
   Color get _glowDotColor => isDark
       ? const Color(0xFF12B5C1).withValues(alpha: 0.35 * opacity)
-      : const Color(0xFF7FC8EF).withValues(alpha: 0.25 * opacity);
+      : const Color(0xFF0B7185).withValues(alpha: 0.40 * opacity);
 
   Color get _eqBarColor => isDark
       ? const Color(0xFF12B5C1).withValues(alpha: 0.18 * opacity)
-      : const Color(0xFF69BCE8).withValues(alpha: 0.15 * opacity);
+      : const Color(0xFF168FA0).withValues(alpha: 0.20 * opacity);
 
   Color get _waveformColor => isDark
       ? const Color(0xFF12B5C1).withValues(alpha: 0.14 * opacity)
-      : const Color(0xFF69BCE8).withValues(alpha: 0.12 * opacity);
+      : const Color(0xFF0B7185).withValues(alpha: 0.16 * opacity);
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -1066,14 +1088,14 @@ class HomeMusicBackgroundPainter extends CustomPainter {
     final fill = Paint()
       ..style = PaintingStyle.fill
       ..color = _noteColorStart.withValues(
-        alpha: isDark ? 0.45 * opacity : 0.22 * opacity,
+        alpha: isDark ? 0.45 * opacity : 0.34 * opacity,
       );
     final stroke = Paint()
       ..style = PaintingStyle.stroke
       ..strokeWidth = 1.6
       ..strokeCap = StrokeCap.round
       ..color = _noteColorEnd.withValues(
-        alpha: isDark ? 0.55 * opacity : 0.28 * opacity,
+        alpha: isDark ? 0.55 * opacity : 0.40 * opacity,
       );
 
     // Note head (tilted ellipse)
@@ -1127,14 +1149,14 @@ class HomeMusicBackgroundPainter extends CustomPainter {
     final fill = Paint()
       ..style = PaintingStyle.fill
       ..color = _noteColorStart.withValues(
-        alpha: isDark ? 0.40 * opacity : 0.20 * opacity,
+        alpha: isDark ? 0.40 * opacity : 0.30 * opacity,
       );
     final stroke = Paint()
       ..style = PaintingStyle.stroke
       ..strokeWidth = 1.4
       ..strokeCap = StrokeCap.round
       ..color = _noteColorEnd.withValues(
-        alpha: isDark ? 0.50 * opacity : 0.25 * opacity,
+        alpha: isDark ? 0.50 * opacity : 0.36 * opacity,
       );
 
     for (int i = 0; i < 2; i++) {
@@ -1198,7 +1220,7 @@ class HomeMusicBackgroundPainter extends CustomPainter {
       ..style = PaintingStyle.fill
       ..color = const Color(
         0xFFD9A62E,
-      ).withValues(alpha: (isDark ? 0.18 : 0.10) * opacity);
+      ).withValues(alpha: (isDark ? 0.18 : 0.14) * opacity);
     canvas.drawCircle(center, halfSize * 0.55, glowPaint);
 
     // Four diamond-shaped arms with layered gold
@@ -1207,14 +1229,14 @@ class HomeMusicBackgroundPainter extends CustomPainter {
       ..style = PaintingStyle.fill
       ..color = const Color(
         0xFFE3B94F,
-      ).withValues(alpha: (isDark ? 0.65 : 0.45) * opacity);
+      ).withValues(alpha: (isDark ? 0.65 : 0.50) * opacity);
 
     // Champagne highlight overlay
     final highlightPaint = Paint()
       ..style = PaintingStyle.fill
       ..color = const Color(
         0xFFFFF2A6,
-      ).withValues(alpha: (isDark ? 0.50 : 0.35) * opacity);
+      ).withValues(alpha: (isDark ? 0.50 : 0.42) * opacity);
 
     for (int i = 0; i < 4; i++) {
       final angle = i * math.pi / 2;
@@ -1258,7 +1280,7 @@ class HomeMusicBackgroundPainter extends CustomPainter {
       ..style = PaintingStyle.fill
       ..color = const Color(
         0xFFA86D16,
-      ).withValues(alpha: (isDark ? 0.55 : 0.35) * opacity);
+      ).withValues(alpha: (isDark ? 0.55 : 0.42) * opacity);
     canvas.drawCircle(center, innerRadius * 0.4, deepGoldPaint);
 
     // Bright champagne center dot
@@ -1266,7 +1288,7 @@ class HomeMusicBackgroundPainter extends CustomPainter {
       ..style = PaintingStyle.fill
       ..color = const Color(
         0xFFFFF2A6,
-      ).withValues(alpha: (isDark ? 0.80 : 0.60) * opacity);
+      ).withValues(alpha: (isDark ? 0.80 : 0.55) * opacity);
     canvas.drawCircle(center, innerRadius * 0.25, centerDotPaint);
   }
 
@@ -1357,7 +1379,7 @@ class HomeMusicBackgroundPainter extends CustomPainter {
       ..strokeWidth = 1.0
       ..strokeCap = StrokeCap.round
       ..color = _waveformColor.withValues(
-        alpha: isDark ? 0.10 * opacity : 0.08 * opacity,
+        alpha: isDark ? 0.10 * opacity : 0.12 * opacity,
       );
 
     final path2 = Path();

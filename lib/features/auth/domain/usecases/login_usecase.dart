@@ -2,7 +2,7 @@ import '../errors/auth_failure.dart';
 import '../repositories/auth_repository.dart';
 
 class LoginUseCase {
-  LoginUseCase({required AuthRepository repository}) : _repository = repository;
+  LoginUseCase({required this._repository});
 
   final AuthRepository _repository;
 

@@ -1478,4 +1478,47 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get saving => 'Saving...';
+
+  @override
+  String get referenceTrackLibraryTitle => 'Your Library';
+
+  @override
+  String get referenceTrackLibrarySubtitle =>
+      'Choose a track for your practice';
+
+  @override
+  String get referenceTrackLibraryAddTrack => 'Add Track';
+
+  @override
+  String get referenceTrackLibraryEmptyTitle => 'Your library is empty';
+
+  @override
+  String get referenceTrackLibraryEmptySubtitle =>
+      'Add an audio track to start practising';
+
+  @override
+  String get referenceTrackLibraryViewLibrary => 'View Library';
+
+  @override
+  String referenceTrackLibraryTrackSelected(String name) {
+    return 'Track selected: $name';
+  }
+
+  @override
+  String get referenceTrackLibraryRemove => 'Remove track';
+
+  @override
+  String get referenceTrackLibrarySaving => 'Saving library...';
+
+  @override
+  String get loadingLibrary => 'Loading library...';
+
+  @override
+  String get referenceTrackLabel => 'Reference Track';
+
+  @override
+  String get referenceTrackChange => 'Change Track';
+
+  @override
+  String get referenceTrackClear => 'Clear Selection';
 }

@@ -1,19 +1,30 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
+import '../../../../core/theme/app_colors.dart';
 import '../../../../core/widgets/tuno_dashboard_background.dart';
 import '../../../../core/widgets/metallic_gold_border.dart';
 import '../../../../core/widgets/tuno_card.dart';
-import '../../../../core/widgets/glass_card.dart';
+import '../../../../core/widgets/tuno_gradient_button.dart';
 import '../../../../l10n/app_localizations.dart';
+import '../../data/storage/recording_audio.dart';
 import '../../domain/recording_library_entry.dart';
 import '../../domain/recording_library_error_code.dart';
 import '../../domain/recording_library_state.dart';
 import 'package:ai_singing_coach/features/recording_library/recording_library_providers.dart';
+
+/// Tuno CTA gradient shared by the selected filter chip and CTA buttons.
+const _tunoCtaGradient = LinearGradient(
+  colors: [Color(0xFF008BA6), Color(0xFF006D98), Color(0xFF014B75)],
+  begin: Alignment.centerLeft,
+  end: Alignment.centerRight,
+  stops: [0.0, 0.52, 1.0],
+);
 
 class RecordingLibraryScreen extends ConsumerStatefulWidget {
   const RecordingLibraryScreen({super.key});
@@ -58,38 +69,53 @@ class _RecordingLibraryScreenState
     final textTheme = Theme.of(context).textTheme;
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
-    return TunoDashboardBackground(
-      animate: true,
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        body: SafeArea(
-          child: LayoutBuilder(
-            builder: (context, constraints) {
-              return SingleChildScrollView(
-                physics: const ClampingScrollPhysics(),
-                child: ConstrainedBox(
-                  constraints: BoxConstraints(minHeight: constraints.maxHeight),
-                  child: Center(
-                    child: ConstrainedBox(
-                      constraints: const BoxConstraints(maxWidth: 760),
-                      child: Padding(
-                        padding: const EdgeInsets.fromLTRB(20, 0, 20, 140),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            _buildHeader(l10n, cs, textTheme),
-                            const SizedBox(height: 32),
-                            _buildSearchAndFilter(l10n, cs, textTheme, isDark),
-                            const SizedBox(height: 24),
-                            _buildContent(state, l10n, cs, textTheme, isDark),
-                          ],
+    // Theme-aware page background: dark = #030D1B, light = icy white/light blue.
+    // Derived from the active theme so it reacts to Light/Dark mode changes.
+    final pageBackground = Theme.of(context).scaffoldBackgroundColor;
+
+    return ColoredBox(
+      color: pageBackground,
+      child: TunoDashboardBackground(
+        animate: true,
+        child: Scaffold(
+          backgroundColor: Colors.transparent,
+          body: SafeArea(
+            child: LayoutBuilder(
+              builder: (context, constraints) {
+                return SingleChildScrollView(
+                  physics: const ClampingScrollPhysics(),
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints(
+                      minHeight: constraints.maxHeight,
+                    ),
+                    child: Center(
+                      child: ConstrainedBox(
+                        constraints: const BoxConstraints(maxWidth: 760),
+                        child: Padding(
+                          // Flexible page padding for mobile (16) vs desktop (32).
+                          padding: EdgeInsets.fromLTRB(
+                            constraints.maxWidth >= 600 ? 32 : 16,
+                            0,
+                            constraints.maxWidth >= 600 ? 32 : 16,
+                            140,
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              _buildHeader(l10n, cs, textTheme),
+                              const SizedBox(height: 32),
+                              _buildSearchAndFilter(l10n, cs, textTheme),
+                              const SizedBox(height: 24),
+                              _buildContent(state, l10n, cs, textTheme, isDark),
+                            ],
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
-              );
-            },
+                );
+              },
+            ),
           ),
         ),
       ),
@@ -178,7 +204,6 @@ class _RecordingLibraryScreenState
     AppLocalizations l10n,
     ColorScheme cs,
     TextTheme textTheme,
-    bool isDark,
   ) {
     return Column(
       children: [
@@ -188,12 +213,18 @@ class _RecordingLibraryScreenState
             hintText: l10n.searchRecordings,
             prefixIcon: Icon(Icons.search_rounded, color: cs.onSurfaceVariant),
             filled: true,
-            fillColor: isDark
-                ? cs.surfaceContainerHighest.withValues(alpha: 0.5)
-                : cs.surfaceContainerHighest.withValues(alpha: 0.3),
+            fillColor: cs.surfaceContainerHighest.withValues(alpha: 0.5),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(16),
+              borderSide: BorderSide(color: cs.outlineVariant),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(16),
+              borderSide: BorderSide(color: cs.primary, width: 1.5),
+            ),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(16),
-              borderSide: BorderSide.none,
+              borderSide: BorderSide(color: cs.outlineVariant),
             ),
             contentPadding: const EdgeInsets.symmetric(
               horizontal: 16,
@@ -240,22 +271,70 @@ class _RecordingLibraryScreenState
     TextTheme textTheme,
   ) {
     final isSelected = _currentFilter == filter;
-    return ChoiceChip(
-      label: Text(label),
+    // Selected chips use the Tuno gradient with a white label/icon.
+    // Unselected chips use a theme-aware surface with onSurface text.
+    final foreground = isSelected ? Colors.white : cs.onSurface;
+
+    return Semantics(
+      button: true,
       selected: isSelected,
-      onSelected: (_) => setState(() => _currentFilter = filter),
-      labelStyle: textTheme.labelLarge?.copyWith(
-        fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
-        color: isSelected ? Colors.white : cs.onSurfaceVariant,
+      label: label,
+      child: MouseRegion(
+        cursor: SystemMouseCursors.click,
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 180),
+          curve: Curves.easeOut,
+          decoration: BoxDecoration(
+            gradient: isSelected ? _tunoCtaGradient : null,
+            color: isSelected ? null : cs.surfaceContainerHighest,
+            borderRadius: BorderRadius.circular(20),
+            border: Border.all(
+              color: isSelected
+                  ? const Color(0xFF014B75).withValues(alpha: 0.8)
+                  : cs.outlineVariant,
+              width: 1,
+            ),
+          ),
+          child: Material(
+            color: Colors.transparent,
+            borderRadius: BorderRadius.circular(20),
+            child: InkWell(
+              onTap: () => setState(() => _currentFilter = filter),
+              borderRadius: BorderRadius.circular(20),
+              splashColor: Colors.white.withValues(alpha: 0.20),
+              highlightColor: Colors.white.withValues(alpha: 0.10),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 12,
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(
+                      filter == RecordingLibraryFilter.all
+                          ? Icons.library_music_rounded
+                          : Icons.star_rounded,
+                      size: 18,
+                      color: foreground,
+                    ),
+                    const SizedBox(width: 8),
+                    Text(
+                      label,
+                      style: textTheme.labelLarge?.copyWith(
+                        fontWeight: isSelected
+                            ? FontWeight.w600
+                            : FontWeight.w500,
+                        color: foreground,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ),
       ),
-      selectedColor: cs.primary,
-      backgroundColor: cs.surfaceContainerHighest.withValues(alpha: 0.5),
-      side: BorderSide(
-        color: isSelected ? cs.primary : cs.outlineVariant,
-        width: 1,
-      ),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
     );
   }
 
@@ -355,7 +434,7 @@ class _RecordingLibraryScreenState
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
           itemCount: filteredRecordings.length,
-          separatorBuilder: (_, __) => const SizedBox(height: 12),
+          separatorBuilder: (_, _) => const SizedBox(height: 12),
           itemBuilder: (context, index) => _RecordingCard(
             entry: filteredRecordings[index],
             onTap: () => _playRecording(filteredRecordings[index]),
@@ -395,12 +474,20 @@ class _RecordingLibraryScreenState
     TextTheme textTheme,
     bool isDark,
   ) {
+    // Empty-state icon uses the Tuno cyan/teal brand colour.
+    final accentColor = isDark ? AppColors.tunoCyan : AppColors.tealAccent;
+
     return Center(
       child: Padding(
-        padding: const EdgeInsets.all(48),
-        child: GlassCard(
-          borderRadius: 24,
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: Container(
+          width: double.infinity,
           padding: const EdgeInsets.all(32),
+          decoration: BoxDecoration(
+            color: cs.surfaceContainer,
+            borderRadius: BorderRadius.circular(24),
+            border: Border.all(color: cs.outlineVariant),
+          ),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -408,13 +495,13 @@ class _RecordingLibraryScreenState
                 width: 80,
                 height: 80,
                 decoration: BoxDecoration(
-                  color: cs.primaryContainer,
+                  color: accentColor.withValues(alpha: 0.14),
                   shape: BoxShape.circle,
                 ),
                 child: Icon(
                   Icons.music_off_rounded,
                   size: 40,
-                  color: cs.onPrimaryContainer,
+                  color: accentColor,
                 ),
               ),
               const SizedBox(height: 24),
@@ -437,30 +524,17 @@ class _RecordingLibraryScreenState
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 24),
-              _GradientCTAButton(
-                onPressed: () => context.push('/practice/modes'),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Container(
-                      width: 10,
-                      height: 10,
-                      decoration: const BoxDecoration(
-                        color: Colors.white,
-                        shape: BoxShape.circle,
-                      ),
-                    ),
-                    const SizedBox(width: 10),
-                    Text(
-                      l10n.startPractice,
-                      style: textTheme.titleMedium?.copyWith(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w700,
-                        color: Colors.white,
-                        letterSpacing: 0.2,
-                      ),
-                    ),
-                  ],
+              // Tuno gradient CTA with a thin metallic-gold border.
+              MetallicGoldBorder(
+                borderRadius: BorderRadius.circular(20),
+                padding: 1.0,
+                boxShadow: const [],
+                gradientOpacity: 0.8,
+                child: TunoGradientButton(
+                  label: l10n.startPractice,
+                  onPressed: () => context.push('/practice/modes'),
+                  icon: Icons.play_arrow_rounded,
+                  gradient: _tunoCtaGradient,
                 ),
               ),
             ],
@@ -522,10 +596,15 @@ class _RecordingLibraryScreenState
 
     return Center(
       child: Padding(
-        padding: const EdgeInsets.all(48),
-        child: GlassCard(
-          borderRadius: 24,
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: Container(
+          width: double.infinity,
           padding: const EdgeInsets.all(32),
+          decoration: BoxDecoration(
+            color: cs.surfaceContainer,
+            borderRadius: BorderRadius.circular(24),
+            border: Border.all(color: cs.outlineVariant),
+          ),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -562,32 +641,18 @@ class _RecordingLibraryScreenState
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 24),
-              _GradientCTAButton(
-                onPressed: () => ref
-                    .read(recordingLibraryControllerProvider.notifier)
-                    .refresh(),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Container(
-                      width: 10,
-                      height: 10,
-                      decoration: const BoxDecoration(
-                        color: Colors.white,
-                        shape: BoxShape.circle,
-                      ),
-                    ),
-                    const SizedBox(width: 10),
-                    Text(
-                      l10n.retry,
-                      style: textTheme.titleMedium?.copyWith(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w700,
-                        color: Colors.white,
-                        letterSpacing: 0.2,
-                      ),
-                    ),
-                  ],
+              MetallicGoldBorder(
+                borderRadius: BorderRadius.circular(20),
+                padding: 1.0,
+                boxShadow: const [],
+                gradientOpacity: 0.8,
+                child: TunoGradientButton(
+                  label: l10n.retry,
+                  onPressed: () => ref
+                      .read(recordingLibraryControllerProvider.notifier)
+                      .refresh(),
+                  icon: Icons.refresh_rounded,
+                  gradient: _tunoCtaGradient,
                 ),
               ),
             ],
@@ -658,23 +723,33 @@ class _RecordingLibraryScreenState
   }
 
   void _playRecording(RecordingLibraryEntry entry) {
-    ref
-        .read(recordingLibraryControllerProvider.notifier)
-        .loadRecordingBytes(entry.id)
-        .then((bytes) {
-          if (bytes != null && mounted) {
-            // Navigate to review screen with audio bytes
-            context.push(
-              '/practice/review',
-              extra: {'audioBytes': bytes, 'entry': entry},
-            );
+    final controller = ref.read(recordingLibraryControllerProvider.notifier);
+
+    if (kIsWeb) {
+      // Web: load bytes, create a session blob URL, and navigate.
+      controller.loadRecordingBytes(entry.id).then((bytes) async {
+        if (bytes != null && mounted) {
+          final url = await createObjectUrlFromBytes(
+            bytes,
+            'audio/${entry.extension}',
+          );
+          if (url != null && mounted) {
+            context.push('/practice/review', extra: url);
           }
-        });
+        }
+      });
+    } else {
+      // Native: use the file path.
+      controller.loadRecordingPath(entry.id).then((path) {
+        if (path != null && mounted) {
+          context.push('/practice/review', extra: path);
+        }
+      });
+    }
   }
 
   void _renameRecording(RecordingLibraryEntry entry) {
     final controller = TextEditingController(text: entry.title);
-    final cs = Theme.of(context).colorScheme;
 
     showDialog<void>(
       context: context,
@@ -1047,103 +1122,6 @@ class _RecordingCard extends StatelessWidget {
   String _formatDuration(Duration duration) {
     final minutes = duration.inMinutes;
     final seconds = duration.inSeconds % 60;
-    return '${minutes}:${seconds.toString().padLeft(2, '0')}';
-  }
-}
-
-class _GradientCTAButton extends StatefulWidget {
-  const _GradientCTAButton({required this.onPressed, required this.child});
-
-  final VoidCallback onPressed;
-  final Widget child;
-
-  @override
-  State<_GradientCTAButton> createState() => _GradientCTAButtonState();
-}
-
-class _GradientCTAButtonState extends State<_GradientCTAButton> {
-  bool _hovered = false;
-  bool _focused = false;
-
-  static const _ctaGradient = LinearGradient(
-    colors: [Color(0xFF008BA6), Color(0xFF006D98), Color(0xFF014B75)],
-    begin: Alignment.centerLeft,
-    end: Alignment.centerRight,
-    stops: [0.0, 0.52, 1.0],
-  );
-
-  static const _goldBorderGradient = LinearGradient(
-    colors: [
-      Color(0xFFFFF2A6),
-      Color(0xFFE3B94F),
-      Color(0xFFA86D16),
-      Color(0xFFF4D675),
-    ],
-    begin: Alignment.topLeft,
-    end: Alignment.bottomRight,
-  );
-
-  @override
-  Widget build(BuildContext context) {
-    final shadowColor = _hovered || _focused
-        ? const Color(0xFF12B5C1).withValues(alpha: 0.35)
-        : const Color(0xFF0069A0).withValues(alpha: 0.25);
-
-    return Focus(
-      onFocusChange: (v) => setState(() => _focused = v),
-      child: MouseRegion(
-        onEnter: (_) => setState(() => _hovered = true),
-        onExit: (_) => setState(() => _hovered = false),
-        child: Container(
-          height: 56,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-            gradient: _ctaGradient,
-            boxShadow: [
-              BoxShadow(
-                color: shadowColor,
-                blurRadius: _hovered || _focused ? 16 : 10,
-                spreadRadius: 0,
-                offset: const Offset(0, 4),
-              ),
-            ],
-          ),
-          child: Stack(
-            children: [
-              Positioned.fill(
-                child: IgnorePointer(
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      gradient: _goldBorderGradient,
-                    ),
-                    padding: const EdgeInsets.all(1),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(19),
-                        gradient: _ctaGradient,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              Material(
-                color: Colors.transparent,
-                borderRadius: BorderRadius.circular(20),
-                child: InkWell(
-                  onTap: widget.onPressed,
-                  borderRadius: BorderRadius.circular(20),
-                  splashColor: Colors.white.withValues(alpha: 0.18),
-                  highlightColor: Colors.white.withValues(alpha: 0.10),
-                  hoverColor: Colors.transparent,
-                  focusColor: Colors.transparent,
-                  child: Center(child: widget.child),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
+    return '$minutes:${seconds.toString().padLeft(2, '0')}';
   }
 }

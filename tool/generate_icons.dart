@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'dart:typed_data';
 
 import 'package:image/image.dart';
 
@@ -32,7 +31,7 @@ Future<void> main() async {
 
     final outputFile = File('${outputDir.path}/$name');
     await outputFile.writeAsBytes(encodePng(canvas));
-    print('Generated: ${outputFile.path} (${size}x${size})');
+    stdout.writeln('Generated: ${outputFile.path} (${size}x$size)');
   }
 
   // Generate all required icons
@@ -55,7 +54,7 @@ Future<void> main() async {
   final faviconSource = File('web/icons/favicon.png');
   final faviconDest = File('web/favicon.png');
   await faviconSource.copy(faviconDest.path);
-  print('Copied: ${faviconDest.path}');
+  stdout.writeln('Copied: ${faviconDest.path}');
 
-  print('\nAll icons generated successfully!');
+  stdout.writeln('\nAll icons generated successfully!');
 }

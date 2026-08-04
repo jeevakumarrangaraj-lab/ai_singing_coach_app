@@ -5,6 +5,7 @@ import 'screens/voice_practice_screen.dart';
 import 'screens/recording_review_screen.dart';
 import 'screens/analysis_result_screen.dart';
 import 'screens/reference_track_screen.dart';
+import 'screens/reference_track_library_screen.dart';
 
 class PracticeRoutes {
   static const String practiceModes = '/practice/modes';
@@ -12,6 +13,7 @@ class PracticeRoutes {
   static const String recordingReview = '/practice/review';
   static const String analysisResult = '/practice/analysis';
   static const String referenceTrack = '/practice/upload';
+  static const String referenceTrackLibrary = '/practice/library';
 
   List<RouteBase> get routes => [
     GoRoute(
@@ -28,6 +30,11 @@ class PracticeRoutes {
       path: referenceTrack,
       name: 'referenceTrack',
       builder: (context, state) => const ReferenceTrackScreen(),
+    ),
+    GoRoute(
+      path: referenceTrackLibrary,
+      name: 'referenceTrackLibrary',
+      builder: (context, state) => const ReferenceTrackLibraryScreen(),
     ),
     GoRoute(
       path: recordingReview,

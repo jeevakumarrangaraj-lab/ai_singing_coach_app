@@ -1502,4 +1502,47 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String get saving => 'சேமித்து இருக்கிறது...';
+
+  @override
+  String get referenceTrackLibraryTitle => 'உங்கள் நூலகம்';
+
+  @override
+  String get referenceTrackLibrarySubtitle =>
+      'உங்கள் பயிற்சிக்கு ஒரு ட்ராக் தேர்ந்தெடுக்கவும்';
+
+  @override
+  String get referenceTrackLibraryAddTrack => 'ட்ராக் சேர்';
+
+  @override
+  String get referenceTrackLibraryEmptyTitle => 'உங்கள் நூலகம் காலியாக உள்ளது';
+
+  @override
+  String get referenceTrackLibraryEmptySubtitle =>
+      'பயிற்சி தொடங்க ஒலி ட்ராக் சேர்க்கவும்';
+
+  @override
+  String get referenceTrackLibraryViewLibrary => 'நூலகத்தை பார்க்கவும்';
+
+  @override
+  String referenceTrackLibraryTrackSelected(String name) {
+    return 'ட்ராக் தேர்ந்தெடுக்கப்பட்டது: $name';
+  }
+
+  @override
+  String get referenceTrackLibraryRemove => 'ட்ராக் நீக்கு';
+
+  @override
+  String get referenceTrackLibrarySaving => 'நூலகம் சேமிக்கப்படுகிறது...';
+
+  @override
+  String get loadingLibrary => 'நூலகம் ஏற்றப்படுகிறது...';
+
+  @override
+  String get referenceTrackLabel => 'அடிப்படை இசை';
+
+  @override
+  String get referenceTrackChange => 'ட்ராக் மாற்று';
+
+  @override
+  String get referenceTrackClear => 'தேர்வை நீக்கு';
 }

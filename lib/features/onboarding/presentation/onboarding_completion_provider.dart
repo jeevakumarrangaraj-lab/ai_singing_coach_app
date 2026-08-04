@@ -59,10 +59,9 @@ const _shouldClearCode = Object();
 class OnboardingCompletionController
     extends StateNotifier<OnboardingCompletionState> {
   OnboardingCompletionController({
-    required OnboardingRepository onboardingRepository,
+    required this._onboardingRepository,
     String? userId,
-  }) : _onboardingRepository = onboardingRepository,
-       _currentUserId = userId,
+  }) : _currentUserId = userId,
        super(OnboardingCompletionState.unknown()) {
     if (userId == null || userId.isEmpty) {
       state = OnboardingCompletionState.signedOut();

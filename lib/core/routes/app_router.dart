@@ -22,10 +22,10 @@ import '../../features/splash/presentation/screens/splash_screen.dart';
 
 class _GoRouterRefreshNotifier extends ChangeNotifier {
   _GoRouterRefreshNotifier(Ref ref) {
-    ref.listen<AuthState>(authControllerProvider, (_, __) => notifyListeners());
+    ref.listen<AuthState>(authControllerProvider, (_, _) => notifyListeners());
     ref.listen<OnboardingCompletionState>(
       onboardingCompletionProvider,
-      (_, __) => notifyListeners(),
+      (_, _) => notifyListeners(),
     );
   }
 }

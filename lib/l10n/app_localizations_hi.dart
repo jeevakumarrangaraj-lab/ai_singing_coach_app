@@ -1485,4 +1485,46 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get saving => 'सहेजा जा रहा है...';
+
+  @override
+  String get referenceTrackLibraryTitle => 'आपकी लाइब्रेरी';
+
+  @override
+  String get referenceTrackLibrarySubtitle => 'अभ्यास के लिए एक ट्रैक चुनें';
+
+  @override
+  String get referenceTrackLibraryAddTrack => 'ट्रैक जोड़ें';
+
+  @override
+  String get referenceTrackLibraryEmptyTitle => 'आपकी लाइब्रेरी खाली है';
+
+  @override
+  String get referenceTrackLibraryEmptySubtitle =>
+      'अभ्यास शुरू करने के लिए एक ऑडियो ट्रैक जोड़ें';
+
+  @override
+  String get referenceTrackLibraryViewLibrary => 'लाइब्रेरी देखें';
+
+  @override
+  String referenceTrackLibraryTrackSelected(String name) {
+    return 'ट्रैक चुना गया: $name';
+  }
+
+  @override
+  String get referenceTrackLibraryRemove => 'ट्रैक हटाएं';
+
+  @override
+  String get referenceTrackLibrarySaving => 'लाइब्रेरी सहेजी जा रही है...';
+
+  @override
+  String get loadingLibrary => 'लाइब्रेरी लोड हो रही है...';
+
+  @override
+  String get referenceTrackLabel => 'संदर्भ ट्रैक';
+
+  @override
+  String get referenceTrackChange => 'ट्रैक बदलें';
+
+  @override
+  String get referenceTrackClear => 'चयन साफ़ करें';
 }
