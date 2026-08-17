@@ -1,17 +1,32 @@
-# ai_singing_coach
+# TUNO - AI Singing Coach 🎤
 
-A new Flutter project.
+A cross-platform mobile app built with Flutter that helps users practice singing with real-time feedback, progress tracking, and a clean, multilingual experience.
+
+## Features
+- 🔐 User authentication (Firebase Auth)
+- 🎙️ Voice recording and playback
+- 📊 Practice history and progress tracking
+- 🌍 Multi-language support (English, Tamil, Hindi)
+- 🎯 Pitch detection and reference-song comparison *(in progress)*
+- 🤖 AI-driven feedback module *(in progress)*
+
+## Tech Stack
+- **Frontend:** Flutter, Dart
+- **State Management:** Riverpod
+- **Navigation:** GoRouter
+- **Backend:** Firebase (Authentication, Cloud Firestore, Storage)
+
+## Status
+🚧 Actively under development — core app flow (auth, dashboard, recording, history) is complete. Pitch detection and AI feedback modules are the next milestone.
+
 
 ## Getting Started
+```bash
+git clone <repo-url>
+cd tuno
+flutter pub get
+flutter run
+```
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Author
+Jeevakumar R
