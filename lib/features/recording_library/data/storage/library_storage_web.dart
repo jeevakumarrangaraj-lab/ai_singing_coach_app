@@ -383,14 +383,14 @@ class LibraryStorageWeb implements LibraryStorage {
   /// Computes a stable, content-derived identity for the audio bytes.
   ///
   /// Used for duplicate protection. This is NOT a security hash; it is only
-  /// a cheap deterministic fingerprint (FNV-1a 64-bit) of the recorded blob.
+  /// a cheap deterministic fingerprint (FNV-1a 32-bit) of the recorded blob.
   String _hashBytes(Uint8List bytes) {
-    var hash = 0xcbf29ce484222325;
+    var hash = 0x811c9dc5;
     for (final b in bytes) {
-      hash ^= b;
-      hash *= 0x100000001b3;
+      hash = (hash ^ b) & 0xffffffff;
+      hash = (hash * 0x01000193) & 0xffffffff;
     }
-    return 'fnv1a_${hash.toUnsigned(64).toRadixString(16)}';
+    return 'fnv1a_${hash.toRadixString(16).padLeft(8, '0')}';
   }
 
   String _generateId() {

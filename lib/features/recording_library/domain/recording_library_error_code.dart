@@ -23,4 +23,7 @@ enum RecordingLibraryErrorCode {
 
   /// The operation was rejected because the controller is disposed.
   disposed,
+
+  /// Permission denied while accessing storage (native only).
+  permissionDenied,
 }

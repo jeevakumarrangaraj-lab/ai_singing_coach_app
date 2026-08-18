@@ -135,6 +135,19 @@ class LibraryStorageIO implements LibraryStorage {
         await sourceFile.copy(destPath);
       }
       // Web path handled by web implementation
+    } on FileSystemException catch (e) {
+      if (_isPermissionDenied(e)) {
+        throw RecordingLibraryException(
+          RecordingLibraryErrorCode.permissionDenied,
+          'Permission denied while accessing audio file',
+          e,
+        );
+      }
+      throw RecordingLibraryException(
+        RecordingLibraryErrorCode.platformError,
+        'Failed to copy audio file',
+        e,
+      );
     } catch (e) {
       throw RecordingLibraryException(
         RecordingLibraryErrorCode.platformError,
@@ -172,6 +185,23 @@ class LibraryStorageIO implements LibraryStorage {
       final currentIndex = await loadIndex();
       currentIndex.add(entry);
       await _writeIndexAtomically(currentIndex.map((e) => e.toJson()).toList());
+    } on FileSystemException catch (e) {
+      if (_isPermissionDenied(e)) {
+        throw RecordingLibraryException(
+          RecordingLibraryErrorCode.permissionDenied,
+          'Permission denied while writing metadata',
+          e,
+        );
+      }
+      // Rollback: delete the copied audio file on metadata failure
+      try {
+        await destFile.delete();
+      } catch (_) {}
+      throw RecordingLibraryException(
+        RecordingLibraryErrorCode.storageUnavailable,
+        'Failed to persist metadata index',
+        e,
+      );
     } catch (e) {
       // Rollback: delete the copied audio file on metadata failure
       try {
@@ -244,13 +274,39 @@ class LibraryStorageIO implements LibraryStorage {
     if (entry.localPath != null) {
       final audioFile = File(entry.localPath!);
       if (await audioFile.exists()) {
-        await audioFile.delete();
+        try {
+          await audioFile.delete();
+        } on FileSystemException catch (e) {
+          if (_isPermissionDenied(e)) {
+            throw RecordingLibraryException(
+              RecordingLibraryErrorCode.permissionDenied,
+              'Permission denied while deleting audio file',
+              e,
+            );
+          }
+          // Ignore other file system errors during delete
+        }
       }
     }
 
     // Update index
     entries.removeWhere((e) => e.id == id);
-    await _writeIndexAtomically(entries.map((e) => e.toJson()).toList());
+    try {
+      await _writeIndexAtomically(entries.map((e) => e.toJson()).toList());
+    } on FileSystemException catch (e) {
+      if (_isPermissionDenied(e)) {
+        throw RecordingLibraryException(
+          RecordingLibraryErrorCode.permissionDenied,
+          'Permission denied while updating metadata',
+          e,
+        );
+      }
+      throw RecordingLibraryException(
+        RecordingLibraryErrorCode.storageUnavailable,
+        'Failed to update metadata index',
+        e,
+      );
+    }
   }
 
   /// Loads audio bytes for playback.
@@ -320,6 +376,17 @@ class LibraryStorageIO implements LibraryStorage {
       length,
       (i) => chars[(random + i * 7) % chars.length],
     ).join();
+  }
+
+  /// Checks if a [FileSystemException] represents a permission denied error.
+  ///
+  /// On POSIX (Android, iOS, Linux, macOS): error code 13 (EACCES).
+  /// On Windows: error code 5 (ERROR_ACCESS_DENIED).
+  bool _isPermissionDenied(FileSystemException e) {
+    final osError = e.osError;
+    if (osError == null) return false;
+    final errorCode = osError.errorCode;
+    return errorCode == 13 || errorCode == 5;
   }
 }
 

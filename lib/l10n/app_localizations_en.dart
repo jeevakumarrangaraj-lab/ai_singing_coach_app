@@ -1521,4 +1521,45 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get referenceTrackClear => 'Clear Selection';
+
+  @override
+  String get recordingSavedToLibrary => 'Recording saved to library';
+
+  @override
+  String get webPersistenceWarning =>
+      'Web: recordings are stored in browser IndexedDB and may not survive clearing browser data. For permanent storage, use the native app.';
+
+  @override
+  String get recordingSessionOnly =>
+      'Recording available for this session only. It was not saved to persistent storage.';
+
+  @override
+  String get recordingSaveQuotaExceeded =>
+      'Storage quota exceeded. Please free up space and try again.';
+
+  @override
+  String get recordingSaveStorageUnavailable =>
+      'Storage is unavailable. Please try again later.';
+
+  @override
+  String get recordingSaveNotFound => 'Recording not found.';
+
+  @override
+  String get recordingSaveCancelled => 'Save operation was cancelled.';
+
+  @override
+  String get recordingSavePlatformError =>
+      'A platform error occurred while saving. Please try again.';
+
+  @override
+  String get recordingSaveInvalidData =>
+      'Invalid recording data. Please try recording again.';
+
+  @override
+  String get recordingSaveDisposed =>
+      'Save operation failed. Please try again.';
+
+  @override
+  String get recordingSavePermissionDenied =>
+      'Permission denied. Please grant storage access and try again.';
 }

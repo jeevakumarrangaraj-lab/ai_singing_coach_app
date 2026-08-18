@@ -2021,5 +2021,49 @@
   "referenceTrackClear": "Clear Selection",
   "@referenceTrackClear": {
     "description": "Button to clear the reference track selection"
+  },
+  "recordingSavedToLibrary": "Recording saved to library",
+  "@recordingSavedToLibrary": {
+    "description": "Message shown when recording is successfully saved to library"
+  },
+  "webPersistenceWarning": "Web: recordings are stored in browser IndexedDB and may not survive clearing browser data. For permanent storage, use the native app.",
+  "@webPersistenceWarning": {
+    "description": "Warning about web persistence limitations"
+  },
+  "recordingSessionOnly": "Recording available for this session only. It was not saved to persistent storage.",
+  "@recordingSessionOnly": {
+    "description": "Message shown when recording is only available for current session on web"
+  },
+  "recordingSaveQuotaExceeded": "Storage quota exceeded. Please free up space and try again.",
+  "@recordingSaveQuotaExceeded": {
+    "description": "Error message when storage quota is exceeded"
+  },
+  "recordingSaveStorageUnavailable": "Storage is unavailable. Please try again later.",
+  "@recordingSaveStorageUnavailable": {
+    "description": "Error message when storage backend is unavailable"
+  },
+  "recordingSaveNotFound": "Recording not found.",
+  "@recordingSaveNotFound": {
+    "description": "Error message when recording is not found"
+  },
+  "recordingSaveCancelled": "Save operation was cancelled.",
+  "@recordingSaveCancelled": {
+    "description": "Error message when save operation is cancelled"
+  },
+  "recordingSavePlatformError": "A platform error occurred while saving. Please try again.",
+  "@recordingSavePlatformError": {
+    "description": "Error message for platform errors during save"
+  },
+  "recordingSaveInvalidData": "Invalid recording data. Please try recording again.",
+  "@recordingSaveInvalidData": {
+    "description": "Error message when recording data is invalid"
+  },
+  "recordingSaveDisposed": "Save operation failed. Please try again.",
+  "@recordingSaveDisposed": {
+    "description": "Error message when controller is disposed during save"
+  },
+  "recordingSavePermissionDenied": "Permission denied. Please grant storage access and try again.",
+  "@recordingSavePermissionDenied": {
+    "description": "Error message when permission is denied while saving"
   }
 }

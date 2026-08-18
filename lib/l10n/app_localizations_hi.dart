@@ -1527,4 +1527,45 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get referenceTrackClear => 'चयन साफ़ करें';
+
+  @override
+  String get recordingSavedToLibrary => 'रिकॉर्डिंग लाइब्रेरी में सहेजी गई';
+
+  @override
+  String get webPersistenceWarning =>
+      'वेब: रिकॉर्डिंग ब्राउज़र IndexedDB में संग्रहीत होती हैं और ब्राउज़र डेटा साफ़ करने पर नहीं बच सकतीं। स्थायी संग्रहण के लिए, नेटिव ऐप का उपयोग करें।';
+
+  @override
+  String get recordingSessionOnly =>
+      'रिकॉर्डिंग केवल इस सत्र के लिए उपलब्ध है। इसे स्थायी संग्रहण में नहीं सहेजा गया।';
+
+  @override
+  String get recordingSaveQuotaExceeded =>
+      'संग्रहण कोटा पार हो गया। कृपया जगह खाली करें और पुनः प्रयास करें।';
+
+  @override
+  String get recordingSaveStorageUnavailable =>
+      'संग्रहण उपलब्ध नहीं है। कृपया बाद में पुनः प्रयास करें।';
+
+  @override
+  String get recordingSaveNotFound => 'रिकॉर्डिंग नहीं मिली।';
+
+  @override
+  String get recordingSaveCancelled => 'सेव ऑपरेशन रद्द कर दिया गया।';
+
+  @override
+  String get recordingSavePlatformError =>
+      'सेव करते समय एक प्लेटफ़ॉर्म त्रुटि हुई। कृपया पुनः प्रयास करें।';
+
+  @override
+  String get recordingSaveInvalidData =>
+      'अमान्य रिकॉर्डिंग डेटा। कृपया पुनः रिकॉर्ड करने का प्रयास करें।';
+
+  @override
+  String get recordingSaveDisposed =>
+      'सेव ऑपरेशन विफल। कृपया पुनः प्रयास करें।';
+
+  @override
+  String get recordingSavePermissionDenied =>
+      'अनुमति अस्वीकृत। कृपया संग्रहण पहुँच प्रदान करें और पुनः प्रयास करें।';
 }

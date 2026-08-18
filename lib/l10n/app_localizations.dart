@@ -2841,6 +2841,72 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Clear Selection'**
   String get referenceTrackClear;
+
+  /// Message shown when recording is successfully saved to library
+  ///
+  /// In en, this message translates to:
+  /// **'Recording saved to library'**
+  String get recordingSavedToLibrary;
+
+  /// Warning about web persistence limitations
+  ///
+  /// In en, this message translates to:
+  /// **'Web: recordings are stored in browser IndexedDB and may not survive clearing browser data. For permanent storage, use the native app.'**
+  String get webPersistenceWarning;
+
+  /// Message shown when recording is only available for current session on web
+  ///
+  /// In en, this message translates to:
+  /// **'Recording available for this session only. It was not saved to persistent storage.'**
+  String get recordingSessionOnly;
+
+  /// Error message when storage quota is exceeded
+  ///
+  /// In en, this message translates to:
+  /// **'Storage quota exceeded. Please free up space and try again.'**
+  String get recordingSaveQuotaExceeded;
+
+  /// Error message when storage backend is unavailable
+  ///
+  /// In en, this message translates to:
+  /// **'Storage is unavailable. Please try again later.'**
+  String get recordingSaveStorageUnavailable;
+
+  /// Error message when recording is not found
+  ///
+  /// In en, this message translates to:
+  /// **'Recording not found.'**
+  String get recordingSaveNotFound;
+
+  /// Error message when save operation is cancelled
+  ///
+  /// In en, this message translates to:
+  /// **'Save operation was cancelled.'**
+  String get recordingSaveCancelled;
+
+  /// Error message for platform errors during save
+  ///
+  /// In en, this message translates to:
+  /// **'A platform error occurred while saving. Please try again.'**
+  String get recordingSavePlatformError;
+
+  /// Error message when recording data is invalid
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid recording data. Please try recording again.'**
+  String get recordingSaveInvalidData;
+
+  /// Error message when controller is disposed during save
+  ///
+  /// In en, this message translates to:
+  /// **'Save operation failed. Please try again.'**
+  String get recordingSaveDisposed;
+
+  /// Error message when permission is denied while saving
+  ///
+  /// In en, this message translates to:
+  /// **'Permission denied. Please grant storage access and try again.'**
+  String get recordingSavePermissionDenied;
 }
 
 class _AppLocalizationsDelegate

@@ -2021,5 +2021,49 @@
   "referenceTrackClear": "தேர்வை நீக்கு",
   "@referenceTrackClear": {
     "description": "Button to clear the reference track selection"
+  },
+  "recordingSavedToLibrary": "பதிவு நூலகத்தில் சேமிக்கப்பட்டது",
+  "@recordingSavedToLibrary": {
+    "description": "Message shown when recording is successfully saved to library"
+  },
+  "webPersistenceWarning": "வலைத்தளம்: பதிவுகள் உலாவியின் IndexedDB-இல் சேமிக்கப்படுகின்றன மற்றும் உலாவி தரவை அழிக்கும்போது நீக்கப்படலாம். நிரந்தர சேமிப்பிற்கு, நேட்டிவ் செயலியைப் பயன்படுத்தவும்.",
+  "@webPersistenceWarning": {
+    "description": "Warning about web persistence limitations"
+  },
+  "recordingSessionOnly": "பதிவு இந்த அமர்வுக்கு மட்டுமே கிடைக்கும். இது நிலையான சேமிப்பகத்தில் சேமிக்கப்படவில்லை.",
+  "@recordingSessionOnly": {
+    "description": "Message shown when recording is only available for current session on web"
+  },
+  "recordingSaveQuotaExceeded": "சேமிப்பக வரம்பு முடிந்தது. இடத்தைக் காலி செய்து மீண்டும் முயற்சிக்கவும்.",
+  "@recordingSaveQuotaExceeded": {
+    "description": "Error message when storage quota is exceeded"
+  },
+  "recordingSaveStorageUnavailable": "சேமிப்பகம் கிடைக்கவில்லை. சிறிது நேரம் கழித்து மீண்டும் முயற்சிக்கவும்.",
+  "@recordingSaveStorageUnavailable": {
+    "description": "Error message when storage backend is unavailable"
+  },
+  "recordingSaveNotFound": "பதிவு காணப்படவில்லை.",
+  "@recordingSaveNotFound": {
+    "description": "Error message when recording is not found"
+  },
+  "recordingSaveCancelled": "சேமிக்கும் செயல்பாடு ரத்து செய்யப்பட்டது.",
+  "@recordingSaveCancelled": {
+    "description": "Error message when save operation is cancelled"
+  },
+  "recordingSavePlatformError": "சேமிக்கும் போது இயங்குதளப் பிழை ஏற்பட்டது. மீண்டும் முயற்சிக்கவும்.",
+  "@recordingSavePlatformError": {
+    "description": "Error message for platform errors during save"
+  },
+  "recordingSaveInvalidData": "செல்லுபடியாகாத பதிவுத் தரவு. மீண்டும் பதிவு செய்ய முயற்சிக்கவும்.",
+  "@recordingSaveInvalidData": {
+    "description": "Error message when recording data is invalid"
+  },
+  "recordingSaveDisposed": "சேமிக்கும் செயல்பாடு தோல்வியடைந்தது. மீண்டும் முயற்சிக்கவும்.",
+  "@recordingSaveDisposed": {
+    "description": "Error message when controller is disposed during save"
+  },
+  "recordingSavePermissionDenied": "அனுமதி மறுக்கப்பட்டது. சேமிப்பக அணுகலை வழங்கி மீண்டும் முயற்சிக்கவும்.",
+  "@recordingSavePermissionDenied": {
+    "description": "Error message when permission is denied while saving"
   }
 }

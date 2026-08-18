@@ -668,19 +668,21 @@ class _RecordingLibraryScreenState
   ) {
     switch (code) {
       case RecordingLibraryErrorCode.quotaExceeded:
-        return 'Storage quota exceeded. Please free up space and try again.';
+        return l10n.recordingSaveQuotaExceeded;
       case RecordingLibraryErrorCode.storageUnavailable:
-        return 'Storage is unavailable. Please try again later.';
+        return l10n.recordingSaveStorageUnavailable;
       case RecordingLibraryErrorCode.notFound:
-        return 'The requested recording was not found.';
+        return l10n.recordingSaveNotFound;
       case RecordingLibraryErrorCode.cancelled:
-        return 'The operation was cancelled.';
+        return l10n.recordingSaveCancelled;
       case RecordingLibraryErrorCode.platformError:
-        return 'An unexpected platform error occurred. Please try again.';
+        return l10n.recordingSavePlatformError;
       case RecordingLibraryErrorCode.invalidData:
-        return 'Invalid data provided. Please try again.';
+        return l10n.recordingSaveInvalidData;
       case RecordingLibraryErrorCode.disposed:
-        return 'The operation could not be completed. Please try again.';
+        return l10n.recordingSaveDisposed;
+      case RecordingLibraryErrorCode.permissionDenied:
+        return l10n.recordingSavePermissionDenied;
     }
   }
 

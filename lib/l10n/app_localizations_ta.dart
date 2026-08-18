@@ -1545,4 +1545,46 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String get referenceTrackClear => 'தேர்வை நீக்கு';
+
+  @override
+  String get recordingSavedToLibrary => 'பதிவு நூலகத்தில் சேமிக்கப்பட்டது';
+
+  @override
+  String get webPersistenceWarning =>
+      'வலைத்தளம்: பதிவுகள் உலாவியின் IndexedDB-இல் சேமிக்கப்படுகின்றன மற்றும் உலாவி தரவை அழிக்கும்போது நீக்கப்படலாம். நிரந்தர சேமிப்பிற்கு, நேட்டிவ் செயலியைப் பயன்படுத்தவும்.';
+
+  @override
+  String get recordingSessionOnly =>
+      'பதிவு இந்த அமர்வுக்கு மட்டுமே கிடைக்கும். இது நிலையான சேமிப்பகத்தில் சேமிக்கப்படவில்லை.';
+
+  @override
+  String get recordingSaveQuotaExceeded =>
+      'சேமிப்பக வரம்பு முடிந்தது. இடத்தைக் காலி செய்து மீண்டும் முயற்சிக்கவும்.';
+
+  @override
+  String get recordingSaveStorageUnavailable =>
+      'சேமிப்பகம் கிடைக்கவில்லை. சிறிது நேரம் கழித்து மீண்டும் முயற்சிக்கவும்.';
+
+  @override
+  String get recordingSaveNotFound => 'பதிவு காணப்படவில்லை.';
+
+  @override
+  String get recordingSaveCancelled =>
+      'சேமிக்கும் செயல்பாடு ரத்து செய்யப்பட்டது.';
+
+  @override
+  String get recordingSavePlatformError =>
+      'சேமிக்கும் போது இயங்குதளப் பிழை ஏற்பட்டது. மீண்டும் முயற்சிக்கவும்.';
+
+  @override
+  String get recordingSaveInvalidData =>
+      'செல்லுபடியாகாத பதிவுத் தரவு. மீண்டும் பதிவு செய்ய முயற்சிக்கவும்.';
+
+  @override
+  String get recordingSaveDisposed =>
+      'சேமிக்கும் செயல்பாடு தோல்வியடைந்தது. மீண்டும் முயற்சிக்கவும்.';
+
+  @override
+  String get recordingSavePermissionDenied =>
+      'அனுமதி மறுக்கப்பட்டது. சேமிப்பக அணுகலை வழங்கி மீண்டும் முயற்சிக்கவும்.';
 }

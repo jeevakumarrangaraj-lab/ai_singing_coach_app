@@ -2021,5 +2021,49 @@
   "referenceTrackClear": "चयन साफ़ करें",
   "@referenceTrackClear": {
     "description": "Button to clear the reference track selection"
+  },
+  "recordingSavedToLibrary": "रिकॉर्डिंग लाइब्रेरी में सहेजी गई",
+  "@recordingSavedToLibrary": {
+    "description": "Message shown when recording is successfully saved to library"
+  },
+  "webPersistenceWarning": "वेब: रिकॉर्डिंग ब्राउज़र IndexedDB में संग्रहीत होती हैं और ब्राउज़र डेटा साफ़ करने पर नहीं बच सकतीं। स्थायी संग्रहण के लिए, नेटिव ऐप का उपयोग करें।",
+  "@webPersistenceWarning": {
+    "description": "Warning about web persistence limitations"
+  },
+  "recordingSessionOnly": "रिकॉर्डिंग केवल इस सत्र के लिए उपलब्ध है। इसे स्थायी संग्रहण में नहीं सहेजा गया।",
+  "@recordingSessionOnly": {
+    "description": "Message shown when recording is only available for current session on web"
+  },
+  "recordingSaveQuotaExceeded": "संग्रहण कोटा पार हो गया। कृपया जगह खाली करें और पुनः प्रयास करें।",
+  "@recordingSaveQuotaExceeded": {
+    "description": "Error message when storage quota is exceeded"
+  },
+  "recordingSaveStorageUnavailable": "संग्रहण उपलब्ध नहीं है। कृपया बाद में पुनः प्रयास करें।",
+  "@recordingSaveStorageUnavailable": {
+    "description": "Error message when storage backend is unavailable"
+  },
+  "recordingSaveNotFound": "रिकॉर्डिंग नहीं मिली।",
+  "@recordingSaveNotFound": {
+    "description": "Error message when recording is not found"
+  },
+  "recordingSaveCancelled": "सेव ऑपरेशन रद्द कर दिया गया।",
+  "@recordingSaveCancelled": {
+    "description": "Error message when save operation is cancelled"
+  },
+  "recordingSavePlatformError": "सेव करते समय एक प्लेटफ़ॉर्म त्रुटि हुई। कृपया पुनः प्रयास करें।",
+  "@recordingSavePlatformError": {
+    "description": "Error message for platform errors during save"
+  },
+  "recordingSaveInvalidData": "अमान्य रिकॉर्डिंग डेटा। कृपया पुनः रिकॉर्ड करने का प्रयास करें।",
+  "@recordingSaveInvalidData": {
+    "description": "Error message when recording data is invalid"
+  },
+  "recordingSaveDisposed": "सेव ऑपरेशन विफल। कृपया पुनः प्रयास करें।",
+  "@recordingSaveDisposed": {
+    "description": "Error message when controller is disposed during save"
+  },
+  "recordingSavePermissionDenied": "अनुमति अस्वीकृत। कृपया संग्रहण पहुँच प्रदान करें और पुनः प्रयास करें।",
+  "@recordingSavePermissionDenied": {
+    "description": "Error message when permission is denied while saving"
   }
 }

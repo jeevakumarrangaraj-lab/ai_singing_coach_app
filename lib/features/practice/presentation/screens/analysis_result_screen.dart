@@ -1,11 +1,20 @@
+import 'dart:async';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ai_singing_coach/l10n/app_localizations.dart';
 
 import '../../../../common/widgets/app_back_button.dart';
 import '../../../../core/widgets/tuno_dashboard_background.dart';
+import '../../../recording_library/data/recording_library_repository.dart';
+import '../../../recording_library/data/storage/recording_audio.dart';
+import '../../../recording_library/domain/recording_library_entry.dart';
+import '../../../recording_library/domain/recording_library_error_code.dart';
+import '../../../recording_library/presentation/recording_library_controller.dart';
 
-class AnalysisResultScreen extends StatelessWidget {
+class AnalysisResultScreen extends ConsumerStatefulWidget {
   final String audioPath;
   final Duration duration;
   final DateTime recordedAt;
@@ -17,6 +26,140 @@ class AnalysisResultScreen extends StatelessWidget {
     required this.recordedAt,
   });
 
+  @override
+  ConsumerState<AnalysisResultScreen> createState() =>
+      _AnalysisResultScreenState();
+}
+
+class _AnalysisResultScreenState extends ConsumerState<AnalysisResultScreen> {
+  bool _isSaving = false;
+  bool _hasSaved = false;
+  bool _isSessionOnly = false;
+  RecordingLibraryErrorCode? _saveErrorCode;
+  bool _hasUnexpectedError = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _saveToLibrary();
+  }
+
+  Future<void> _saveToLibrary() async {
+    if (_isSaving || _hasSaved) return;
+    setState(() {
+      _isSaving = true;
+      _saveErrorCode = null;
+      _hasUnexpectedError = false;
+    });
+
+    try {
+      Uint8List? audioBytes;
+      String? temporaryPath;
+
+      if (kIsWeb) {
+        // On web, the audioPath is a blob URL. Fetch the bytes.
+        audioBytes = await fetchBlobUrlBytes(widget.audioPath);
+        if (audioBytes == null || audioBytes.isEmpty) {
+          // Fall back to just recording the URL for session use.
+          // Web persistence is limited: the recording will be usable
+          // during the current session but NOT after browser restart.
+          if (mounted) {
+            setState(() {
+              _isSaving = false;
+              _hasSaved = true;
+              _isSessionOnly = true;
+            });
+          }
+          return;
+        }
+      } else {
+        // On native, the audioPath is a file path.
+        temporaryPath = widget.audioPath;
+      }
+
+      // Determine file extension from the path.
+      final extension = widget.audioPath.split('.').last.toLowerCase();
+      final validExt =
+          ['wav', 'opus', 'mp3', 'ogg', 'm4a', 'webm'].contains(extension)
+          ? extension
+          : 'wav';
+
+      // Build a user-friendly title from the date/time.
+      final now = DateTime.now();
+      final title =
+          'Recording ${now.day.toString().padLeft(2, '0')}'
+          '/${now.month.toString().padLeft(2, '0')}'
+          '/${now.year} ${now.hour.toString().padLeft(2, '0')}:'
+          '${now.minute.toString().padLeft(2, '0')}';
+
+      final request = RecordingLibrarySaveRequest(
+        temporaryPath: temporaryPath,
+        audioBytes: audioBytes,
+        title: title,
+        duration: widget.duration,
+        sizeBytes: temporaryPath != null
+            ? 0 // Will be resolved by storage
+            : (audioBytes?.lengthInBytes ?? 0),
+        extension: validExt,
+      );
+
+      await ref
+          .read(recordingLibraryControllerProvider.notifier)
+          .saveRecording(request);
+
+      if (mounted) {
+        setState(() {
+          _isSaving = false;
+          _hasSaved = true;
+          _isSessionOnly = false;
+        });
+      }
+    } on RecordingLibraryException catch (e) {
+      if (mounted) {
+        setState(() {
+          _isSaving = false;
+          _saveErrorCode = e.code;
+          _hasUnexpectedError = false;
+        });
+      }
+    } catch (_) {
+      if (mounted) {
+        setState(() {
+          _isSaving = false;
+          _saveErrorCode = null;
+          _hasUnexpectedError = true;
+        });
+      }
+    }
+  }
+
+  String? _getErrorMessage(AppLocalizations l10n) {
+    if (_hasUnexpectedError) {
+      return l10n.unexpectedError;
+    }
+    if (_saveErrorCode != null) {
+      switch (_saveErrorCode!) {
+        case RecordingLibraryErrorCode.quotaExceeded:
+          return l10n.recordingSaveQuotaExceeded;
+        case RecordingLibraryErrorCode.storageUnavailable:
+          return l10n.recordingSaveStorageUnavailable;
+        case RecordingLibraryErrorCode.notFound:
+          return l10n.recordingSaveNotFound;
+        case RecordingLibraryErrorCode.cancelled:
+          return l10n.recordingSaveCancelled;
+        case RecordingLibraryErrorCode.platformError:
+          return l10n.recordingSavePlatformError;
+        case RecordingLibraryErrorCode.invalidData:
+          return l10n.recordingSaveInvalidData;
+        case RecordingLibraryErrorCode.disposed:
+          return l10n.recordingSaveDisposed;
+        case RecordingLibraryErrorCode.permissionDenied:
+          return l10n.recordingSavePermissionDenied;
+      }
+    }
+    return null;
+  }
+
   String _formatDuration(Duration duration) {
     final minutes = duration.inMinutes.toString().padLeft(2, '0');
     final seconds = (duration.inSeconds % 60).toString().padLeft(2, '0');
@@ -24,7 +167,7 @@ class AnalysisResultScreen extends StatelessWidget {
   }
 
   String _getFileName() {
-    return audioPath.split('/').last;
+    return widget.audioPath.split('/').last;
   }
 
   String _formatDateTime(DateTime dateTime) {
@@ -35,9 +178,9 @@ class AnalysisResultScreen extends StatelessWidget {
 
   bool get _hasValidData {
     final fileName = _getFileName();
-    return audioPath.isNotEmpty &&
+    return widget.audioPath.isNotEmpty &&
         fileName.isNotEmpty &&
-        duration > Duration.zero;
+        widget.duration > Duration.zero;
   }
 
   @override
@@ -46,7 +189,7 @@ class AnalysisResultScreen extends StatelessWidget {
     final textTheme = Theme.of(context).textTheme;
     final l10n = AppLocalizations.of(context)!;
     final fileName = _getFileName();
-    final formattedDuration = _formatDuration(duration);
+    final formattedDuration = _formatDuration(widget.duration);
 
     return Scaffold(
       backgroundColor: cs.surface,
@@ -96,17 +239,27 @@ class AnalysisResultScreen extends StatelessWidget {
                           width: 1.5,
                         ),
                       ),
-                      child: Icon(
-                        Icons.pending_actions_rounded,
-                        size: 60,
-                        color: cs.primary,
-                      ),
+                      child: _isSaving
+                          ? Padding(
+                              padding: const EdgeInsets.all(30),
+                              child: CircularProgressIndicator(
+                                strokeWidth: 3,
+                                color: cs.primary,
+                              ),
+                            )
+                          : Icon(
+                              _hasSaved
+                                  ? Icons.check_circle_rounded
+                                  : Icons.pending_actions_rounded,
+                              size: 60,
+                              color: _hasSaved ? Colors.green : cs.primary,
+                            ),
                     ),
                     const SizedBox(height: 32),
 
                     // Title
                     Text(
-                      l10n.analysisPending,
+                      _hasSaved ? l10n.recordingSaved : l10n.analysisPending,
                       style: textTheme.headlineMedium?.copyWith(
                         fontSize: 28,
                         fontWeight: FontWeight.bold,
@@ -128,7 +281,13 @@ class AnalysisResultScreen extends StatelessWidget {
                         border: Border.all(color: cs.outlineVariant, width: 1),
                       ),
                       child: Text(
-                        l10n.aiAnalysisComingSoon,
+                        _hasSaved
+                            ? (_isSessionOnly
+                                  ? l10n.recordingSessionOnly
+                                  : l10n.recordingSavedToLibrary)
+                            : (_isSaving
+                                  ? l10n.saving
+                                  : l10n.aiAnalysisComingSoon),
                         style: textTheme.bodyMedium?.copyWith(
                           color: cs.onSurfaceVariant,
                           fontWeight: FontWeight.w500,
@@ -136,7 +295,63 @@ class AnalysisResultScreen extends StatelessWidget {
                         textAlign: TextAlign.center,
                       ),
                     ),
+
+                    // Error message
+                    if (_getErrorMessage(l10n) != null) ...[
+                      const SizedBox(height: 12),
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 16,
+                          vertical: 8,
+                        ),
+                        decoration: BoxDecoration(
+                          color: cs.errorContainer,
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: Text(
+                          _getErrorMessage(l10n)!,
+                          style: textTheme.bodySmall?.copyWith(
+                            color: cs.onErrorContainer,
+                          ),
+                        ),
+                      ),
+                    ],
+
                     const SizedBox(height: 40),
+
+                    // Web persistence warning
+                    if (kIsWeb && _hasSaved && !_isSessionOnly) ...[
+                      Container(
+                        width: double.infinity,
+                        padding: const EdgeInsets.all(12),
+                        decoration: BoxDecoration(
+                          color: Colors.amber.withValues(alpha: 0.15),
+                          borderRadius: BorderRadius.circular(12),
+                          border: Border.all(
+                            color: Colors.amber.withValues(alpha: 0.4),
+                          ),
+                        ),
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.info_outline_rounded,
+                              size: 20,
+                              color: Colors.amber.shade700,
+                            ),
+                            const SizedBox(width: 12),
+                            Expanded(
+                              child: Text(
+                                l10n.webPersistenceWarning,
+                                style: textTheme.bodySmall?.copyWith(
+                                  color: Colors.amber.shade700,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 24),
+                    ],
 
                     // Recording Details Card
                     Card(
@@ -212,7 +427,7 @@ class AnalysisResultScreen extends StatelessWidget {
                                 context,
                                 icon: Icons.calendar_today_rounded,
                                 label: l10n.recorded,
-                                value: _formatDateTime(recordedAt),
+                                value: _formatDateTime(widget.recordedAt),
                               ),
                             ],
                           ],
@@ -256,16 +471,10 @@ class AnalysisResultScreen extends StatelessWidget {
                           ),
                         );
 
-                        final backToReviewButton = Tooltip(
-                          message: l10n.backToReview,
+                        final viewLibraryButton = Tooltip(
+                          message: l10n.recordingLibrary,
                           child: OutlinedButton(
-                            onPressed: () {
-                              if (context.canPop()) {
-                                context.pop();
-                              } else {
-                                context.go('/practice');
-                              }
-                            },
+                            onPressed: () => context.push('/recording-library'),
                             style: OutlinedButton.styleFrom(
                               padding: const EdgeInsets.symmetric(vertical: 16),
                               shape: RoundedRectangleBorder(
@@ -277,10 +486,10 @@ class AnalysisResultScreen extends StatelessWidget {
                               mainAxisSize: MainAxisSize.min,
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Icon(Icons.arrow_back_rounded, size: 20),
+                                Icon(Icons.library_music_rounded, size: 20),
                                 const SizedBox(width: 8),
                                 Text(
-                                  l10n.backToReview,
+                                  l10n.recordingLibrary,
                                   style: const TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.bold,
@@ -296,7 +505,7 @@ class AnalysisResultScreen extends StatelessWidget {
                             children: [
                               Expanded(child: practiceAgainButton),
                               const SizedBox(width: 16),
-                              Expanded(child: backToReviewButton),
+                              Expanded(child: viewLibraryButton),
                             ],
                           );
                         }
@@ -310,7 +519,7 @@ class AnalysisResultScreen extends StatelessWidget {
                             const SizedBox(height: 12),
                             SizedBox(
                               width: double.infinity,
-                              child: backToReviewButton,
+                              child: viewLibraryButton,
                             ),
                           ],
                         );
