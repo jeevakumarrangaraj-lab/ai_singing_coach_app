@@ -8,7 +8,7 @@ import Foundation
 import audio_session
 import audioplayers_darwin
 import cloud_firestore
-import file_picker
+import file_picker_darwin
 import firebase_auth
 import firebase_core
 import firebase_storage
