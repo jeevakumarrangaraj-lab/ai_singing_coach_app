@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:ai_singing_coach/l10n/app_localizations.dart';
 
 import '../../domain/reference_track_state.dart';
 import '../reference_track_controller.dart';
+import '../reference_track_library_controller.dart';
 import '../practice_router.dart';
 import '../../../../common/widgets/app_back_button.dart';
 import '../../../../common/utils/navigation_helpers.dart';
@@ -39,9 +41,17 @@ class _ReferenceTrackScreenState extends ConsumerState<ReferenceTrackScreen> {
   Widget build(BuildContext context) {
     final state = ref.watch(referenceTrackProvider);
     final controller = ref.read(referenceTrackProvider.notifier);
+    final libraryController = ref.read(referenceTrackLibraryProvider.notifier);
     final cs = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
     final l10n = AppLocalizations.of(context)!;
+
+    // Listen for new track selections and add to library
+    ref.listen<ReferenceTrackState>(referenceTrackProvider, (prev, next) {
+      if (next is ReferenceTrackSelected && prev != next) {
+        libraryController.addTrack(next.track);
+      }
+    });
 
     return Scaffold(
       backgroundColor: cs.surface,
@@ -76,7 +86,13 @@ class _ReferenceTrackScreenState extends ConsumerState<ReferenceTrackScreen> {
                           ),
                         ),
                         const SizedBox(height: 48),
-                        _buildContent(state, controller, textTheme, cs),
+                        _buildContent(
+                          state,
+                          controller,
+                          libraryController,
+                          textTheme,
+                          cs,
+                        ),
                       ],
                     ),
                   ),
@@ -103,24 +119,44 @@ class _ReferenceTrackScreenState extends ConsumerState<ReferenceTrackScreen> {
   Widget _buildContent(
     ReferenceTrackState state,
     ReferenceTrackController controller,
+    ReferenceTrackLibraryController libraryController,
     TextTheme textTheme,
     ColorScheme cs,
   ) {
     final isPicking = state.isPicking;
 
     if (state.isError) {
-      return _buildErrorCard(state, controller, textTheme, cs);
+      return _buildErrorCard(
+        state,
+        controller,
+        libraryController,
+        textTheme,
+        cs,
+      );
     }
 
     if (state.isSelected) {
-      return _buildSelectedCard(state, controller, textTheme, cs);
+      return _buildSelectedCard(
+        state,
+        controller,
+        libraryController,
+        textTheme,
+        cs,
+      );
     }
 
-    return _buildIdleCard(controller, textTheme, cs, isPicking);
+    return _buildIdleCard(
+      controller,
+      libraryController,
+      textTheme,
+      cs,
+      isPicking,
+    );
   }
 
   Widget _buildIdleCard(
     ReferenceTrackController controller,
+    ReferenceTrackLibraryController libraryController,
     TextTheme textTheme,
     ColorScheme cs,
     bool isPicking,
@@ -200,6 +236,7 @@ class _ReferenceTrackScreenState extends ConsumerState<ReferenceTrackScreen> {
   Widget _buildSelectedCard(
     ReferenceTrackState state,
     ReferenceTrackController controller,
+    ReferenceTrackLibraryController libraryController,
     TextTheme textTheme,
     ColorScheme cs,
   ) {
@@ -354,6 +391,18 @@ class _ReferenceTrackScreenState extends ConsumerState<ReferenceTrackScreen> {
                     ),
                   ],
                 ),
+                const SizedBox(height: 12),
+                // View Library action
+                OutlinedButton.icon(
+                  onPressed: () =>
+                      context.push(PracticeRoutes.referenceTrackLibrary),
+                  icon: const Icon(Icons.library_music_rounded, size: 18),
+                  label: Text(l10n.referenceTrackLibraryViewLibrary),
+                  style: OutlinedButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(vertical: 14),
+                    side: BorderSide(color: cs.outlineVariant, width: 1.5),
+                  ),
+                ),
               ],
             ),
           ),
@@ -395,6 +444,7 @@ class _ReferenceTrackScreenState extends ConsumerState<ReferenceTrackScreen> {
   Widget _buildErrorCard(
     ReferenceTrackState state,
     ReferenceTrackController controller,
+    ReferenceTrackLibraryController libraryController,
     TextTheme textTheme,
     ColorScheme cs,
   ) {

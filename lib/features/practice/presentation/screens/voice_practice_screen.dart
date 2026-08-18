@@ -9,6 +9,8 @@ import '../../../../core/widgets/tuno_dashboard_background.dart';
 import '../../../../core/enums/icon_position.dart';
 import '../../presentation/voice_recording_controller.dart';
 import '../../domain/voice_recording_state.dart';
+import '../../presentation/reference_track_controller.dart';
+import '../../domain/reference_track_state.dart';
 import '../../../auth/presentation/widgets/auth_elevated_button.dart';
 import '../../../auth/presentation/widgets/auth_secondary_button.dart';
 import '../../../auth/presentation/widgets/auth_destructive_button.dart';
@@ -38,7 +40,7 @@ class _VoicePracticeScreenState extends ConsumerState<VoicePracticeScreen>
 
       // Recording: confirm discard.
       if (currentState.isRecording) {
-        if (!context.mounted) return;
+        if (!mounted) return;
         final cs = Theme.of(context).colorScheme;
         final l10n = AppLocalizations.of(context)!;
         final shouldDiscard = await showDialog<bool>(
@@ -61,10 +63,10 @@ class _VoicePracticeScreenState extends ConsumerState<VoicePracticeScreen>
           ),
         );
 
-        if (!context.mounted) return;
+        if (!mounted) return;
         if (shouldDiscard == true) {
           await controller.cancelRecording();
-          if (!context.mounted) return;
+          if (!mounted) return;
           await navigateBackSafely(context, fallbackRoute: '/home');
         }
         return;
@@ -75,7 +77,7 @@ class _VoicePracticeScreenState extends ConsumerState<VoicePracticeScreen>
       if (currentState.hasRecording) {
         // Saved recording: reset recording state and go back.
         controller.reset();
-        if (!context.mounted) return;
+        if (!mounted) return;
         await navigateBackSafely(context, fallbackRoute: '/home');
         return;
       }
@@ -139,6 +141,7 @@ class _VoicePracticeScreenState extends ConsumerState<VoicePracticeScreen>
   Widget build(BuildContext context) {
     final state = ref.watch(voiceRecordingControllerProvider);
     final controller = ref.read(voiceRecordingControllerProvider.notifier);
+    final refTrackState = ref.watch(referenceTrackProvider);
     final cs = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
     final l10n = AppLocalizations.of(context)!;
@@ -181,6 +184,14 @@ class _VoicePracticeScreenState extends ConsumerState<VoicePracticeScreen>
                           ),
                         ),
                         const SizedBox(height: 32),
+                        // ── Reference Track Display ──
+                        _buildReferenceTrackDisplay(
+                          refTrackState,
+                          textTheme,
+                          cs,
+                          l10n,
+                        ),
+                        const SizedBox(height: 24),
                         _buildRecordingUI(state, controller, textTheme, cs),
                         const SizedBox(height: 48),
                         if (state.isError)
@@ -207,6 +218,152 @@ class _VoicePracticeScreenState extends ConsumerState<VoicePracticeScreen>
         ),
       ),
     );
+  }
+
+  Widget _buildReferenceTrackDisplay(
+    ReferenceTrackState refTrackState,
+    TextTheme textTheme,
+    ColorScheme cs,
+    AppLocalizations l10n,
+  ) {
+    final track = refTrackState.track;
+    if (track == null) return const SizedBox.shrink();
+
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            cs.primaryContainer.withValues(alpha: 0.3),
+            cs.tertiaryContainer.withValues(alpha: 0.3),
+          ],
+        ),
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(
+          color: cs.primary.withValues(alpha: 0.5),
+          width: 1.5,
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: cs.primary.withValues(alpha: 0.15),
+            blurRadius: 8,
+            offset: const Offset(0, 2),
+          ),
+        ],
+      ),
+      child: Row(
+        children: [
+          Container(
+            width: 48,
+            height: 48,
+            decoration: BoxDecoration(
+              color: cs.primaryContainer,
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Icon(
+              Icons.audiotrack_rounded,
+              size: 24,
+              color: cs.onPrimaryContainer,
+            ),
+          ),
+          const SizedBox(width: 16),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  l10n.referenceTrackLabel,
+                  style: textTheme.labelSmall?.copyWith(
+                    fontSize: 11,
+                    fontWeight: FontWeight.w600,
+                    color: cs.primary,
+                    letterSpacing: 0.5,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  track.name,
+                  style: textTheme.titleMedium?.copyWith(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                    color: cs.onSurface,
+                  ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                const SizedBox(height: 4),
+                Row(
+                  children: [
+                    _RefTrackInfoChip(
+                      text: track.extension.toUpperCase(),
+                      icon: Icons.description_rounded,
+                      cs: cs,
+                      textTheme: textTheme,
+                    ),
+                    const SizedBox(width: 8),
+                    _RefTrackInfoChip(
+                      text: _formatFileSize(track.sizeBytes),
+                      icon: Icons.data_usage_rounded,
+                      cs: cs,
+                      textTheme: textTheme,
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(width: 16),
+          // Actions
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              // Change Track button
+              OutlinedButton.icon(
+                onPressed: () => context.push('/practice/library'),
+                icon: const Icon(Icons.swap_horiz_rounded, size: 18),
+                label: Text(l10n.referenceTrackChange),
+                style: OutlinedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 10,
+                  ),
+                  side: BorderSide(
+                    color: cs.outlineVariant.withValues(alpha: 0.7),
+                    width: 1.5,
+                  ),
+                  foregroundColor: cs.onSurfaceVariant,
+                ),
+              ),
+              const SizedBox(height: 8),
+              // Clear selection button
+              OutlinedButton.icon(
+                onPressed: () =>
+                    ref.read(referenceTrackProvider.notifier).clearSelection(),
+                icon: const Icon(Icons.close_rounded, size: 18),
+                label: Text(l10n.referenceTrackClear),
+                style: OutlinedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 10,
+                  ),
+                  side: BorderSide(color: cs.error, width: 1.5),
+                  foregroundColor: cs.error,
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  String _formatFileSize(int bytes) {
+    if (bytes < 1024) return '$bytes B';
+    if (bytes < 1024 * 1024) return '${(bytes / 1024).toStringAsFixed(1)} KB';
+    return '${(bytes / (1024 * 1024)).toStringAsFixed(1)} MB';
   }
 
   Widget _buildErrorCard(
@@ -855,7 +1012,7 @@ class _VoicePracticeScreenState extends ConsumerState<VoicePracticeScreen>
 
     try {
       final path = await controller.stopRecording();
-      if (!context.mounted) return;
+      if (!mounted) return;
       if (path != null && path.isNotEmpty) {
         context.go('/practice/review', extra: path);
       }
@@ -948,5 +1105,47 @@ class _GoldRingPainter extends CustomPainter {
     return oldDelegate.strokeWidth != strokeWidth ||
         oldDelegate.radius != radius ||
         oldDelegate.center != center;
+  }
+}
+
+/// Info chip for reference track display (extension, file size, etc.)
+class _RefTrackInfoChip extends StatelessWidget {
+  const _RefTrackInfoChip({
+    required this.text,
+    required this.icon,
+    required this.cs,
+    required this.textTheme,
+  });
+
+  final String text;
+  final IconData icon;
+  final ColorScheme cs;
+  final TextTheme textTheme;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+      decoration: BoxDecoration(
+        color: cs.surfaceContainerHighest,
+        borderRadius: BorderRadius.circular(6),
+        border: Border.all(color: cs.outlineVariant, width: 1),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(icon, size: 11, color: cs.onSurfaceVariant),
+          const SizedBox(width: 4),
+          Text(
+            text,
+            style: textTheme.labelSmall?.copyWith(
+              fontSize: 10,
+              fontWeight: FontWeight.w600,
+              color: cs.onSurfaceVariant,
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
