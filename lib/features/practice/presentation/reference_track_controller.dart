@@ -68,7 +68,6 @@ class ReferenceTrackController extends StateNotifier<ReferenceTrackState> {
       final result = await FilePicker.pickFiles(
         type: FileType.custom,
         allowedExtensions: _allowedExtensions.toList(),
-        withData: kIsWeb, // bytes only needed on Web
       );
 
       // Dispose guard: check after the await.
@@ -78,12 +77,12 @@ class ReferenceTrackController extends StateNotifier<ReferenceTrackState> {
       }
 
       // Handle cancellation.
-      if (result == null || result.files.isEmpty) {
+      if (result.isEmpty) {
         _handleCancellation();
         return;
       }
 
-      final file = result.files.single;
+      final file = result.single;
 
       // ---- Validate extension ----
       final extension = _normalizeExtension(file);
@@ -96,7 +95,8 @@ class ReferenceTrackController extends StateNotifier<ReferenceTrackState> {
       }
 
       // ---- Validate size ----
-      if (file.size > _maxSizeBytes) {
+      final size = await file.length();
+      if (size > _maxSizeBytes) {
         state = const ReferenceTrackError(ReferenceTrackErrorCode.fileTooLarge);
         _previousTrack = null;
         return;
@@ -107,8 +107,8 @@ class ReferenceTrackController extends StateNotifier<ReferenceTrackState> {
       Uint8List? bytes;
 
       if (kIsWeb) {
-        bytes = file.bytes;
-        if (bytes == null || bytes.isEmpty) {
+        bytes = await file.readAsBytes();
+        if (bytes.isEmpty) {
           state = const ReferenceTrackError(
             ReferenceTrackErrorCode.unreadableFile,
           );
@@ -128,7 +128,7 @@ class ReferenceTrackController extends StateNotifier<ReferenceTrackState> {
 
       final track = ReferenceTrack(
         name: file.name,
-        sizeBytes: file.size,
+        sizeBytes: size,
         extension: extension,
         localPath: localPath,
         bytes: bytes,
@@ -200,10 +200,7 @@ class ReferenceTrackController extends StateNotifier<ReferenceTrackState> {
 
   /// Safely extracts and normalises the file extension to lowercase.
   String? _normalizeExtension(PlatformFile file) {
-    if (file.extension != null) {
-      return file.extension!.toLowerCase();
-    }
-    // Fall back to deriving from the file name.
+    // Derive from the file name (PlatformFile.extension removed in file_picker 12+).
     final name = file.name;
     final dot = name.lastIndexOf('.');
     if (dot > 0 && dot < name.length - 1) {
