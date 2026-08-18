@@ -13,3 +13,4 @@ export 'domain/yin_pitch_analysis_service.dart';
 export 'domain/decoded_audio.dart';
 export 'domain/audio_decoding_service.dart';
 export 'domain/wav_pcm_decoder.dart';
+export 'domain/recording_pitch_analysis_service.dart';
