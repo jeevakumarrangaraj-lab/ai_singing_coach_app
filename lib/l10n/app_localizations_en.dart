@@ -782,6 +782,19 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String loginLockoutCountdown(int seconds) {
+    return 'Too many failed attempts. Try again in $seconds seconds.';
+  }
+
+  @override
+  String loginRemainingAttempts(int attempts) {
+    return 'Incorrect email or password. $attempts attempts remaining.';
+  }
+
+  @override
+  String get loginLocked => 'Locked';
+
+  @override
   String get createAccount => 'Create Account';
 
   @override
@@ -1562,4 +1575,47 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get recordingSavePermissionDenied =>
       'Permission denied. Please grant storage access and try again.';
+
+  @override
+  String get analyzingRecording => 'Analyzing your recording...';
+
+  @override
+  String get pitchAnalysisNoVoiceDetected =>
+      'No clear voice was detected. Please record again in a quieter environment.';
+
+  @override
+  String get pitchAnalysisUnsupportedFormat =>
+      'Detailed pitch analysis is not available for this recording format. WebM/Opus recordings cannot be analyzed yet.';
+
+  @override
+  String get pitchAnalysisUnavailableOnWeb =>
+      'Pitch analysis requires native WAV recordings. Web recordings use WebM/Opus which cannot be analyzed.';
+
+  @override
+  String get pitchAnalysisFileNotFound =>
+      'Could not find the recording file. Please try recording again.';
+
+  @override
+  String get pitchAnalysisFailed => 'Analysis failed. Please try again.';
+
+  @override
+  String get medianPitch => 'Median Pitch';
+
+  @override
+  String get detectedVocalRange => 'Detected Vocal Range';
+
+  @override
+  String get voicedRatio => 'Voiced Ratio';
+
+  @override
+  String get pitchStability => 'Pitch Stability';
+
+  @override
+  String get analysisConfidence => 'Analysis Confidence';
+
+  @override
+  String get recordAgain => 'Record Again';
+
+  @override
+  String get retryAnalysis => 'Retry Analysis';
 }

@@ -19,11 +19,11 @@ class RecordingPitchAnalysisService {
   ///
   /// [decoder] - WAV decoder (defaults to [WavPcmDecoder]).
   /// [pitchAnalyzer] - Pitch analysis service (defaults to [YinPitchAnalysisService]).
-RecordingPitchAnalysisService({
+  RecordingPitchAnalysisService({
     AudioDecodingService? decoder,
     PitchAnalysisService? pitchAnalyzer,
-  })  : _decoder = decoder ?? WavPcmDecoder(),
-        _pitchAnalyzer = pitchAnalyzer ?? YinPitchAnalysisService();
+  }) : _decoder = decoder ?? WavPcmDecoder(),
+       _pitchAnalyzer = pitchAnalyzer ?? YinPitchAnalysisService();
 
   /// Analyzes pitch from WAV audio data.
   ///

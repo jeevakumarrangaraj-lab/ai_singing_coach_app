@@ -1034,6 +1034,28 @@
       }
     }
   },
+  "loginLockoutCountdown": "Too many failed attempts. Try again in {seconds} seconds.",
+  "@loginLockoutCountdown": {
+    "description": "Lockout countdown message with seconds placeholder",
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
+  "loginRemainingAttempts": "Incorrect email or password. {attempts} attempts remaining.",
+  "@loginRemainingAttempts": {
+    "description": "Remaining attempts message with count placeholder",
+    "placeholders": {
+      "attempts": {
+        "type": "int"
+      }
+    }
+  },
+  "loginLocked": "Locked",
+  "@loginLocked": {
+    "description": "Login button label when locked"
+  },
   "createAccount": "Create Account",
   "@createAccount": {
     "description": "Heading on sign up screen"
@@ -2065,5 +2087,57 @@
   "recordingSavePermissionDenied": "Permission denied. Please grant storage access and try again.",
   "@recordingSavePermissionDenied": {
     "description": "Error message when permission is denied while saving"
+  },
+  "analyzingRecording": "Analyzing your recording...",
+  "@analyzingRecording": {
+    "description": "Message shown while pitch analysis is in progress"
+  },
+  "pitchAnalysisNoVoiceDetected": "No clear voice was detected. Please record again in a quieter environment.",
+  "@pitchAnalysisNoVoiceDetected": {
+    "description": "Message when pitch analysis finds no voiced frames"
+  },
+  "pitchAnalysisUnsupportedFormat": "Detailed pitch analysis is not available for this recording format. WebM/Opus recordings cannot be analyzed yet.",
+  "@pitchAnalysisUnsupportedFormat": {
+    "description": "Message when recording format is not supported for pitch analysis"
+  },
+  "pitchAnalysisUnavailableOnWeb": "Pitch analysis requires native WAV recordings. Web recordings use WebM/Opus which cannot be analyzed.",
+  "@pitchAnalysisUnavailableOnWeb": {
+    "description": "Message explaining pitch analysis is unavailable on web"
+  },
+  "pitchAnalysisFileNotFound": "Could not find the recording file. Please try recording again.",
+  "@pitchAnalysisFileNotFound": {
+    "description": "Error message when recording file is not found"
+  },
+  "pitchAnalysisFailed": "Analysis failed. Please try again.",
+  "@pitchAnalysisFailed": {
+    "description": "Generic error message when pitch analysis fails"
+  },
+  "medianPitch": "Median Pitch",
+  "@medianPitch": {
+    "description": "Label for median detected pitch"
+  },
+  "detectedVocalRange": "Detected Vocal Range",
+  "@detectedVocalRange": {
+    "description": "Label for detected vocal range (min - max)"
+  },
+  "voicedRatio": "Voiced Ratio",
+  "@voicedRatio": {
+    "description": "Label for voiced frames ratio"
+  },
+  "pitchStability": "Pitch Stability",
+  "@pitchStability": {
+    "description": "Label for pitch stability metric"
+  },
+  "analysisConfidence": "Analysis Confidence",
+  "@analysisConfidence": {
+    "description": "Label for average confidence metric"
+  },
+  "recordAgain": "Record Again",
+  "@recordAgain": {
+    "description": "Button to record again"
+  },
+  "retryAnalysis": "Retry Analysis",
+  "@retryAnalysis": {
+    "description": "Button to retry pitch analysis"
   }
 }

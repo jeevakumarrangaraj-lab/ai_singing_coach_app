@@ -134,6 +134,12 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     final isLoginLoading =
         authState.isLoading && authState.action == AuthAction.login;
 
+    // Check if locked before attempting login
+    if (authState.loginLockoutExpiry != null &&
+        authState.loginLockoutExpiry!.isAfter(DateTime.now())) {
+      return;
+    }
+
     if (isLoginLoading) return;
 
     FocusScope.of(context).unfocus();
@@ -187,6 +193,14 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 
     final isLoginLoading =
         authState.isLoading && authState.action == AuthAction.login;
+
+    final isLocked =
+        authState.loginLockoutExpiry != null &&
+        authState.loginLockoutExpiry!.isAfter(DateTime.now());
+    final lockoutSeconds = isLocked
+        ? authState.loginLockoutExpiry!.difference(DateTime.now()).inSeconds
+        : 0;
+    final remainingAttempts = authState.remainingLoginAttempts;
 
     return Scaffold(
       backgroundColor: theme.scaffoldBackgroundColor,
@@ -309,6 +323,93 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                                   ),
                                   const SizedBox(height: 4),
 
+                                  // ── Lockout Countdown ──
+                                  if (isLocked) ...[
+                                    const SizedBox(height: 8),
+                                    Container(
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 12,
+                                        vertical: 10,
+                                      ),
+                                      decoration: BoxDecoration(
+                                        color: colorScheme.errorContainer,
+                                        borderRadius: BorderRadius.circular(12),
+                                        border: Border.all(
+                                          color: colorScheme.error.withValues(
+                                            alpha: 0.3,
+                                          ),
+                                          width: 1,
+                                        ),
+                                      ),
+                                      child: Row(
+                                        children: [
+                                          Icon(
+                                            Icons.lock_outline_rounded,
+                                            color: colorScheme.error,
+                                            size: 20,
+                                          ),
+                                          const SizedBox(width: 8),
+                                          Expanded(
+                                            child: Text(
+                                              l10n.loginLockoutCountdown(
+                                                lockoutSeconds,
+                                              ),
+                                              style: TextStyle(
+                                                color: colorScheme
+                                                    .onErrorContainer,
+                                                fontSize: 13,
+                                                fontWeight: FontWeight.w500,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ] else if (remainingAttempts != null &&
+                                      remainingAttempts < 3) ...[
+                                    const SizedBox(height: 8),
+                                    Container(
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 12,
+                                        vertical: 10,
+                                      ),
+                                      decoration: BoxDecoration(
+                                        color: Colors.amber.withValues(
+                                          alpha: 0.1,
+                                        ),
+                                        borderRadius: BorderRadius.circular(12),
+                                        border: Border.all(
+                                          color: Colors.amber.withValues(
+                                            alpha: 0.4,
+                                          ),
+                                          width: 1,
+                                        ),
+                                      ),
+                                      child: Row(
+                                        children: [
+                                          Icon(
+                                            Icons.warning_amber_rounded,
+                                            color: Colors.amber.shade700,
+                                            size: 20,
+                                          ),
+                                          const SizedBox(width: 8),
+                                          Expanded(
+                                            child: Text(
+                                              l10n.loginRemainingAttempts(
+                                                remainingAttempts,
+                                              ),
+                                              style: TextStyle(
+                                                color: Colors.amber.shade700,
+                                                fontSize: 13,
+                                                fontWeight: FontWeight.w500,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+
                                   // ── Error text ──
                                   if (_loginError != null) ...[
                                     const SizedBox(height: 6),
@@ -334,7 +435,11 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                                   const SizedBox(height: 20),
 
                                   // ── 10. Login Button ──
-                                  _buildLoginButton(isLoginLoading, l10n),
+                                  _buildLoginButton(
+                                    isLoginLoading,
+                                    isLocked,
+                                    l10n,
+                                  ),
                                   const SizedBox(height: 22),
 
                                   // ── 11. Divider ──
@@ -751,13 +856,17 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   // 10. LOGIN BUTTON
   // ─────────────────────────────────────────────────────────────
 
-  Widget _buildLoginButton(bool isLoading, AppLocalizations l10n) {
-    final enabled = !isLoading;
+  Widget _buildLoginButton(
+    bool isLoading,
+    bool isLocked,
+    AppLocalizations l10n,
+  ) {
+    final enabled = !isLoading && !isLocked;
 
     return Semantics(
       button: true,
       enabled: enabled,
-      label: l10n.login,
+      label: isLocked ? l10n.loginLocked : l10n.login,
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(56),
@@ -767,7 +876,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
         child: ClipRRect(
           borderRadius: BorderRadius.circular(54.5),
           child: TunoGradientButton(
-            label: l10n.login,
+            label: isLocked ? l10n.loginLocked : l10n.login,
             onPressed: enabled ? _handleLogin : null,
             isLoading: isLoading,
             fullWidth: true,

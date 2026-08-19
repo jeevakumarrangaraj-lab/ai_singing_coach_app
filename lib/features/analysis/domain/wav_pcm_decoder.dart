@@ -32,9 +32,7 @@ class WavPcmDecoder implements AudioDecodingService {
   @override
   DecodedAudio decode(Uint8List bytes) {
     if (!canDecode(bytes)) {
-      throw const AudioDecodingException(
-        'Invalid RIFF/WAVE header',
-      );
+      throw const AudioDecodingException('Invalid RIFF/WAVE header');
     }
 
     int offset = 12; // Skip RIFF header (12 bytes)
@@ -84,7 +82,10 @@ class WavPcmDecoder implements AudioDecodingService {
     }
 
     // Validate required chunks found
-    if (audioFormat == null || sampleRate == null || channels == null || bitsPerSample == null) {
+    if (audioFormat == null ||
+        sampleRate == null ||
+        channels == null ||
+        bitsPerSample == null) {
       throw const AudioDecodingException('Missing fmt chunk');
     }
     if (dataChunkOffset < 0) {
@@ -136,7 +137,9 @@ class WavPcmDecoder implements AudioDecodingService {
     }
 
     if (dataChunkSize % expectedBlockAlign != 0) {
-      throw const AudioDecodingException('Data chunk size not aligned to block size');
+      throw const AudioDecodingException(
+        'Data chunk size not aligned to block size',
+      );
     }
 
     // Decode samples

@@ -1034,6 +1034,28 @@
       }
     }
   },
+  "loginLockoutCountdown": "அதிக முயற்சிகள் தோல்வி. {seconds} வினாடிகளில் மீண்டும் முயற்சிக்கவும்.",
+  "@loginLockoutCountdown": {
+    "description": "Lockout countdown message with seconds placeholder",
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
+  "loginRemainingAttempts": "தவறான மின்னஞ்சல் அல்லது கடவுச்சொல்। {attempts} முயற்சிகள் மீதம்.",
+  "@loginRemainingAttempts": {
+    "description": "Remaining attempts message with count placeholder",
+    "placeholders": {
+      "attempts": {
+        "type": "int"
+      }
+    }
+  },
+  "loginLocked": "தண்டிக்கப்பட்டது",
+  "@loginLocked": {
+    "description": "Login button label when locked"
+  },
   "createAccount": "கணக்கை உருவாக்கு",
   "@createAccount": {
     "description": "Heading on sign up screen"
@@ -2065,5 +2087,57 @@
   "recordingSavePermissionDenied": "அனுமதி மறுக்கப்பட்டது. சேமிப்பக அணுகலை வழங்கி மீண்டும் முயற்சிக்கவும்.",
   "@recordingSavePermissionDenied": {
     "description": "Error message when permission is denied while saving"
+  },
+  "analyzingRecording": "உங்கள் பதிவைப் பகுப்பாய்வு செய்கிறது...",
+  "@analyzingRecording": {
+    "description": "Message shown while pitch analysis is in progress"
+  },
+  "pitchAnalysisNoVoiceDetected": "தெளிவான குரல் கண்டறியப்படவில்லை. தயவுசெய்து அமைதியான சூழலில் மீண்டும் பதிவு செய்யவும்.",
+  "@pitchAnalysisNoVoiceDetected": {
+    "description": "Message when pitch analysis finds no voiced frames"
+  },
+  "pitchAnalysisUnsupportedFormat": "இந்த பதிவு வடிவத்திற்கு விரிவான சுருதி பகுப்பாய்வு கிடைக்கவில்லை. WebM/Opus பதிவுகளைப் பகுப்பாய்வு செய்ய முடியவில்லை.",
+  "@pitchAnalysisUnsupportedFormat": {
+    "description": "Message when recording format is not supported for pitch analysis"
+  },
+  "pitchAnalysisUnavailableOnWeb": "சுருதி பகுப்பாய்வுக்கு நேட்டிவ் WAV பதிவுகள் தேவை. வலை பதிவுகள் WebM/Opus பயன்படுத்துகின்றன, அவை பகுப்பாய்வு செய்ய முடியாது.",
+  "@pitchAnalysisUnavailableOnWeb": {
+    "description": "Message explaining pitch analysis is unavailable on web"
+  },
+  "pitchAnalysisFileNotFound": "பதிவு கோப்பு காணப்படவில்லை. மீண்டும் பதிவு செய்ய முயற்சிக்கவும்.",
+  "@pitchAnalysisFileNotFound": {
+    "description": "Error message when recording file is not found"
+  },
+  "pitchAnalysisFailed": "பகுப்பாய்வு தோல்வியடைந்தது. மீண்டும் முயற்சிக்கவும்.",
+  "@pitchAnalysisFailed": {
+    "description": "Generic error message when pitch analysis fails"
+  },
+  "medianPitch": "நடுத்தர சுருதி",
+  "@medianPitch": {
+    "description": "Label for median detected pitch"
+  },
+  "detectedVocalRange": "கண்டறியப்பட்ட குரல் வரம்பு",
+  "@detectedVocalRange": {
+    "description": "Label for detected vocal range (min - max)"
+  },
+  "voicedRatio": "அனைத்து சொற்கள் விகிதம்",
+  "@voicedRatio": {
+    "description": "Label for voiced frames ratio"
+  },
+  "pitchStability": "சுருதி நிலைத்தன்மை",
+  "@pitchStability": {
+    "description": "Label for pitch stability metric"
+  },
+  "analysisConfidence": "பகுப்பாய்வு நம்பிக்கை",
+  "@analysisConfidence": {
+    "description": "Label for average confidence metric"
+  },
+  "recordAgain": "மீண்டும் பதிவு",
+  "@recordAgain": {
+    "description": "Button to record again"
+  },
+  "retryAnalysis": "பகுப்பாய்வு மீண்டும் முயற்சி",
+  "@retryAnalysis": {
+    "description": "Button to retry pitch analysis"
   }
 }

@@ -796,6 +796,19 @@ class AppLocalizationsTa extends AppLocalizations {
   }
 
   @override
+  String loginLockoutCountdown(int seconds) {
+    return 'அதிக முயற்சிகள் தோல்வி. $seconds வினாடிகளில் மீண்டும் முயற்சிக்கவும்.';
+  }
+
+  @override
+  String loginRemainingAttempts(int attempts) {
+    return 'தவறான மின்னஞ்சல் அல்லது கடவுச்சொல்। $attempts முயற்சிகள் மீதம்.';
+  }
+
+  @override
+  String get loginLocked => 'தண்டிக்கப்பட்டது';
+
+  @override
   String get createAccount => 'கணக்கை உருவாக்கு';
 
   @override
@@ -1587,4 +1600,48 @@ class AppLocalizationsTa extends AppLocalizations {
   @override
   String get recordingSavePermissionDenied =>
       'அனுமதி மறுக்கப்பட்டது. சேமிப்பக அணுகலை வழங்கி மீண்டும் முயற்சிக்கவும்.';
+
+  @override
+  String get analyzingRecording => 'உங்கள் பதிவைப் பகுப்பாய்வு செய்கிறது...';
+
+  @override
+  String get pitchAnalysisNoVoiceDetected =>
+      'தெளிவான குரல் கண்டறியப்படவில்லை. தயவுசெய்து அமைதியான சூழலில் மீண்டும் பதிவு செய்யவும்.';
+
+  @override
+  String get pitchAnalysisUnsupportedFormat =>
+      'இந்த பதிவு வடிவத்திற்கு விரிவான சுருதி பகுப்பாய்வு கிடைக்கவில்லை. WebM/Opus பதிவுகளைப் பகுப்பாய்வு செய்ய முடியவில்லை.';
+
+  @override
+  String get pitchAnalysisUnavailableOnWeb =>
+      'சுருதி பகுப்பாய்வுக்கு நேட்டிவ் WAV பதிவுகள் தேவை. வலை பதிவுகள் WebM/Opus பயன்படுத்துகின்றன, அவை பகுப்பாய்வு செய்ய முடியாது.';
+
+  @override
+  String get pitchAnalysisFileNotFound =>
+      'பதிவு கோப்பு காணப்படவில்லை. மீண்டும் பதிவு செய்ய முயற்சிக்கவும்.';
+
+  @override
+  String get pitchAnalysisFailed =>
+      'பகுப்பாய்வு தோல்வியடைந்தது. மீண்டும் முயற்சிக்கவும்.';
+
+  @override
+  String get medianPitch => 'நடுத்தர சுருதி';
+
+  @override
+  String get detectedVocalRange => 'கண்டறியப்பட்ட குரல் வரம்பு';
+
+  @override
+  String get voicedRatio => 'அனைத்து சொற்கள் விகிதம்';
+
+  @override
+  String get pitchStability => 'சுருதி நிலைத்தன்மை';
+
+  @override
+  String get analysisConfidence => 'பகுப்பாய்வு நம்பிக்கை';
+
+  @override
+  String get recordAgain => 'மீண்டும் பதிவு';
+
+  @override
+  String get retryAnalysis => 'பகுப்பாய்வு மீண்டும் முயற்சி';
 }

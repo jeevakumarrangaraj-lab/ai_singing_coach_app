@@ -1522,6 +1522,24 @@ abstract class AppLocalizations {
   /// **'{provider} authentication coming soon.'**
   String authComingSoon(String provider);
 
+  /// Lockout countdown message with seconds placeholder
+  ///
+  /// In en, this message translates to:
+  /// **'Too many failed attempts. Try again in {seconds} seconds.'**
+  String loginLockoutCountdown(int seconds);
+
+  /// Remaining attempts message with count placeholder
+  ///
+  /// In en, this message translates to:
+  /// **'Incorrect email or password. {attempts} attempts remaining.'**
+  String loginRemainingAttempts(int attempts);
+
+  /// Login button label when locked
+  ///
+  /// In en, this message translates to:
+  /// **'Locked'**
+  String get loginLocked;
+
   /// Heading on sign up screen
   ///
   /// In en, this message translates to:
@@ -2907,6 +2925,84 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Permission denied. Please grant storage access and try again.'**
   String get recordingSavePermissionDenied;
+
+  /// Message shown while pitch analysis is in progress
+  ///
+  /// In en, this message translates to:
+  /// **'Analyzing your recording...'**
+  String get analyzingRecording;
+
+  /// Message when pitch analysis finds no voiced frames
+  ///
+  /// In en, this message translates to:
+  /// **'No clear voice was detected. Please record again in a quieter environment.'**
+  String get pitchAnalysisNoVoiceDetected;
+
+  /// Message when recording format is not supported for pitch analysis
+  ///
+  /// In en, this message translates to:
+  /// **'Detailed pitch analysis is not available for this recording format. WebM/Opus recordings cannot be analyzed yet.'**
+  String get pitchAnalysisUnsupportedFormat;
+
+  /// Message explaining pitch analysis is unavailable on web
+  ///
+  /// In en, this message translates to:
+  /// **'Pitch analysis requires native WAV recordings. Web recordings use WebM/Opus which cannot be analyzed.'**
+  String get pitchAnalysisUnavailableOnWeb;
+
+  /// Error message when recording file is not found
+  ///
+  /// In en, this message translates to:
+  /// **'Could not find the recording file. Please try recording again.'**
+  String get pitchAnalysisFileNotFound;
+
+  /// Generic error message when pitch analysis fails
+  ///
+  /// In en, this message translates to:
+  /// **'Analysis failed. Please try again.'**
+  String get pitchAnalysisFailed;
+
+  /// Label for median detected pitch
+  ///
+  /// In en, this message translates to:
+  /// **'Median Pitch'**
+  String get medianPitch;
+
+  /// Label for detected vocal range (min - max)
+  ///
+  /// In en, this message translates to:
+  /// **'Detected Vocal Range'**
+  String get detectedVocalRange;
+
+  /// Label for voiced frames ratio
+  ///
+  /// In en, this message translates to:
+  /// **'Voiced Ratio'**
+  String get voicedRatio;
+
+  /// Label for pitch stability metric
+  ///
+  /// In en, this message translates to:
+  /// **'Pitch Stability'**
+  String get pitchStability;
+
+  /// Label for average confidence metric
+  ///
+  /// In en, this message translates to:
+  /// **'Analysis Confidence'**
+  String get analysisConfidence;
+
+  /// Button to record again
+  ///
+  /// In en, this message translates to:
+  /// **'Record Again'**
+  String get recordAgain;
+
+  /// Button to retry pitch analysis
+  ///
+  /// In en, this message translates to:
+  /// **'Retry Analysis'**
+  String get retryAnalysis;
 }
 
 class _AppLocalizationsDelegate

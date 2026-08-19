@@ -785,6 +785,19 @@ class AppLocalizationsHi extends AppLocalizations {
   }
 
   @override
+  String loginLockoutCountdown(int seconds) {
+    return 'अधिक विफल प्रयास। $seconds सेकंड में पुनः प्रयास करें।';
+  }
+
+  @override
+  String loginRemainingAttempts(int attempts) {
+    return 'गलत ईमेल या पासवर्ड। $attempts प्रयास शेष।';
+  }
+
+  @override
+  String get loginLocked => 'लॉक';
+
+  @override
   String get createAccount => 'खाता बनाएँ';
 
   @override
@@ -1568,4 +1581,48 @@ class AppLocalizationsHi extends AppLocalizations {
   @override
   String get recordingSavePermissionDenied =>
       'अनुमति अस्वीकृत। कृपया संग्रहण पहुँच प्रदान करें और पुनः प्रयास करें।';
+
+  @override
+  String get analyzingRecording =>
+      'आपकी रिकॉर्डिंग का विश्लेषण किया जा रहा है...';
+
+  @override
+  String get pitchAnalysisNoVoiceDetected =>
+      'कोई स्पष्ट आवाज़ नहीं मिली। कृपया शांत वातावरण में दोबारा रिकॉर्ड करें।';
+
+  @override
+  String get pitchAnalysisUnsupportedFormat =>
+      'इस रिकॉर्डिंग फॉर्मेट के लिए विस्तृत पिच विश्लेषण उपलब्ध नहीं है। WebM/Opus रिकॉर्डिंग का विश्लेषण अभी नहीं किया जा सकता।';
+
+  @override
+  String get pitchAnalysisUnavailableOnWeb =>
+      'पिच विश्लेषण के लिए नेटिव WAV रिकॉर्डिंग की आवश्यकता होती है। वेब रिकॉर्डिंग WebM/Opus का उपयोग करती हैं जिनका विश्लेषण नहीं किया जा सकता।';
+
+  @override
+  String get pitchAnalysisFileNotFound =>
+      'रिकॉर्डिंग फ़ाइल नहीं मिली। कृपया दोबारा रिकॉर्ड करने का प्रयास करें।';
+
+  @override
+  String get pitchAnalysisFailed => 'विश्लेषण विफल। कृपया पुनः प्रयास करें।';
+
+  @override
+  String get medianPitch => 'औसत पिच';
+
+  @override
+  String get detectedVocalRange => 'पता चला स्वर रेंज';
+
+  @override
+  String get voicedRatio => 'आवाज़ अनुपात';
+
+  @override
+  String get pitchStability => 'पिच स्थिरता';
+
+  @override
+  String get analysisConfidence => 'विश्लेषण विश्वास';
+
+  @override
+  String get recordAgain => 'दोबारा रिकॉर्ड करें';
+
+  @override
+  String get retryAnalysis => 'विश्लेषण पुनः प्रयास';
 }

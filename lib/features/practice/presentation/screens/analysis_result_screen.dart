@@ -7,7 +7,20 @@ import 'package:go_router/go_router.dart';
 import 'package:ai_singing_coach/l10n/app_localizations.dart';
 
 import '../../../../common/widgets/app_back_button.dart';
-import '../../../../core/widgets/tuno_dashboard_background.dart';
+import '../../../../core/widgets/tuno_dashboard_background.dart'
+    show TunoDashboardBackground;
+import '../../../analysis/domain/note_converter.dart';
+import '../../../analysis/domain/pitch_analysis_result.dart';
+import '../../../analysis/presentation/analysis_screen_controller.dart'
+    show
+        AnalysisSuccess,
+        AnalysisLoading,
+        AnalysisIdle,
+        AnalysisNoVoiceDetected,
+        AnalysisUnsupportedFormat,
+        AnalysisFileNotFound,
+        AnalysisFailed,
+        analysisScreenControllerProvider;
 import '../../../recording_library/data/recording_library_repository.dart';
 import '../../../recording_library/data/storage/recording_audio.dart';
 import '../../../recording_library/domain/recording_library_entry.dart';
@@ -37,11 +50,34 @@ class _AnalysisResultScreenState extends ConsumerState<AnalysisResultScreen> {
   bool _isSessionOnly = false;
   RecordingLibraryErrorCode? _saveErrorCode;
   bool _hasUnexpectedError = false;
+  bool _analysisStarted = false;
 
   @override
   void initState() {
     super.initState();
     _saveToLibrary();
+    // Start analysis after the first frame to ensure provider is ready
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted && !_analysisStarted) {
+        _startAnalysis();
+      }
+    });
+  }
+
+  void _startAnalysis() {
+    if (_analysisStarted) return;
+    _analysisStarted = true;
+
+    // Determine file extension from the path
+    final extension = widget.audioPath.split('.').last.toLowerCase();
+
+    ref
+        .read(analysisScreenControllerProvider.notifier)
+        .analyze(
+          recordingRef: widget.audioPath,
+          extension: extension,
+          duration: widget.duration,
+        );
   }
 
   Future<void> _saveToLibrary() async {
@@ -436,10 +472,15 @@ class _AnalysisResultScreenState extends ConsumerState<AnalysisResultScreen> {
                     ),
                     const SizedBox(height: 32),
 
+                    // Pitch Analysis Result
+                    _buildAnalysisResultSection(context, ref, l10n),
+
+                    const SizedBox(height: 32),
+
                     // Action buttons
                     LayoutBuilder(
                       builder: (context, constraints) {
-                        const minWidthForRow = 480.0;
+                        const minWidthForRow = 400.0;
                         final useRowLayout =
                             constraints.maxWidth >= minWidthForRow;
 
@@ -448,22 +489,28 @@ class _AnalysisResultScreenState extends ConsumerState<AnalysisResultScreen> {
                           child: FilledButton(
                             onPressed: () => context.go('/practice'),
                             style: FilledButton.styleFrom(
-                              padding: const EdgeInsets.symmetric(vertical: 16),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 24,
+                                vertical: 16,
+                              ),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(18),
                               ),
                             ),
                             child: Row(
-                              mainAxisSize: MainAxisSize.min,
+                              mainAxisSize: MainAxisSize.max,
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Icon(Icons.mic_rounded, size: 20),
                                 const SizedBox(width: 8),
-                                Text(
-                                  l10n.practiceAgain,
-                                  style: const TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
+                                Flexible(
+                                  child: Text(
+                                    l10n.practiceAgain,
+                                    style: const TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                    overflow: TextOverflow.ellipsis,
                                   ),
                                 ),
                               ],
@@ -476,23 +523,29 @@ class _AnalysisResultScreenState extends ConsumerState<AnalysisResultScreen> {
                           child: OutlinedButton(
                             onPressed: () => context.push('/recording-library'),
                             style: OutlinedButton.styleFrom(
-                              padding: const EdgeInsets.symmetric(vertical: 16),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 24,
+                                vertical: 16,
+                              ),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(18),
                               ),
                               side: BorderSide(color: cs.outline, width: 1.5),
                             ),
                             child: Row(
-                              mainAxisSize: MainAxisSize.min,
+                              mainAxisSize: MainAxisSize.max,
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Icon(Icons.library_music_rounded, size: 20),
                                 const SizedBox(width: 8),
-                                Text(
-                                  l10n.recordingLibrary,
-                                  style: const TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
+                                Flexible(
+                                  child: Text(
+                                    l10n.recordingLibrary,
+                                    style: const TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                    overflow: TextOverflow.ellipsis,
                                   ),
                                 ),
                               ],
@@ -511,16 +564,11 @@ class _AnalysisResultScreenState extends ConsumerState<AnalysisResultScreen> {
                         }
 
                         return Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
-                            SizedBox(
-                              width: double.infinity,
-                              child: practiceAgainButton,
-                            ),
+                            practiceAgainButton,
                             const SizedBox(height: 12),
-                            SizedBox(
-                              width: double.infinity,
-                              child: viewLibraryButton,
-                            ),
+                            viewLibraryButton,
                           ],
                         );
                       },
@@ -582,5 +630,533 @@ class _AnalysisResultScreenState extends ConsumerState<AnalysisResultScreen> {
         ),
       ],
     );
+  }
+
+  Widget _buildAnalysisResultSection(
+    BuildContext context,
+    WidgetRef ref,
+    AppLocalizations l10n,
+  ) {
+    final state = ref.watch(analysisScreenControllerProvider);
+
+    return switch (state) {
+      AnalysisIdle() => const SizedBox.shrink(),
+      AnalysisLoading() => _buildLoadingState(context, l10n),
+      AnalysisSuccess(:final result) => _buildSuccessState(
+        context,
+        l10n,
+        result,
+      ),
+      AnalysisNoVoiceDetected(:final duration) => _buildNoVoiceDetectedState(
+        context,
+        l10n,
+        duration,
+      ),
+      AnalysisUnsupportedFormat(:final reason) => _buildUnsupportedFormatState(
+        context,
+        l10n,
+        reason,
+      ),
+      AnalysisFileNotFound() => _buildFileNotFoundState(context, l10n),
+      AnalysisFailed(:final message) => _buildFailedState(
+        context,
+        l10n,
+        message,
+      ),
+    };
+  }
+
+  Widget _buildLoadingState(BuildContext context, AppLocalizations l10n) {
+    final cs = Theme.of(context).colorScheme;
+    final textTheme = Theme.of(context).textTheme;
+
+    return Card(
+      color: cs.surfaceContainerHighest,
+      surfaceTintColor: Colors.transparent,
+      shadowColor: Colors.transparent,
+      elevation: 0,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(22),
+        side: BorderSide(color: cs.outlineVariant, width: 1),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(32),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            CircularProgressIndicator(color: cs.primary, strokeWidth: 3),
+            const SizedBox(height: 20),
+            Text(
+              l10n.analysisPending,
+              style: textTheme.bodyLarge?.copyWith(
+                color: cs.onSurfaceVariant,
+                fontWeight: FontWeight.w500,
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildSuccessState(
+    BuildContext context,
+    AppLocalizations l10n,
+    PitchAnalysisResult result,
+  ) {
+    final cs = Theme.of(context).colorScheme;
+    final textTheme = Theme.of(context).textTheme;
+
+    final medianNote = result.medianFrequency != null
+        ? NoteConverter.frequencyToNote(result.medianFrequency!)
+        : null;
+    final minNote = result.minimumFrequency != null
+        ? NoteConverter.frequencyToNote(result.minimumFrequency!)
+        : null;
+    final maxNote = result.maximumFrequency != null
+        ? NoteConverter.frequencyToNote(result.maximumFrequency!)
+        : null;
+
+    final durationSeconds = result.duration;
+    final formattedDuration = _formatDurationSeconds(durationSeconds);
+
+    return Card(
+      color: cs.surfaceContainerHighest,
+      surfaceTintColor: Colors.transparent,
+      shadowColor: Colors.transparent,
+      elevation: 0,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(22),
+        side: BorderSide(color: cs.outlineVariant, width: 1),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(24),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              l10n.analysisStatus,
+              style: textTheme.titleLarge?.copyWith(
+                fontWeight: FontWeight.bold,
+                color: cs.onSurface,
+              ),
+            ),
+            const SizedBox(height: 24),
+
+            _buildMetricRow(
+              context,
+              icon: Icons.music_note_rounded,
+              label: l10n.medianPitch,
+              value: medianNote != null
+                  ? '${medianNote.displayName} (${result.medianFrequency!.toStringAsFixed(1)} Hz)'
+                  : l10n.analysisNone,
+            ),
+            const SizedBox(height: 16),
+
+            _buildMetricRow(
+              context,
+              icon: Icons.arrow_upward_rounded,
+              label: l10n.detectedVocalRange,
+              value: minNote != null && maxNote != null
+                  ? '${minNote.displayName} - ${maxNote.displayName} '
+                        '(${result.minimumFrequency!.toStringAsFixed(1)} - ${result.maximumFrequency!.toStringAsFixed(1)} Hz)'
+                  : l10n.analysisNone,
+            ),
+            const SizedBox(height: 16),
+
+            _buildMetricRow(
+              context,
+              icon: Icons.waves_rounded,
+              label: l10n.voicedRatio,
+              value: '${(result.voicedRatio * 100).toStringAsFixed(1)}%',
+            ),
+            const SizedBox(height: 16),
+
+            _buildMetricRow(
+              context,
+              icon: Icons.straighten_rounded,
+              label: l10n.pitchStability,
+              value: '${(result.pitchStability * 100).toStringAsFixed(1)}%',
+            ),
+            const SizedBox(height: 16),
+
+            _buildMetricRow(
+              context,
+              icon: Icons.psychology_rounded,
+              label: l10n.analysisConfidence,
+              value: '${(result.averageConfidence * 100).toStringAsFixed(1)}%',
+            ),
+            const SizedBox(height: 16),
+
+            _buildMetricRow(
+              context,
+              icon: Icons.timer_rounded,
+              label: l10n.duration,
+              value: formattedDuration,
+            ),
+
+            if (result.warnings.isNotEmpty) ...[
+              const SizedBox(height: 16),
+              _buildWarningsSection(context, l10n, result.warnings),
+            ],
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildNoVoiceDetectedState(
+    BuildContext context,
+    AppLocalizations l10n,
+    Duration duration,
+  ) {
+    final cs = Theme.of(context).colorScheme;
+    final textTheme = Theme.of(context).textTheme;
+
+    return Card(
+      color: cs.surfaceContainerHighest,
+      surfaceTintColor: Colors.transparent,
+      shadowColor: Colors.transparent,
+      elevation: 0,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(22),
+        side: BorderSide(color: cs.outlineVariant, width: 1),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(32),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(Icons.mic_off_rounded, size: 48, color: cs.onSurfaceVariant),
+            const SizedBox(height: 16),
+            Text(
+              l10n.pitchAnalysisNoVoiceDetected,
+              style: textTheme.bodyLarge?.copyWith(color: cs.onSurfaceVariant),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 24),
+            FilledButton(
+              onPressed: () => context.go('/practice'),
+              style: FilledButton.styleFrom(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 32,
+                  vertical: 16,
+                ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(18),
+                ),
+              ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(Icons.mic_rounded, size: 20),
+                  const SizedBox(width: 8),
+                  Text(
+                    l10n.recordAgain,
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildUnsupportedFormatState(
+    BuildContext context,
+    AppLocalizations l10n,
+    String reason,
+  ) {
+    final cs = Theme.of(context).colorScheme;
+    final textTheme = Theme.of(context).textTheme;
+
+    return Card(
+      color: cs.surfaceContainerHighest,
+      surfaceTintColor: Colors.transparent,
+      shadowColor: Colors.transparent,
+      elevation: 0,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(22),
+        side: BorderSide(color: cs.outlineVariant, width: 1),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(24),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Icon(Icons.info_outline_rounded, color: cs.primary, size: 24),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Text(
+                    l10n.pitchAnalysisUnsupportedFormat,
+                    style: textTheme.bodyLarge?.copyWith(color: cs.onSurface),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 12),
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: cs.surfaceContainer,
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(color: cs.outlineVariant, width: 1),
+              ),
+              child: Text(
+                reason,
+                style: textTheme.bodySmall?.copyWith(
+                  color: cs.onSurfaceVariant,
+                  fontFamily: 'monospace',
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildFileNotFoundState(BuildContext context, AppLocalizations l10n) {
+    final cs = Theme.of(context).colorScheme;
+    final textTheme = Theme.of(context).textTheme;
+
+    return Card(
+      color: cs.surfaceContainerHighest,
+      surfaceTintColor: Colors.transparent,
+      shadowColor: Colors.transparent,
+      elevation: 0,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(22),
+        side: BorderSide(color: cs.outlineVariant, width: 1),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(32),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(Icons.error_outline_rounded, size: 48, color: cs.error),
+            const SizedBox(height: 16),
+            Text(
+              l10n.pitchAnalysisFileNotFound,
+              style: textTheme.bodyLarge?.copyWith(color: cs.onSurfaceVariant),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 24),
+            FilledButton(
+              onPressed: () => context.go('/practice'),
+              style: FilledButton.styleFrom(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 32,
+                  vertical: 16,
+                ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(18),
+                ),
+              ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(Icons.mic_rounded, size: 20),
+                  const SizedBox(width: 8),
+                  Text(
+                    l10n.recordAgain,
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildFailedState(
+    BuildContext context,
+    AppLocalizations l10n,
+    String message,
+  ) {
+    final cs = Theme.of(context).colorScheme;
+    final textTheme = Theme.of(context).textTheme;
+
+    return Card(
+      color: cs.surfaceContainerHighest,
+      surfaceTintColor: Colors.transparent,
+      shadowColor: Colors.transparent,
+      elevation: 0,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(22),
+        side: BorderSide(color: cs.outlineVariant, width: 1),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(32),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(Icons.error_outline_rounded, size: 48, color: cs.error),
+            const SizedBox(height: 16),
+            Text(
+              l10n.pitchAnalysisFailed,
+              style: textTheme.bodyLarge?.copyWith(color: cs.onSurfaceVariant),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 24),
+            FilledButton(
+              onPressed: () =>
+                  ref.read(analysisScreenControllerProvider.notifier).retry(),
+              style: FilledButton.styleFrom(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 32,
+                  vertical: 16,
+                ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(18),
+                ),
+              ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(Icons.refresh_rounded, size: 20),
+                  const SizedBox(width: 8),
+                  Text(
+                    l10n.retryAnalysis,
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildMetricRow(
+    BuildContext context, {
+    required IconData icon,
+    required String label,
+    required String value,
+  }) {
+    final cs = Theme.of(context).colorScheme;
+    final textTheme = Theme.of(context).textTheme;
+
+    return Row(
+      children: [
+        Container(
+          width: 48,
+          height: 48,
+          decoration: BoxDecoration(
+            color: cs.primaryContainer,
+            borderRadius: BorderRadius.circular(16),
+          ),
+          child: Icon(icon, color: cs.primary, size: 24),
+        ),
+        const SizedBox(width: 16),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                label,
+                style: textTheme.bodySmall?.copyWith(
+                  color: cs.onSurfaceVariant,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              const SizedBox(height: 2),
+              Text(
+                value,
+                style: textTheme.bodyLarge?.copyWith(
+                  color: cs.onSurface,
+                  fontWeight: FontWeight.w500,
+                ),
+                overflow: TextOverflow.ellipsis,
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildWarningsSection(
+    BuildContext context,
+    AppLocalizations l10n,
+    List<String> warnings,
+  ) {
+    final cs = Theme.of(context).colorScheme;
+    final textTheme = Theme.of(context).textTheme;
+
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          width: 48,
+          height: 48,
+          decoration: BoxDecoration(
+            color: cs.tertiaryContainer,
+            borderRadius: BorderRadius.circular(16),
+          ),
+          child: Icon(
+            Icons.warning_amber_rounded,
+            color: cs.tertiary,
+            size: 24,
+          ),
+        ),
+        const SizedBox(width: 16),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Warnings',
+                style: textTheme.bodySmall?.copyWith(
+                  color: cs.onSurfaceVariant,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              const SizedBox(height: 2),
+              ...warnings.map(
+                (w) => Padding(
+                  padding: const EdgeInsets.only(top: 4),
+                  child: Text(
+                    w,
+                    style: textTheme.bodySmall?.copyWith(
+                      color: cs.onSurfaceVariant,
+                    ),
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 2,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  String _formatDurationSeconds(double seconds) {
+    final duration = Duration(milliseconds: (seconds * 1000).round());
+    final minutes = duration.inMinutes.toString().padLeft(2, '0');
+    final secs = (duration.inSeconds % 60).toString().padLeft(2, '0');
+    return '$minutes:$secs';
   }
 }
