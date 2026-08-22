@@ -7,6 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../domain/voice_recording_state.dart';
 import '../data/voice_recording_repository.dart';
+import '../data/audio_playback.dart';
 import 'voice_recording_delete.dart';
 
 final voiceRecordingRepositoryProvider = Provider<VoiceRecordingRepository>((
@@ -15,19 +16,26 @@ final voiceRecordingRepositoryProvider = Provider<VoiceRecordingRepository>((
   return VoiceRecordingRepositoryImpl();
 });
 
+final audioPlaybackProvider = Provider<AudioPlayback>((ref) {
+  return AudioPlayerAdapter();
+});
+
 final voiceRecordingControllerProvider =
     StateNotifierProvider<VoiceRecordingController, VoiceRecordingState>((ref) {
       final repository = ref.watch(voiceRecordingRepositoryProvider);
-      return VoiceRecordingController(repository);
+      final playback = ref.watch(audioPlaybackProvider);
+      return VoiceRecordingController(repository, playback);
     });
 
 class VoiceRecordingController extends StateNotifier<VoiceRecordingState> {
   final VoiceRecordingRepository _repository;
-  final AudioPlayer _audioPlayer = AudioPlayer();
+  final AudioPlayback _audioPlayer;
   Timer? _timer;
   Timer? _positionTimer;
   final Stopwatch _recordingStopwatch = Stopwatch();
   String? _currentRecordingPath;
+  String? _currentRecordingExtension;
+  AudioEncoder? _currentEncoder;
 
   bool _isStartingRecording = false;
   bool _isStoppingRecording = false;
@@ -44,7 +52,8 @@ class VoiceRecordingController extends StateNotifier<VoiceRecordingState> {
   StreamSubscription<PlayerState>? _playerStateSubscription;
   StreamSubscription<void>? _playerCompleteSubscription;
 
-  VoiceRecordingController(this._repository) : super(const IdleState()) {
+  VoiceRecordingController(this._repository, this._audioPlayer)
+    : super(const IdleState()) {
     _initAudioPlayer();
   }
 
@@ -154,10 +163,16 @@ class VoiceRecordingController extends StateNotifier<VoiceRecordingState> {
         return;
       }
 
+      // Enter Starting state immediately
+      state = const StartingState();
+
       _currentRecordingPath = await _repository.startRecording(
         encoder: AudioEncoder.wav,
         sampleRate: 44100,
       );
+
+      _currentEncoder = _repository.getCurrentEncoder();
+      _currentRecordingExtension = _repository.getCurrentExtension();
 
       if (_currentRecordingPath == null) {
         state = const ErrorState(VoiceRecordingErrorCode.startFailed);
@@ -252,6 +267,8 @@ class VoiceRecordingController extends StateNotifier<VoiceRecordingState> {
     }
 
     _currentRecordingPath = null;
+    _currentRecordingExtension = null;
+    _currentEncoder = null;
     state = const IdleState();
 
     _isCancelingRecording = false;
@@ -263,6 +280,8 @@ class VoiceRecordingController extends StateNotifier<VoiceRecordingState> {
       ..stop()
       ..reset();
     _currentRecordingPath = null;
+    _currentRecordingExtension = null;
+    _currentEncoder = null;
     state = const IdleState();
   }
 
@@ -282,7 +301,7 @@ class VoiceRecordingController extends StateNotifier<VoiceRecordingState> {
 
       await _audioPlayer.stop();
       await _audioPlayer.setSource(source);
-      await _audioPlayer.resume();
+      await _audioPlayer.play();
 
       final duration = await _audioPlayer.getDuration();
       if (duration != null) {
@@ -419,4 +438,8 @@ class VoiceRecordingController extends StateNotifier<VoiceRecordingState> {
   Duration get currentDuration => _totalDuration;
   Duration get currentPosition => _currentPosition;
   bool get isPlaying => _playerState == PlayerState.playing;
+
+  // Expose encoder/extension info
+  AudioEncoder? get currentEncoder => _currentEncoder;
+  String? get currentExtension => _currentRecordingExtension;
 }
